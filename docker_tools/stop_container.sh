@@ -1,1 +1,1 @@
-docker stop c9webserver
+docker stop $1
