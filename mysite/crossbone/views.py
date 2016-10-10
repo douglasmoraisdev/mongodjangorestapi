@@ -5,10 +5,16 @@ from crossbone.models import *
 
 def index(request):
     template = loader.get_template('home/index.html')
-    context = {
-        'item': 'dale',
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Group_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
     }
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(content, request))
     
     
 def contact(request):
