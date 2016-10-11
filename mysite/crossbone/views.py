@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.http import HttpResponseForbidden
 
 from crossbone.models import *
 
@@ -26,26 +27,33 @@ def contact(request):
 
 def novogrupo(request):
 
-	userrole1 = User_roles(user=Users.objects[0], role=Roles.objects[0])
-	userrole2 = User_roles(user=Users.objects[1], role=Roles.objects[1])
-	group_child = Groups.objects[0]
+	if request.method == 'POST':
+		nome_grupo = request.POST.get('nome_grupo')
 
-	#grupo = Groups.objects.create(
-	#	group_type=['Celula', 'Rede'],
-	#	user_roles= [userrole1, userrole2]
-	#)
+		userrole1 = User_roles(user=Users.objects[0], role=Roles.objects[0])
+		userrole2 = User_roles(user=Users.objects[1], role=Roles.objects[1])
+		#group_child = Groups.objects[0]
 
-	grupo = Groups.objects.create(
-			group_type=['Celula', 'Rede'],
-			user_roles= [userrole1],
-			group_roles= group_child
-		)
+		#grupo = Groups.objects.create(
+		#	group_type=['Celula', 'Rede'],
+		#	user_roles= [userrole1, userrole2],
+		#	data={'nome':nome_grupo}
+		#)
+
+		#grupo = Groups.objects.create(
+		#		group_type=['Celula', 'Rede'],
+		#		user_roles= [userrole1],
+		#		group_roles= group_child
+		#	)
 
 
 
-	grupo.save()
+		#grupo.save()
 
-	return HttpResponse('Criado com sucesso!')
+		return HttpResponse('Feito!')
+
+	else:
+		return HttpResponseForbidden()
 
 def novouser(request):
 	user = Users.objects.create(

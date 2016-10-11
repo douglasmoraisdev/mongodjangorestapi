@@ -23,134 +23,19 @@
 
   <h1>Cadastro rápido</h1>
 
-  <div class="panel panel-default">
-    <div class="panel-heading">Novo usuario</div>
-    <div class="panel-body">
-        <form class="form-inline">
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-           </div>
+  {% include "home/documents/users_list.html" %}
 
-           <button type="submit" class="btn btn-default">Sign in</button>
-        </form>
+  {% include "home/documents/groups_list.html" %}
 
-        <div class="panel-body">
-          Usuarios cadastrados: 
-            {% for item in Users %}
-              <pre>{{ item.to_json }}</pre>
-            {% endfor %}          
-        </div>
+  {% include "home/documents/group_types_list.html" %}
 
-      </div>
-  </div>
+  {% include "home/documents/roles_list.html" %}
 
+  {% include "home/documents/events_list.html" %}
 
-
-  <div class="panel panel-default">
-    <div class="panel-heading">Novo Grupo</div>
-    <div class="panel-body">  
-        <form class="form-inline">
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-           </div>
-
-           <button type="submit" class="btn btn-default">Sign in</button>
-        </form>
-        <div class="panel-body">
-          Grupos cadastrados: 
-            {% for item in Groups %}
-              <pre>{{ item.to_json }}</pre>
-            {% endfor %}          
-        </div>
-
-    </div>
-  </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">Novo tipo de Grupo</div>
-    <div class="panel-body"> 
-        <form class="form-inline">
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-           </div>
-
-           <button type="submit" class="btn btn-default">Sign in</button>
-        </form>
-        <div class="panel-body">
-          Tipos de grupos cadastrados: 
-            {% for item in Group_types %}
-              <pre>{{ item.to_json }}</pre>
-            {% endfor %}          
-        </div>        
-     </div>
-  </div>
-
-
-  <div class="panel panel-default">
-    <div class="panel-heading">Nova função</div>
-      <div class="panel-body">
-        <form class="form-inline">
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-           </div>
-
-           <button type="submit" class="btn btn-default">Sign in</button>
-        </form>
-        <div class="panel-body">
-          Funções cadastradas: 
-            {% for item in Roles %}
-              <pre>{{ item.to_json }}</pre>
-            {% endfor %}          
-        </div>        
-     </div>
-  </div>
-
-
-  <div class="panel panel-default">
-    <div class="panel-heading">Novo Evento</div>
-      <div class="panel-body">
-        <form class="form-inline">
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-           </div>
-
-           <button type="submit" class="btn btn-default">Sign in</button>
-        </form>
-        <div class="panel-body">
-          Eventos cadastrados: 
-            {% for item in Events %}
-              <pre>{{ item.to_json }}</pre>
-            {% endfor %}          
-        </div>        
-     </div>
-  </div>
 
 </div>
+
 
 </body>
 
