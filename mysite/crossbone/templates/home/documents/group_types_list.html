@@ -1,23 +1,34 @@
-<div class="panel panel-default">
+  <div class="panel panel-default">
     <div class="panel-heading">Novo tipo de Grupo</div>
-    <div class="panel-body"> 
-        <form class="form-inline">
+    <div class="panel-body">
+
+        <form class="form-horizontal" method="POST" action="novogrouptype">
+          {% csrf_token %}
+
            <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
+              <label for="codigo_tipo_grupo" class="col-sm-2 control-label">Codigo do tipo</label>                                    
+              <div class="col-sm-2">          
+                <input type="text" class="form-control" id="codigo_tipo_grupo" name="codigo_tipo_grupo">
+              </div>
            </div>
 
-           <button type="submit" class="btn btn-default">Sign in</button>
+           <div class="form-group">
+              <label for="nome_tipo_grupo" class="col-sm-2 control-label">Nome do tipo</label>                                    
+              <div class="col-sm-2">          
+                <input type="text" class="form-control" id="nome_tipo_grupo" name="nome_tipo_grupo">
+              </div>
+           </div>           
+
+
+           <button type="submit" class="btn btn-default">Cadastrar</button>
         </form>
+
         <div class="panel-body">
-          Tipos de grupos cadastrados: 
-            {% for item in Group_types %}
+          Usuarios cadastrados: 
+            {% for item in Groups_types %}
               <pre>{{ item.to_json }}</pre>
             {% endfor %}          
-        </div>        
-     </div>
+        </div>
+
+      </div>
   </div>

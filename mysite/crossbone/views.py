@@ -11,7 +11,7 @@ def index(request):
     content = {
         'Users': Users.objects,
         'Groups': Groups.objects,
-        'Group_types': Groups_types.objects,
+        'Groups_types': Groups_types.objects,
         'Roles': Roles.objects,
         'Events': Events.objects,        
     }
@@ -56,43 +56,54 @@ def novogrupo(request):
 		return HttpResponseForbidden()
 
 def novouser(request):
-	user = Users.objects.create(
-		name = 'Altair'
-	)
 
-	user.save()
+	if request.method == 'POST':
 
-	return HttpResponse('Criado com sucesso!')	
+		nome_usuario = request.POST.get('nome_usuario')
+
+		user = Users.objects.create(
+			name = nome_usuario
+		)
+
+		user.save()
+
+		return HttpResponse('Feito!')
+
+	else:
+		return HttpResponseForbidden()	
 
 def novorole(request):
 
-	roles = Roles.objects.create(
-		name = 'Anfitriao'
-	)
+	if request.method == 'POST':
 
-	roles.save()
+		nome_funcao = request.POST.get('nome_funcao')
 
-	return HttpResponse('Criado com sucesso!')
+		role = Roles.objects.create(
+			name = nome_funcao
+		)
 
-def userrole(request):	
+		role.save()
 
-	userroles = User_roles.objects.create(
-		user = Users.objects[1],
-		role = Roles.objects[1]
-	)
+		return HttpResponse('Feito!')
 
-	userroles.save()
+	else:
+		return HttpResponseForbidden()	
 
-	return HttpResponse('Criado com sucesso!')			
+def novogrouptype(request):
 
-def visualizar(request):
+	if request.method == 'POST':
 
-	employee_list = Groups.objects.all()
+		codigo_tipo_grupo = request.POST.get('codigo_tipo_grupo')
+		nome_tipo_grupo = request.POST.get('nome_tipo_grupo')		
 
-	group_name = []
+		group_type = Groups_types.objects.create(
+			code = codigo_tipo_grupo,
+			name = nome_tipo_grupo
+		)
 
-	for a in employee_list:
-		group_name.append(a.name)
+		group_type.save()
 
-	return HttpResponse('lista de grupos %s' % group_name)
+		return HttpResponse('Feito!')
 
+	else:
+		return HttpResponseForbidden()	

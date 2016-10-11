@@ -13,21 +13,23 @@
           </div>
 
           <div class="form-group">
-          <label for="dropdownMenu1" class="col-sm-2 control-label">Tipo de Grupo</label>                      
+          <label for="d-tipo-grupo" class="col-sm-2 control-label">Tipo de Grupo</label>                      
           <div class="col-sm-10">
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <button class="btn btn-default dropdown-toggle" type="button" id="d-tipo-grupo" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                   Tipo de Grupo
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li id='celula'><a>Célula</a></li>
-                  <li id='rede'><a>Rede</a></li>
-                  <li id='regiao'><a>Região</a></li>
+                <ul class="dropdown-menu" aria-labelledby="d-tipo-grupo">
+                                    
+                  {% for item in Groups_types %}                    
+                    <li id='{{ item.id }}'><a>{{ item.name }}</a></li>
+                  {% endfor %}                                  
+
                 </ul>
               </div>
             </div>              
-           </div>
+          </div>
 
           <div class="form-group">
             <label for="dropdownMenu2" class="col-sm-2 control-label">Grupo de Origem</label>
@@ -38,11 +40,11 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <li><a>Celula Fátima</a></li>
-                  <li><a>Celula Centro</a></li>
-                  <li><a>Celula Alvorada</a></li>
+                  {% for item in Groups %}                    
+                    <li id='{{ item.id }}'><a>{{ item.data.nome }}</a></li>
+                  {% endfor %}   
                 </ul>
-              </div>   
+              </div>
             </div>
             </div>
 
@@ -52,12 +54,9 @@
             <label for="grupos-acima" class="col-sm-2 control-label">Grupo Acima</label>
             <div class="col-sm-10">            
               <select id="grupos-acima" multiple="multiple">
-                  <option value="cheese">Cheese</option>
-                  <option value="tomatoes">Tomatoes</option>
-                  <option value="mozarella">Mozzarella</option>
-                  <option value="mushrooms">Mushrooms</option>
-                  <option value="pepperoni">Pepperoni</option>
-                  <option value="onions">Onions</option>
+                  {% for item in Groups %}                    
+                    <option value="{{ item.id }}">{{ item.data.nome }}</option>
+                  {% endfor %}                    
               </select>
             </div>
 
@@ -69,12 +68,9 @@
             <label for="grupos-abaixo" class="col-sm-2 control-label">Grupo Abaixo</label>
             <div class="col-sm-10">            
               <select id="grupos-abaixo" multiple="multiple">
-                  <option value="cheese">Cheese</option>
-                  <option value="tomatoes">Tomatoes</option>
-                  <option value="mozarella">Mozzarella</option>
-                  <option value="mushrooms">Mushrooms</option>
-                  <option value="pepperoni">Pepperoni</option>
-                  <option value="onions">Onions</option>
+                  {% for item in Groups %}                    
+                    <option value="{{ item.id }}">{{ item.data.nome }}</option>
+                  {% endfor %}
               </select>
             </div>
 
