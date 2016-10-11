@@ -18,7 +18,7 @@ class Groups_types(Document):
 	code = StringField(max_length=50)
 	name = StringField(max_length=50)
 
-class Groups(Document):	
+class Groups(Document):
 	group_type = ListField(ReferenceField(Groups_types))
 	user_roles = EmbeddedDocumentListField(User_roles)
 	data = DictField()
