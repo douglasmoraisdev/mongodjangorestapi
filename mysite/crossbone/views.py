@@ -55,11 +55,6 @@ def novogrupo(request):
 			group_users_hashs = input_name.replace('user-group','')
 			group_roles.append(request.POST.getlist('user-role'+group_users_hashs+'-multiple'))
 
-		#userrole1 = User_roles(user=Users.objects[0], role=Roles.objects[0])
-		#userrole2 = User_roles(user=Users.objects[1], role=Roles.objects[1])
-		#group_child = Groups.objects[0]
-
-
 		if grupo_origem:
 			document_group_origin = Groups.objects.get(id=ObjectId(grupo_origem))
 
@@ -97,14 +92,6 @@ def novogrupo(request):
 			user_roles = user_roles,			
 			data={'nome':nome_grupo}
 		)
-
-		#grupo = Groups.objects.create(
-		#		group_type=['Celula', 'Rede'],
-		#		user_roles= [userrole1],
-		#		group_roles= group_child
-		#	)
-
-
 
 		grupo.save()
 
@@ -165,7 +152,65 @@ def novogrouptype(request):
 		return HttpResponse('Feito!')
 
 	else:
-		return HttpResponseForbidden()	
+		return HttpResponseForbidden()
+
+def newevent(request):
+
+	if request.method == 'POST':
+
+		stdlogger.info('teste log')
+
+		document_group_origin, document_group_acima, document_group_abaixo = None, [], []
+		document_group_roles, document_group_users, document_group_users_roles = [], [], []
+		group_users = []
+		group_users_hashs = []
+		group_roles = []
+		user_roles = []
+		nome_evento = request.POST.get('nome-grupo-evento')
+		grupo_origem = request.POST.get('grupo-origem-evento')
+
+		
+		users_group_input_names = [name for name in request.POST.keys() if name.startswith('user-group')]
+		for input_name in users_group_input_names:
+			group_users.append(request.POST.get(input_name))
+			group_users_hashs = input_name.replace('user-group','')
+			group_roles.append(request.POST.getlist('user-role'+group_users_hashs+'-multiple'))
+
+		if grupo_origem:
+			document_group_origin = Groups.objects.get(id=ObjectId(grupo_origem))
+
+
+		if group_users:
+			for key, users in enumerate(group_users):
+				if users != '':
+					document_group_users.append(Users.objects.get(id=ObjectId(group_users[key])))					
+
+
+					for roles in group_roles[key]:
+						document_group_roles.append(Roles.objects.get(id=ObjectId(roles)))
+
+					document_group_users_roles.append(document_group_roles)
+					document_group_roles = []		
+
+		for key, user in enumerate(document_group_users):
+
+
+			for role in document_group_users_roles[key]:
+				user_roles.append(User_roles(user=user, role=role))
+
+		evento = Events.objects.create(
+			host=document_group_origin,
+			event_roles = user_roles,			
+			data={'nome':nome_evento}
+		)
+
+		evento.save()
+
+		return HttpResponse(document_group_users_roles)
+
+
+	else:
+		return HttpResponseForbidden()		
 
 
 def usuarios_roles_list(request):

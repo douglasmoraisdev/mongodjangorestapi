@@ -1,23 +1,101 @@
   <div class="panel panel-default">
     <div class="panel-heading">Novo Evento</div>
-      <div class="panel-body">
-        <form class="form-inline">
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputEmail3">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail3" placeholder="Email">
-           </div>
-           <div class="form-group">
-              <label class="sr-only" for="exampleInputPassword3">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword3" placeholder="Password">
-           </div>
+    <div class="panel-body">  
 
-           <button type="submit" class="btn btn-default">Sign in</button>
+        <form class="form-horizontal" method="POST" action="newevent">
+          {% csrf_token %}
+          
+          <div class="form-group">
+            <label for="nome-grupo-evento" class="col-sm-2 control-label">Nome do Evento</label>                                
+            <div class="col-sm-2">
+              <input type="text" class="form-control" id="nome-grupo-evento" name="nome-grupo-evento" />              
+            </div>  
+          </div>
+
+
+          <div class="form-group">
+            <label for="dropdownMenu2" class="col-sm-2 control-label">Grupo de Host</label>
+            <div class="col-sm-10">
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Grupo de Origem
+                    <span class="caret"></span>
+                </button>
+                <input type="hidden" value="" id="grupo-origem-evento" name="grupo-origem-evento" />                                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+
+                  {% for item in Groups %}                    
+                    <li onclick="$('#grupo-origem-evento').val('{{ item.id }}');"><a>{{ item.data.nome }}</a></li>
+                  {% endfor %}   
+
+                </ul>
+              </div>
+            </div>
+          </div>
+
+      <div class="panel-heading">Usuarios e funções</div>
+
+        <div class="panel-body">
+
+          <div id="usuarios-events-roles-list-container">
+
+            <div class="form-group">
+
+              <div class="col-sm-10">
+                <button onclick="add_user_role()" type="button" class="btn btn-default">Adicionar</button>                
+              </div>        
+
+            </div>    
+
+          </div>
+
+        </div>
+
+
+           <button type="submit" class="btn btn-default">Cadastrar</button>
         </form>
+
         <div class="panel-body">
           Eventos cadastrados: 
             {% for item in Events %}
               <pre>{{ item.to_json }}</pre>
             {% endfor %}          
-        </div>        
-     </div>
+        </div>
+
+        <!-- User roles list div -->
+        <div id="user-event-list-div" style="display:none">
+
+
+        </div>
+        <!-- User roles list div -->            
+
+    </div>
+
+
   </div>
+
+
+
+
+<script>
+
+    function add_user_role(){
+
+
+      appended = $("<div id='appended'></div>")
+
+      $('#user-event-list-div').append(appended);
+
+      $(appended).load("usuarios_roles_list");
+      
+      $('#usuarios-events-roles-list-container').append(appended.show());
+
+    };
+
+    $(".dropdown-menu li a").click(function(){
+        var selText = $(this).text();
+        $(this).closest('div').find('button[data-toggle="dropdown"]').html(selText + ' <span class="caret"></span>');
+    });  
+ 
+   
+</script>

@@ -8,6 +8,7 @@ urlpatterns = [
     url(r'novouser$', views.novouser, name='novouser'),  
     url(r'novorole$', views.novorole, name='novorole'),
     url(r'novogrouptype$', views.novogrouptype, name='novogrouptype'),
+    url(r'newevent$', views.newevent, name='newevent'),    
 
 
     url(r'usuarios_roles_list$', views.usuarios_roles_list, name='usuarios_roles_list'),
