@@ -1,0 +1,14 @@
+POST Fields =====
+
+	groups_list.html
+	
+		name="nome-grupo"
+		name="tipo-grupo"
+		name="grupo-origem"
+		name="grupos-acima-multiple" multiple
+		name="grupos-abaixo-multiple" multiple
+
+
+	usuarios_roles_list.html
+		name="user-group{{ fields_seq }}"
+		name="user-role{{ fields_seq }}-multiple"
