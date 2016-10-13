@@ -44,7 +44,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 
                   {% for item in Groups %}                    
-                    <li onclick="$('#grupo-origem').val('{{ item.id }}');"><a>{{ item.data.nome }}</a></li>
+                    <li onclick="$('#grupo-origem').val('{{ item.id }}');"><a>{{ item.data.name }}</a></li>
                   {% endfor %}   
 
                 </ul>
@@ -59,7 +59,7 @@
             <div class="col-sm-10">            
               <select id="grupos-acima-multiple" name="grupos-acima-multiple" multiple="multiple">
                   {% for item in Groups %}                    
-                    <option value="{{ item.id }}">{{ item.data.nome }}</option>
+                    <option value="{{ item.id }}">{{ item.data.name }}</option>
                   {% endfor %}                    
               </select>
             </div>
@@ -73,7 +73,7 @@
             <div class="col-sm-10">            
               <select id="grupos-abaixo-multiple" name="grupos-abaixo-multiple" multiple="multiple">
                   {% for item in Groups %}                    
-                    <option value="{{ item.id }}">{{ item.data.nome }}</option>
+                    <option value="{{ item.id }}">{{ item.data.name }}</option>
                   {% endfor %}
               </select>
             </div>

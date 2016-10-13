@@ -6,9 +6,16 @@ import uuid
 
 from crossbone.models import *
 
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
+
+    logger.error('debug Something went wrong!')
+
     template = loader.get_template('home/index.html')
 
 
