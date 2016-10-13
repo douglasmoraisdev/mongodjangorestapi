@@ -3,11 +3,9 @@ from django.template import loader
 from django.http import HttpResponseForbidden
 from bson.objectid import ObjectId
 import uuid
-import logging
 
 from crossbone.models import *
 
-stdlogger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -35,7 +33,6 @@ def novogrupo(request):
 
 	if request.method == 'POST':
 
-		stdlogger.info('teste log')
 
 		document_group_origin, document_group_acima, document_group_abaixo = None, [], []
 		document_group_roles, document_group_users, document_group_users_roles = [], [], []
@@ -43,11 +40,11 @@ def novogrupo(request):
 		group_users_hashs = []
 		group_roles = []
 		user_roles = []
-		nome_grupo = request.POST.get('nome-grupo')
-		tipo_grupo = request.POST.get('tipo-grupo')
-		grupo_origem = request.POST.get('grupo-origem')
-		grupos_acima = request.POST.getlist('grupos-acima-multiple')
-		grupos_abaixo = request.POST.getlist('grupos-abaixo-multiple')
+		group_name = request.POST.get('nome-grupo')
+		group_type = request.POST.get('tipo-grupo')
+		group_origin = request.POST.get('grupo-origem')
+		groups_over = request.POST.getlist('grupos-acima-multiple')
+		groups_under = request.POST.getlist('grupos-abaixo-multiple')
 		
 		users_group_input_names = [name for name in request.POST.keys() if name.startswith('user-group')]
 		for input_name in users_group_input_names:
@@ -55,15 +52,15 @@ def novogrupo(request):
 			group_users_hashs = input_name.replace('user-group','')
 			group_roles.append(request.POST.getlist('user-role'+group_users_hashs+'-multiple'))
 
-		if grupo_origem:
-			document_group_origin = Groups.objects.get(id=ObjectId(grupo_origem))
+		if group_origin:
+			document_group_origin = Groups.objects.get(id=ObjectId(group_origin))
 
-		if grupos_acima:
-			for gruposa in grupos_acima:
+		if groups_over:
+			for gruposa in groups_over:
 				document_group_acima.append(Groups.objects.get(id=ObjectId(gruposa)))
 
-		if grupos_abaixo:
-			for gruposb in grupos_abaixo:			
+		if groups_under:
+			for gruposb in groups_under:			
 				document_group_abaixo.append(Groups.objects.get(id=ObjectId(gruposb)))
 
 		if group_users:
@@ -84,16 +81,16 @@ def novogrupo(request):
 			for role in document_group_users_roles[key]:
 				user_roles.append(User_roles(user=user, role=role))
 
-		grupo = Groups.objects.create(
-			group_type=[tipo_grupo],
+		group = Groups.objects.create(
+			group_type=[group_type],
 			origin=document_group_origin,
 			groups_over=document_group_acima,
 			groups_under=document_group_abaixo,
 			user_roles = user_roles,			
-			data={'nome':nome_grupo}
+			data={'name':group_name}
 		)
 
-		grupo.save()
+		group.save()
 
 		return HttpResponse(document_group_users_roles)
 
@@ -105,10 +102,10 @@ def novouser(request):
 
 	if request.method == 'POST':
 
-		nome_usuario = request.POST.get('nome_usuario')
+		user_name = request.POST.get('nome_usuario')
 
 		user = Users.objects.create(
-			name = nome_usuario
+			name = user_name
 		)
 
 		user.save()
@@ -122,10 +119,10 @@ def novorole(request):
 
 	if request.method == 'POST':
 
-		nome_funcao = request.POST.get('nome_funcao')
+		role_name = request.POST.get('nome_funcao')
 
 		role = Roles.objects.create(
-			name = nome_funcao
+			name = role_name
 		)
 
 		role.save()
@@ -139,12 +136,12 @@ def novogrouptype(request):
 
 	if request.method == 'POST':
 
-		codigo_tipo_grupo = request.POST.get('codigo_tipo_grupo')
-		nome_tipo_grupo = request.POST.get('nome_tipo_grupo')		
+		type_group_code = request.POST.get('codigo_tipo_grupo')
+		type_group_name = request.POST.get('nome_tipo_grupo')		
 
 		group_type = Groups_types.objects.create(
-			code = codigo_tipo_grupo,
-			name = nome_tipo_grupo
+			code = type_group_code,
+			name = type_group_name
 		)
 
 		group_type.save()
@@ -158,7 +155,7 @@ def newevent(request):
 
 	if request.method == 'POST':
 
-		stdlogger.info('teste log')
+	
 
 		document_group_origin, document_group_acima, document_group_abaixo = None, [], []
 		document_group_roles, document_group_users, document_group_users_roles = [], [], []
@@ -166,8 +163,8 @@ def newevent(request):
 		group_users_hashs = []
 		group_roles = []
 		user_roles = []
-		nome_evento = request.POST.get('nome-grupo-evento')
-		grupo_origem = request.POST.get('grupo-origem-evento')
+		event_name = request.POST.get('nome-grupo-evento')
+		group_origin = request.POST.get('grupo-origem-evento')
 
 		
 		users_group_input_names = [name for name in request.POST.keys() if name.startswith('user-group')]
@@ -176,8 +173,8 @@ def newevent(request):
 			group_users_hashs = input_name.replace('user-group','')
 			group_roles.append(request.POST.getlist('user-role'+group_users_hashs+'-multiple'))
 
-		if grupo_origem:
-			document_group_origin = Groups.objects.get(id=ObjectId(grupo_origem))
+		if group_origin:
+			document_group_origin = Groups.objects.get(id=ObjectId(group_origin))
 
 
 		if group_users:
@@ -201,7 +198,7 @@ def newevent(request):
 		evento = Events.objects.create(
 			host=document_group_origin,
 			event_roles = user_roles,			
-			data={'nome':nome_evento}
+			data={'nome':event_name}
 		)
 
 		evento.save()
