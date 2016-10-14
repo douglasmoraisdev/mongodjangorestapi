@@ -116,7 +116,7 @@ def novouser(request):
 		return HttpResponse('Feito!')
 
 	else:
-		return HttpResponseForbidden()	
+		return HttpResponseForbidden()
 
 def novorole(request):
 
@@ -140,12 +140,9 @@ def novogrouptype(request):
 		type_group_code = request.POST.get('codigo_tipo_grupo')
 		type_group_name = request.POST.get('nome_tipo_grupo')		
 
-		group_type = Groups_types.objects.create(
-			code = type_group_code,
-			name = type_group_name
-		)
+		group_type = Groups_types()
 
-		group_type.save()
+		group_type.add_group_type(type_group_code, type_group_name)
 
 		return HttpResponse('Feito!')
 
@@ -192,11 +189,9 @@ def newevent(request):
 			for role in document_group_users_roles[key]:
 				user_roles.append(User_roles(user=user, role=role))
 
-		evento = Events.objects.create(
-			host=document_group_origin,
-			event_roles = user_roles,			
-			data={'name':event_name}
-		)
+		evento = Events()
+
+		evento.add_event(document_group_origin, user_roles, {'name':event_name})
 
 		return HttpResponse(request)
 
@@ -204,7 +199,7 @@ def newevent(request):
 	else:
 		return HttpResponseForbidden()		
 
-
+#ajax
 def usuarios_roles_list(request):
 
 	content = {
