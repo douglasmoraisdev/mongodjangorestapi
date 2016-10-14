@@ -99,7 +99,7 @@ def novogrupo(request):
 
 		group.save()
 
-		return HttpResponse(document_group_users_roles)
+		return HttpResponse('abc')
 
 
 	else:
@@ -111,11 +111,9 @@ def novouser(request):
 
 		user_name = request.POST.get('nome_usuario')
 
-		user = Users.objects.create(
-			name = user_name
-		)
+		user = Users()
 
-		user.save()
+		user.add_user(user_name)
 
 		return HttpResponse('Feito!')
 
