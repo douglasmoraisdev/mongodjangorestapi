@@ -2,39 +2,87 @@ from crossbone.models import *
 
 import test_addons
 
+class ModelsTest_add(test_addons.MongoTestCase):
+
+	def test_add_users(self):
+
+		user = Users()
+
+		user.add_user('Joao')
+
+		self.assertEquals(Users.objects[0].name, 'Joao')
+
+	def test_add_roles(self):
+
+		role = Roles()
+
+		role.add_role('Lider')
+
+		self.assertEquals(Roles.objects[0].name, 'Lider')		
+
+	def test_add_group_type(self):
+
+		groups_types = Groups_types()
+
+		groups_types.add_group_type('celula', 'Célula')
+
+		self.assertEquals(Groups_types.objects[0].code, 'celula')
+		self.assertEquals(Groups_types.objects[0].name, 'Célula')
+
+	def test_add_groups(self):
+
+		group = Groups()
+
+		#First Group
+		group_type = Groups_types()
+		user_roles = []
+		data = {'name':'Celula da Alvorada'}
+		origin = None
+		groups_over = None
+		groups_under = None
+		user_roles = []
+
+		group_type.add_group_type('celula', 'Célula')
+		group_type_id = Groups_types.objects[0].id
+
+		group.add_group({'name':'Celula da Alvorada'}, group_type_id, origin, groups_over, groups_under, user_roles)
+
+		self.assertEquals(Groups.objects[0].data['name'], 'Celula da Alvorada')
+		self.assertIn(Groups.objects[0].group_type[0].id, [group_type_id])
+		self.assertEquals(Groups.objects[0].origin == None, True)
+		self.assertEquals(Groups.objects[0].groups_over == [], True)
+		self.assertEquals(Groups.objects[0].groups_under == [], True)
+		self.assertEquals(Groups.objects[0].user_roles == [], True)
+
+		#Second Group
+		user_roles = []
+		data = {'name':'Celula Fátima'}
+		origin = Groups.objects[0].id
+		groups_over = [Groups.objects[0].id]
+		groups_under = [Groups.objects[0].id]
+		user_roles = []
+
+		group.add_group({'name':'Celula da Fatima'}, group_type_id, origin, groups_over, groups_under, user_roles)
+
+		self.assertEquals(Groups.objects[1].data['name'], 'Celula da Fatima')
+		self.assertIn(Groups.objects[1].group_type[0].id, [group_type_id])
+		self.assertEquals(Groups.objects[1].origin.id, origin)
+		self.assertIn(Groups.objects[1].groups_over[0].id, groups_over)
+		self.assertIn(Groups.objects[1].groups_under[0].id, groups_under)
+		self.assertEquals(Groups.objects[1].user_roles == [], True)
 
 
-class ModelsTest_Group(test_addons.MongoTestCase):
 
-	def test_dict_deep_group(self):
+	def test_add_event(self):
 
-		Groups.objects.create(
-			group_type=['Celula'],
-			origin='',
-			groups_over=[],
-			groups_under=[],
-			user_roles = [],			
-			data={'name':
-						{	'first_name':'Joao',
-							'last_name':'Silva'
-						}
-				}
-		)
+		host = None
+		event_roles = []
+		some_data = dict()
 
-		self.assertEquals(Groups.objects[0].data['name']['last_name'], 'Silva')
+		event = Events()
 
+		event.add_event(host, event_roles, some_data)
 
-class ModelsTest_Users(test_addons.MongoTestCase):
-
-	def test_dict_deep_user(self):
-
-		Users.objects.create(
-			name='Joao',	
-			data={'name':
-						{	'first_name':'Joao',
-							'last_name':'Silva'
-						}
-				}
-		)
-
-		self.assertEquals(Users.objects[0].data['name']['last_name'], 'Silva')
+		self.assertEquals(Events.objects[0].host, host)
+		self.assertEquals(Events.objects[0].event_roles, event_roles)
+		self.assertEquals(Events.objects[0].data, some_data)

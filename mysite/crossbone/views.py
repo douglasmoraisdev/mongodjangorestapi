@@ -97,8 +97,6 @@ def novogrupo(request):
 			data={'name':group_name}
 		)
 
-		group.save()
-
 		return HttpResponse('abc')
 
 
@@ -126,11 +124,9 @@ def novorole(request):
 
 		role_name = request.POST.get('nome_funcao')
 
-		role = Roles.objects.create(
-			name = role_name
-		)
+		role = Roles()
 
-		role.save()
+		role.add_role(role_name)
 
 		return HttpResponse('Feito!')
 
@@ -160,8 +156,6 @@ def newevent(request):
 
 	if request.method == 'POST':
 
-	
-
 		document_group_origin, document_group_acima, document_group_abaixo = None, [], []
 		document_group_roles, document_group_users, document_group_users_roles = [], [], []
 		group_users = []
@@ -181,7 +175,6 @@ def newevent(request):
 		if group_origin:
 			document_group_origin = Groups.objects.get(id=ObjectId(group_origin))
 
-
 		if group_users:
 			for key, users in enumerate(group_users):
 				if users != '':
@@ -196,19 +189,16 @@ def newevent(request):
 
 		for key, user in enumerate(document_group_users):
 
-
 			for role in document_group_users_roles[key]:
 				user_roles.append(User_roles(user=user, role=role))
 
 		evento = Events.objects.create(
 			host=document_group_origin,
 			event_roles = user_roles,			
-			data={'nome':event_name}
+			data={'name':event_name}
 		)
 
-		evento.save()
-
-		return HttpResponse(document_group_users_roles)
+		return HttpResponse(request)
 
 
 	else:

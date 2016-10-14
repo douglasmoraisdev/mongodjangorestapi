@@ -1,12 +1,14 @@
+import test_addons
+
 from django.test import TestCase
 from django.test import Client
 
 client = Client()
 
-class ViewsTest_Users(TestCase):
+class ViewsTest_Users(test_addons.MongoTestCase):
 
 	def test_add_user(self):
 
-		response = client.post('/crossbone/novouser', {'nome_usuario':'TioJoao'})
+		response = client.post('/crossbone/novouser', {'nome_usuario':'TioPaulo'})
 
-		self.assertEquals(response.status_code, 201)
+		self.assertEquals(response.status_code, 200)
