@@ -27,15 +27,120 @@ def index(request):
         'Events': Events.objects,        
     }
     return HttpResponse(template.render(content, request))
-    
-    
-def contact(request):
-    
-    template = loader.get_template('contact/contact.html')
-    
-    return HttpResponse(template.render('',request))
 
 
+def loginLogout(request):
+
+    template = loader.get_template('home/login.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))
+
+
+def group(request):
+
+    template = loader.get_template('home/group.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))
+
+
+def group_new(request):
+
+    template = loader.get_template('home/group_new.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))
+
+def user_new(request):
+
+    template = loader.get_template('home/user_new.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))
+
+
+def role_new(request):
+
+    template = loader.get_template('home/role_new.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))
+
+
+def grouptype_new(request):
+
+    template = loader.get_template('home/grouptype_new.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))    
+
+
+def event(request):
+
+    template = loader.get_template('home/event.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))    
+
+
+    
 def novogrupo(request):
 
 	if request.method == 'POST':
