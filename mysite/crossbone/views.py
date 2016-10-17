@@ -121,8 +121,23 @@ def grouptype_new(request):
         'Events': Events.objects,        
     }
 
-    return HttpResponse(template.render(content, request))    
+    return HttpResponse(template.render(content, request))
 
+
+def event_new(request):
+
+    template = loader.get_template('home/event_new.html')
+
+
+    content = {
+        'Users': Users.objects,
+        'Groups': Groups.objects,
+        'Groups_types': Groups_types.objects,
+        'Roles': Roles.objects,
+        'Events': Events.objects,        
+    }
+
+    return HttpResponse(template.render(content, request))        
 
 def event(request):
 

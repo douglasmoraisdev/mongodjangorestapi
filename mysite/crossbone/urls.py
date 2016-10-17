@@ -16,6 +16,9 @@ urlpatterns = [
 
     url(r'tipogrupo/novo$', views.grouptype_new, name='tipogrupo_novo'),
 
+    url(r'evento/novo$', views.event_new, name='evento_novo'),
+
+
 
     url(r'evento$', views.event, name='evento'),    
 

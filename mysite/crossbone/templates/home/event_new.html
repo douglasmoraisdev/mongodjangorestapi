@@ -80,7 +80,7 @@
                             <div class="card-content">
 
                                 <span class="card-title activator">
-                                    Novo Grupo
+                                    Novo Evento
                                     <i class="material-icons right">live_help</i>
                                 </span>
 
@@ -104,53 +104,21 @@
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <input id="last_name" type="text" class="validate">
-                                            <label for="last_name">Nome do grupo</label>
+                                            <label for="last_name">Nome do Evento</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <select>
                                               <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula</option>
-                                              <option value="2">Rede</option>
-                                              <option value="3">Região</option>
-                                        </select>
-                                            <label>Tipo de Grupo</label>
-
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <select>
-                                              <option value="" disabled selected>Selecione</option>
                                               <option value="1">Célula Alvorada</option>
                                               <option value="2">Célula Fatima</option>
                                               <option value="3">Célula Centro</option>
                                         </select>
-                                            <label>Grupo de Origem</label>
+                                            <label>Grupo Anfitrião</label>
                                         </div>
                                     </div>
-                                    <div class="row">
 
-
-                                        <div class="input-field col s6">
-                                            <select multiple>
-                                          <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula Alvorada</option>
-                                              <option value="2">Célula Fatima</option>
-                                              <option value="3">Célula Centro</option>
-                                        </select>
-                                            <label>Supervisionando:</label>
-                                        </div>
-                                        <div class="input-field col s6">
-                                            <select multiple>
-                                          <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula Alvorada</option>
-                                              <option value="2">Célula Fatima</option>
-                                              <option value="3">Célula Centro</option>
-                                        </select>
-                                            <label>Supervisionado por:</label>
-                                        </div>
-
-                                    </div>
                                     <div class="row">
                                         <div class="input-field col s6">
 
@@ -159,15 +127,13 @@
                                         </div>
 
                                     </div>
- 
-
 
                                     <div id="usuarios-roles-list-container">
 
                                         <div class="row">
 
                                             <div class="input-field col s6">
-                                                <select id="user-group{{ fields_seq }}" name="user-group{{ fields_seq }}">
+                                                <select id="user-event{{ fields_seq }}" name="user-event{{ fields_seq }}">
                                                       <option value="" disabled selected>Selecione</option>
                                                       {% for item in Users %}                    
                                                         <option value="{{ item.id }}">{{ item.name }}</option>
@@ -178,7 +144,7 @@
                                             </div>
 
                                             <div class="input-field col s6">
-                                                <select multiple id="group-role{{ fields_seq }}-multiple" name="group-role{{ fields_seq }}-multiple">
+                                                <select multiple id="user-role{{ fields_seq }}-multiple" name="user-role{{ fields_seq }}-multiple">
                                                   <option value="" disabled selected>Selecione</option>
 
                                                       {% for item in Roles %}                    
@@ -196,15 +162,14 @@
 
                                     <div id="row">
 
-                                        <a onclick="add_user_role_group()" class="waves-effect waves-light btn right">+ Usuário</a>
+                                        <a onclick="add_user_role_event()" class="waves-effect waves-light btn right">+ Usuário</a>
 
                                     </div>
-
 
                                     <div class="row">
                                         <div class="input-field col s6">
 
-                                            <p><b>Detalhes do Grupo</b></p>
+                                            <p><b>Detalhes do Evento</b></p>
 
                                         </div>
 
@@ -298,8 +263,7 @@
         );           
 
 
-
-        function add_user_role_group(){
+        function add_user_role_event(){
 
 
           appended = $("<div id='appended'></div>")
@@ -311,7 +275,6 @@
           $('#usuarios-roles-list-container').append(appended.show());
 
         };
-
 
     </script>
 
