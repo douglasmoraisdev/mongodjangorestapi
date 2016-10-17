@@ -47,23 +47,33 @@ def loginLogout(request):
     return HttpResponse(template.render(content, request))
 
 
-def group(request): #MD
+def group(request):
 
     template = loader.get_template('home/group/group.html')
 
+    #content = {
+    #    'Users': Users.objects,
+    #    'Groups': Groups.objects,
+    #    'Groups_types': Groups_types.objects,
+    #    'Roles': Roles.objects,
+    #    'Events': Events.objects,        
+    #}    
+
+    group = Groups()
+    group = group.get_group_by_id(ObjectId(Groups.objects[0].id))
+
 
     content = {
-        'Users': Users.objects,
-        'Groups': Groups.objects,
-        'Groups_types': Groups_types.objects,
-        'Roles': Roles.objects,
-        'Events': Events.objects,        
+    	'group_name':group.data['name']
+
     }
+
+
 
     return HttpResponse(template.render(content, request))
 
 
-def group_new(request): #testado MD
+def group_new(request):
 
 	template = loader.get_template('home/group/group_new.html')
 
@@ -138,7 +148,7 @@ def group_new(request): #testado MD
 
 		return HttpResponse(template.render(content, request))
 
-def user_new(request): #testado MD
+def user_new(request):
 
 	template = loader.get_template('home/user/user_new.html')
 
@@ -164,7 +174,7 @@ def user_new(request): #testado MD
 
 
 
-def role_new(request): #testado MD
+def role_new(request):
 
 	template = loader.get_template('home/role/role_new.html')
 
@@ -192,7 +202,7 @@ def role_new(request): #testado MD
 		return HttpResponse(template.render(content, request))
 
 
-def grouptype_new(request): #testado MD
+def grouptype_new(request):
 
 	template = loader.get_template('home/group/grouptype_new.html')
 
@@ -233,7 +243,7 @@ def event(request):
 
     return HttpResponse(template.render(content, request))
 
-def event_new(request): #testado MD
+def event_new(request):
 
 	template = loader.get_template('home/event/event_new.html')
 
