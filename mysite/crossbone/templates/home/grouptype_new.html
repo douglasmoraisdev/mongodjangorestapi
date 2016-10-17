@@ -101,7 +101,8 @@
                             </div>
 
                             <div class="row">
-                                <form class="col s12">
+                                <form id="form_add_grouptype" class="col s12" action="" method="POST">
+                                  {% csrf_token %}                            
 
                                     <div class="row">
                                         <div class="input-field col s6">
@@ -114,9 +115,14 @@
 
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="last_name" type="text" class="validate">
-                                            <label for="last_name">Nome do Tipo</label>
+                                            <input id="codigo_tipo_grupo" name="codigo_tipo_grupo" type="text" class="validate">
+                                            <label for="codigo_tipo_grupo">Codigo do Tipo</label>
                                         </div>
+
+                                        <div class="input-field col s6">
+                                            <input id="nome_tipo_grupo" name="nome_tipo_grupo" type="text" class="validate">
+                                            <label for="nome_tipo_grupo">Nome do Tipo</label>
+                                        </div>                                        
 
                                     </div>                                    
 
@@ -126,7 +132,7 @@
 
 
                             <div class="card-action">
-                                <button class="btn waves-effect waves-light ">Cadastrar</button>
+                                <button onclick="$('#form_add_grouptype').submit()" class="btn waves-effect waves-light ">Cadastrar</button>
                             </div>
 
 

@@ -101,7 +101,9 @@
                             </div>
 
                             <div class="row">
-                                <form class="col s12">
+                                <form id="form_add_role" class="col s12" action="" method="POST">
+                                  {% csrf_token %}
+
 
                                     <div class="row">
                                         <div class="input-field col s6">
@@ -114,7 +116,7 @@
 
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="last_name" type="text" class="validate">
+                                            <input id="nome_funcao" name="nome_funcao" type="text" class="validate">
                                             <label for="last_name">Nome da Função</label>
                                         </div>
 
@@ -126,7 +128,7 @@
 
 
                             <div class="card-action">
-                                <button class="btn waves-effect waves-light ">Cadastrar</button>
+                                <button onclick="$('#form_add_role').submit()" class="btn waves-effect waves-light ">Cadastrar</button>
                             </div>
 
 

@@ -84,13 +84,13 @@
                                     <i class="material-icons right">live_help</i>
                                 </span>
 
-
                             </div>
 
                             <div class="row">
                                 <!--<img class="round" width="60" height="60" avatar="+">-->
 
-                                <form class="col s12">
+                                <form id="form_add_group" action="" method="POST" class="col s12">
+                                  {% csrf_token %}
 
                                     <div class="row">
                                         <div class="input-field col s6">
@@ -103,27 +103,27 @@
 
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="last_name" type="text" class="validate">
-                                            <label for="last_name">Nome do grupo</label>
+                                            <input id="nome-grupo" name="nome-grupo" type="text" class="validate">
+                                            <label for="nome-grupo">Nome do grupo</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <select>
+                                            <select id="tipo-grupo" name="tipo-grupo">
                                               <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula</option>
-                                              <option value="2">Rede</option>
-                                              <option value="3">Região</option>
+                                              {% for item in Groups_types %}   
+                                                <option value="{{ item.id }}">{{ item.name }}</option>
+                                              {% endfor %}   
                                         </select>
                                             <label>Tipo de Grupo</label>
 
                                         </div>
                                         <div class="input-field col s6">
-                                            <select>
+                                            <select id="grupo-origem" name="grupo-origem">
                                               <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula Alvorada</option>
-                                              <option value="2">Célula Fatima</option>
-                                              <option value="3">Célula Centro</option>
+                                              {% for item in Groups %}   
+                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                              {% endfor %}   
                                         </select>
                                             <label>Grupo de Origem</label>
                                         </div>
@@ -132,20 +132,20 @@
 
 
                                         <div class="input-field col s6">
-                                            <select multiple>
+                                        <select multiple id="grupos-acima-multiple" name="grupos-acima-multiple">
                                           <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula Alvorada</option>
-                                              <option value="2">Célula Fatima</option>
-                                              <option value="3">Célula Centro</option>
+                                              {% for item in Groups %}   
+                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                              {% endfor %}  
                                         </select>
                                             <label>Supervisionando:</label>
                                         </div>
                                         <div class="input-field col s6">
-                                            <select multiple>
+                                        <select multiple id="grupos-abaixo-multiple" name="grupos-abaixo-multiple">
                                           <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula Alvorada</option>
-                                              <option value="2">Célula Fatima</option>
-                                              <option value="3">Célula Centro</option>
+                                              {% for item in Groups %}   
+                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                              {% endfor %}  
                                         </select>
                                             <label>Supervisionado por:</label>
                                         </div>
@@ -160,37 +160,7 @@
 
                                     </div>
  
-
-
                                     <div id="usuarios-roles-list-container">
-
-                                        <div class="row">
-
-                                            <div class="input-field col s6">
-                                                <select id="user-group{{ fields_seq }}" name="user-group{{ fields_seq }}">
-                                                      <option value="" disabled selected>Selecione</option>
-                                                      {% for item in Users %}                    
-                                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                                      {% endfor %} 
-
-                                                </select>
-                                                <label>Usuário</label>
-                                            </div>
-
-                                            <div class="input-field col s6">
-                                                <select multiple id="group-role{{ fields_seq }}-multiple" name="group-role{{ fields_seq }}-multiple">
-                                                  <option value="" disabled selected>Selecione</option>
-
-                                                      {% for item in Roles %}                    
-                                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                                      {% endfor %} 
-
-                                                </select>
-                                                <label>Função</label>
-
-                                            </div>
-
-                                        </div>
 
                                     </div>
 
@@ -199,7 +169,6 @@
                                         <a onclick="add_user_role_group()" class="waves-effect waves-light btn right">+ Usuário</a>
 
                                     </div>
-
 
                                     <div class="row">
                                         <div class="input-field col s6">
@@ -230,7 +199,7 @@
 
 
                             <div class="card-action">
-                                <button class="btn waves-effect waves-light ">Cadastrar</button>
+                                <button onclick="$('#form_add_group').submit()" class="btn waves-effect waves-light ">Cadastrar</button>
                             </div>
 
 
