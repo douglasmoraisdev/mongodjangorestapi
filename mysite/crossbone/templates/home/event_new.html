@@ -90,7 +90,9 @@
                             <div class="row">
                                 <!--<img class="round" width="60" height="60" avatar="+">-->
 
-                                <form class="col s12">
+                                <form id="form_add_event" action="" method="POST" class="col s12">
+                                {% csrf_token %}
+
 
                                     <div class="row">
                                         <div class="input-field col s6">
@@ -103,8 +105,8 @@
 
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <input id="last_name" type="text" class="validate">
-                                            <label for="last_name">Nome do Evento</label>
+                                            <input id="nome-evento" name="nome-evento" type="text" class="validate">
+                                            <label for="nome-evento">Nome do Evento</label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -130,39 +132,13 @@
 
                                     <div id="usuarios-roles-list-container">
 
-                                        <div class="row">
-
-                                            <div class="input-field col s6">
-                                                <select id="user-event{{ fields_seq }}" name="user-event{{ fields_seq }}">
-                                                      <option value="" disabled selected>Selecione</option>
-                                                      {% for item in Users %}                    
-                                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                                      {% endfor %} 
-
-                                                </select>
-                                                <label>Usuário</label>
-                                            </div>
-
-                                            <div class="input-field col s6">
-                                                <select multiple id="user-role{{ fields_seq }}-multiple" name="user-role{{ fields_seq }}-multiple">
-                                                  <option value="" disabled selected>Selecione</option>
-
-                                                      {% for item in Roles %}                    
-                                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                                      {% endfor %} 
-
-                                                </select>
-                                                <label>Função</label>
-
-                                            </div>
-
-                                        </div>
 
                                     </div>
 
+
                                     <div id="row">
 
-                                        <a onclick="add_user_role_event()" class="waves-effect waves-light btn right">+ Usuário</a>
+                                        <a onclick="add_user_role_event()" class="waves-effect waves-light btn">+ Usuário</a>
 
                                     </div>
 
@@ -195,7 +171,7 @@
 
 
                             <div class="card-action">
-                                <button class="btn waves-effect waves-light ">Cadastrar</button>
+                                <button onclick="$('#form_add_event').submit()" class="btn waves-effect waves-light ">Cadastrar</button>
                             </div>
 
 
