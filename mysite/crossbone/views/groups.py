@@ -24,11 +24,12 @@ def group(request):
 
     users = group.get_group_users(ObjectId(Groups.objects[0].id))
 
-
+    users_count = len(users)
     content = {
     	'group_name':group.data['name'],
     	'group_type':group_type.name,
-    	'users':users
+    	'users_list':users,
+    	'users_count': users_count
     	#'group_date':group.data['created_on']
 
     }
