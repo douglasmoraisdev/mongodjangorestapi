@@ -1,43 +1,31 @@
-            <div id="usuarios-roles-list">
-                <div class="form-group">
+<div class="row">
 
-                  <!-- Build your select: -->
-                  <label for="usuario-grupo" class="col-sm-2 control-label">Usuario</label>
-                  <div class="col-sm-2">            
-                    <div class="dropdown">
-                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        Usuario
-                          <span class="caret"></span>
-                      </button>
-                      <input type="hidden" value="" id="user-group{{ fields_seq }}" name="user-group{{ fields_seq }}" />                
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        {% for item in Users %}                    
-                          <li onclick="$('#user-group{{ fields_seq }}').val('{{ item.id }}');"><a>{{ item.name }}</a></li>
-                        {% endfor %}                     
-                      </ul>
-                    </div> 
-                  </div>
+    <div class="input-field col s6">
+        <select id="user-group{{ fields_seq }}" name="user-group{{ fields_seq }}">
+              <option value="" disabled selected>Selecione</option>
+              {% for item in Users %}                    
+                <option value="{{ item.id }}">{{ item.name }}</option>
+              {% endfor %} 
 
-                  <label for="funcao-usuario-grupo" class="col-sm-2 control-label">Funções</label>
-                  <div class="col-sm-2">            
-                    <select id="user-role{{ fields_seq }}-multiple" name="user-role{{ fields_seq }}-multiple" multiple="multiple">
-                        {% for item in Roles %}                    
-                          <option value="{{ item.id }}">{{ item.name }}</option>
-                        {% endfor %}                  
-                    </select>
-                  </div>
+        </select>
+        <label>Usuário</label>
+    </div>
 
-              </div>
-            </div>
+    <div class="input-field col s6">
+        <select multiple id="group-role{{ fields_seq }}-multiple" name="group-role{{ fields_seq }}-multiple">
+          <option value="" disabled selected>Selecione</option>
 
-            <script>
+              {% for item in Roles %}                    
+                <option value="{{ item.id }}">{{ item.name }}</option>
+              {% endfor %} 
 
-              $(".dropdown-menu li a").click(function(){
-                  var selText = $(this).text();
-                  $(this).closest('div').find('button[data-toggle="dropdown"]').html(selText + ' <span class="caret"></span>');
-              });  
+        </select>
+        <label>Função</label>
 
+    </div>
 
-              $('#user-role{{ fields_seq }}-multiple').multiselect();        
-                  
-            </script>
+</div>
+
+<script>
+        $('select').material_select();
+</script>

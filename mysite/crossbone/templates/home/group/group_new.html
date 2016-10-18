@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    <!-- BOOTSTRAP & STYLES -->
+    {% include "default/bootstrap_css.html" %}
+    <!-- END OF BOOTSTRAP & STYLES -->
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Portal Betel</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#!">Sass</a></li>
+                <li><a href="#!">Components</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons">more_vert</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <!-- Page Layout here -->
+    <div class="row">
+
+        <div class="col s12 m4 l3">
+
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+
+            <!-- Grey navigation panel
+
+
+            This content will be:
+            3-columns-wide on large screens,
+            4-columns-wide on medium screens,
+            12-columns-wide on small screens  -->
+
+        </div>
+
+        <div class="col s12 m8 l9">
+            <!-- Note that "m8 l9" was added -->
+            <!-- Teal page content
+
+                This content will be:
+            9-columns-wide on large screens,
+            8-columns-wide on medium screens,
+            12-columns-wide on small screens  -->
+
+
+            <div id="main_content">
+
+              <!-- Dropdown Structure -->
+              <ul id='dropdown1' class='dropdown-content'>
+                <li><a href="#!">one</a></li>
+                <li><a href="#!">two</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">three</a></li>
+              </ul>            
+
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card">
+                            <div class="card-content">
+
+                                <span class="card-title activator">
+                                    Novo Grupo
+                                    <i class="material-icons right">live_help</i>
+                                </span>
+
+                            </div>
+
+                            <div class="row">
+                                <!--<img class="round" width="60" height="60" avatar="+">-->
+
+                                <form id="form_add_group" action="" method="POST" class="col s12">
+                                  {% csrf_token %}
+
+                                    <div class="row">
+                                        <div class="input-field col s6">
+
+                                            <p><b>Dados básicos</b></p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <input id="nome-grupo" name="nome-grupo" type="text" class="validate">
+                                            <label for="nome-grupo">Nome do grupo</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <select id="tipo-grupo" name="tipo-grupo">
+                                              <option value="" disabled selected>Selecione</option>
+                                              {% for item in Groups_types %}   
+                                                <option value="{{ item.id }}">{{ item.name }}</option>
+                                              {% endfor %}   
+                                        </select>
+                                            <label>Tipo de Grupo</label>
+
+                                        </div>
+                                        <div class="input-field col s6">
+                                            <select id="grupo-origem" name="grupo-origem">
+                                              <option value="" disabled selected>Selecione</option>
+                                              {% for item in Groups %}   
+                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                              {% endfor %}   
+                                        </select>
+                                            <label>Grupo de Origem</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+
+
+                                        <div class="input-field col s6">
+                                        <select multiple id="grupos-acima-multiple" name="grupos-acima-multiple">
+                                          <option value="" disabled selected>Selecione</option>
+                                              {% for item in Groups %}   
+                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                              {% endfor %}  
+                                        </select>
+                                            <label>Supervisionando:</label>
+                                        </div>
+                                        <div class="input-field col s6">
+                                        <select multiple id="grupos-abaixo-multiple" name="grupos-abaixo-multiple">
+                                          <option value="" disabled selected>Selecione</option>
+                                              {% for item in Groups %}   
+                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                              {% endfor %}  
+                                        </select>
+                                            <label>Supervisionado por:</label>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s6">
+
+                                            <p><b>Pessoas e Funções</b></p>
+
+                                        </div>
+
+                                    </div>
+ 
+                                    <div id="usuarios-roles-list-container">
+
+                                    </div>
+
+                                    <div id="row">
+
+                                        <a onclick="add_user_role_group()" class="waves-effect waves-light btn">+ Usuário</a>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s6">
+
+                                            <p><b>Detalhes do Grupo</b></p>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="input-field col s6">
+                                            <input id="first_name" type="text" class="validate">
+                                            <label for="first_name">Endereço</label>
+                                        </div>
+
+                                        <div class="input-field col s6">
+                                            <input id="first_name" type="text" class="validate">
+                                            <label for="first_name">Cidade</label>
+                                        </div>
+
+                                    </div>
+
+
+                                </form>
+                            </div>
+
+
+                            <div class="card-action">
+                                <button onclick="$('#form_add_group').submit()" class="btn waves-effect waves-light ">Cadastrar</button>
+                            </div>
+
+
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Cadastrando um novo grupo<i class="material-icons right">close</i></span>
+                                <p>Dados do grupo1</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!--<button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>-->
+
+    <div class="fixed-action-btn vertical" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large waves-effect waves-light red">
+            <i class="large material-icons">add</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating blue"><i class="material-icons">supervisor_account</i></a></li>
+            <li><a class="btn-floating green"><i class="material-icons">today</i></a></li>
+        </ul>
+    </div>
+
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+
+        $('select').material_select();
+
+        $('.modal-trigger').leanModal();     
+
+        $('.dropdown-button').dropdown({
+          inDuration: 300,
+          outDuration: 225,
+          constrain_width: false, // Does not change width of dropdown to that of the activator
+          hover: true, // Activate on hover
+          gutter: 0, // Spacing from edge
+          belowOrigin: false, // Displays dropdown below the button
+          alignment: 'left' // Displays dropdown with edge aligned to the left of button
+        }
+        );           
+
+
+
+        function add_user_role_group(){
+
+
+          appended = $("<div id='appended'></div>")
+
+          $('#user-list-div').append(appended);
+
+          $(appended).load("usuarios_roles_list");
+          
+          $('#usuarios-roles-list-container').append(appended.show());
+
+        };
+
+
+    </script>
+
+
+</body>
+
+
+</html>

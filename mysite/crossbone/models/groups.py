@@ -3,6 +3,7 @@ from mongoengine import *
 from crossbone.models.groups_types import *
 from crossbone.models.users import *
 
+
 # Create your models here.
 
 
@@ -17,7 +18,7 @@ class Groups(Document):
 
 	def add_group(self, data, group_type, group_origin, groups_over, groups_under, user_roles):
 
-		group = Groups.objects.create(
+		Groups.objects.create(
 			group_type=[group_type],
 			origin=group_origin,
 			groups_over=groups_over,
@@ -25,3 +26,7 @@ class Groups(Document):
 			user_roles = user_roles,			
 			data=data
 		)
+
+	def get_group_by_id(self, group_id):
+
+		return Groups.objects.get(id=group_id)
