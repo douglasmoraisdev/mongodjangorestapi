@@ -15,3 +15,8 @@ class Events(Document):
 			event_roles = event_roles,			
 			data=data
 		)
+
+	def get_events_by_group_id(self, group_id):
+
+		#return Events.objects.filter(Q(host=group_id))	
+		return Events.objects(host="5806280c6096c864bc924932")

@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'evento$', views.events.event, name='evento'),    
     url(r'evento/novo$', views.events.event_new, name='evento_novo'),
 
-    url(r'grupo$', views.groups.group, name='grupo'),
+    url(r'^grupo/([0-9])/$', views.groups.group, name='grupo'),
     url(r'^grupo/novo$', views.groups.group_new, name='grupo_novo'),
     url(r'tipogrupo/novo$', views.groups.grouptype_new, name='tipogrupo_novo'),
 
@@ -21,5 +21,4 @@ urlpatterns = [
     #ajax
     url(r'usuarios_roles_list$', views.users.usuarios_roles_list, name='usuarios_roles_list'),
 
-    
 ]

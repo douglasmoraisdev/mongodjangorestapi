@@ -111,11 +111,11 @@
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
-                                            <select>
-                                              <option value="" disabled selected>Selecione</option>
-                                              <option value="1">Célula Alvorada</option>
-                                              <option value="2">Célula Fatima</option>
-                                              <option value="3">Célula Centro</option>
+                                            <select id="grupo-origem-evento" name="grupo-origem-evento">
+                                                  <option value="" disabled selected>Selecione</option>
+                                                {% for item in Groups %}
+                                                  <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                                {% endfor %}
                                         </select>
                                             <label>Grupo Anfitrião</label>
                                         </div>

@@ -96,7 +96,7 @@
                             <div class="card-content white-text">
 
                                 <span class="card-title activator white-text">{{ group_name }}<i class="material-icons right">live_help</i></span>
-                                <p>{{ group_type }} fundada em 06/07/2016</p>
+                                <p>{{ group_type }} fundada em {{ group_date }}</p>
                                 <p>{{ users_count }} membros</p>
                             </div>
 
@@ -137,25 +137,20 @@
                             <div class="card-content white-text">
 
                                 <span class="card-title">Eventos do Grupo</span>
-                                <p>4 reuniões</p>
+                                <p>{{ events.count }} Evento(s)</p>
+                                <p></p>
 
                             </div>
 
 
 
                             <ul class="collection">
-                                <li class="collection-item">
-                                    <div>Reunião de Célula - 12/10/2016<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-                                </li>
-                                <li class="collection-item">
-                                    <div>Reunião de Célula - 02/10/2016<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-                                </li>
-                                <li class="collection-item">
-                                    <div>Reunião de Célula - 24/09/2016<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-                                </li>
-                                <li class="collection-item">
-                                    <div>Reunião de Célula - 16/10/2016<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
-                                </li>
+                                {% for item in events %}                                                        
+                                    <li class="collection-item">
+                                        <div>{{ item.data.name }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                    </li>
+                                {% endfor %}
+
                             </ul>
 
 

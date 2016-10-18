@@ -11,32 +11,41 @@ from crossbone.models import *
 
 
 
-def group(request):
+def group(request, group_id):
 
-    template = loader.get_template('home/group/group.html') 
-
-    group = Groups()
-    group = group.get_group_by_id(ObjectId(Groups.objects[0].id))
-
-    group_type_id = group.group_type.id
-    group_type = Groups_types()
-    group_type = group_type.get_grouptype_by_id(ObjectId(group_type_id))
-
-    users = group.get_group_users(ObjectId(Groups.objects[0].id))
-
-    users_count = len(users)
-    content = {
-    	'group_name':group.data['name'],
-    	'group_type':group_type.name,
-    	'users_list':users,
-    	'users_count': users_count
-    	#'group_date':group.data['created_on']
-
-    }
+	template = loader.get_template('home/group/group.html') 
 
 
+	group_no = int(group_id)
 
-    return HttpResponse(template.render(content, request))
+	group_id = ObjectId(Groups.objects[group_no].id)
+
+	group = Groups()
+	group = group.get_group_by_id(group_id)
+
+	group_type_id = group.group_type.id
+	group_type = Groups_types()
+	group_type = group_type.get_grouptype_by_id(ObjectId(group_type_id))
+
+	users = group.get_group_users(group_id)
+
+	events = Events()
+	events = events.get_events_by_group_id(group_id)
+
+	users_count = len(users)
+	content = {
+		'group_name':group.data['name'],
+		'group_type':group_type.name,
+		'users_list':users,
+		'users_count': users_count,
+		'group_date':group.data['created_on'],
+		'events':events
+
+	}
+
+
+
+	return HttpResponse(template.render(content, request))
 
 
 def group_new(request):
@@ -63,6 +72,7 @@ def group_new(request):
 		group_roles = []
 		user_roles = []
 		group_name = request.POST.get('nome-grupo')
+		group_date = request.POST.get('group-date')
 		group_type = request.POST.get('tipo-grupo')
 		group_origin = request.POST.get('grupo-origem')
 		groups_over = request.POST.getlist('grupos-acima-multiple')
@@ -104,8 +114,13 @@ def group_new(request):
 				user_roles.append(User_roles(user=user, role=role))
 
 
+		extra_data = {
+			'name': group_name,
+			'created_on': group_date
+		}
+
 		group = Groups()
-		group.add_group({'name':group_name}, group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles)
+		group.add_group(extra_data, group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles)
 
 
 		return HttpResponse('ok')
