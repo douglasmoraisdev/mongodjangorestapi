@@ -15,4 +15,3 @@ class Events(Document):
 			event_roles = event_roles,			
 			data=data
 		)
-

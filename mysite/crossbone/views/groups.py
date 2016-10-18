@@ -13,22 +13,23 @@ from crossbone.models import *
 
 def group(request):
 
-    template = loader.get_template('home/group/group.html')
-
-    #content = {
-    #    'Users': Users.objects,
-    #    'Groups': Groups.objects,
-    #    'Groups_types': Groups_types.objects,
-    #    'Roles': Roles.objects,
-    #    'Events': Events.objects,        
-    #}    
+    template = loader.get_template('home/group/group.html') 
 
     group = Groups()
     group = group.get_group_by_id(ObjectId(Groups.objects[0].id))
 
+    group_type_id = group.group_type.id
+    group_type = Groups_types()
+    group_type = group_type.get_grouptype_by_id(ObjectId(group_type_id))
+
+    users = group.get_group_users(ObjectId(Groups.objects[0].id))
+
 
     content = {
-    	'group_name':group.data['name']
+    	'group_name':group.data['name'],
+    	'group_type':group_type.name,
+    	'users':users
+    	#'group_date':group.data['created_on']
 
     }
 
@@ -103,7 +104,7 @@ def group_new(request):
 
 
 		group = Groups()
-		group.add_group({'name':group_name}, [group_type], document_group_origin, document_group_acima, document_group_abaixo, user_roles)
+		group.add_group({'name':group_name}, group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles)
 
 
 		return HttpResponse('ok')
