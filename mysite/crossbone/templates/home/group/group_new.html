@@ -106,6 +106,12 @@
                                             <input id="nome-grupo" name="nome-grupo" type="text" class="validate">
                                             <label for="nome-grupo">Nome do grupo</label>
                                         </div>
+
+                                        <div class="input-field col s6">
+                                            <input id="group-date" name="group-date" type="date" class="datepicker">
+                                            <label for="group-date">Data de criação</label>
+                                        </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="input-field col s6">
@@ -266,6 +272,18 @@
         }
         );           
 
+      $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 10, // Creates a dropdown of 15 years to control year
+        monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+        monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
+        weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],        
+        today: 'Hoje',
+        clear: 'Limpar',
+        close: 'Fechar',  
+        format: 'dd/mm/yyyy',
+      });
 
 
         function add_user_role_group(){

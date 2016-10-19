@@ -12,3 +12,7 @@ class Groups_types(Document):
 			code=code,
 			name=name
 		)
+
+	def get_grouptype_by_id(self, grouptype_id):
+
+		return Groups_types.objects.get(id=grouptype_id)		

@@ -8,6 +8,25 @@ import uuid
 
 from crossbone.models import *
 
+
+def user(request, user_id):
+
+	template = loader.get_template('home/user/user.html') 
+
+
+	user_id = ObjectId(user_id)
+
+	
+	user = Users()
+	user = user.get_user_by_id(user_id)
+
+	content = {
+		'user':user
+	}
+	
+	return HttpResponse(template.render(content, request))
+
+
 def user_new(request):
 
 	template = loader.get_template('home/user/user_new.html')
