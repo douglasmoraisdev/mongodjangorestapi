@@ -60,7 +60,7 @@ class Groups(Document):
 						user_role.append(roles_list[x].name)
 						user_added.append(users_list[key].id)
 
-				users_formated.append({'name':user.name,'role':user_role})
+				users_formated.append({'name':user.name,'user_id':user.id,'role':user_role})
 				user_role = []
 
 		return users_formated

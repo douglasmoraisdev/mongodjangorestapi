@@ -16,10 +16,9 @@ def group(request, group_id):
 	template = loader.get_template('home/group/group.html') 
 
 
-	group_no = int(group_id)
+	group_id = ObjectId(group_id)
 
-	group_id = ObjectId(Groups.objects[group_no].id)
-
+	
 	group = Groups()
 	group = group.get_group_by_id(group_id)
 
@@ -42,10 +41,9 @@ def group(request, group_id):
 		'events':events
 
 	}
-
-
-
+	
 	return HttpResponse(template.render(content, request))
+
 
 
 def group_new(request):

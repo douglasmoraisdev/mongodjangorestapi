@@ -9,20 +9,37 @@ import uuid
 from crossbone.models import *
 
 
-def event(request):
+def event(request, event_id):
 
-    template = loader.get_template('home/event/event.html')
+	template = loader.get_template('home/event/event.html')
 
+	events = Events()
+	events = events.get_event_by_id(event_id)
 
-    content = {
-        'Users': Users.objects,
-        'Groups': Groups.objects,
-        'Groups_types': Groups_types.objects,
-        'Roles': Roles.objects,
-        'Events': Events.objects,        
-    }
+	group_id = ObjectId(events.host.id)
+	
+	group = Groups()
+	group = group.get_group_by_id(group_id)
 
-    return HttpResponse(template.render(content, request))
+	group_type_id = group.group_type.id
+	group_type = Groups_types()
+	group_type = group_type.get_grouptype_by_id(ObjectId(group_type_id))
+
+	users = events.get_event_users(event_id)
+
+	users_count = len(users)
+	content = {
+		'group_name':group.data['name'],
+		'group_type':group_type.name,
+		'users_list':users,
+		'users_count': users_count,
+		'event_date':events.data['name'],
+		'event_name': events.data['name'],
+		'event_data': events.data
+
+	}
+
+	return HttpResponse(template.render(content, request))
 
 def event_new(request):
 

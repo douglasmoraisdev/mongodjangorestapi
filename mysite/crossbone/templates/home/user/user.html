@@ -95,9 +95,9 @@
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">
 
-                                <span class="card-title activator white-text">{{ group_name }}<i class="material-icons right">live_help</i></span>
-                                <p>{{ group_type }} fundada em {{ group_date }}</p>
-                                <p>{{ users_count }} membros</p>
+                                <img class="round" width="100" height="100" avatar="{{ user.name }}">                        
+
+                                <span class="card-title activator white-text">{{ user.name }}<i class="material-icons right">live_help</i></span>
                             </div>
 
 
@@ -129,20 +129,16 @@
                 </div>
 
 
-
-
                 <div class="row">
                     <div class="col s12 m11">
                         <div class="card blue-grey darken-1">
                             <div class="card-content white-text">
 
-                                <span class="card-title">Eventos do Grupo</span>
-                                <p>{{ events.count }} Evento(s)</p>
+                                <span class="card-title">Grupos do Usuário</span>
+                                <p>{{ events.count }} Grupo(s)</p>
                                 <p></p>
 
                             </div>
-
-
 
                             <ul class="collection">
                                 {% for item in events %}                                                        
@@ -159,12 +155,41 @@
 
                             </div>
 
-
-
                         </div>
                     </div>
 
                 </div>
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title">Eventos do Usuário</span>
+                                <p>{{ events.count }} Evento(s)</p>
+                                <p></p>
+
+                            </div>
+
+                            <ul class="collection">
+                                {% for item in events %}                                                        
+                                    <li class="collection-item">
+                                        <div>{{ item.data.name }}<a href="http://localhost:10/crossbone/evento/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+
+                            <div class="card-action">
+                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>                
 
 
 
