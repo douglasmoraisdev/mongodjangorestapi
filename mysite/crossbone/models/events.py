@@ -6,9 +6,11 @@ from crossbone.models.groups import *
 class Events(Document):
 	host = ReferenceField(Groups)
 	event_roles = EmbeddedDocumentListField(User_roles)
+	start_date = StringField(max_length=50)
+	end_date = StringField(max_length=50)	
 	extra_data = DictField()
 
-	def add_event(self, host, event_roles, extra_data):
+	def add_event(self, host, event_roles, start_date, end_date, extra_data):
 
 		ex_data = dict()
 
@@ -26,6 +28,8 @@ class Events(Document):
 
 		Events.objects.create(
 			host=host,
+			start_date=start_date,
+			end_date=end_date,
 			event_roles = event_roles,			
 			extra_data=ex_data
 		)

@@ -74,7 +74,7 @@ class ModelsTest_add(test_addons.MongoTestCase):
 
 		event = Events()
 
-		event.add_event(host, event_roles, some_data)
+		event.add_event(host, event_roles,'01/01/2016','01/02/2016', some_data)
 
 		self.assertEquals(Events.objects[0].host, host)
 		self.assertEquals(Events.objects[0].event_roles, event_roles)
