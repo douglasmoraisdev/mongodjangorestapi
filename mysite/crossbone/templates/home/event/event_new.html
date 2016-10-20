@@ -114,7 +114,7 @@
                                             <select id="grupo-origem-evento" name="grupo-origem-evento">
                                                   <option value="" disabled selected>Selecione</option>
                                                 {% for item in Groups %}
-                                                  <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                                  <option value="{{ item.id }}">{{ item.extra_data.name.value }}</option>
                                                 {% endfor %}
                                         </select>
                                             <label>Grupo Anfitrião</label>

@@ -33,11 +33,11 @@ def group(request, group_id):
 
 	users_count = len(users)
 	content = {
-		'group_name':group.data['name'],
+		'group_name':group.extra_data['name']['value'],
 		'group_type':group_type.name,
 		'users_list':users,
 		'users_count': users_count,
-		'group_date':group.data['created_on'],
+		'group_date':group.extra_data['created_on_date']['value'],
 		'events':events
 
 	}
@@ -112,13 +112,13 @@ def group_new(request):
 				user_roles.append(User_roles(user=user, role=role))
 
 
-		extra_data = {
+		extra_data = dict({
 			'name': group_name,
-			'created_on': group_date
-		}
+			'created_on_date': group_date
+		})
 
 		group = Groups()
-		group.add_group(extra_data, group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles)
+		group.add_group(group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles, extra_data)
 
 
 		return HttpResponse('ok')

@@ -43,7 +43,7 @@ def user_new(request):
 
 		user_name = request.POST.get('nome_usuario')
 		user = Users()
-		user.add_user(user_name)		
+		user.add_user(user_name, {'first_name':user_name})		
 
 		return HttpResponse(template.render(content, request))
 

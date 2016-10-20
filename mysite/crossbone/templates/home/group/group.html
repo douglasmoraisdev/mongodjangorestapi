@@ -109,7 +109,7 @@
                                         {% for roles in item.role %}
                                         <p>{{ roles }}</p>   
                                         {%endfor%}
-                                    <a href="#!" class="secondary-content"><i class="material-icons">edit</i></a>
+                                    <a href="http://localhost:10/crossbone/usuario/{{ item.user_id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                 </li>
                                 {% endfor%}
                             </ul>
@@ -147,7 +147,7 @@
                             <ul class="collection">
                                 {% for item in events %}                                                        
                                     <li class="collection-item">
-                                        <div>{{ item.data.name }}<a href="http://localhost:10/crossbone/evento/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                        <div>{{ item.extra_data.name }}<a href="http://localhost:10/crossbone/evento/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
                                     </li>
                                 {% endfor %}
 

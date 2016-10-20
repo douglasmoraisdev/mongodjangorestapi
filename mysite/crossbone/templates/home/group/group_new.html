@@ -128,7 +128,7 @@
                                             <select id="grupo-origem" name="grupo-origem">
                                               <option value="" disabled selected>Selecione</option>
                                               {% for item in Groups %}   
-                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                                <option value="{{ item.id }}">{{ item.extra_data.name.value }}</option>
                                               {% endfor %}   
                                         </select>
                                             <label>Grupo de Origem</label>
@@ -141,7 +141,7 @@
                                         <select multiple id="grupos-acima-multiple" name="grupos-acima-multiple">
                                           <option value="" disabled selected>Selecione</option>
                                               {% for item in Groups %}   
-                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                                <option value="{{ item.id }}">{{ item.extra_data.name.value }}</option>
                                               {% endfor %}  
                                         </select>
                                             <label>Supervisionando:</label>
@@ -150,7 +150,7 @@
                                         <select multiple id="grupos-abaixo-multiple" name="grupos-abaixo-multiple">
                                           <option value="" disabled selected>Selecione</option>
                                               {% for item in Groups %}   
-                                                <option value="{{ item.id }}">{{ item.data.name }}</option>
+                                                <option value="{{ item.id }}">{{ item.extra_data.name.value}}</option>
                                               {% endfor %}  
                                         </select>
                                             <label>Supervisionado por:</label>

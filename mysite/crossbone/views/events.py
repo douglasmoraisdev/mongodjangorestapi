@@ -29,13 +29,13 @@ def event(request, event_id):
 
 	users_count = len(users)
 	content = {
-		'group_name':group.data['name'],
+		'group_name':group.extra_data['name']['value'],
 		'group_type':group_type.name,
 		'users_list':users,
 		'users_count': users_count,
-		'event_date':events.data['name'],
-		'event_name': events.data['name'],
-		'event_data': events.data
+		'event_date':events.extra_data['name']['value'],
+		'event_name': events.extra_data['name']['value'],
+		'event_data': events.extra_data
 
 	}
 
@@ -92,7 +92,7 @@ def event_new(request):
 				user_roles.append(User_roles(user=user, role=role))
 
 		evento = Events()
-		evento.add_event(document_group_origin, user_roles, {'name':event_name})
+		evento.add_event(document_group_origin, user_roles, 'start', 'end', {'name':event_name})
 
 		return HttpResponse('evento ok')    
 

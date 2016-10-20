@@ -10,18 +10,21 @@ class Events(Document):
 	end_date = StringField(max_length=50)	
 	extra_data = DictField()
 
-	def add_event(self, host, event_roles, start_date, end_date, extra_data):
+	def add_event(self, host, event_roles, start_date, end_date, extra_data=None):
 
 		ex_data = dict()
 
 		if extra_data:
 
 			#empty 
-			extra_data['description'] = extra_data['description'] if ('description' in extra_data) else ''
+			extra_data['name'] = extra_data['name'] if ('name' in extra_data) else ''			
+			extra_data['description'] = extra_data['description'] if ('description' in 	extra_data) else ''
 
 			ex_data = dict( 
-				{'description':
-					{'name':'Descrição','value': extra_data.description}
+				{'name':
+					{'name':'Nome','value': extra_data['name'] },
+				 'description':
+					{'name':'Descrição','value': extra_data['description']}					
 
 				}
 			)			
