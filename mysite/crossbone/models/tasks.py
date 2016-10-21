@@ -1,14 +1,16 @@
 from django.db import models
 from mongoengine import *
-# Create your models here.
 
+
+#TODO: Adicionar usuarios assigned=None, um ou VARIOS usuarios pode estar assigned para esta tarefa
+#Colocar também concluida ou não
 class Tasks(Document):
 	name = StringField(max_length=50)
 	start_date = StringField(max_length=50)
 	end_date = StringField(max_length=50)
 	extra_data = DictField()
 
-	def add_role(self, task_name='', start_date, end_date, extra_data=None):
+	def add_task(self, task_name, start_date='', end_date='', extra_data=None):
 		
 		ex_data = dict()
 
@@ -25,9 +27,8 @@ class Tasks(Document):
 			)
 
 		Tasks.objects.create(
-			name = role_name,
-			roles_over = roles_over,
-			roles_under = roles_under,
-			view_order=view_order,
+			name = task_name,
+			start_date=start_date,
+			end_date=end_date,
 			extra_data = ex_data
 		)

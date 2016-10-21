@@ -4,7 +4,8 @@ from django.http import HttpResponseForbidden
 from bson.objectid import ObjectId
 from django.urls import reverse
 
-import uuid
+import os
+import binascii
 
 from crossbone.models import *
 
@@ -13,9 +14,7 @@ def user(request, user_id):
 
 	template = loader.get_template('home/user/user.html') 
 
-
 	user_id = ObjectId(user_id)
-
 	
 	user = Users()
 	user = user.get_user_by_id(user_id)
@@ -57,9 +56,25 @@ def usuarios_roles_list(request):
 	content = {
 		'Users': Users.objects,
 		'Roles': Roles.objects,
-		'fields_seq' : uuid.uuid1()
+		'fields_seq' : binascii.hexlify(os.urandom(4))
 	}	
 
 	template = loader.get_template('default/usuarios_roles_list.html')
+
+	return HttpResponse(template.render(content,request))
+
+
+#ajax
+def usuarios_tasks_list(request, fields_seq):
+
+	content = {
+		'Users': Users.objects,
+		'Tasks': Tasks.objects,
+		'fields_seq' : fields_seq,
+		'task_seq' : binascii.hexlify(os.urandom(4))
+
+	}	
+
+	template = loader.get_template('default/usuarios_tasks_list.html')
 
 	return HttpResponse(template.render(content,request))

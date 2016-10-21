@@ -1,6 +1,8 @@
 from django.db import models
 from mongoengine import *
 from crossbone.models.roles import *
+from crossbone.models.tasks import *
+
 
 # Create your models here.
 
@@ -10,7 +12,6 @@ class Users(Document):
 	extra_data = DictField()
 
 	def add_user(self, user_name, extra_data=None):
-
 
 		ex_data = dict()
 
@@ -61,4 +62,5 @@ class Users(Document):
 
 class User_roles(EmbeddedDocument):
 	user = ReferenceField(Users)
-	role = ReferenceField(Roles)
+	role = ListField(ReferenceField(Roles))
+	task = ListField(ReferenceField(Tasks))

@@ -50,7 +50,7 @@ class Groups(Document):
 			origin=group_origin,
 			groups_over=groups_over,
 			groups_under=groups_under,
-			user_roles = user_roles,			
+			user_roles = user_roles,
 			extra_data=ex_data
 		)
 
@@ -72,9 +72,9 @@ class Groups(Document):
 
 		#algoritimo que faz um distict entre os usuarios e suas funções
 		#retorna uma lista de dicts ex.: UsuarioA:['funcao1'], UsuarioB: ['funcao1','funcao2']
-		for u in group.user_roles:
-			users_list.append(u.user)
-			roles_list.append(u.role)
+		for ur in group.user_roles:
+			users_list.append(ur.user)
+			roles_list.append(ur.role)
 
 		users_count = len(users_list)
 		for key, user in enumerate(users_list):
@@ -90,5 +90,3 @@ class Groups(Document):
 
 		return users_formated
 
-
-		#query to get and separe users on group
