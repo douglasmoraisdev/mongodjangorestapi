@@ -15,10 +15,10 @@ urlpatterns = [
     url(r'^atividade/novo$', views.tasks.task_new, name='atividade_novo'),
 
 
-    url(r'^evento/[^usuarios_tasks_list](.+)/$', views.events.event, name='evento'),    
+    url(r'^evento/(.+)/$', views.events.event, name='evento'),    
     url(r'^evento/novo$', views.events.event_new, name='evento_novo'),
 
-    url(r'^grupo/[^usuarios_tasks_list](.+)/$', views.groups.group, name='grupo'),
+    url(r'^grupo/(.+)/$', views.groups.group, name='grupo'),
     url(r'^grupo/novo$', views.groups.group_new, name='grupo_novo'),
     url(r'^tipogrupo/novo$', views.groups.grouptype_new, name='tipogrupo_novo'),
 

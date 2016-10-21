@@ -107,12 +107,12 @@
                             <ul class="collection">
                                 {% for item in users_list %}
                                 <li class="collection-item avatar">
-                                    <img class="circle" width="60" height="60" avatar="{{ item.name }}">
-                                    <span class="title">{{ item.name }}</span>
+                                    <img class="circle" width="60" height="60" avatar="{{ item.user.name }}">
+                                    <span class="title">{{ item.user.name }}</span>
                                         {% for roles in item.role %}
-                                        <p>{{ roles }}</p>   
+                                        <p>{{ roles.name }}</p>   
                                         {%endfor%}
-                                    <a href="http://localhost:10/crossbone/usuario/{{ item.user_id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                    <a href="http://localhost:10/crossbone/usuario/{{ item.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                 </li>
                                 {% endfor%}
                             </ul>

@@ -18,9 +18,7 @@ def group(request, group_id):
 
 	template = loader.get_template('home/group/group.html') 
 
-
 	group_id = ObjectId(group_id)
-
 	
 	group = Groups()
 	group = group.get_group_by_id(group_id)
