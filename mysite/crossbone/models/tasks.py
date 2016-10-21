@@ -32,3 +32,7 @@ class Tasks(Document):
 			end_date=end_date,
 			extra_data = ex_data
 		)
+
+	def get_task_by_id(self, task_id):
+
+		return Tasks.objects.get(id=task_id)

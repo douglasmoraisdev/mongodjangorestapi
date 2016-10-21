@@ -7,6 +7,21 @@ from django.urls import reverse
 from crossbone.models import *
 
 
+def task(request, task_id):
+
+	template = loader.get_template('home/task/task.html')
+
+	tasks = Tasks()
+	tasks = tasks.get_task_by_id(task_id)
+
+	content = {
+		'task_name':tasks.name
+
+	}
+
+	return HttpResponse(template.render(content, request))
+
+
 def task_new(request):
 
 	template = loader.get_template('home/task/task_new.html')

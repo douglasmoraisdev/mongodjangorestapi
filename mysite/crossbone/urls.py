@@ -12,6 +12,7 @@ urlpatterns = [
 
     url(r'^funcao/novo$', views.roles.role_new, name='funcao_novo'),
 
+    url(r'^atividade/(.+)/$', views.tasks.task, name='atividade'),    
     url(r'^atividade/novo$', views.tasks.task_new, name='atividade_novo'),
 
 
