@@ -69,12 +69,22 @@ class ModelsTest_add(test_addons.MongoTestCase):
 	def test_add_event(self):
 
 		host = None
+		event_type = None
+		groups_in = []
 		event_roles = []
 		some_data = dict()
 
 		event = Events()
 
-		event.add_event(host, event_roles,'01/01/2016','01/02/2016', some_data)
+		event.add_event(
+			host=host, 
+			groups_in=groups_in,
+			event_type=event_type,
+			event_roles=event_roles,
+			start_date='',
+			end_date='',
+			extra_data=None
+		)
 
 		self.assertEquals(Events.objects[0].host, host)
 		self.assertEquals(Events.objects[0].event_roles, event_roles)
