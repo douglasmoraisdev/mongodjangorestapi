@@ -9,14 +9,14 @@ class Events(Document):
 	host = ReferenceField(Groups)
 	groups_in = ListField(ReferenceField(Groups))
 	event_type = ReferenceField(Events_types)
-	event_roles = EmbeddedDocumentListField(User_roles)
+	user_roles = EmbeddedDocumentListField(User_roles)
 	start_date = StringField(max_length=50)
 	end_date = StringField(max_length=50)
 	recorrent = StringField(max_length=1)	
 	extra_data = DictField()
 
 
-	def add_event(self, host, groups_in, event_type, event_roles, start_date, end_date, extra_data=None):
+	def add_event(self, host, groups_in, event_type, user_roles, start_date, end_date, extra_data=None):
 
 		ex_data = dict()
 
@@ -39,7 +39,7 @@ class Events(Document):
 			host=host,
 			groups_in=groups_in,
 			event_type=event_type,
-			event_roles = event_roles,
+			user_roles = user_roles,
 			start_date=start_date,
 			end_date=end_date,
 			extra_data=ex_data
@@ -58,4 +58,4 @@ class Events(Document):
 
 		event = Events.objects.get(id=event_id)
 
-		return event.event_roles
+		return event.user_roles

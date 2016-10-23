@@ -9,6 +9,7 @@ from crossbone.models.tasks import *
 class Users(Document):
 	name = StringField(max_length=50)
 	auth = StringField(max_length=255)
+	users_under = ReferenceField("self", reverse_delete_rule = NULLIFY)
 	extra_data = DictField()
 
 	def add_user(self, user_name, extra_data=None):

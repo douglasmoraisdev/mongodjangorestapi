@@ -50,11 +50,11 @@ class ViewModelTest_Add(test_addons.MongoTestCase):
 		roles2_id = ObjectId(Roles.objects[1].id)
 
 		host = ''
-		event_roles = []
-		event_roles.append({'user_group123': users1_id})
-		event_roles.append({'user_group456': users2_id})
-		event_roles.append({'user_roles123-multiple': roles1_id})
-		event_roles.append({'user_roles456-multiple': roles2_id})		
+		user_roles = []
+		user_roles.append({'user_group123': users1_id})
+		user_roles.append({'user_group456': users2_id})
+		user_roles.append({'user_roles123-multiple': roles1_id})
+		user_roles.append({'user_roles456-multiple': roles2_id})		
 		some_data = 'Reuniao de celula'
 
 		response = client.post('/crossbone/newevent', 
@@ -77,8 +77,8 @@ class ViewModelTest_Add(test_addons.MongoTestCase):
 		#user-roled2d32710-9239-11e6-917e-782bcbed44aa-multiple:580120126096c87b3b3e9084		
 
 		self.assertEquals(Events.objects[0].host, host or None)
-		self.assertIn(ObjectId(Events.objects[0].event_roles[0].user.id), [users1_id,users2_id])
-		self.assertIn(ObjectId(Events.objects[0].event_roles[1].user.id), [users1_id,users2_id])
-		self.assertIn(ObjectId(Events.objects[0].event_roles[0].role.id), [roles1_id,roles2_id])
-		self.assertIn(ObjectId(Events.objects[0].event_roles[1].role.id), [roles1_id,roles2_id])		
+		self.assertIn(ObjectId(Events.objects[0].user_roles[0].user.id), [users1_id,users2_id])
+		self.assertIn(ObjectId(Events.objects[0].user_roles[1].user.id), [users1_id,users2_id])
+		self.assertIn(ObjectId(Events.objects[0].user_roles[0].role.id), [roles1_id,roles2_id])
+		self.assertIn(ObjectId(Events.objects[0].user_roles[1].role.id), [roles1_id,roles2_id])		
 		self.assertEquals(Events.objects[0].data['name'], some_data)		
