@@ -64,3 +64,4 @@ class User_roles(EmbeddedDocument):
 	user = ReferenceField(Users)
 	role = ListField(ReferenceField(Roles))
 	task = ListField(ReferenceField(Tasks))
+	extra_data = DictField()

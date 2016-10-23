@@ -5,13 +5,16 @@ from crossbone.models.events_types import *
 # Create your models here.
 
 class Events(Document):
+	parent_event = ReferenceField("self", reverse_delete_rule = NULLIFY)
 	host = ReferenceField(Groups)
 	groups_in = ListField(ReferenceField(Groups))
-	event_type = ReferenceField(Events_types)	
+	event_type = ReferenceField(Events_types)
 	event_roles = EmbeddedDocumentListField(User_roles)
 	start_date = StringField(max_length=50)
-	end_date = StringField(max_length=50)	
+	end_date = StringField(max_length=50)
+	recorrent = StringField(max_length=1)	
 	extra_data = DictField()
+
 
 	def add_event(self, host, groups_in, event_type, event_roles, start_date, end_date, extra_data=None):
 
@@ -52,11 +55,6 @@ class Events(Document):
 
 
 	def get_event_users(self, event_id):
-
-		users_list = []
-		roles_list = []
-		tasks_list = []
-		users_formated = []
 
 		event = Events.objects.get(id=event_id)
 
