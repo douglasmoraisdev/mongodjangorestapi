@@ -5,3 +5,5 @@ from crossbone.models.groups_types import *
 from crossbone.models.users import *
 from crossbone.models.roles import *
 from crossbone.models.tasks import *
+from crossbone.models.financial_account import *
+from crossbone.models.financial_movement import *

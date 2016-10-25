@@ -9,24 +9,10 @@ class Events_types(Document):
 
 	def add_event_type(self, code, name, extra_data=None):
 
-		ex_data = dict()
-
-		if extra_data:
-
-			#empty 
-			extra_data['description'] = extra_data['description'] if ('description' in extra_data) else ''
-
-			ex_data = dict( 
-				{'description':
-					{'name':'Descrição','value': extra_data.description}
-
-				}
-			)			
-
 		Events_types.objects.create(
 			code=code,
 			name=name,
-			extra_data=ex_data
+			extra_data=extra_data
 		)
 
 	def get_eventtype_by_id(self, eventtype_id):

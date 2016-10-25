@@ -12,25 +12,11 @@ class Tasks(Document):
 
 	def add_task(self, task_name, start_date='', end_date='', extra_data=None):
 		
-		ex_data = dict()
-
-		if extra_data:
-
-			#empty 
-			extra_data['description'] = extra_data['description'] if ('description' in extra_data) else ''
-			
-			ex_data = dict( 
-				{'description':
-					{'name':'Descrição','value': extra_data.description}
-
-				}
-			)
-
 		Tasks.objects.create(
 			name = task_name,
 			start_date=start_date,
 			end_date=end_date,
-			extra_data = ex_data
+			extra_data = extra_data
 		)
 
 	def get_task_by_id(self, task_id):

@@ -14,20 +14,6 @@ class Roles(Document):
 
 	def add_role(self, role_name='', permissions='r', presence='y', roles_over=[], roles_under=[], view_order=0, extra_data=None):
 		
-		ex_data = dict()
-
-		if extra_data:
-
-			#empty 
-			extra_data['description'] = extra_data['description'] if ('description' in extra_data) else ''
-			
-			ex_data = dict( 
-				{'description':
-					{'name':'Descrição','value': extra_data.description}
-
-				}
-			)
-
 		Roles.objects.create(
 			name = role_name,
 			roles_over = roles_over,
@@ -35,5 +21,5 @@ class Roles(Document):
 			view_order=view_order,
 			permissions=permissions,
 			presence=presence,
-			extra_data = ex_data
+			extra_data = extra_data
 		)
