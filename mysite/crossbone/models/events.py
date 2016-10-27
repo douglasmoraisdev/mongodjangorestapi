@@ -7,6 +7,7 @@ from crossbone.models.events_types import *
 class Events(Document):
 
 	parent_event = ReferenceField("self", reverse_delete_rule = NULLIFY)
+	name = StringField(max_length=50)	
 	host = ReferenceField(Groups)
 	groups_in = ListField(ReferenceField(Groups))
 	event_type = ReferenceField(Events_types)
@@ -17,15 +18,18 @@ class Events(Document):
 	extra_data = DictField()
 
 
-	def add_event(self, host, groups_in, event_type, user_roles, start_date, end_date, extra_data=None):
+	def add_event(self, name,  parent_event, event_type, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
 
 		Events.objects.create(
+			name=name,
+			parent_event=parent_event,
 			host=host,
 			groups_in=groups_in,
 			event_type=event_type,
 			user_roles = user_roles,
 			start_date=start_date,
 			end_date=end_date,
+			recorrent=recorrent,
 			extra_data=extra_data
 		)
 

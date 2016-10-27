@@ -34,7 +34,7 @@ def group(request, group_id):
 
 	users_count = len(users)
 	content = {
-		'group_name':group.extra_data['name']['value'],
+		'group_name':group.name,
 		'group_type':group_type.name,
 		'users_list':users,
 		'users_count': users_count,
@@ -131,12 +131,11 @@ def group_new(request):
 
 
 		extra_data = dict({
-			'name': group_name,
 			'created_on_date': group_date
 		})
 
 		group = Groups()
-		group.add_group(group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles, extra_data)
+		group.add_group(group_name, group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles, extra_data)
 
 
 		return HttpResponse('ok')

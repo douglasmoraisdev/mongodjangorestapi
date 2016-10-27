@@ -2,6 +2,8 @@ from django.db import models
 from mongoengine import *
 # Create your models here.
 
+app_label = 'crossbone'
+
 class Events_types(Document):
 	code = StringField(max_length=50)
 	name = StringField(max_length=50)

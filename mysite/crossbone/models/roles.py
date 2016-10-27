@@ -4,6 +4,7 @@ from mongoengine import *
 
 class Roles(Document):
 	name = StringField(max_length=50)
+	code = StringField(max_length=50)
 	roles_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
 	roles_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
 	view_order = IntField(max_length=5)
@@ -12,10 +13,11 @@ class Roles(Document):
 	extra_data = DictField()
 
 
-	def add_role(self, role_name='', permissions='r', presence='y', roles_over=[], roles_under=[], view_order=0, extra_data=None):
+	def add_role(self, role_name, code, permissions='r', presence='y', roles_over=[], roles_under=[], view_order=0, extra_data=None):
 		
 		Roles.objects.create(
 			name = role_name,
+			code = code,
 			roles_over = roles_over,
 			roles_under = roles_under,
 			view_order=view_order,

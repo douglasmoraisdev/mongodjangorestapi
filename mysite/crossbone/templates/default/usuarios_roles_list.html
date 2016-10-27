@@ -4,7 +4,7 @@
         <select id="user-group{{ fields_seq }}" name="user-group{{ fields_seq }}">
               <option value="" disabled selected>Selecione</option>
               {% for item in Users %}                    
-                <option value="{{ item.id }}">{{ item.extra_data.first_name.value }}</option>
+                <option value="{{ item.id }}">{{ item.extra_data.first_name }}</option>
               {% endfor %} 
 
         </select>

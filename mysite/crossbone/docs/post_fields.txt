@@ -34,7 +34,21 @@ POST Fields =====
 
 
 
+	event_new_course
+		nome-curso:Curso de Novos Membros
+		grupo-origem:58121e306096c835eea719b8
+		grupos-incluidos-multiple:[]
+		data-inicio:01/10/2016
+		data-fim:31/10/2016
+		grupo-origem-evento:N
+		curso-valor:150
+		curso-cobranca:N
 
-	
 
-
+	event_new_course_subject
+		disciplina-nome
+		curso-origem-disciplina
+		data-inicio
+		data-fim
+		disciplina-dias-multiple
+		disciplina-valor

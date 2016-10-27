@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class Groups(Document):
+	name = StringField(max_length=50)
 	group_type = ReferenceField(Groups_types)
 	user_roles = EmbeddedDocumentListField(User_roles)
 	origin = ReferenceField("self", reverse_delete_rule = NULLIFY)
@@ -18,9 +19,10 @@ class Groups(Document):
 	extra_data = DictField()
 
 
-	def add_group(self, group_type, group_origin, groups_over, groups_under, user_roles, extra_data=None):
+	def add_group(self, name, group_type, group_origin, groups_over, groups_under, user_roles, extra_data=None):
 
 		Groups.objects.create(
+			name=name,
 			group_type=group_type,
 			origin=group_origin,
 			groups_over=groups_over,

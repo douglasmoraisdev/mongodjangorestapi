@@ -11,8 +11,8 @@ class Financial_account(Document):
 	open_date = StringField(max_length=20)
 	description = StringField(max_length=30)
 	balance = StringField(max_length=30)
-	group_owner = ListField(ReferenceField(Groups))
-	users_owner = ListField(ReferenceField(Users))
+	group_owner = ReferenceField(Groups)
+	user_owner = ReferenceField(Users)
 	events_owner = ListField(ReferenceField(Events))
 	active = StringField(max_length=1)
 

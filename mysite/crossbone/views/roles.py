@@ -25,10 +25,11 @@ def role_new(request):
 	if request.method == 'POST':
 
 		role_name = request.POST.get('nome_funcao')
+		role_code = request.POST.get('codigo_funcao')		
 
 		role = Roles()
 
-		role.add_role(role_name)
+		role.add_role(role_name, role_code)
 
 		return HttpResponse(template.render(content, request))
 
