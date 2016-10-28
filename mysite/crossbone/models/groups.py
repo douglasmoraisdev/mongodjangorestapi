@@ -38,11 +38,13 @@ class Groups(Document):
 
 	def get_group_users(self, group_id):
 
-		users_list = []
-		roles_list = []
-		tasks_list = []
-		users_formated = []
-
 		group = Groups.objects.get(id=group_id)
 
 		return group.user_roles
+
+
+	def get_user_groups(self, user_id):
+
+		group = Groups.objects(user_roles__in=user_id)
+
+		return group

@@ -40,9 +40,21 @@ def user_new(request):
 
 	if request.method == 'POST':
 
-		user_name = request.POST.get('nome_usuario')
+		first_name = request.POST.get('nome_usuario')
+
+		user_name = request.POST.get('user-name')
+		user_pass = request.POST.get('user-pass')
+	
+		auth_type = 'password'
+		auth_token = user_pass
+
 		user = Users()
-		user.add_user(user_name, {'first_name':user_name})		
+		user.add_user(
+				user_name = user_name,
+				auth_type = auth_type,
+				auth_token = auth_token,
+				extra_data={'first_name':first_name}
+			)
 
 		return HttpResponse(template.render(content, request))
 
@@ -61,7 +73,7 @@ def usuarios_roles_list(request):
 
 	template = loader.get_template('default/usuarios_roles_list.html')
 
-	return HttpResponse(template.render(content,request))
+	return HttpResponse(template.render(content,request))	
 
 
 #ajax

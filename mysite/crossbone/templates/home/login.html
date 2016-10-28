@@ -10,9 +10,8 @@
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
 
-    <!-- BOOTSTRAP & STYLES -->
-    {% include "default/bootstrap_css.html" %}
-    <!-- END OF BOOTSTRAP & STYLES -->
+    {% include "default/styles_css.html" %}
+
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,31 +31,94 @@
 
 
     <!-- Page Layout here -->
-    <div class="row ">
-
-      <div class="col s12 m3"></div>    
-
-      <div class="col s12 m6">
-          <div class="card darken-1">
-              <div class="card-content">
-
-                  <span class="card-title">Login</span>
-                  <p>Informe suas credenciais:</p>
+    <div class="row">
 
 
+        <div class="col s12 m4 l4"></div>
 
-              </div>
-             
+        <div class="col s12 m6 l4">
+            <div class="card darken-1">
+                <div class="card-content">
 
-          </div>
-      </div>              
+
+                    <span class="card-title">
+                      Login
+                    </span>
+
+
+                      <form id="form_login" action="" method="POST">
+                                  {% csrf_token %}
+                      
+                        <div class="row">
+
+                            <div class="input-field col s12">
+                                <input id="user-name" name="user-name" type="text" class="validate">
+                                <label for="user-name">Usuario ou Email</label>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="input-field col s12">
+                                <input id="user-pass" name="user-pass" type="password" class="validate">
+                                <label for="user-pass">Senha</label>
+                            </div>
+                            
+                        </div>
+
+                        {% if messages %}
+                            {% for message in messages %}
+                              <div class="card-panel red lighten-2">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+
+                      </form>
+
+                </div>
+
+
+                <div class="card-action center">
+                
+
+                      <button onclick="$('#form_login').submit()" class="btn waves-effect waves-light ">Entrar</button>
+
+
+                </div>                
+
+
+                <div class="card-action">
+                  <div class="row center">
+                    <div class="card-panel lighten-2">Você também pode usar suas redes sociais:</div>                  
+                  </div>
+                
+                  <div class="row center">
+                  <a class="waves-effect waves-light btn"><i class="material-icons right">check_circle</i>Entrar com Facebook</a>
+                  </div>
+
+                  <div class="row center">
+                  <a class="waves-effect waves-light btn"><i class="material-icons right">check_circle</i>Entrar com Gmail</a>                  
+                  </div>
+
+
+                  <div class="row center">
+                      <a href="">Esqueci minha senha</a>
+                  </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col s12 m4 l4"></div>
 
     </div>
 
-
+        
     <!--Import jQuery before materialize.js-->
-    <script src="{% static " js/jquery.js " %}"></script>
-    <script src="{% static " js/materialize.js " %}"></script>
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
 
 
 </body>

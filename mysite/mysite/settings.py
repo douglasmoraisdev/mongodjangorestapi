@@ -79,9 +79,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'NAME': '/tmp/mysite.sqlite3',
     }
 }
+
+
 
 
 # Password validation
@@ -153,3 +155,19 @@ TEST_MONGO_DATABASE = {
     'host': ['localhost'],
     'port': 27017,
 }
+
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': 'localhost:10',
+        'OPTIONS': {
+            'DB': 0,
+        },
+    },
+}
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
