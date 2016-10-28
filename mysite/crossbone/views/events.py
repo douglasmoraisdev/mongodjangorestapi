@@ -45,7 +45,7 @@ def event(request, event_id):
 
 def event_new(request):
 
-	template = loader.get_template('home/event/course/event_new_course.html')
+	template = loader.get_template('home/event/event_new.html')
 
 	content = {
 		'Users': Users.objects,
@@ -117,7 +117,16 @@ def event_new(request):
 		})
 
 		evento = Events()
-		evento.add_event(document_group_origin, user_roles, 'start', 'end', {'name':event_name})
+		evento.add_event(name=event_name, 
+				  host=document_group_origin,
+				  parent_event='',
+				  groups_in=[],
+				  event_type='',
+				  user_roles=user_roles,
+				  start_date='date_start', 
+				  end_date='date_end',
+				  recorrent='S',
+				  extra_data={})		
 
 		return HttpResponse('evento ok')    
 
@@ -211,7 +220,7 @@ def new_course(request):
 				  host=document_group_origin,
 				  parent_event=course_origin,
 				  groups_in=groups_included,
-				  event_type='',
+				  event_type='course',
 				  user_roles=user_roles,
 				  start_date=date_start, 
 				  end_date=date_end,

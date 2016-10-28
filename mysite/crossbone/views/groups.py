@@ -38,7 +38,7 @@ def group(request, group_id):
 		'group_type':group_type.name,
 		'users_list':users,
 		'users_count': users_count,
-		'group_date':group.extra_data['created_on_date']['value'],
+		'group_date':group.extra_data['createdon']['value'],
 		'events':events
 
 	}

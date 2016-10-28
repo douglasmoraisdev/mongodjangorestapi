@@ -27,15 +27,20 @@ def index(request):
             user = Users().get_user_by_id(user_id)
 
             user_groups = Groups().get_user_groups(user_id)
+            user_events = Events().get_user_events(user_id)
+            #user_courses = Events().get_user_courses(user_id)
 
-            logger.error(user_groups)
+
+            logger.error(user_courses)
+
 
             content = {
                 'user_name': user.user_name,
-                'Groups': Groups.objects,
+                'Groups': user_groups,
                 'Groups_types': Groups_types.objects,
                 'Roles': Roles.objects,
-                'Events': Events.objects,        
+                'Events': user_events,
+                'Courses': user_courses
             }
             return HttpResponse(template.render(content, request))
 
@@ -54,8 +59,6 @@ def loginLogout(request):
         password = request.POST.get('user-pass')
 
         user = Users()
-
-        logger.error(user.id)
 
         user_id = user.is_auth(user_name, password)
 

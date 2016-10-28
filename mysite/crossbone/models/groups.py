@@ -45,6 +45,6 @@ class Groups(Document):
 
 	def get_user_groups(self, user_id):
 
-		group = Groups.objects(user_roles__in=user_id)
+		group = Groups.objects(user_roles__user=user_id)
 
 		return group
