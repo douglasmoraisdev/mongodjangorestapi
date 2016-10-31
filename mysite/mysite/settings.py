@@ -84,8 +84,6 @@ DATABASES = {
 }
 
 
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
 
@@ -170,4 +168,9 @@ CACHES = {
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 
-MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
+
+
+# Bethel Groups Settings
+
+EVENTS_TYPES_CODES = {'Evento': 'event', 'Curso' : 'course', 'Retiro': 'acamp'}

@@ -215,12 +215,15 @@ def new_course(request):
 			user_roles.append(User_roles(user=user, role=document_group_users_roles[key], task=document_group_users_tasks[key]))
 
 
+		course_type_id = Events_types.objects(code='course')[0].id
+
+
 		evento = Events()
 		evento.add_event(name=course_name, 
 				  host=document_group_origin,
 				  parent_event=course_origin,
 				  groups_in=groups_included,
-				  event_type='course',
+				  event_type=course_type_id,
 				  user_roles=user_roles,
 				  start_date=date_start, 
 				  end_date=date_end,

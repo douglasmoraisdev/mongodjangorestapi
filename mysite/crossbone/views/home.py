@@ -28,10 +28,7 @@ def index(request):
 
             user_groups = Groups().get_user_groups(user_id)
             user_events = Events().get_user_events(user_id)
-            #user_courses = Events().get_user_courses(user_id)
-
-
-            logger.error(user_courses)
+            user_courses = Events().get_user_courses(user_id)
 
 
             content = {

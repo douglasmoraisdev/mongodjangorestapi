@@ -60,8 +60,8 @@ class Events(Document):
 
 	def get_user_courses(self, user_id):
 
-
-		#todo fazer ele pegar pelo event_type.code
-		event = Events.objects(user_roles__user=user_id, event_type='course')
+		type_course_id = Events_types.objects(code='course')[0].id
+		
+		event = Events.objects(user_roles__user=user_id, event_type=type_course_id)
 
 		return event
