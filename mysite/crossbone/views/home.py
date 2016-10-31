@@ -26,15 +26,14 @@ def index(request):
 
             user = Users().get_user_by_id(user_id)
 
-            user_groups = Groups().get_user_groups(user_id)
-            user_events = Events().get_user_events(user_id)
+            user_groups = Groups().get_user_groups_by_type(user_id)
+            user_events = Events().get_user_events_by_type(user_id)
             user_courses = Events().get_user_courses(user_id)
 
 
             content = {
                 'user_name': user.user_name,
                 'Groups': user_groups,
-                'Groups_types': Groups_types.objects,
                 'Roles': Roles.objects,
                 'Events': user_events,
                 'Courses': user_courses

@@ -7,15 +7,21 @@
 
     <ul class="collection with-header">
 
-        {% for event in Events %}
-            <li class="collection-header">
-                <h5>Células</h5>
+        {% for key, values in Events.items %}
+        <li class="collection-header">               
+
+            <h5>{{ values.0.event_type.name }}</h5>
+
+            {% for event in values %}
 
                 <li class="collection-item">
-                    <div>{{ event.name }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                    <div>{{ event.name }}<a href="{{ event.id }}" class="secondary-content"><i class="material-icons">send</i></a>
                     </div>
-                </li>                
-            </li>
+                </li>
+
+            {% endfor%}
+
+        </li>
         {% endfor %}
 
     </ul>

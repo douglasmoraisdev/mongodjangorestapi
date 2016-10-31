@@ -65,3 +65,24 @@ class Events(Document):
 		event = Events.objects(user_roles__user=user_id, event_type=type_course_id)
 
 		return event
+
+
+	def get_user_events_by_type(self, user_id):
+
+		events = Events.objects(user_roles__user=user_id)
+
+		user_events = dict()
+
+		for key, etype in enumerate(events):
+
+
+			if etype.event_type.code not in ['course']: #retorna tudos menos os cursos TODO: criar um list na conf
+				if etype.event_type.code in user_events:
+					user_events[etype.event_type.code].append(events[key])
+				else:
+					user_events[etype.event_type.code] = [events[key]]
+
+
+		logger.error(user_events)
+
+		return user_events

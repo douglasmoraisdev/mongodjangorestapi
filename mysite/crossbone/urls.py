@@ -41,4 +41,8 @@ urlpatterns = [
     url(r'usuarios_tasks_list/(.+)/$', views.users.usuarios_tasks_list, name='usuarios_tasks_list'),
 
 
+
+    url(r'^stepper$', views.events.stepper, name='stepper'),
+
+
 ]

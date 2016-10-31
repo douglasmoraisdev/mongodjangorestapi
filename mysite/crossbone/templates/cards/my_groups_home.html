@@ -10,17 +10,22 @@
 
     <ul class="collection with-header">
 
-        {% for group in Groups %}
-            <li class="collection-header">
-                <h5>Células</h5>
+        {% for key, values in Groups.items %}
+        <li class="collection-header">               
+
+            <h5>{{ values.0.group_type.name }}</h5>
+
+            {% for group in values %}
 
                 <li class="collection-item">
-                    <div>{{ group.name }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                    <div>{{ group.name }}<a href="{{ group.id }}" class="secondary-content"><i class="material-icons">send</i></a>
                     </div>
-                </li>                
-            </li>
-        {% endfor %}
+                </li>
 
+            {% endfor%}
+
+        </li>
+        {% endfor %}
 
     </ul>
 

@@ -48,3 +48,20 @@ class Groups(Document):
 		group = Groups.objects(user_roles__user=user_id)
 
 		return group
+
+	def get_user_groups_by_type(self, user_id):
+
+		group = Groups.objects(user_roles__user=user_id)
+
+		user_groups = dict()
+
+		for key, gtype in enumerate(group):
+
+			if gtype.group_type.code in user_groups:
+				user_groups[gtype.group_type.code].append(group[key])
+			else:
+				user_groups[gtype.group_type.code] = [group[key]]
+
+
+
+		return user_groups

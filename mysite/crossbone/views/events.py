@@ -52,7 +52,8 @@ def event_new(request):
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects,
-		'Events': Events.objects,        
+		'Events': Events.objects,
+		'Events_types': Events_types.objects,
 	}
 
 	if request.method == 'POST':
@@ -69,6 +70,7 @@ def event_new(request):
 		user_roles = []
 		event_name = request.POST.get('nome-evento')
 		group_origin = request.POST.get('grupo-origem-evento')
+		event_type = request.POST.get('tipo-evento')
 
 		
 		users_group_input_names = [name for name in request.POST.keys() if name.startswith('user-group')]
@@ -121,7 +123,7 @@ def event_new(request):
 				  host=document_group_origin,
 				  parent_event='',
 				  groups_in=[],
-				  event_type='',
+				  event_type=event_type,
 				  user_roles=user_roles,
 				  start_date='date_start', 
 				  end_date='date_end',
@@ -383,6 +385,16 @@ def subject(request, event_id):
 		'start_date': subject.start_date,
 		'end_date': subject.end_date,
 		'event_data': subject.extra_data
+	}
+
+	return HttpResponse(template.render(content, request))
+
+def stepper(request):
+
+	template = loader.get_template('home/tests/stepper.html')
+
+	content = {
+		'dale': 'nosmeio'
 	}
 
 	return HttpResponse(template.render(content, request))

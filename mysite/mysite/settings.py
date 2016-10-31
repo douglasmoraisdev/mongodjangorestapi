@@ -173,4 +173,4 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 # Bethel Groups Settings
 
-EVENTS_TYPES_CODES = {'Evento': 'event', 'Curso' : 'course', 'Retiro': 'acamp'}
+EVENT_TYPE_COURSE = {'Evento': 'event', 'Curso' : 'course', 'Retiro': 'acamp'}

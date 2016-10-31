@@ -109,6 +109,19 @@
                                             <label for="nome-evento">Nome do Evento</label>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="input-field col s6">
+                                            <select id="tipo-evento" name="tipo-evento">
+                                                  <option value="" disabled selected>Selecione</option>
+                                                {% for item in Events_types %}
+                                                  <option value="{{ item.id }}">{{ item.name }}</option>
+                                                {% endfor %}
+                                        </select>
+                                            <label>Tipo de Evento</label>
+                                        </div>
+                                    </div>
+
                                     <div class="row">
                                         <div class="input-field col s6">
                                             <select id="grupo-origem-evento" name="grupo-origem-evento">
@@ -120,6 +133,7 @@
                                             <label>Grupo Anfitrião</label>
                                         </div>
                                     </div>
+
 
                                     <div class="row">
                                         <div class="input-field col s6">

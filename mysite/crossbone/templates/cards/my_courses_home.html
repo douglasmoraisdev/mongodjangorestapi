@@ -7,16 +7,21 @@
 
     <ul class="collection with-header">
 
-        {% for course in Courses %}
-            <li class="collection-header">
-                <h5>Células</h5>
+
+        <li class="collection-header">               
+
+            <h5>Cursos</h5>
+
+            {% for items in Courses %}
 
                 <li class="collection-item">
-                    <div>{{ course.name }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                    <div>{{ items.name }}<a href="{{ event.id }}" class="secondary-content"><i class="material-icons">send</i></a>
                     </div>
-                </li>                
-            </li>
-        {% endfor %}
+                </li>
+
+            {% endfor%}
+
+        </li>
 
     </ul>
 
