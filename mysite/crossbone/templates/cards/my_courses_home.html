@@ -1,0 +1,42 @@
+<div class="card blue-grey darken-1">
+    <div class="card-content white-text ">
+        <span class="card-title activator white-text">Meus Cursos<i class="material-icons right">live_help</i></span>
+        <p>Abaixo todos os Eventos em que você e/ou seus grupos participaram</p>
+    </div>
+
+
+    <ul class="collection with-header">
+
+        {% for course in Courses %}
+            <li class="collection-header">
+                <h5>Células</h5>
+
+                <li class="collection-item">
+                    <div>{{ course.name }}<a href="#!" class="secondary-content"><i class="material-icons">send</i></a>
+                    </div>
+                </li>                
+            </li>
+        {% endfor %}
+
+    </ul>
+
+    <div class="card-action">
+        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
+        </button>
+
+    </div>
+
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Sobre os Eventos<i class="material-icons right">close</i></span>
+        <p>Eventos são encontros de pessoas e/ou grupos. Podem ser: Reuniões de Células, Cultos, Reuniões gerais e Diversas</p>
+        <p>
+            Para adicionar um novo evento clique no botão [ + ]
+        </p>
+        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
+        </button>
+
+    </div>
+
+
+
+</div>
