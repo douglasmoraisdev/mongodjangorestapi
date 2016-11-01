@@ -31,12 +31,28 @@ class Groups(Document):
 			extra_data=extra_data
 		)
 
+
 	def get_group_by_id(self, group_id):
 
 		return Groups.objects.get(id=group_id)
 
 
-	def get_group_users(self, group_id):
+	def get_groups_over_by_id(self, group_id):
+
+		return Groups.objects.get(id=group_id)
+
+
+	def get_groups_under_by_id(self, group_id):
+
+		return Groups.objects.get(id=group_id)			
+
+
+	def get_group_users(self, group_id, role=''):
+		'''
+		returns the user_roles of the groups by id
+		params:
+		role(optional): get by user role, eg: 'leaders or hosts'
+		'''
 
 		group = Groups.objects.get(id=group_id)
 
@@ -65,3 +81,9 @@ class Groups(Document):
 
 
 		return user_groups
+
+	def get_groups_generetad(self, group_id):
+
+		groups = Groups.objects(origin=group_id)
+
+		return groups

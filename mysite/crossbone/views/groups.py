@@ -16,7 +16,13 @@ logger = logging.getLogger(__name__)
 
 def group(request, group_id):
 
-	template = loader.get_template('home/group/group.html') 
+	template = loader.get_template('home/group/group.html')
+
+	leader_users = []
+	host_users = []
+	member_users = []
+	visitor_users = []
+	user_already_listed = []
 
 	group_id = ObjectId(group_id)
 	
@@ -29,16 +35,51 @@ def group(request, group_id):
 
 	users = group.get_group_users(group_id)
 
+	for key, user_list in enumerate(users):
+		for role in user_list.role:
+
+			if user_list.user.id not in user_already_listed:
+				if role.code == 'leader':
+					leader_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+				if role.code == 'host':
+					host_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+				if role.code == 'cell_member':
+					member_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+				if role.code == 'visitor':
+					visitor_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+
 	events = Events()
 	events = events.get_events_by_group_id(group_id)
+
+	meetings = Events()
+	meetings = meetings.get_meetings_by_group_id(group_id)
+
+	generated_groups = Groups()
+	generated_groups = generated_groups.get_groups_generetad(group_id)
 
 	users_count = len(users)
 	content = {
 		'group_name':group.name,
 		'group_type':group_type.name,
-		'users_list':users,
+		'groups_over':group.groups_over,
+		'groups_under':group.groups_under,
+		'group_origin':group.origin,
+		'generated_groups': generated_groups,
+		'leader_users' : leader_users,
+		'host_users' : host_users,
+		'member_users' : member_users,
+		'visitor_users' : visitor_users,
+		'meetings' : meetings,
 		'users_count': users_count,
-		'group_date':group.extra_data['createdon']['value'],
+		'group_date':group.extra_data['created_on_date'],
 		'events':events
 
 	}

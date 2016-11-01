@@ -36,7 +36,8 @@ def index(request):
                 'Groups': user_groups,
                 'Roles': Roles.objects,
                 'Events': user_events,
-                'Courses': user_courses
+                'Courses': user_courses,
+                'baseurl': request.get_full_path
             }
             return HttpResponse(template.render(content, request))
 

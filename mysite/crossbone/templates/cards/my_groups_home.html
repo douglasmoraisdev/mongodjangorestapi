@@ -18,7 +18,7 @@
             {% for group in values %}
 
                 <li class="collection-item">
-                    <div>{{ group.name }}<a href="{{ group.id }}" class="secondary-content"><i class="material-icons">send</i></a>
+                    <div>{{ group.name }}<a href="{{baseurl}}grupo/get/{{ group.id }}" class="secondary-content"><i class="material-icons">send</i></a>
                     </div>
                 </li>
 

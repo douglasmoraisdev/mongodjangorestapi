@@ -19,8 +19,20 @@ def user(request, user_id):
 	user = Users()
 	user = user.get_user_by_id(user_id)
 
+	groups = Groups()
+	groups = groups.get_user_groups(user_id)
+
+	events = Events()
+	events = events.get_user_events(user_id)
+
+	courses = Events()
+	courses = courses.get_user_courses(user_id)
+
 	content = {
-		'user':user
+		'User':user,
+		'Groups':groups,
+		'Events':events,
+		'Courses':courses
 	}
 	
 	return HttpResponse(template.render(content, request))

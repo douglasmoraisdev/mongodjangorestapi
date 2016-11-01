@@ -9,9 +9,11 @@ from crossbone.models.financial_account import *
 
 class Financial_movement(Document):
 
-	movement_date = StringField(max_length=20)
-	description = StringField(max_length=30)
+	release_date = StringField(max_length=20)
+	due_date = StringField(max_length=20)	
 	value = StringField(max_length=30)
+	amount_paid	= StringField(max_length=30)
+	description = StringField(max_length=30)
 	groups_origin = ListField(ReferenceField(Groups))
 	users_origin = ListField(ReferenceField(Users))
 	events_origin = ListField(ReferenceField(Events))

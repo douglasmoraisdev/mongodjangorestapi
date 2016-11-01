@@ -11,34 +11,35 @@ from crossbone.models import *
 
 def event(request, event_id):
 
-	template = loader.get_template('home/event/course/event_course.html')
-	
-	'''
+	template = loader.get_template('home/event/event.html')
+
+	group_name = ''
+		
 	events = Events()
 	events = events.get_event_by_id(event_id)
 
-	group_id = ObjectId(events.host.id)
+	if events.host:
+		group_id = ObjectId(events.host.id)
+	else:
+		group_id = None
 	
-	group = Groups()
-	group = group.get_group_by_id(group_id)
-
-	group_type_id = group.group_type.id
-	group_type = Groups_types()
-	group_type = group_type.get_grouptype_by_id(ObjectId(group_type_id))
+	if group_id:
+		group = Groups()
+		group = group.get_group_by_id(group_id)
+		group_name = group.name
 
 	users = events.get_event_users(event_id)
 	users_count = len(users)
-	'''
+	
 
 	content = {
-		'group_name': 'group.extra_data['']['']',
-		'group_type': 'group_type.name',
-		'users_list': 'users',
-		'users_count': 'users_count',
-		'event_date': 'events.extra_data['']['']',
-		'event_name': 'Curso de Novos Membros',
-		'event_data': 'events.extra_data'
-
+		'event_name': events.name,
+		'group_origin_name': group_name,
+		'users_list': users,
+		'users_count': users_count,
+		'start_date': events.start_date,
+		'end_date': events.end_date,
+		'event_data': events.extra_data
 	}
 
 	return HttpResponse(template.render(content, request))

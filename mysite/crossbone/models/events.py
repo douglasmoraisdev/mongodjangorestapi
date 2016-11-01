@@ -35,8 +35,31 @@ class Events(Document):
 
 
 	def get_events_by_group_id(self, group_id):
+		
+		course_id = Events_types.objects(code='course')[0].id
+		meeting_id = Events_types.objects(code='meeting')[0].id	
 
-		return Events.objects(host=group_id)
+		events = Events.objects(host=group_id, event_type__nin=[course_id, meeting_id])
+
+		return events
+
+
+	def get_courses_by_group_id(self, group_id):
+
+		course_id = Events_types.objects(code='course')[0].id
+
+		courses = Events.objects(host=group_id, event_type=course_id)		
+
+		return courses
+
+
+	def get_meetings_by_group_id(self, group_id):
+
+		meeting_id = Events_types.objects(code='meeting')[0].id
+
+		meetings = Events.objects(host=group_id, event_type=meeting_id)		
+
+		return meetings			
 
 
 	def get_event_by_id(self, event_id):
@@ -53,7 +76,9 @@ class Events(Document):
 
 	def get_user_events(self, user_id):
 
-		event = Events.objects(user_roles__user=user_id)
+		course_id = Events_types.objects(code='course')[0].id
+
+		event = Events.objects(user_roles__user=user_id, event_type__ne=course_id)
 
 		return event
 

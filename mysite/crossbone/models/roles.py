@@ -25,3 +25,17 @@ class Roles(Document):
 			presence=presence,
 			extra_data = extra_data
 		)
+
+
+	def edit_role(self, role_name, code, permissions='r', presence='y', roles_over=[], roles_under=[], view_order=0, extra_data=None):
+		
+		Roles.objects.create(
+			name = role_name,
+			code = code,
+			roles_over = roles_over,
+			roles_under = roles_under,
+			view_order=view_order,
+			permissions=permissions,
+			presence=presence,
+			extra_data = extra_data
+		)

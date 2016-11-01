@@ -15,7 +15,7 @@
             {% for items in Courses %}
 
                 <li class="collection-item">
-                    <div>{{ items.name }}<a href="{{ event.id }}" class="secondary-content"><i class="material-icons">send</i></a>
+                    <div>{{ items.name }}<a href="{{baseurl}}curso/get/{{ items.id }}" class="secondary-content"><i class="material-icons">send</i></a>
                     </div>
                 </li>
 
