@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'crossbone.apps.CrossboneConfig',
+    'bethelgroups.apps.BethelgroupsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,7 +111,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'crossbone/log/debug.log',
+            'filename': 'bethelgroups/log/debug.log',
         },
     },
     'loggers': {

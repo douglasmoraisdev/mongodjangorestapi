@@ -17,6 +17,6 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^crossbone/', include('crossbone.urls')),
+    url(r'^bethelgroups/', include('bethelgroups.urls')),
     url(r'^admin/', admin.site.urls),
 ]

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    <!-- BOOTSTRAP & STYLES -->
+    {% include "default/bootstrap_css.html" %}
+    <!-- END OF BOOTSTRAP & STYLES -->
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="#!">one</a></li>
+        <li><a href="#!">two</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">three</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Portal Betel</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#!">Sass</a></li>
+                <li><a href="#!">Components</a></li>
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons">more_vert</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Page Layout here -->
+    <div class="row">
+
+        <div class="col s12 m4 l3">
+            <!-- Note that "m4 l3" was added -->
+
+            <ul id="slide-out" class="side-nav">
+                <li>
+                    <div class="userView">
+                        <img class="background" src="images/office.jpg">
+                        <a href="#!user"><img class="circle" src="images/yuna.jpg"></a>
+                        <a href="#!name"><span class="white-text name">John Doe</span></a>
+                        <a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a>
+                    </div>
+                </li>
+                <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+                <li><a href="#!">Second Link</a></li>
+                <li>
+                    <div class="divider"></div>
+                </li>
+                <li><a class="subheader">Subheader</a></li>
+                <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
+
+
+            <!-- Grey navigation panel
+
+
+            This content will be:
+            3-columns-wide on large screens,
+            4-columns-wide on medium screens,
+            12-columns-wide on small screens  -->
+
+        </div>
+
+        <div class="col s12 m8 l9">
+            <!-- Note that "m8 l9" was added -->
+            <!-- Teal page content
+
+                This content will be:
+            9-columns-wide on large screens,
+            8-columns-wide on medium screens,
+            12-columns-wide on small screens  -->
+
+
+            <div id="main_content">
+
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title white-text">{{ subject_name }}</span>
+                                <p>{{ course_name }}</p>
+                                <p>Inicio: {{ start_date }}</p>
+                                <p>Fim: {{ end_date }}</p>                                
+
+
+                            </div>
+
+
+                            <ul class="collection">
+                                <li class="collection-item">
+                                    <li class="collection-item">
+                                        <div>Total de participantes: {{ users_count }}</div>
+                                    </li>
+
+                                    <li class="collection-item">
+                                        <div>Valor do curso: R$ {{ event_data.value }}</div>
+                                    </li>
+                                    <li class="collection-item">
+                                        <div>Tipo de cobrança: {{ event_data.tax_period }}</div>
+                                    </li>
+
+
+                                </li>
+                            </ul>                            
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title white-text">Professor(es)</span>
+                            </div>
+
+                            <ul class="collection">
+                                {% for item in users_list %}
+                                    {% if item.role.0.code == 'professor' %}
+                                        <li class="collection-item avatar">
+                                            <img class="circle" width="60" height="60" avatar="{{ item.user.name }}">
+                                            <span class="title">{{ item.user.name }}</span>
+                                                {% for roles in item.role %}
+                                                <p>{{ roles.name }}</p>   
+                                                {%endfor%}
+                                            <a href="http://localhost:10/bethelgroups/usuario/{{ item.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor%}
+                            </ul>                            
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title white-text">Alunos</span>
+                            </div>
+
+                            <ul class="collection">
+                                {% for item in users_list %}
+                                    {% if item.role.0.code == 'aluno' %}
+                                        <li class="collection-item avatar">
+                                            <img class="circle" width="60" height="60" avatar="{{ item.user.name }}">
+                                            <span class="title">{{ item.user.name }}</span>
+                                                {% for roles in item.role %}
+                                                <p>{{ roles.name }}</p>   
+                                                {%endfor%}
+                                            <a href="http://localhost:10/bethelgroups/usuario/{{ item.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor%}
+                            </ul>                            
+
+                        </div>
+                    </div>
+                </div>                                
+
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card blue-grey darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title">Disciplinas do Curso</span>
+
+                            </div>
+
+
+                            <div class="card-action">
+
+                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col s12 m6">
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="card-action">
+        <!--<button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>-->
+
+        <div class="fixed-action-btn vertical" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large waves-effect waves-light red">
+                <i class="large material-icons">add</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating blue"><i class="material-icons">supervisor_account</i></a></li>
+                <li><a class="btn-floating green"><i class="material-icons">today</i></a></li>
+            </ul>
+        </div>
+
+    </div>
+
+
+
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+    </script>
+
+
+</body>
+
+
+</html>
