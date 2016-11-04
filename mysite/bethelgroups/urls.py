@@ -33,6 +33,10 @@ urlpatterns = [
     url(r'^grupo/novo$', views.groups.group_new, name='grupo_novo'),
     url(r'^tipogrupo/novo$', views.groups.grouptype_new, name='tipogrupo_novo'),
 
+    #Celulas
+    url(r'^celula/novo$', views.groups.cell_new, name='celula_novo'),
+
+
 
     #ajax
     url(r'usuarios_roles_list$', views.users.usuarios_roles_list, name='usuarios_roles_list'),

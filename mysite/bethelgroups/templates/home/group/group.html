@@ -62,8 +62,8 @@
                                 {% for list in leader_users %} 
 
                                     <li class="collection-item avatar">
-                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }}">
-                                        <span class="title">{{ list.user.extra_data.first_name }}</span> 
+                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}
@@ -75,8 +75,8 @@
                                 {% for list in host_users %}
 
                                     <li class="collection-item avatar">
-                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }}">
-                                        <span class="title">{{ list.user.extra_data.first_name }}</span> 
+                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}
@@ -236,8 +236,8 @@
                                 {% for list in member_users %}
 
                                     <li class="collection-item avatar">
-                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }}">
-                                        <span class="title">{{ list.user.extra_data.first_name }}</span> 
+                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}
@@ -277,8 +277,8 @@
                                 {% for list in visitor_users %}
 
                                     <li class="collection-item avatar">
-                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }}">
-                                        <span class="title">{{ list.user.extra_data.first_name }}</span> 
+                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+
+    {% include "default/styles_css.html" %}
+
+    <link href="{% static "css/materialize-stepper.css" %}" rel="stylesheet">
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <!--Header -->
+    {% include "default/header_default.html" %}
+    <!--Header -->
+
+
+
+    <!-- Page Layout here -->
+    <div class="row">
+
+        <!-- 
+        Materializecss Stepper v1.1 - Igor Marcossi
+        https://github.com/Kinark/Materialize-stepper 
+        -->
+        <div class="section grey lighten-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col l6 m10 s12 offset-l3 offset-m1">
+                        <h3 class="light center-align blue-text">Cadastrar nova Célula</h3>
+                        <div class="card">
+                            <div class="card-content">
+
+                                <ul data-method="GET" class="stepper linear">
+
+
+                                    <li class="step active">
+                                        <div class="step-title waves-effect waves-dark">Dados Básicos</div>
+                                        <div class="step-content">
+
+                                            <div class="row">
+
+                                                <div class="input-field col s12 l12">
+                                                  <input type="text" id="autocomplete-input" class="autocomplete">
+                                                  <label for="autocomplete-input">Autocomplete</label>
+                                                </div>                                            
+
+
+                                                <div class="input-field col s12 l6">
+                                                    <input id="cell-name" name="cell-name" type="text" class="validate">
+                                                    <label for="cell-name">Nome da Célula</label>
+                                                </div>
+
+
+                                                <div class="input-field col s12 l6">
+                                                    <input id="cell-date" name="cell-date" type="date" class="datepicker">
+                                                    <label for="cell-date">Data de criação</label>
+                                                </div>
+
+
+                                                <div class="input-field col s12 l6">
+                                                    <select id="group-origin" name="group-origin">
+                                                        <option value="" disabled selected>Selecione</option>
+                                                        {% for item in Groups %}   
+                                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                                        {% endfor %}   
+                                                    </select>
+                                                    <label>Grupo de Origem</label>
+                                                </div>
+
+
+                                                <div class="input-field col s12 l12">
+                                                <select multiple id="groups-up-multiple" name="groups-up-multiple">
+                                                  <option value="" disabled selected>Selecione</option>
+                                                      {% for item in Groups %}   
+                                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                                      {% endfor %}  
+                                                </select>
+                                                    <label>Supervisionado por:</label>
+                                                </div>
+
+
+                                                <div class="input-field col s12 l12">
+                                                <select multiple id="groups-down-multiple" name="groups-down-multiple">
+                                                  <option value="" disabled selected>Selecione</option>
+                                                      {% for item in Groups %}   
+                                                        <option value="{{ item.id }}">{{ item.name }}</option>
+                                                      {% endfor %}  
+                                                </select>
+                                                    <label>Supervisionando:</label>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="step-actions">
+                                                <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Próximo</button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                    <li class="step">
+                                        <div class="step-title waves-effect waves-dark">Endereço</div>
+                                        <div class="step-content">
+                                            <div class="row">
+
+                                                    <div class="input-field col s6">
+                                                        <input id="cell-zip" name="cell-zip" type="text" class="validate" >
+                                                        <label for="cell-zip">CEP:</label>
+                                                    </div>
+                                            
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-state" name="cell-state" type="text" class="validate" >
+                                                        <label for="cell-state">Estado:</label>
+                                                    </div>
+
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-city" name="cell-city" type="text" class="validate" >
+                                                        <label for="cell-city">Cidade:</label>
+                                                    </div>
+
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-neigh" name="cell-neigh" type="text" class="validate" >
+                                                        <label for="cell-neigh">Bairro:</label>
+                                                    </div>
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-street" name="cell-street" type="text" class="validate" >
+                                                        <label for="cell-street">Logradouro:</label>
+                                                    </div>
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-street-number" name="cell-street-number" type="text" class="validate" >
+                                                        <label for="cell-street-number">Nro/Complemento</label>
+                                                    </div>                                                    
+
+
+                                            </div>
+
+                                                    <div class="step-actions">
+                                                        <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                        <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+
+                                   <li class="step">
+                                        <div class="step-title waves-effect waves-dark">Horários</div>
+                                        <div class="step-content">
+                                            <div class="row">
+
+                                                    <div class="input-field col s6">
+                                                        <input id="cell-zip" name="cell-zip" type="text" class="validate" >
+                                                        <label for="cell-zip">Dias:</label>
+                                                    </div>
+                                            
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-state" name="cell-state" type="text" class="validate" >
+                                                        <label for="cell-state">Horarios:</label>
+                                                    </div>
+
+
+                                            </div>
+
+                                                    <div class="step-actions">
+                                                        <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                        <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                            </div>
+                                        </div>
+                                    </li>    
+
+
+
+                                   <li class="step">
+                                        <div class="step-title waves-effect waves-dark">Servos</div>
+                                        <div class="step-content">
+                                            <div class="row">
+
+                                                    <div class="input-field col s6">
+                                                        <input id="cell-zip" name="cell-zip" type="text" class="validate" required>
+                                                        <label for="cell-zip">Dias:</label>
+                                                    </div>
+                                            
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-state" name="cell-state" type="text" class="validate" required>
+                                                        <label for="cell-state">Horarios:</label>
+                                                    </div>
+
+
+                                            </div>
+
+                                                    <div class="step-actions">
+                                                        <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                        <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+
+
+                                   <li class="step">
+                                        <div class="step-title waves-effect waves-dark">Membros</div>
+                                        <div class="step-content">
+                                            <div class="row">
+
+                                                    <div class="input-field col s6">
+                                                        <input id="cell-zip" name="cell-zip" type="text" class="validate" required>
+                                                        <label for="cell-zip">Dias:</label>
+                                                    </div>
+                                            
+
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-state" name="cell-state" type="text" class="validate" required>
+                                                        <label for="cell-state">Horarios:</label>
+                                                    </div>
+
+
+                                            </div>
+
+                                                    <div class="step-actions">
+                                                        <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                        <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                            </div>
+                                        </div>
+                                    </li>                                                                                                          
+
+
+
+                                    <li class="step">
+                                        <div class="step-title waves-effect waves-dark">Finalizar</div>
+                                        <div class="step-content">
+
+                                            Clique em "Cadastrar" para finalizar o cadastro
+                                            <div class="step-actions">
+                                                <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Cadastrar célula</button>
+                                            </div>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js"%}"></script>
+    <script src="{% static "js/materialize.js"%}"></script>
+    <script src="{% static "js/jquery.validate.min.js"%}"></script>
+    <script src="{% static "js/materialize-stepper.js"%}"></script>
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>
+    
+
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+
+        $('select').material_select();
+
+
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 10, // Creates a dropdown of 15 years to control year
+            monthsFull: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+            monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            weekdaysFull: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabado'],
+            weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+            today: 'Hoje',
+            clear: 'Limpar',
+            close: 'Fechar',
+            format: 'dd/mm/yyyy',
+        });
+
+        $(function() {
+          $('input.autocomplete').autocomplete({
+            data: {
+              "Apple": null,
+              "Microsoft": null,
+              "Google": 'http://placehold.it/250x250',
+            }
+          });
+        });     
+
+        function anyThing() {
+            setTimeout(function() {
+                $('.stepper').nextStep();
+            }, 1500);
+        }
+
+        $(function() {
+            $('.stepper').activateStepper();
+        });
+    </script>
+
+
+</body>
+
+</html>
