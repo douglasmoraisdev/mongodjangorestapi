@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 from django.urls import reverse
 
 import json
+import time
 
 import os
 import binascii
@@ -108,8 +109,7 @@ def usuarios_tasks_list(request, fields_seq):
 
 
 #ajax
-
-def get_users_autocomplete(request):
+def get_servant_autocomplete(request):
 
 	user_list = dict()
 
@@ -119,13 +119,15 @@ def get_users_autocomplete(request):
 		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
 	}	
 
-	template = loader.get_template('modals/user_item_list_search.html')
+	template = loader.get_template('home/group/cells/modals/servant_item_list_search.html')
 
 	return HttpResponse(template.render(content,request))	
 
+#ajax
+def add_servant_list(request):
 
-def add_users_list(request):
 
+	time.sleep(2)
 
 	user_list = dict()
 
@@ -142,6 +144,47 @@ def add_users_list(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('modals/user_item_list_add.html')
+	template = loader.get_template('home/group/cells/modals/servant_item_list_add.html')
+
+	return HttpResponse(template.render(content,request))
+
+#ajax
+def get_member_autocomplete(request):
+
+	user_list = dict()
+
+	search = request.GET.get('send')
+
+	content = {
+		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
+	}	
+
+	template = loader.get_template('home/group/cells/modals/member_item_list_search.html')
 
 	return HttpResponse(template.render(content,request))	
+
+#ajax
+def add_member_list(request):
+
+
+	time.sleep(1)
+
+	user_list = dict()
+
+	user_id = request.GET.get('userid');
+	roles_ids = request.GET.getlist('rolesid[]');
+
+	user_selected = Users.objects(id=user_id)[0] #TODO mover como função nos Models
+	roles_selected = Roles.objects(id__in=roles_ids)
+
+	content = {
+		'user_name': user_selected,
+		'user_roles' : roles_selected,
+		'user_id': user_id,
+		'roles_ids': roles_ids,
+	}	
+
+	template = loader.get_template('home/group/cells/modals/member_item_list_add.html')
+
+	return HttpResponse(template.render(content,request))	
+

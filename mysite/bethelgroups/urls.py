@@ -45,10 +45,17 @@ urlpatterns = [
     url(r'usuarios_tasks_list/(.+)/$', views.users.usuarios_tasks_list, name='usuarios_tasks_list'),
 
     #ajax
-    url(r'^get_users_autocomplete$', views.users.get_users_autocomplete, name='usuarios_autocomplete'),
+    url(r'^get_servant_autocomplete$', views.users.get_servant_autocomplete, name='servos_autocomplete'),
 
     #ajax
-    url(r'^add_users_list$', views.users.add_users_list, name='usuarios_add_list'),
+    url(r'^add_servant_list$', views.users.add_servant_list, name='servos_add_list'),
+
+
+    #ajax
+    url(r'^get_member_autocomplete$', views.users.get_member_autocomplete, name='membro_autocomplete'),
+
+    #ajax
+    url(r'^add_member_list$', views.users.add_member_list, name='membro_add_list'),    
 
 
     url(r'^stepper$', views.events.stepper, name='stepper'),

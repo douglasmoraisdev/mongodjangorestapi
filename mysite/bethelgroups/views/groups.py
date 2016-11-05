@@ -276,7 +276,7 @@ def cell_new(request):
 		})
 
 		group = Groups()
-		group.add_group(group_name, group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles, extra_data)
+		#group.add_group(group_name, group_type, document_group_origin, document_group_acima, document_group_abaixo, user_roles, extra_data)
 
 
 		return HttpResponse('ok')
