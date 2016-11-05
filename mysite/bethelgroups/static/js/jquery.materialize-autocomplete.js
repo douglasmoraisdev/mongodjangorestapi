@@ -10,6 +10,8 @@
 
 }(this, function ($) {
 
+    var noop = function () {};
+
     var template = function (text) {
         var matcher = new RegExp('<%=([\\s\\S]+?)%>|<%([\\s\\S]+?)%>|$', 'g');
 
@@ -114,7 +116,7 @@
             el: '',
             tagName: 'ul',
             className: 'ac-appender',
-            tagTemplate: '<div class="chip" data-id="<%= item.id %>" data-text="<% item.text %>"><%= item.text %>(<%= item.id %>)<i class="material-icons close">close</i></div>'
+            tagTemplate: '<div class="chip" data-id="<%= item.id %>" data-text="<%= item.text %>"><%= item.text %>(<%= item.id %>)<i class="material-icons close">close</i></div>'
         },
         dropdown: {
             el: '',
@@ -123,13 +125,10 @@
             itemTemplate: '<li class="ac-item" data-id="<%= item.id %>" data-text="<%= item.text %>"><a href="javascript:void(0)"><%= item.text %></a></li>',
             noItem: ''
         },
-        handlers: {
-            'setValue': '.ac-dropdown .ac-item',
-            '.ac-appender .ac-tag .close': 'remove'
-        },
         getData: function (value, callback) {
             callback(value, []);
         },
+        onSelect: noop,
         ignoreCase: true,
         throttling: true
     };
@@ -171,7 +170,7 @@
                 if (self.options.cacheable && !self.resultCache.hasOwnProperty(value)) {
                     self.resultCache[value] = list;
                 }
- 
+
                 if (value !== currentValue) {
                     return false;
                 }
@@ -245,19 +244,19 @@
 
                     $items = self.$dropdown.find('[data-id]');
 
-                    if (!$items.size()) {
+                    if (!$items.length) {
                         return false;
                     }
 
                     $hover = $items.filter('.ac-hover');
 
-                    if (!$hover.size()) {
+                    if (!$hover.length) {
                         $items.removeClass('ac-hover');
                         $items.eq(keyCode == '40' ? 0 : -1).addClass('ac-hover');
                     } else {
                         var index = $hover.index();
                         $items.removeClass('ac-hover');
-                        $items.eq(keyCode == '40' ? (index + 1) % $items.size() : index - 1).addClass('ac-hover');
+                        $items.eq(keyCode == '40' ? (index + 1) % $items.length : index - 1).addClass('ac-hover');
                     }
 
                     return false;
@@ -266,13 +265,13 @@
                 if (keyCode == '13') {
                     $items = self.$dropdown.find('[data-id]');
 
-                    if (!$items.size()) {
+                    if (!$items.length) {
                         return false;
                     }
 
                     $hover = $items.filter('.ac-hover');
 
-                    if (!$hover.size()) {
+                    if (!$hover.length) {
                         return false;
                     }
 
@@ -298,7 +297,7 @@
 
             self.$appender.on('click', '[data-id] .close', function (e) {
                 var $t = $(this);
-                var $li = $t.closest('[data-id');
+                var $li = $t.closest('[data-id]');
                 var item = {
                     id: $li.data('id'),
                     text: $li.data('text')
@@ -337,7 +336,7 @@
                 }
 
                 if (self.options.hidden.inputName) {
-                    self.$el.attr('name', self.options.hidden.inputName);
+                    self.$hidden.attr('name', self.options.hidden.inputName);
                 }
 
                 if (self.options.hidden.required) {
@@ -377,7 +376,7 @@
             if (self.value.length >= self.options.multiple.maxSize) {
 
                 if ('function' === typeof self.options.multiple.onExceed) {
-                    self.options.multiple.onExceed.call(this, self.options.multiple.maxSize);
+                    self.options.multiple.onExceed.call(this, self.options.multiple.maxSize, item);
                 }
 
                 return false;
@@ -437,6 +436,10 @@
 
             if (self.options.hidden.enable) {
                 self.$hidden.val(item.id);
+            }
+
+            if ('function' === typeof self.options.onSelect) {
+                self.options.onSelect.call(self, item);
             }
         }
     };

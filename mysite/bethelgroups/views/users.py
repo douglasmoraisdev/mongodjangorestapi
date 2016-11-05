@@ -4,6 +4,8 @@ from django.http import HttpResponseForbidden
 from bson.objectid import ObjectId
 from django.urls import reverse
 
+import json
+
 import os
 import binascii
 
@@ -102,3 +104,44 @@ def usuarios_tasks_list(request, fields_seq):
 	template = loader.get_template('default/usuarios_tasks_list.html')
 
 	return HttpResponse(template.render(content,request))
+
+
+
+#ajax
+
+def get_users_autocomplete(request):
+
+	user_list = dict()
+
+	search = request.GET.get('send')
+
+	content = {
+		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
+	}	
+
+	template = loader.get_template('modals/user_item_list_search.html')
+
+	return HttpResponse(template.render(content,request))	
+
+
+def add_users_list(request):
+
+
+	user_list = dict()
+
+	user_id = request.GET.get('userid');
+	roles_ids = request.GET.getlist('rolesid[]');
+
+	user_selected = Users.objects(id=user_id)[0] #TODO mover como função nos Models
+	roles_selected = Roles.objects(id__in=roles_ids)
+
+	content = {
+		'user_name': user_selected,
+		'user_roles' : roles_selected,
+		'user_id': user_id,
+		'roles_ids': roles_ids,
+	}	
+
+	template = loader.get_template('modals/user_item_list_add.html')
+
+	return HttpResponse(template.render(content,request))	

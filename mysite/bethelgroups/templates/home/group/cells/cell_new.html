@@ -15,6 +15,14 @@
     <link href="{% static "css/materialize-stepper.css" %}" rel="stylesheet">
 
 
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js"%}"></script>
+    <script src="{% static "js/materialize.js"%}"></script>
+    <script src="{% static "js/jquery.validate.min.js"%}"></script>
+    <script src="{% static "js/materialize-stepper.js"%}"></script>
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
+
+
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -42,8 +50,10 @@
                         <div class="card">
                             <div class="card-content">
 
-                                <ul data-method="GET" class="stepper linear">
 
+                                <form method="POST" action="" name='tal' id='tal'>
+
+                                <ul data-method="GET" class="stepper linear">
 
                                     <li class="step active">
                                         <div class="step-title waves-effect waves-dark">Dados Básicos</div>
@@ -51,55 +61,49 @@
 
                                             <div class="row">
 
-                                                <div class="input-field col s12 l12">
-                                                  <input type="text" id="autocomplete-input" class="autocomplete">
-                                                  <label for="autocomplete-input">Autocomplete</label>
-                                                </div>                                            
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-name" name="cell-name" type="text" class="validate">
+                                                        <label for="cell-name">Nome da Célula</label>
+                                                    </div>
 
 
-                                                <div class="input-field col s12 l6">
-                                                    <input id="cell-name" name="cell-name" type="text" class="validate">
-                                                    <label for="cell-name">Nome da Célula</label>
-                                                </div>
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-date" name="cell-date" type="date" class="datepicker">
+                                                        <label for="cell-date">Data de criação</label>
+                                                    </div>
 
 
-                                                <div class="input-field col s12 l6">
-                                                    <input id="cell-date" name="cell-date" type="date" class="datepicker">
-                                                    <label for="cell-date">Data de criação</label>
-                                                </div>
+                                                    <div class="input-field col s12 l6">
+                                                        <select id="group-origin" name="group-origin">
+                                                            <option value="" disabled selected>Selecione</option>
+                                                            {% for item in Groups %}   
+                                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                                            {% endfor %}   
+                                                        </select>
+                                                        <label>Grupo de Origem</label>
+                                                    </div>
 
 
-                                                <div class="input-field col s12 l6">
-                                                    <select id="group-origin" name="group-origin">
-                                                        <option value="" disabled selected>Selecione</option>
-                                                        {% for item in Groups %}   
-                                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                                        {% endfor %}   
+                                                    <div class="input-field col s12 l12">
+                                                    <select multiple id="groups-up-multiple" name="groups-up-multiple">
+                                                      <option value="" disabled selected>Selecione</option>
+                                                          {% for item in Groups %}   
+                                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                                          {% endfor %}  
                                                     </select>
-                                                    <label>Grupo de Origem</label>
-                                                </div>
+                                                        <label>Supervisionado por:</label>
+                                                    </div>
 
 
-                                                <div class="input-field col s12 l12">
-                                                <select multiple id="groups-up-multiple" name="groups-up-multiple">
-                                                  <option value="" disabled selected>Selecione</option>
-                                                      {% for item in Groups %}   
-                                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                                      {% endfor %}  
-                                                </select>
-                                                    <label>Supervisionado por:</label>
-                                                </div>
-
-
-                                                <div class="input-field col s12 l12">
-                                                <select multiple id="groups-down-multiple" name="groups-down-multiple">
-                                                  <option value="" disabled selected>Selecione</option>
-                                                      {% for item in Groups %}   
-                                                        <option value="{{ item.id }}">{{ item.name }}</option>
-                                                      {% endfor %}  
-                                                </select>
-                                                    <label>Supervisionando:</label>
-                                                </div>
+                                                    <div class="input-field col s12 l12">
+                                                    <select multiple id="groups-down-multiple" name="groups-down-multiple">
+                                                      <option value="" disabled selected>Selecione</option>
+                                                          {% for item in Groups %}   
+                                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                                          {% endfor %}  
+                                                    </select>
+                                                        <label>Supervisionando:</label>
+                                                    </div>
 
 
                                             </div>
@@ -193,25 +197,33 @@
                                         <div class="step-title waves-effect waves-dark">Servos</div>
                                         <div class="step-content">
                                             <div class="row">
+                                     
 
-                                                    <div class="input-field col s6">
-                                                        <input id="cell-zip" name="cell-zip" type="text" class="validate" required>
-                                                        <label for="cell-zip">Dias:</label>
-                                                    </div>
-                                            
 
-                                                    <div class="input-field col s12 l6">
-                                                        <input id="cell-state" name="cell-state" type="text" class="validate" required>
-                                                        <label for="cell-state">Horarios:</label>
-                                                    </div>
+                                            <ul class="collection" id="users-cell-added">
+                                                
 
+                                            </ul>
+
+                                            <div id="row">
+                                                <div class="col s12 m12">
+
+                                                    <a id="btnReset" class="waves-effect waves-light btn right modal-trigger" data-target="modal1">+ Servo</a>
+                                                    {% include "modals/add_user_search_modal.html" %}
+
+
+                                                </div>
+                                            </div>
+
+                                                     
 
                                             </div>
 
-                                                    <div class="step-actions">
-                                                        <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
-                                                        <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
-                                            </div>
+                                                <div class="step-actions">
+                                                    <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                    <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                                </div>
+
                                         </div>
                                     </li>
 
@@ -257,8 +269,10 @@
                                         </div>
                                     </li>
 
-
                                 </ul>
+
+                                </form>
+
 
                             </div>
                         </div>
@@ -269,14 +283,6 @@
 
     </div>
 
-
-
-    <!--Import jQuery before materialize.js-->
-    <script src="{% static "js/jquery.js"%}"></script>
-    <script src="{% static "js/materialize.js"%}"></script>
-    <script src="{% static "js/jquery.validate.min.js"%}"></script>
-    <script src="{% static "js/materialize-stepper.js"%}"></script>
-    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>
     
 
 
@@ -304,25 +310,74 @@
             format: 'dd/mm/yyyy',
         });
 
-        $(function() {
-          $('input.autocomplete').autocomplete({
-            data: {
-              "Apple": null,
-              "Microsoft": null,
-              "Google": 'http://placehold.it/250x250',
-            }
-          });
-        });     
 
         function anyThing() {
             setTimeout(function() {
                 $('.stepper').nextStep();
-            }, 1500);
+            }, 150);
         }
 
         $(function() {
             $('.stepper').activateStepper();
         });
+
+
+
+        $(document).ready(function () {
+            // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+            $('.modal-trigger').leanModal({
+                dismissible: false,
+                ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+
+                    $('#cell-role-multiple').prop('selectedIndex', 0); //Sets the first option as selected
+                    $('#cell-role-multiple').material_select();    
+
+                    $('#result-search-users').html('');
+                },                
+                complete: function(){
+
+
+                    user_selected = $('#user_searched_selected').val();
+                    roles_selectec = $('#cell-role-multiple').val();
+
+                    $.ajax({
+                        method: "GET",
+                        dataType: "html",
+                        url: "http://localhost:10/bethelgroups/add_users_list",
+                        data: { userid: user_selected, rolesid: roles_selectec}
+                        })
+                        .done(function( msg ) {
+
+                            $('#users-cell-added').append(msg);            
+
+                        });
+
+                }
+            });
+
+        });
+
+      
+
+        function add_user_role_group(){
+
+
+          appended = $("<div id='appended'></div>")
+
+          $('#user-list-div').append(appended);
+
+          $(appended).load("usuarios_roles_list");
+          
+          $('#usuarios-roles-list-container').append(appended.show());
+
+        };
+
+
+        function remove_user(list_id){
+
+            $('#'+list_id).remove();
+        };
+
     </script>
 
 

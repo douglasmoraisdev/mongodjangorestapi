@@ -44,6 +44,11 @@ urlpatterns = [
     #ajax
     url(r'usuarios_tasks_list/(.+)/$', views.users.usuarios_tasks_list, name='usuarios_tasks_list'),
 
+    #ajax
+    url(r'^get_users_autocomplete$', views.users.get_users_autocomplete, name='usuarios_autocomplete'),
+
+    #ajax
+    url(r'^add_users_list$', views.users.add_users_list, name='usuarios_add_list'),
 
 
     url(r'^stepper$', views.events.stepper, name='stepper'),
