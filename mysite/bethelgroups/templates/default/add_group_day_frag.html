@@ -1,0 +1,25 @@
+<div class="input-field col s6 l6">
+    <select id="cell-days-multiple" name="cell-days-multiple-{{ day_seq }}" multiple>
+        <option value="" disabled selected>Selecione</option>
+        <option value="seg">Segunda-feira</option>
+        <option value="ter">Terça-feira</option>
+        <option value="qua">Quarta-feira</option>
+        <option value="qui">Quinta-feira</option>
+        <option value="sex">Sexta-feira</option>
+        <option value="sab">Sábado</option>
+        <option value="dom">Domingo</option>
+
+    </select>
+        <label>Dia:</label>
+</div>
+
+
+<div class="input-field col s12 l6">
+    <input id="cell-hours" name="cell-hours-{{ day_seq }}" type="text" class="validate" >
+    <label for="cell-statea">Horario:</label>
+</div>
+
+
+<script>
+    $('select').material_select();    
+</script>

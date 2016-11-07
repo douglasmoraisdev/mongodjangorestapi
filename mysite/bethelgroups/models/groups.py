@@ -31,6 +31,20 @@ class Groups(Document):
 			extra_data=extra_data
 		)
 
+	def add_cell(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
+
+		cell_type_id = Groups_types.objects(code='cell')[0]
+
+		Groups.objects.create(
+			name=name,
+			group_type=cell_type_id,
+			origin=group_origin,
+			groups_over=groups_over,
+			groups_under=groups_under,
+			user_roles = user_roles,
+			extra_data=extra_data
+		)	
+
 
 	def get_group_by_id(self, group_id):
 

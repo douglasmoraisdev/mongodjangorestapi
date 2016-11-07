@@ -7,7 +7,7 @@
     <title>Portal Betel</title>
 
     <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     
     <!--Import materialize.css-->
 
     {% include "default/styles_css.html" %}
@@ -51,11 +51,9 @@
                             <div class="card-content">
 
 
-
-                                    <ul data-method="POST" data-action="http://localhost:10/bethelgroups/celula/novo" class="stepper linear">
+                                    <ul class="stepper linear" data-method="POST" data-action="http://localhost:10/bethelgroups/celula/novo">
 
                                         {% csrf_token %}
-
 
                                         <li class="step active">
                                             <div class="step-title waves-effect waves-dark">Dados Básicos</div>
@@ -64,7 +62,7 @@
                                                 <div class="row">
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="cell-name" name="cell-name" type="text" class="validate">
+                                                            <input id="cell-name" name="cell-name" type="text" class="validate" >
                                                             <label for="cell-name">Nome da Célula</label>
                                                         </div>
 
@@ -167,24 +165,27 @@
 
 
 
-                                       <li class="step">
+                                        <li class="step">
                                             <div class="step-title waves-effect waves-dark">Horários</div>
                                             <div class="step-content">
                                                 <div class="row">
 
-                                                        <div class="input-field col s6">
-                                                            <input id="cell-zip" name="cell-zip" type="text" class="validate" >
-                                                            <label for="cell-zip">Dias:</label>
-                                                        </div>
-                                                
+                                                    <div id="days_list">
 
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-state" name="cell-state" type="text" class="validate" >
-                                                            <label for="cell-state">Horarios:</label>
-                                                        </div>
 
+                                                    </div>
+
+                                                    <div id="row">
+                                                        <div class="col s12 m12">
+
+                                                            <a onclick="add_day_group()" class="waves-effect waves-light btn right">+ Horário</a>
+
+                                                        </div>
+                                                    </div>                                                    
 
                                                 </div>
+
+
 
                                                         <div class="step-actions">
                                                             <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
@@ -279,14 +280,12 @@
 
                                                 Clique em "Cadastrar" para finalizar o cadastro
                                                 <div class="step-actions">
-                                                    <button class="waves-effect waves-dark btn" type="submit">Cadastrar</button>
+                                                    <button onclick="$('#form-add-cell').submit()" class="waves-effect waves-dark btn" >Cadastrar</button>
                                                 </div>
                                             </div>
                                         </li>
 
                                     </ul>
-
-                                </form>
 
 
                             </div>
@@ -418,7 +417,6 @@
 
         function add_user_role_group(){
 
-
           appended = $("<div id='appended'></div>")
 
           $('#user-list-div').append(appended);
@@ -428,6 +426,16 @@
           $('#usuarios-roles-list-container').append(appended.show());
 
         };
+
+
+        function add_day_group(){
+
+            $.get( "day_group_hmtl_frag", function( data ) {
+              $( "#days_list" ).append( data );
+
+            });          
+
+        };        
 
 
         function remove_user(list_id){

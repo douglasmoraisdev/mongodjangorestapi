@@ -7,7 +7,7 @@
     <title>Portal Betel</title>
 
     <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     
     <!--Import materialize.css-->
 
     <!-- BOOTSTRAP & STYLES -->
@@ -52,7 +52,7 @@
                             <div class="card-content white-text">
 
                                 <span class="card-title activator white-text">{{ group_name }}<i class="material-icons right">live_help</i></span>
-                                <p>{{ group_type }} fundada em {{ group_date }}</p>
+                                <p>{{ group_type }} fundada em {{ group_data.created_on_date }}</p>
 
                             </div>
 
@@ -87,57 +87,66 @@
 
                             </ul>
 
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h5>Supervisionado por:</h5></li>
-                                {% for list in groups_over %} 
+                            {% if groups_over %}
+                                <ul class="collection with-header">
+                                    <li class="collection-header"><h5>Supervisionado por:</h5></li>
+                                    {% for list in groups_over %} 
 
-                                    <li class="collection-item">
-                                        <div>{{ list.name }}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
+                                        <li class="collection-item">
+                                            <div>{{ list.name }}
+                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            </div>
+                                        </li>
 
-                                {% endfor %}
+                                    {% endfor %}
+                                </ul>
 
-                            </ul>
-
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h5>Grupo de origem:</h5></li>
-                                    <li class="collection-item">
-                                        <div>{{ group_origin.name }}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-                            </ul>
-
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h5>Grupos que originou</h5></li>
-                                {% for list in generated_groups %} 
-
-                                    <li class="collection-item">
-                                        <div>{{ list.name }}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-
-                                {% endfor %}
-
-                            </ul>                                                        
+                            {% endif %}
 
 
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h5>Supervisionando:</h5></li>
-                                {% for list in groups_under %} 
+                            {% if group_origin %}
+                                <ul class="collection with-header">
+                                    <li class="collection-header"><h5>Grupo de origem:</h5></li>
+                                        <li class="collection-item">
+                                            <div>{{ group_origin.name }}
+                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            </div>
+                                        </li>
+                                </ul>
+                            {% endif %}
 
-                                    <li class="collection-item">
-                                        <div>{{ list.name }}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
 
-                                {% endfor %}
+                            {% if generated_groups %}
+                                <ul class="collection with-header">
+                                    <li class="collection-header"><h5>Grupos que originou</h5></li>
+                                    {% for list in generated_groups %} 
 
-                            </ul>
+                                        <li class="collection-item">
+                                            <div>{{ list.name }}
+                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            </div>
+                                        </li>
+
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
+
+                            {% if groups_under %}
+                                <ul class="collection with-header">
+                                    <li class="collection-header"><h5>Supervisionando:</h5></li>
+                                    {% for list in groups_under %} 
+
+                                        <li class="collection-item">
+                                            <div>{{ list.name }}
+                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            </div>
+                                        </li>
+
+                                    {% endfor %}
+
+                                </ul>
+                            {% endif %}
 
 
                             <div class="card-reveal">
@@ -149,39 +158,39 @@
                                     <li class="collection-header"><h5>Endereço</h5></li>                                
 
                                     <li class="collection-item">
-                                        <div>CEP: 91450-140
+                                        <div>CEP: {{ group_data.addr_zip }}
                                             <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
 
                                     <li class="collection-item">
-                                        <div>Estado: Rio Grande do Sul
+                                        <div>Estado: {{ group_data.addr_state }}
                                             <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
 
                                     <li class="collection-item">
-                                        <div>Cidade: Guaíba
+                                        <div>Cidade:  {{ group_data.addr_city }}
                                             <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
                                     <li class="collection-item">
-                                        <div>Bairro: Alvorada
+                                        <div>Bairro: {{ group_data.addr_neigh }}
                                             <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
                                     <li class="collection-item">
-                                        <div>Logradouro: Rua Almirante Barroso
+                                        <div>Logradouro: {{ group_data.addr_street }}
                                             <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
                                     <li class="collection-item">
-                                        <div>Nro/Complemento: 50 / Casa
+                                        <div>Nro/Complemento: {{ group_data.addr_street_number }}
                                             <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
@@ -202,8 +211,16 @@
 
 
                                     <li class="collection-item">
-                                        <div>Segunda-Feira: 20h30 as 21h30
+                                        <div>
+
+                                            <!-- TODO make work -->
+                                            {% for key, item in group_data.meet_day.items %}
+
+                                                <p>{{ item.key }} : {{group_data.meet_hour.key}}</p>
+
+                                            {% endfor %}
                                             <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+
                                         </div>
                                     </li>                                                                                                                               
 

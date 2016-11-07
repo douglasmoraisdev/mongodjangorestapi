@@ -126,9 +126,6 @@ def get_servant_autocomplete(request):
 #ajax
 def add_servant_list(request):
 
-
-	time.sleep(2)
-
 	user_list = dict()
 
 	user_id = request.GET.get('userid');
@@ -167,8 +164,6 @@ def get_member_autocomplete(request):
 def add_member_list(request):
 
 
-	time.sleep(1)
-
 	user_list = dict()
 
 	user_id = request.GET.get('userid');
@@ -188,3 +183,14 @@ def add_member_list(request):
 
 	return HttpResponse(template.render(content,request))	
 
+
+#ajax
+def day_group_hmtl_frag(request):
+
+	content = {
+		'day_seq' : binascii.hexlify(os.urandom(4))
+	}	
+
+	template = loader.get_template('default/add_group_day_frag.html')
+
+	return HttpResponse(template.render(content,request))		

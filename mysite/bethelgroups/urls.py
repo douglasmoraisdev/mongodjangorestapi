@@ -55,7 +55,10 @@ urlpatterns = [
     url(r'^get_member_autocomplete$', views.users.get_member_autocomplete, name='membro_autocomplete'),
 
     #ajax
-    url(r'^add_member_list$', views.users.add_member_list, name='membro_add_list'),    
+    url(r'^add_member_list$', views.users.add_member_list, name='membro_add_list'),
+
+    #ajax
+    url(r'day_group_hmtl_frag$', views.users.day_group_hmtl_frag, name='day_group_hmtl_frag'),    
 
 
     url(r'^stepper$', views.events.stepper, name='stepper'),
