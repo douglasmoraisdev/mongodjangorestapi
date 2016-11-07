@@ -51,11 +51,11 @@
                             <div class="card-content">
 
 
-                                <form method="POST" action="" id='form-add-cell'>
 
-                                    {% csrf_token %}
+                                    <ul data-method="POST" data-action="http://localhost:10/bethelgroups/celula/novo" class="stepper linear">
 
-                                    <ul  class="stepper linear">
+                                        {% csrf_token %}
+
 
                                         <li class="step active">
                                             <div class="step-title waves-effect waves-dark">Dados Básicos</div>
@@ -279,7 +279,7 @@
 
                                                 Clique em "Cadastrar" para finalizar o cadastro
                                                 <div class="step-actions">
-                                                    <button onclick="$('#form-add-cell').submit()" class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Cadastrar célula</button>
+                                                    <button class="waves-effect waves-dark btn" type="submit">Cadastrar</button>
                                                 </div>
                                             </div>
                                         </li>
