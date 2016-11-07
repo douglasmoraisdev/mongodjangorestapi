@@ -8,7 +8,6 @@ urlpatterns = [
     url(r'^logout$', views.home.loginLogout, name='logout'),
 
 
-
     url(r'^usuario/get/(.+)/$', views.users.user, name='user'),
     url(r'^usuario/novo$', views.users.user_new, name='user_novo'),
 

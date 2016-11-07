@@ -141,7 +141,7 @@ def event_new(request):
 
 def new_course(request):
 
-	template = loader.get_template('home/event/course/event_new_course.html')
+	template = loader.get_template('home/event/course/course_new.html')
 
 	content = {
 		'Users': Users.objects,
