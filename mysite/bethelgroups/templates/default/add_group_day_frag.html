@@ -15,11 +15,20 @@
 
 
 <div class="input-field col s12 l6">
-    <input id="cell-hours-{{ day_seq }}" name="cell-hours-{{ day_seq }}" type="text" class="validate" data-rule-required="true" data-rule-minlength="5" >
-    <label for="cell-statea">Horario:</label>
+    <input id="cell-hours-{{ day_seq }}" name="cell-hours-{{ day_seq }}" type="time" class="timepicker validate" data-rule-required="true" data-rule-minlength="5" >
+    <label for="cell-hours-{{ day_seq }}">Horario:</label>
 </div>
-
 
 <script>
     $('select').material_select();
+
+    //Time Picker:
+    $('.timepicker').pickatime({
+        default: 'now',
+        twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+        donetext: 'OK',
+      autoclose: false,
+      vibrate: true // vibrate the device when dragging clock hand
+    });
+
 </script>

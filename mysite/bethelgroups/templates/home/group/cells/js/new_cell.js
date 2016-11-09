@@ -144,3 +144,7 @@ jQuery.validator.setDefaults({
 	},	
   }
 });
+
+jQuery(function($){
+   $("#cell-zip").mask("99999-999");
+});    

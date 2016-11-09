@@ -7,6 +7,6 @@ $('.datepicker').pickadate({
     weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
     today: 'Hoje',
     clear: 'Limpar',
-    close: 'Fechar',
+    close: 'OK',
     format: 'dd/mm/yyyy',
 });
