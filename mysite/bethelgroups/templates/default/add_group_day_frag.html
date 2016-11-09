@@ -1,16 +1,14 @@
 <div class="input-field col s6 l6">
-    <select id="cell-days-multiple" name="cell-days-multiple-{{ day_seq }}" multiple required>
-        <option value="" disabled selected>Selecione</option>
-        <option value="seg">Segunda-feira</option>
+    <select id="cell-days-multiple-{{ day_seq }}" type="text" name="cell-days-multiple-{{ day_seq }}" class="validate" data-rule-required="true" multiple>
+        <option value="seg" selected>Segunda-feira</option>
         <option value="ter">Terça-feira</option>
         <option value="qua">Quarta-feira</option>
         <option value="qui">Quinta-feira</option>
         <option value="sex">Sexta-feira</option>
         <option value="sab">Sábado</option>
         <option value="dom">Domingo</option>
-
     </select>
-        <label>Dia:</label>
+        <label for="cell-days-multiple-{{ day_seq }}">Dia:</label>        
 </div>
 
 
@@ -30,5 +28,6 @@
       autoclose: false,
       vibrate: true // vibrate the device when dragging clock hand
     });
+
 
 </script>

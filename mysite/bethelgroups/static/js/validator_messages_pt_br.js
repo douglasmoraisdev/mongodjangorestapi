@@ -3,3 +3,5 @@ jQuery.extend(jQuery.validator.messages, {
 	minlength: jQuery.validator.format("Minimo {0} caracteres"),
 	maxlength: jQuery.validator.format("Máximo {0} caracteres")    
 });
+
+
