@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^evento/get/(.+)/$', views.events.event, name='evento'),    
     url(r'^evento/novo$', views.events.event_new, name='evento_novo'),
 
+    url(r'^reuniaocelula/novo$', views.events.cell_metting_new, name='cell_metting_new'),    
+
     url(r'^curso/get/(.+)/$', views.events.course, name='evento'),
     url(r'^curso/novo$', views.events.new_course, name='curso_novo'),
 
@@ -60,7 +62,6 @@ urlpatterns = [
     url(r'day_group_hmtl_frag$', views.users.day_group_hmtl_frag, name='day_group_hmtl_frag'),    
 
 
-    url(r'^stepper$', views.events.stepper, name='stepper'),
 
 
 ]
