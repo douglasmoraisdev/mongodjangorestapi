@@ -3176,7 +3176,7 @@ td, th {
 
 .secondary-content {
   float: right;
-  color: #26a69a;
+  color: #FF5F00;
 }
 
 .collapsible .collection {
@@ -4067,7 +4067,7 @@ input[type=range] + .thumb {
 
 nav {
   color: #fff;
-  background-color: #ef4a25;
+  background-color: rgb(255,87,34);
   width: 100%;
   height: 56px;
   line-height: 56px;
@@ -4956,7 +4956,7 @@ small {
 .btn, .btn-large {
   text-decoration: none;
   color: #fff;
-  background-color: #26a69a;
+  background-color: #FF5F00;
   text-align: center;
   letter-spacing: .5px;
   transition: .2s ease-out;
@@ -4964,7 +4964,7 @@ small {
 }
 
 .btn:hover, .btn-large:hover {
-  background-color: #2bbbad;
+  background-color: #FFC6A4;
 }
 
 .btn-floating {

@@ -38,42 +38,42 @@ db.users.insert({
 	"user_name" : "msantos.douglas@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Douglas", "last_name": "Morais"}
+	"extra_data" : {"first_name" : "Douglas", "last_name": "Morais", "profile_image": "douglas.jpg"}
 });
 db.users.insert({
 	"user_name" : "tatiele@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Tatiele", "last_name": "Morais"}
+	"extra_data" : {"first_name" : "Tatiele", "last_name": "Morais", "profile_image": "tatiele.jpg"}
 });
 db.users.insert({
 	"user_name" : "altair@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Altair", "last_name": "Souza"}
+	"extra_data" : {"first_name" : "Altair", "last_name": "Souza", "profile_image": "altair.jpg"}
 });
 db.users.insert({
 	"user_name" : "indaia@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Indaia", "last_name": "Souza"}
+	"extra_data" : {"first_name" : "Indaia", "last_name": "Souza", "profile_image": "indaia.jpg"}
 });
 db.users.insert({
 	"user_name" : "felipe@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Felipe", "last_name": "Maia"}
+	"extra_data" : {"first_name" : "Felipe", "last_name": "Maia", "profile_image": "felipe.jpg"}
 });
 db.users.insert({
 	"user_name" : "camila@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Camila", "last_name": "Maia"}
+	"extra_data" : {"first_name" : "Camila", "last_name": "Maia", "profile_image": "camila.jpg"}
 });
 db.users.insert({
 	"user_name" : "jose@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Jose", "last_name": "Silva"}
+	"extra_data" : {"first_name" : "Jose", "last_name": "Silva", "profile_image": "jose.jpg"}
 });
 

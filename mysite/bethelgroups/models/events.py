@@ -87,7 +87,8 @@ class Events(Document):
 
 		type_course_id = Events_types.objects(code='course')[0].id
 		
-		event = Events.objects(user_roles__user=user_id, event_type=type_course_id)
+		#TODORETIRARTESTE event = Events.objects(user_roles__user=user_id, event_type=type_course_id)
+		event = Events.objects(event_type=type_course_id)
 
 		return event
 

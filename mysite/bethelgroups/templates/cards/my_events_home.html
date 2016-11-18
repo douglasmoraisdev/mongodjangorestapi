@@ -1,9 +1,11 @@
-<div class="card blue-grey darken-1">
-    <div class="card-content white-text ">
-        <span class="card-title activator white-text">Meus Eventos<i class="material-icons right">live_help</i></span>
-        <p>Abaixo todos os Eventos em que você e/ou seus grupos participaram</p>
-    </div>
+{% load static %}
+<div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="{% static "images/event_hover.png" %}">
 
+        <span class="card-title activator">Meus Eventos</span>
+
+    </div>
 
     <ul class="collection with-header">
 
@@ -15,7 +17,7 @@
             {% for event in values %}
 
                 <li class="collection-item">
-                    <div>{{ event.name }}<a href="{{baseurl}}evento/get/{{ event.id }}" class="secondary-content"><i class="material-icons">send</i></a>
+                    <div>{{ event.name }}<a href="{{baseurl}}reuniaocelula/get/{{ event.id }}" class="secondary-content"><i class="material-icons">send</i></a>
                     </div>
                 </li>
 
@@ -27,8 +29,7 @@
     </ul>
 
     <div class="card-action">
-        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
-        </button>
+        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
 
     </div>
 
@@ -42,6 +43,8 @@
         </button>
 
     </div>
+
+
 
 
 

@@ -17,25 +17,35 @@ urlpatterns = [
     url(r'^atividade/novo$', views.tasks.task_new, name='atividade_novo'),
 
 
+
     #Eventos e Cursos
-    url(r'^evento/get/(.+)/$', views.events.event, name='evento'),    
+    url(r'^evento/get/(.+)/$', views.events.event, name='evento'),
     url(r'^evento/novo$', views.events.event_new, name='evento_novo'),
 
-    url(r'^reuniaocelula/novo$', views.events.cell_metting_new, name='cell_metting_new'),    
 
-    url(r'^curso/get/(.+)/$', views.events.course, name='evento'),
-    url(r'^curso/novo$', views.events.new_course, name='curso_novo'),
+    url(r'^reuniaocelula/get/(.+)/$', views.cell_metting.cell_metting, name='cell_metting'),
+    url(r'^reuniaocelula/novo$', views.cell_metting.cell_metting_new, name='cell_metting_new'),
+
+
+    url(r'^curso/get/(.+)/$', views.courses.course, name='curso'),
+    url(r'^curso/novo$', views.courses.course_new, name='curso_novo'),
+
 
     url(r'^disciplina/get/(.+)/$', views.events.subject, name='disciplina'),
     url(r'^disciplina/novo$', views.events.new_subject, name='curso_novo'),
+
+
 
     #Grupos
     url(r'^grupo/get/(.+)/$', views.groups.group, name='grupo'),
     url(r'^grupo/novo$', views.groups.group_new, name='grupo_novo'),
     url(r'^tipogrupo/novo$', views.groups.grouptype_new, name='tipogrupo_novo'),
 
+
+
     #Celulas
-    url(r'^celula/novo$', views.groups.cell_new, name='celula_novo'),
+    url(r'^celula/get/(.+)/$', views.cells.cell, name='celula'),    
+    url(r'^celula/novo$', views.cells.cell_new, name='celula_novo'),
 
 
 

@@ -1,19 +1,18 @@
-<div class="card blue-grey darken-1">
-    <div class="card-content white-text">
+{% load static %}
+<div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="{% static "images/group_hover.jpg" %}">
 
-        <span class="card-title">Meus Grupos</span>
-        <p>Abaixo todos os Grupos que você participa ou supervisiona.</p>
-
+        <span class="card-title activator">Meus Grupos</span>
 
     </div>
-
 
     <ul class="collection with-header">
 
         {% for key, values in Groups.items %}
         <li class="collection-header">               
 
-            <h5>{{ values.0.group_type.name }}</h5>
+            <h5>{{ values.0.group_type.name }}s</h5>
 
             {% for group in values %}
 
@@ -28,6 +27,18 @@
         {% endfor %}
 
     </ul>
+
+
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">Sobre os Grupos<i class="material-icons right">close</i></span>
+        <p>Eventos são encontros de pessoas e/ou grupos. Podem ser: Reuniões de Células, Cultos, Reuniões gerais e Diversas</p>
+        <p>
+            Para adicionar um novo evento clique no botão [ + ]
+        </p>
+        <button class="btn waves-effect waves-light"><i class=" material-icons ">add</i>
+        </button>
+
+    </div>    
 
 
 </div>
