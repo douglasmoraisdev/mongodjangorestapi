@@ -74,6 +74,6 @@ db.users.insert({
 	"user_name" : "jose@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
-	"extra_data" : {"first_name" : "Jose", "last_name": "Silva", "profile_image": "jose.jpg"}
+	"extra_data" : {"first_name" : "Jose", "last_name": "Silva"}
 });
 

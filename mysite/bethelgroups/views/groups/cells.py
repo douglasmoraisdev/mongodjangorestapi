@@ -80,6 +80,7 @@ def cell(request, group_id):
 		'meetings' : meetings,
 		'users_count': users_count,
 		'group_data':group.extra_data,
+		'cell_id':group_id,
 		'events':events
 	}
 
@@ -187,6 +188,121 @@ def cell_new(request):
 
 		cell = Groups()
 		cell.add_cell(
+			name=cell_name,
+			group_origin=group_origin,
+			groups_over=groups_over,
+			groups_under=groups_under,
+			user_roles=user_roles,
+			extra_data=extra_data
+			)
+		
+
+		return HttpResponse('ok')
+
+	else:
+
+		return HttpResponse(template.render(content, request))
+
+
+def cell_edit(request, group_id):
+
+	template = loader.get_template('home/group/cells/cell_edit.html')
+
+	content = {
+		'Users': Users.objects,
+		'Groups': Groups.objects,
+		'Groups_types': Groups_types.objects,
+		'Roles': Roles.objects,
+		'Events': Events.objects,
+		'cell_data': Groups.objects.get(id=group_id)
+	}
+
+	if request.method == 'POST':
+
+		group_origin = None
+		groups_over = None
+		groups_under = None
+		servant_roles = []
+		members_roles = []
+		user_roles = []
+		days_list = []
+		hours_list = []
+		#user_obj
+		#roles_add 		
+		roles_obj = []
+
+		cell_name = request.POST.get('cell-name')
+		cell_date = request.POST.get('cell-date')
+		cell_zip = request.POST.get('cell-zip')
+		cell_state = request.POST.get('cell-state')
+		cell_city = request.POST.get('cell-city')
+		cell_neigh = request.POST.get('cell-neigh')
+		cell_street = request.POST.get('cell-street')
+		cell_street_number = request.POST.get('cell-street-number')
+		cell_days = request.POST.getlist('cell-days-multiple[]')
+		cell_hours = request.POST.getlist('cell-hours[]')
+		user_added = request.POST.getlist('user-added[]')
+		roles_added = request.POST.getlist('roles-added[]')
+		member_added = request.POST.getlist('member-added[]')
+		group_origin = request.POST.get('group-origin')
+		groups_up_multiple = request.POST.getlist('groups-up-multiple')
+		groups_down_multiple = request.POST.getlist('groups-down-multiple')
+		
+
+		days_input_names = [name for name in request.POST.keys() if name.startswith('cell-days-multiple-')]
+		for input_name in days_input_names:
+			days_list.append(request.POST.getlist(input_name))
+			seq_hash = input_name.replace('cell-days-multiple-','')
+			hours_list.append(request.POST.get('cell-hours-'+seq_hash))
+
+
+		#servants added get list
+		for key, users in enumerate(user_added):
+			user_obj =	Users.objects.get(id=ObjectId(users))
+
+			for roles in roles_added[key].split(","):
+
+				roles_add = Roles.objects.get(id=ObjectId(roles))
+				roles_obj.append(roles_add)
+
+			servant_roles.append(User_roles(user=user_obj, role=roles_obj))
+
+			roles_obj = []
+
+
+		#members added get list
+		member_role = Roles.objects.get(code="cell_member")
+		for key, users in enumerate(member_added):
+			user_obj =	Users.objects.get(id=ObjectId(users))
+
+			members_roles.append(User_roles(user=user_obj, role=[member_role]))
+
+
+		#join servants and users
+		for servants in servant_roles:
+			user_roles.append(servants)
+
+		for members in members_roles:
+			user_roles.append(members)
+
+
+		#extra data formater
+		extra_data = dict({
+			'created_on_date': cell_date,
+			'addr_zip' : cell_zip,
+			'addr_state': cell_state,
+			'addr_city': cell_city,
+			'addr_neigh' : cell_neigh,
+			'addr_street' : cell_street,
+			'addr_street_number' : cell_street_number,
+			'meet_day':days_list,
+			'meet_hour':hours_list
+		})		
+
+
+		cell = Groups()
+		cell.edit_cell(
+			cell_id=group_id,
 			name=cell_name,
 			group_origin=group_origin,
 			groups_over=groups_over,

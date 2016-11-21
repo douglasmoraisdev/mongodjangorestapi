@@ -19,6 +19,10 @@ class Groups(Document):
 	extra_data = DictField()
 
 
+	'''
+		ADD DATA METHODS		
+	'''
+
 	def add_group(self, name, group_type, group_origin, groups_over, groups_under, user_roles, extra_data=None):
 
 		Groups.objects.create(
@@ -45,6 +49,26 @@ class Groups(Document):
 			extra_data=extra_data
 		)	
 
+
+	'''
+		EDIT DATA METHODS		
+	'''
+
+	def edit_cell(self, cell_id, name, group_origin, groups_over, groups_under, user_roles=None, extra_data=None):
+
+
+		Groups.objects.filter(id=cell_id).update(
+			name=name,
+			origin=group_origin,
+			groups_over=groups_over,
+			groups_under=groups_under,
+#			user_roles = user_roles,
+			extra_data=extra_data
+		)	
+
+	'''
+		GET DATA METHODS		
+	'''
 
 	def get_group_by_id(self, group_id):
 

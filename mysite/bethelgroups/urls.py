@@ -46,6 +46,7 @@ urlpatterns = [
     #Celulas
     url(r'^celula/get/(.+)/$', views.cells.cell, name='celula'),    
     url(r'^celula/novo$', views.cells.cell_new, name='celula_novo'),
+    url(r'^celula/editar/(.+)/$', views.cells.cell_edit, name='celula_editar'),
 
 
 
