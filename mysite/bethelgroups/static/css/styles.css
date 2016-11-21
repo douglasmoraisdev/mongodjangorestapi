@@ -990,7 +990,7 @@ a.button-collapse.top-nav {
 }
 .btn-move-up {
     position: relative;
-    top: -28px;
+    top: -40px;
     right: -18px;
     margin-right: 10px !important
 }
@@ -1977,4 +1977,17 @@ tr.group:hover {
     padding-top: 20px
 }
 
+// Class for when element is above threshold
+.pin-top {
+position: relative;
+}
 
+// Class for when element is below threshold
+.pin-bottom {
+position: relative;
+}
+
+// Class for when element is pinned
+.pinned {
+position: fixed !important;
+}

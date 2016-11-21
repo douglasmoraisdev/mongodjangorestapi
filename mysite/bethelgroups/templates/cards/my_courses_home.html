@@ -7,9 +7,34 @@
 
     </div>
 
+    <div class="card-content">
+
+        <ul class="collection with-header">
+
+
+            <li class="collection-header">               
+
+                <h5>Cursos</h5>
+
+                {% for items in Courses %}
+
+                    <li class="collection-item">
+                        <div>{{ items.name }}<a href="{{baseurl}}curso/get/{{ items.id }}" class="secondary-content"><i class="material-icons">send</i></a>
+                        </div>
+                    </li>
+
+                {% endfor%}
+
+            </li>
+
+        </ul> 
+
+    </div>
+
+
     <div class="card-action">
-        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
-        </button>
+
+            <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
 
     </div>
 

@@ -7,7 +7,7 @@
     <title>Portal Betel</title>
 
     <!--Import Google Icon Font-->
-     
+
     <!--Import materialize.css-->
 
     <!-- BOOTSTRAP & STYLES -->
@@ -20,381 +20,406 @@
 
 <body class="grey lighten-1">
 
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
 
     <!--Header -->
     {% include "default/header_default.html" %}
     <!--Header -->
 
-
-    <!-- Page Layout here -->
-    <div class="row">
-
-        <div class="col s12 m4 l3">
-
-        </div>
-
-        <div class="col s12 m8 l9">
-            <!-- Note that "m8 l9" was added -->
-            <!-- Teal page content
-
-                This content will be:
-            9-columns-wide on large screens,
-            8-columns-wide on medium screens,
-            12-columns-wide on small screens  -->
+    <main>
 
 
-            <div id="main_content">
+        <!-- START MAIN -->
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+
+                {% include "default/side_nav.html" %}
 
 
-                <div class="row">
-                    <div class="col s12 m11">
-                        <div class="card">
-                            <div class="card-content">
-
-                                <span class="card-title activator">{{ group_name }}<i class="material-icons right">live_help</i></span>
-                                <p>{{ group_type }} fundada em {{ group_data.created_on_date }}</p>
-
-                            </div>
+                <!-- Page Layout here -->
 
 
-                            <ul class="collection with-header">
-                                <li class="collection-header"><h5>Lideres</h5></li>
-                                {% for list in leader_users %} 
+                    <!--start container-->
 
-                                    <li class="collection-item avatar">
-                                        <!-- <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}"> -->
-                                        <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">                                    
-                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
-                                            {% for roles in list.role %}
-                                                <p>{{ roles.name }}</p>
-                                            {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                    </li>
+                        <div class="row">
 
-                                {% endfor %}
+                            <div class="col s12 m10 l10">
 
-                                {% for list in host_users %}
 
-                                    <li class="collection-item avatar">
-                                        <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
-                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
-                                            {% for roles in list.role %}
-                                                <p>{{ roles.name }}</p>
-                                            {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                    </li>
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="group" class="card scrollspy">
+                                                <div class="card-content">
 
-                                {% endfor %}
+                                                    <span class="card-title activator">{{ group_name }}<i class="material-icons right">live_help</i></span>
+                                                    <p>{{ group_type }} fundada em {{ group_data.created_on_date }}</p>
 
-                            </ul>
+                                                </div>
 
-                            {% if groups_over %}
-                                <ul class="collection with-header">
-                                    <li class="collection-header"><h5>Supervisionado por:</h5></li>
-                                    {% for list in groups_over %} 
 
-                                        <li class="collection-item">
-                                            <div>{{ list.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                <ul class="collection with-header">
+                                                    <li class="collection-header">
+                                                        <h5>Lideres</h5>
+                                                    </li>
+                                                    {% for list in leader_users %}
+
+                                                    <li class="collection-item avatar">
+                                                        <!-- <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}"> -->
+                                                        <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                        <p>{{ roles.name }}</p>
+                                                        {%endfor%}
+                                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                    </li>
+
+                                                    {% endfor %} {% for list in host_users %}
+
+                                                    <li class="collection-item avatar">
+                                                        <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                        <p>{{ roles.name }}</p>
+                                                        {%endfor%}
+                                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                    </li>
+
+                                                    {% endfor %}
+
+                                                </ul>
+
+                                                {% if groups_over %}
+                                                <ul class="collection with-header">
+                                                    <li class="collection-header">
+                                                        <h5>Supervisionado por:</h5>
+                                                    </li>
+                                                    {% for list in groups_over %}
+
+                                                    <li class="collection-item">
+                                                        <div>{{ list.name }}
+                                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                        </div>
+                                                    </li>
+
+                                                    {% endfor %}
+                                                </ul>
+
+                                                {% endif %} {% if group_origin %}
+                                                <ul class="collection with-header">
+                                                    <li class="collection-header">
+                                                        <h5>Grupo de origem:</h5>
+                                                    </li>
+                                                    <li class="collection-item">
+                                                        <div>{{ group_origin.name }}
+                                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                {% endif %} {% if generated_groups %}
+                                                <ul class="collection with-header">
+                                                    <li class="collection-header">
+                                                        <h5>Grupos que originou</h5>
+                                                    </li>
+                                                    {% for list in generated_groups %}
+
+                                                    <li class="collection-item">
+                                                        <div>{{ list.name }}
+                                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                        </div>
+                                                    </li>
+
+                                                    {% endfor %}
+                                                </ul>
+                                                {% endif %} {% if groups_under %}
+                                                <ul class="collection with-header">
+                                                    <li class="collection-header">
+                                                        <h5>Supervisionando:</h5>
+                                                    </li>
+                                                    {% for list in groups_under %}
+
+                                                    <li class="collection-item">
+                                                        <div>{{ list.name }}
+                                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                        </div>
+                                                    </li>
+
+                                                    {% endfor %}
+
+                                                </ul>
+                                                {% endif %}
+
+
+                                                <div class="card-reveal">
+                                                    <span class="card-title grey-text text-darken-4">+ Detalhes do Grupo<i class="material-icons right">close</i></span>
+
+
+                                                    <ul class="collection with-header">
+
+                                                        <li class="collection-header">
+                                                            <h5>Endereço</h5>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>CEP: {{ group_data.addr_zip }}
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li class="collection-item">
+                                                            <div>Estado: {{ group_data.addr_state }}
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li class="collection-item">
+                                                            <div>Cidade: {{ group_data.addr_city }}
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Bairro: {{ group_data.addr_neigh }}
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Logradouro: {{ group_data.addr_street }}
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Nro/Complemento: {{ group_data.addr_street_number }}
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+
+
+
+                                                    <ul class="collection with-header">
+
+                                                        <li class="collection-header">
+                                                            <h5>Dias e Horários</h5>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Frequência de reuniões: Semanal
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li class="collection-item">
+                                                            <div>
+
+                                                                <!-- TODO make work -->
+                                                                {% for key, item in group_data.meet_day.items %}
+
+                                                                <p>{{ item.key }} : {{group_data.meet_hour.key}}</p>
+
+                                                                {% endfor %}
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+
+                                                </div>
+
+
+
                                             </div>
-                                        </li>
+                                        </div>
 
-                                    {% endfor %}
-                                </ul>
-
-                            {% endif %}
+                                    </div>
 
 
-                            {% if group_origin %}
-                                <ul class="collection with-header">
-                                    <li class="collection-header"><h5>Grupo de origem:</h5></li>
-                                        <li class="collection-item">
-                                            <div>{{ group_origin.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                                <div id="members" class="card scrollspy">
+                                                    <div class="card-content">
+
+                                                        <span class="card-title">Membros</span>
+                                                        <p>{{ users_count }} membros</p>
+                                                        <p></p>
+
+                                                    </div>
+
+
+                                                    <ul class="collection">
+
+                                                        {% for list in member_users %}
+
+                                                        <li class="collection-item avatar">
+                                                            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <p>{{ roles.name }}</p>
+                                                            {%endfor%}
+                                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                        </li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+
+                                                    <div class="card-action">
+                                                        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
+                                                        </button>
+
+
+                                                    </div>
+
+                                                </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                                <div id="visitors" class="card scrollspy">
+                                                    <div class="card-content">
+
+                                                        <span class="card-title">Visitantes</span>
+                                                        <p></p>
+
+                                                    </div>
+
+
+                                                    <ul class="collection">
+
+                                                        {% for list in visitor_users %}
+
+                                                        <li class="collection-item avatar">
+                                                            <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <p>{{ roles.name }}</p>
+                                                            {%endfor%}
+                                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                        </li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+
+                                                    <div class="card-action">
+                                                        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
+                                                        </button>
+
+                                                    </div>
+
+
+
+                                                </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="mettings" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Reuniões de Células</span>
+                                                    <p>{{ meetings.count }} Reuniões(s)</p>
+                                                    <p></p>
+
+                                                </div>
+
+
+
+                                                <ul class="collection">
+                                                    {% for item in meetings %}
+                                                    <li class="collection-item">
+                                                        <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/reuniaocelula/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+
+                                                </ul>
+
+
+                                                <div class="card-action">
+                                                    <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
+                                                    </button>
+
+                                                </div>
+
                                             </div>
-                                        </li>
-                                </ul>
-                            {% endif %}
+                                        </div>
+
+                                    </div>
 
 
-                            {% if generated_groups %}
-                                <ul class="collection with-header">
-                                    <li class="collection-header"><h5>Grupos que originou</h5></li>
-                                    {% for list in generated_groups %} 
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="events" class="card scrollspy">
+                                                <div class="card-content">
 
-                                        <li class="collection-item">
-                                            <div>{{ list.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                                    <span class="card-title">Eventos do Grupo</span>
+                                                    <p>{{ events.count }} Evento(s)</p>
+                                                    <p></p>
+
+                                                </div>
+
+
+
+                                                <ul class="collection">
+                                                    {% for item in events %}
+                                                    <li class="collection-item">
+                                                        <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                        </div>
+                                                    </li>
+                                                    {% endfor %}
+
+                                                </ul>
+
+
+                                                <div class="card-action">
+                                                    <button class="btn waves-effect waves-light "><i class=" material-icons">add</i>
+                                                    </button>
+
+                                                </div>
+
                                             </div>
-                                        </li>
-
-                                    {% endfor %}
-                                </ul>
-                            {% endif %}
-
-
-                            {% if groups_under %}
-                                <ul class="collection with-header">
-                                    <li class="collection-header"><h5>Supervisionando:</h5></li>
-                                    {% for list in groups_under %} 
-
-                                        <li class="collection-item">
-                                            <div>{{ list.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                            </div>
-                                        </li>
-
-                                    {% endfor %}
-
-                                </ul>
-                            {% endif %}
-
-
-                            <div class="card-reveal">
-                                <span class="card-title grey-text text-darken-4">+ Detalhes do Grupo<i class="material-icons right">close</i></span>
-
-
-                                <ul class="collection with-header">
-
-                                    <li class="collection-header"><h5>Endereço</h5></li>                                
-
-                                    <li class="collection-item">
-                                        <div>CEP: {{ group_data.addr_zip }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
-                                    </li>
 
-
-                                    <li class="collection-item">
-                                        <div>Estado: {{ group_data.addr_state }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-
-
-                                    <li class="collection-item">
-                                        <div>Cidade:  {{ group_data.addr_city }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-
-                                    <li class="collection-item">
-                                        <div>Bairro: {{ group_data.addr_neigh }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-
-                                    <li class="collection-item">
-                                        <div>Logradouro: {{ group_data.addr_street }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-
-                                    <li class="collection-item">
-                                        <div>Nro/Complemento: {{ group_data.addr_street_number }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-
-                                </ul>
-
-
-
-                                <ul class="collection with-header">
-
-                                    <li class="collection-header"><h5>Dias e Horários</h5></li>                                
-
-                                    <li class="collection-item">
-                                        <div>Frequência de reuniões: Semanal
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                        </div>
-                                    </li>
-
-
-                                    <li class="collection-item">
-                                        <div>
-
-                                            <!-- TODO make work -->
-                                            {% for key, item in group_data.meet_day.items %}
-
-                                                <p>{{ item.key }} : {{group_data.meet_hour.key}}</p>
-
-                                            {% endfor %}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-
-                                        </div>
-                                    </li>                                                                                                                               
-
-                                </ul>                                  
+                                    </div>
 
                             </div>
 
 
 
+                            <div class="col hide-on-small-only m2 l2">
+                              <ul class="section table-of-contents">
+                                <li><a class="white-text" href="#group">Grupo</a></li>
+                                <li><a class="white-text" href="#members">Membros</a></li>
+                                <li><a class="white-text" href="#visitors">Visitantes</a></li>
+                                <li><a class="white-text" href="#mettings">Reuniões</a></li>
+                                <li><a class="white-text" href="#events">Eventos</a></li>
+                              </ul>
+                            </div>
                         </div>
+
                     </div>
-
-                </div>
-
-
-                <div class="row">
-                    <div class="col s12 m11">
-                        <div class="card   darken-1">
-                            <div class="card-content">
-
-                                <span class="card-title">Membros</span>
-                                <p>{{ users_count }} membros</p>
-                                <p></p>
-
-                            </div>
-
-
-                            <ul class="collection">
-
-                                {% for list in member_users %}
-
-                                    <li class="collection-item avatar">
-                                        <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">                                                                            
-                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
-                                            {% for roles in list.role %}
-                                                <p>{{ roles.name }}</p>
-                                            {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                    </li>
-
-                                {% endfor %}   
-
-                            </ul>
-
-
-                            <div class="card-action">
-                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>                                
-
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>            
-
-
-                <div class="row">
-                    <div class="col s12 m11">
-                        <div class="card   darken-1">
-                            <div class="card-content">
-
-                                <span class="card-title">Visitantes</span>
-                                <p></p>
-
-                            </div>
-
-
-                            <ul class="collection">
-
-                                {% for list in visitor_users %}
-
-                                    <li class="collection-item avatar">
-                                        <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
-                                        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> 
-                                            {% for roles in list.role %}
-                                                <p>{{ roles.name }}</p>
-                                            {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
-                                    </li>
-
-                                {% endfor %}   
-
-                            </ul>
-
-
-                            <div class="card-action">
-                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
-
-                            </div>
-
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="row">
-                    <div class="col s12 m11">
-                        <div class="card   darken-1">
-                            <div class="card-content">
-
-                                <span class="card-title">Reuniões de Células</span>
-                                <p>{{ meetings.count }} Reuniões(s)</p>
-                                <p></p>
-
-                            </div>
-
-
-
-                            <ul class="collection">
-                                {% for item in meetings %}
-                                <li class="collection-item">
-                                    <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/reuniaocelula/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
-                                </li>
-                                {% endfor %}
-
-                            </ul>
-
-
-                            <div class="card-action">
-                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>                                
-
-
-                <div class="row">
-                    <div class="col s12 m11">
-                        <div class="card   darken-1">
-                            <div class="card-content">
-
-                                <span class="card-title">Eventos do Grupo</span>
-                                <p>{{ events.count }} Evento(s)</p>
-                                <p></p>
-
-                            </div>
-
-
-
-                            <ul class="collection">
-                                {% for item in events %}
-                                <li class="collection-item">
-                                    <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
-                                </li>
-                                {% endfor %}
-
-                            </ul>
-
-
-                            <div class="card-action">
-                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-
             </div>
-
         </div>
+    </main>
 
-
-    </div>
 
 
 
@@ -402,7 +427,8 @@
     <script src="{% static "js/jquery.js" %}"></script>
     <script src="{% static "js/materialize.js" %}"></script>
     <script src="{% static "js/letteravatar.js" %}"></script>
-
+    <script src="{% static "js/plugins.min.js" %}"></script>
+    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
 
     <script>
         // Initialize collapse button
@@ -411,6 +437,24 @@
             edge: 'left', // Choose the horizontal origin
             closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
         });
+
+      $(document).ready(function(){
+        $('.scrollspy').scrollSpy({
+            scrollOffset: 100
+        });
+
+
+        $('.table-of-contents').pushpin({
+          //top: 100,
+          //bottom: 1000,
+          offset: 80
+        });        
+
+
+      });
+
+
+
     </script>
 
 
