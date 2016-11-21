@@ -41,12 +41,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
-                        <h3 class="light center-align blue-text">Cadastrar nova Célula</h3>
+                        <h3 class="light center-align blue-text">Nova Disciplina</h3>
+                        <h5 class="light center-align blue-text">{{ Events.name }}</h5>
                         <div class="card">
                             <div class="card-content">
 
 
-                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="http://localhost:10/bethelgroups/celula/novo">
+                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="http://localhost:10/bethelgroups/disciplina/novo/{{ Events.id }}/">
 
                                         {% csrf_token %}
 
@@ -57,15 +58,21 @@
                                                 <div class="row">
                                       
 
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-name" name="cell-name" type="text" class="validate" maxlength="50">
-                                                            <label for="cell-name">Nome da Célula</label>
+                                                        <div class="input-field col s12 l12">
+                                                            <input id="course-name" name="course-name" type="text" class="validate" maxlength="50">
+                                                            <label for="course-name">Nome da Disciplina</label>
                                                         </div>
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="cell-date" name="cell-date" type="date" class="datepicker">
-                                                            <label for="cell-date">Data de criação</label>
+                                                            <input id="course-date-start" name="course-date-start" type="date" class="datepicker">
+                                                            <label for="course-date-start">Data de Inicio</label>
+                                                        </div>
+
+
+                                                        <div class="input-field col s12 l6">
+                                                            <input id="course-date-end" name="course-date-end" type="date" class="datepicker">
+                                                            <label for="course-date-end">Data do Fim</label>
                                                         </div>
 
 
@@ -76,29 +83,7 @@
                                                                 <option value="{{ item.id }}">{{ item.name }}</option>
                                                                 {% endfor %}   
                                                             </select>
-                                                            <label>Grupo de Origem</label>
-                                                        </div>
-
-
-                                                        <div class="input-field col s12 l12">
-                                                        <select multiple id="groups-up-multiple" name="groups-up-multiple">
-                                                          <option value="" disabled selected>Selecione</option>
-                                                              {% for item in Groups %}   
-                                                                <option value="{{ item.id }}">{{ item.name }}</option>
-                                                              {% endfor %}  
-                                                        </select>
-                                                            <label>Supervisionado por:</label>
-                                                        </div>
-
-
-                                                        <div class="input-field col s12 l12">
-                                                        <select multiple id="groups-down-multiple" name="groups-down-multiple">
-                                                          <option value="" disabled selected>Selecione</option>
-                                                              {% for item in Groups %}   
-                                                                <option value="{{ item.id }}">{{ item.name }}</option>
-                                                              {% endfor %}  
-                                                        </select>
-                                                            <label>Supervisionando:</label>
+                                                            <label>Grupo Organizador</label>
                                                         </div>
 
 
@@ -108,58 +93,7 @@
                                                     <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Próximo</button>
                                                 </div>
                                             </div>
-                                        </li>
-
-
-                                        <li class="step">
-                                            <div class="step-title waves-effect waves-dark">Endereço</div>
-                                            <div class="step-content">
-                                                <div class="row">
-
-                                                        <div class="input-field col s6">
-                                                            <input id="cell-zip" name="cell-zip" type="text" class="validate" >
-                                                            <label for="cell-zip">CEP:</label>
-                                                        </div>
-                                                
-
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-state" name="cell-state" type="text" class="validate" >
-                                                            <label for="cell-state">Estado:</label>
-                                                        </div>
-
-
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-city" name="cell-city" type="text" class="validate" >
-                                                            <label for="cell-city">Cidade:</label>
-                                                        </div>
-
-
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-neigh" name="cell-neigh" type="text" class="validate" >
-                                                            <label for="cell-neigh">Bairro:</label>
-                                                        </div>
-
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-street" name="cell-street" type="text" class="validate" >
-                                                            <label for="cell-street">Logradouro:</label>
-                                                        </div>
-
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-street-number" name="cell-street-number" type="text" class="validate" >
-                                                            <label for="cell-street-number">Nro/Complemento</label>
-                                                        </div>                                                    
-
-
-                                                </div>
-
-                                                        <div class="step-actions">
-                                                            <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
-                                                            <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
+                                        </li>                                        
 
                                         <li class="step">
                                             <div class="step-title waves-effect waves-dark">Horários</div>
@@ -212,7 +146,7 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="servant-modal-trigger" class="waves-effect waves-light btn right" data-target="servant-modal">+ Servo</a>
-                                                        {% include "home/group/cells/modals/add_servant_search_modal.html" %}
+                                                        {% include "home/event/course/modals/add_servant_search_modal.html" %}
 
 
                                                     </div>
@@ -229,7 +163,6 @@
 
                                             </div>
                                         </li>
-
 
 
 
@@ -252,7 +185,7 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="member-modal-trigger" class="waves-effect waves-light btn right modal-trigger" data-target="member-modal">+ Membro</a>
-                                                        {% include "home/group/cells/modals/add_member_search_modal.html" %}
+                                                        {% include "home/event/course/modals/add_member_search_modal.html" %}
 
 
                                                     </div>
@@ -294,7 +227,7 @@
     </div>
 
     <script>
-        {% include "home/group/cells/js/new_cell.js" %}
+        {% include "home/event/course/js/course.js" %}
     </script>
 
     <script src="{% static "js/datepicker_defaults.js"%}"></script>

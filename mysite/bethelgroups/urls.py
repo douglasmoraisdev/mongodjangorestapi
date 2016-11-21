@@ -31,8 +31,8 @@ urlpatterns = [
     url(r'^curso/novo$', views.courses.course_new, name='curso_novo'),
 
 
-    url(r'^disciplina/get/(.+)/$', views.events.subject, name='disciplina'),
-    url(r'^disciplina/novo$', views.events.new_subject, name='curso_novo'),
+    url(r'^disciplina/get/(.+)/$', views.courses.subject, name='subject'),
+    url(r'^disciplina/novo/(.+)/$', views.courses.subject_new, name='subject_new'),
 
 
 

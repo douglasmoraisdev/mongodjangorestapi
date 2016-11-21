@@ -7,36 +7,38 @@
 
     </div>
 
-    <ul class="collection with-header">
+    <div class="card-action">
+        <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
 
-        {% for key, values in Groups.items %}
-        <li class="collection-header">               
-
-            <h5>{{ values.0.group_type.name }}s</h5>
-
-            {% for group in values %}
-
-                <li class="collection-item">
-                    <div>{{ group.name }}<a href="{{baseurl}}grupo/get/{{ group.id }}" class="secondary-content"><i class="material-icons">send</i></a>
-                    </div>
-                </li>
-
-            {% endfor%}
-
-        </li>
-        {% endfor %}
-
-    </ul>
-
+    </div>
 
     <div class="card-reveal">
-        <span class="card-title grey-text text-darken-4">Sobre os Grupos<i class="material-icons right">close</i></span>
+        <span class="card-title grey-text text-darken-4">Meus Grupos<i class="material-icons right">close</i></span>
         <p>Eventos são encontros de pessoas e/ou grupos. Podem ser: Reuniões de Células, Cultos, Reuniões gerais e Diversas</p>
-        <p>
-            Para adicionar um novo evento clique no botão [ + ]
-        </p>
-        <button class="btn waves-effect waves-light"><i class=" material-icons ">add</i>
+
         </button>
+
+
+        <ul class="collection with-header">
+
+            {% for key, values in Groups.items %}
+            <li class="collection-header">               
+
+                <h5>{{ values.0.group_type.name }}s</h5>
+
+                {% for group in values %}
+
+                    <li class="collection-item">
+                        <div>{{ group.name }}<a href="{{baseurl}}celula/get/{{ group.id }}" class="secondary-content"><i class="material-icons">send</i></a>
+                        </div>
+                    </li>
+
+                {% endfor%}
+
+            </li>
+            {% endfor %}
+
+        </ul>        
 
     </div>    
 

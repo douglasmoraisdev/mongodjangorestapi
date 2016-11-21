@@ -67,6 +67,10 @@ class Events(Document):
 		return Events.objects.get(id=event_id)
 
 
+	def get_event_childs(self, event_id):
+
+		return Events.objects(parent_event=event_id)
+
 
 	def get_event_users(self, event_id):
 

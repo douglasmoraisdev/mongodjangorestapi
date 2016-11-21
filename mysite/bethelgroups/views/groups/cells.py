@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def cell(request, group_id):
 
-	template = loader.get_template('home/group/group.html')
+	template = loader.get_template('home/group/cells/cell.html')
 
 	leader_users = []
 	host_users = []

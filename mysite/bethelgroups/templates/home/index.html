@@ -16,51 +16,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
-<body>
+<body class="grey lighten-1">
+
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>        
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
 
     <!--Header -->
     {% include "default/header_default.html" %}
     <!--Header -->
 
+    <main>
 
 
-    <!-- Page Layout here -->
-    <div class="row">
+    <!-- START MAIN -->
+    <div id="main">
+        <!-- START WRAPPER -->
+        <div class="wrapper">
 
-        <div id="main_content">
+          
+            {% include "default/side_nav.html" %}    
+          
 
-          <div class="row">
+              <!-- Page Layout here -->
 
-              <div class="col s11 m11 l11">
+            <section id="content">
+
+                <!--start container-->
+                <div class="container">
+
+                  <div class="row">
+
+                    <div class="col s12  m12  l12 ">
 
 
-                  <div class="col s12 m12 l4">
-                      {% include "cards/my_groups_home.html" %}
+                        <div class="col s12 m12 l4">
+                            {% include "cards/my_groups_home.html" %}
+                        </div>
+
+                        <div class="col s12 m12 l4">
+                            {% include "cards/my_events_home.html" %}
+                        </div>
+
+                        <div class="col s12 m12 l4">
+                            {% include "cards/my_courses_home.html" %}
+                        </div>
+
+                    </div>
+
                   </div>
 
-                  <div class="col s12 m12 l4">
-                      {% include "cards/my_events_home.html" %}
-                  </div>
+                </div>
 
-                  <div class="col s12 m12 l4">
-                      {% include "cards/my_courses_home.html" %}
-                  </div>
+            </section>
 
-              </div>
 
-          </div>
 
         </div>
+      </div>
 
-    </div>
-
-
-
+    </main>
 
 
-    <!-- FAB  -->
+
+
+
+    <footer>
+    </footer>
+
+
+    <!-- FAB  --
     <div class="card-action">
-        <!--<button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>-->
+        <!--<button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>--
 
         <div class="fixed-action-btn vertical" style="bottom: 45px; right: 24px;">
             <a class="btn-floating btn-large waves-effect waves-light red">
@@ -75,10 +106,15 @@
         </div>
 
     </div>
+    -->
 
     <!--Import jQuery before materialize.js-->
     <script src="{% static "js/jquery.js" %}"></script>
     <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/plugins.min.js" %}"></script>
+    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
+
+
 
     <script>
         // Initialize collapse button
