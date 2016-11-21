@@ -11,6 +11,15 @@
     {% include "default/styles_css.html" %}
     <!-- END OF BOOTSTRAP & STYLES -->
 
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+    <script src="{% static "js/plugins.min.js" %}"></script>
+    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
+
+
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -277,11 +286,23 @@
 
                                                     </ul>
 
+                                                    <ul class="collection" id="member-cell-added">
+                                                        
+
+                                                    </ul>
+
+                                                    <div class="progress" id="loader-member-cell-added" style="display:none" >
+                                                      <div class="indeterminate"></div>
+                                                    </div>                                                   
+
                                                 </div>
 
                                                 <div class="card-action">
 
-                                                    <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
+
+                                                    {% include "home/group/cells/modals/add_member_search_modal.html" %}
+
 
                                                 </div>
 
@@ -423,15 +444,9 @@
         </div>
     </main>
 
-
-
-
-    <!--Import jQuery before materialize.js-->
-    <script src="{% static "js/jquery.js" %}"></script>
-    <script src="{% static "js/materialize.js" %}"></script>
-    <script src="{% static "js/letteravatar.js" %}"></script>
-    <script src="{% static "js/plugins.min.js" %}"></script>
-    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
+    <script>
+        {% include "home/group/cells/js/cell.js" %}
+    </script>
 
     <script>
         // Initialize collapse button
