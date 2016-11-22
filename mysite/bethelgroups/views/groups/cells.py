@@ -209,8 +209,19 @@ def cell_edit(request, group_id):
 
 	template = loader.get_template('home/group/cells/cell_edit.html')
 
+	cell_members = []
+
+	group = Groups()
+	group_users = group.get_group_users(group_id)	
+
+	for user in group_users:
+		for codes in user.role:
+			if 'cell_member' == codes.code:
+				cell_members.append(user)
+
 	content = {
 		'Users': Users.objects,
+		'cell_members': cell_members,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects,

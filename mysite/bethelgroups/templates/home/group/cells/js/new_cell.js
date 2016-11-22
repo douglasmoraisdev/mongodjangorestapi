@@ -62,8 +62,8 @@ $(document).ready(function () {
         complete: function(){
 
 
-            user_selected = $('#user_searched_selected').val();
-            roles_selectec = $('#cell-role-multiple').val();
+            user_selected = $('#member_searched_selected').val();
+            roles_selectec = $('#member_role_selected').val();
 
             $('#loader-member-cell-added').show();                    
 

@@ -79,7 +79,6 @@ function remove_user_save(user_id){
             $('#loader-member-cell-added').hide();
             alert("removido com sucesso");
 
-
         });
 
 }

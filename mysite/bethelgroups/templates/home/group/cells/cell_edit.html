@@ -188,7 +188,7 @@
                                                         <div class="step-actions">
                                                             <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
                                                             <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
-                                                </div>
+                                                        </div>
                                             </div>
                                         </li>    
 
@@ -241,8 +241,29 @@
                                                 <div class="row">                                            
 
                                                 <ul class="collection" id="member-cell-added">
-                                                    
 
+                                                    {% for item in cell_members %}
+
+                                                        <li id="member-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ user_roles.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('member-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+
+                                                            <input type="hidden" name='member-added[]' id='member-added-x' value="{{ item.user.id }}"/>
+
+                                                        </li>
+
+                                                    {% endfor %}
+                                                    
                                                 </ul>
 
                                                 <div class="progress" id="loader-member-cell-added" style="display:none" >

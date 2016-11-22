@@ -74,7 +74,7 @@ class Groups(Document):
 			origin=group_origin,
 			groups_over=groups_over,
 			groups_under=groups_under,
-#			user_roles = user_roles,
+			user_roles = user_roles,
 			extra_data=extra_data
 		)	
 
@@ -131,6 +131,23 @@ class Groups(Document):
 
 
 		return user_groups
+
+	def get_user_groups_by_role(self, user_id, role_code):
+
+		group = Groups.objects(user_roles__user=user_id)
+
+		user_groups = dict()
+
+		for key, gtype in enumerate(group):
+
+			if gtype.group_type.code in user_groups:
+				user_groups[gtype.group_type.code].append(group[key])
+			else:
+				user_groups[gtype.group_type.code] = [group[key]]
+
+
+
+		return user_groups		
 
 	def get_groups_generetad(self, group_id):
 
