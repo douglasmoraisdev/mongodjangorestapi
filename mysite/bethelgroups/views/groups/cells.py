@@ -230,7 +230,8 @@ def cell_edit(request, group_id):
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects,
 		'Events': Events.objects,
-		'cell_data': Groups.objects.get(id=group_id)
+		'cell_data': Groups.objects.get(id=group_id),
+		'group_id': group_id
 	}
 
 	if request.method == 'POST':

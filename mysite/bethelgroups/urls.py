@@ -24,7 +24,7 @@ urlpatterns = [
 
 
     url(r'^reuniaocelula/get/(.+)/$', views.cell_metting.cell_metting, name='cell_metting'),
-    url(r'^reuniaocelula/novo$', views.cell_metting.cell_metting_new, name='cell_metting_new'),
+    url(r'^reuniaocelula/novo/(.+)/$', views.cell_metting.cell_metting_new, name='cell_metting_new'),
 
 
     url(r'^curso/get/(.+)/$', views.courses.course, name='curso'),

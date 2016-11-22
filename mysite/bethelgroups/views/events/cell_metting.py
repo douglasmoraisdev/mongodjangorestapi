@@ -45,10 +45,19 @@ def cell_metting(request, event_id):
 	return HttpResponse(template.render(content, request))
 
 
-def cell_metting_new(request):
+def cell_metting_new(request, group_id):
 
 	template = loader.get_template('home/event/cell_metting/cell_metting_new.html')
 
+	group_metting_name = ''
+	group_metting_id = ''
+
+	group = Groups()
+	group = group.get_group_by_id(group_id)
+
+	if group.id:
+		group_metting_name = group.name
+		group_metting_id = group.id
 
 	content = {
 		'Users': Users.objects,
@@ -56,7 +65,9 @@ def cell_metting_new(request):
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects,
 		'Events': Events.objects,
-		'cell_members': Users.objects
+		'cell_members': Users.objects,
+		'group_metting_name' : group_metting_name,
+		'group_id':group_metting_id
 	}
 
 
