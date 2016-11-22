@@ -15,6 +15,7 @@
     <!--Import jQuery before materialize.js-->
     <script src="{% static "js/jquery.js"%}"></script>
     <script src="{% static "js/materialize.js"%}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>    
     <script src="{% static "js/jquery.validate.min.js"%}"></script>
     <script src="{% static "js/materialize-stepper.js"%}"></script>
     <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
@@ -201,6 +202,28 @@
                                          
                                                 <ul class="collection" id="servant-cell-added">
                                                     
+                                                    {% for item in cell_leaders %}
+
+                                                        <li id="user-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ item.role.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('user-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+                                                            <input type="hidden" name='user-added[]' id='user-added-x' value="{{ item.user.id }}"/>
+                                                            <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for role_id in item.role %}{% if forloop.last %}{{ role_id.id }}{% else %}{{ role_id.id }},{% endif %}{% endfor %}"/>
+
+
+                                                        </li>
+
+                                                    {% endfor %}                                                    
 
                                                 </ul>
 
