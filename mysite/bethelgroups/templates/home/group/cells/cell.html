@@ -270,7 +270,7 @@
 
                                                         {% for list in member_users %}
 
-                                                        <li class="collection-item avatar">
+                                                        <li id="{{ list.user.id }}" class="collection-item avatar">
                                                             {% if list.user.extra_data.profile_image %}
                                                                 <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
                                                             {% else %}
@@ -279,7 +279,11 @@
                                                             <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
                                                             <p>{{ roles.name }}</p>
                                                             {%endfor%}
-                                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+
+                                                            <div class="secondary-content">
+                                                                <a href="#!" onclick="remove_user_save('{{list.user.id}}')" class=""><i class="material-icons activator">delete</i></a>
+                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>
+                                                            </div>
                                                         </li>
 
                                                         {% endfor %}

@@ -2,9 +2,15 @@
 
 
 <li id="member-added-{{ user_id }}" class="collection-item avatar">
-    <span class="title">{{ user_name.extra_data.first_name }}</span>
+    {% if user_name.extra_data.profile_image %}
+        <img class="circle" src="{% static "upload/profile_images/" %}{{ user_name.extra_data.profile_image }}">
+    {% else %}
+        <img class="circle" avatar="{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}">
+    {% endif %}
+
+    <span class="title">{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}</span>
     <p class="grey-text">
-    Membro
+    {{ user_roles.0.name }}
     </p>
     <a href="#!" onclick="remove_user('member-added-{{ user_id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
 

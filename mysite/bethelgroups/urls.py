@@ -70,6 +70,12 @@ urlpatterns = [
     url(r'^add_member_list$', views.users.add_member_list, name='membro_add_list'),
 
     #ajax
+    url(r'^add_member_list_save$', views.users.add_member_list_save, name='membro_add_list_save'),
+
+    #ajax
+    url(r'^remove_member_list_save$', views.users.remove_member_list_save, name='membro_remove_list_save'),
+
+    #ajax
     url(r'day_group_hmtl_frag$', views.users.day_group_hmtl_frag, name='day_group_hmtl_frag'),    
 
 

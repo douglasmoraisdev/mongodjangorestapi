@@ -183,6 +183,74 @@ def add_member_list(request):
 
 	return HttpResponse(template.render(content,request))	
 
+#ajax
+def add_member_list_save(request):
+
+
+	user_list = dict()
+	user_role = []
+
+	user_id = request.GET.get('userid');
+	roles_ids = request.GET.getlist('rolesid[]');
+
+	doc_type = request.GET.get('origin');
+	doc_id = request.GET.get('origin_id');
+
+	user_selected = Users.objects(id=user_id)[0] #TODO mover como função nos Models
+	roles_selected = Roles.objects(id__in=roles_ids)
+	
+	cell_member_role = Roles.objects(code='cell_member') #TODO retirar e fazer ele carregar o role corretamente de roles_selected
+
+	user_role.append(User_roles(user=user_selected, role=cell_member_role))
+
+
+	# Save on database
+
+	if (doc_type == 'group'):
+		user_group = Groups()
+		user_group.add_user_group(user_role, doc_id)
+
+
+	# Render content to list
+
+	content = {
+		'user_name': user_selected,
+		'user_roles' : cell_member_role,
+		'user_id': user_id,
+		'roles_ids': roles_ids,
+	}	
+
+	template = loader.get_template('home/group/cells/modals/member_item_list_add.html')
+
+	return HttpResponse(template.render(content,request))
+
+#ajax
+def remove_member_list_save(request):
+
+	user_role = []
+
+	user_id = request.GET.get('userid');
+	doc_type = request.GET.get('origin');
+	doc_id = request.GET.get('origin_id');
+
+	user_selected = Users.objects(id=user_id)[0] #TODO mover como função nos Models
+	#roles_selected = Roles.objects(id__in=roles_ids)
+	
+	cell_member_role = Roles.objects(code='cell_member') #TODO retirar e fazer ele carregar o role corretamente de roles_selected
+	
+	user_role.append(User_roles(user=user_selected, role=cell_member_role))
+
+
+	# Remove from database
+
+	if (doc_type == 'group'):
+		user_group = Groups()
+		user_group.remove_user_group(user_role, doc_id)
+
+
+	# Render content response
+	return HttpResponse(200)
+
 
 #ajax
 def day_group_hmtl_frag(request):

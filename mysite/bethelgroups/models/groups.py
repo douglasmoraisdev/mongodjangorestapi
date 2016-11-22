@@ -49,6 +49,18 @@ class Groups(Document):
 			extra_data=extra_data
 		)	
 
+	def add_user_group(self, user_roles, group_id):
+
+		Groups.objects.filter(id=group_id).update(
+			add_to_set__user_roles = user_roles
+		)
+
+	'''
+		REMOVE DATA METHODS
+	'''
+	def remove_user_group(self, user, group_id):
+
+		Groups.objects.filter(id=group_id).update(pull__user_roles__user=user[0].user)
 
 	'''
 		EDIT DATA METHODS		

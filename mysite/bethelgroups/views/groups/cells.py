@@ -67,6 +67,7 @@ def cell(request, group_id):
 
 	users_count = len(users)
 	content = {
+		'group_id':group.id,
 		'group_name':group.name,
 		'group_type':group_type.name,
 		'groups_over':group.groups_over,
