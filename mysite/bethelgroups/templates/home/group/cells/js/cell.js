@@ -52,7 +52,7 @@ function add_day_group(){
 
 function remove_user(list_id){
 
-    $('#'+list_id).remove();
+    $('#member-added-'+list_id).remove();
 };
 
 function remove_user_save(user_id){

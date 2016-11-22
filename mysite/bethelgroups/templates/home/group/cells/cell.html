@@ -249,7 +249,7 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="/bethelgroups/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">edit</i></a>
+                                                    <a href="/bethelgroups/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
                                                     <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
 
                                                 </div>
@@ -273,7 +273,7 @@
 
                                                         {% for list in member_users %}
 
-                                                        <li id="{{ list.user.id }}" class="collection-item avatar">
+                                                        <li id="member-added-{{ list.user.id }}" class="collection-item avatar">
                                                             {% if list.user.extra_data.profile_image %}
                                                                 <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
                                                             {% else %}

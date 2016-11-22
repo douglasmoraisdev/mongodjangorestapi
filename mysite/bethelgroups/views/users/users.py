@@ -220,7 +220,7 @@ def add_member_list_save(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('home/group/cells/modals/member_item_list_add.html')
+	template = loader.get_template('home/group/cells/modals/member_item_list_add_save.html')
 
 	return HttpResponse(template.render(content,request))
 
