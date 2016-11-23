@@ -22,6 +22,11 @@
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 80%; }
+    </style>    
 </head>
 
 <body class="grey lighten-1">
@@ -307,9 +312,7 @@
                                                 <div class="card-action">
 
                                                     <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
-
                                                     {% include "home/group/cells/modals/add_member_search_modal.html" %}
-
 
                                                 </div>
 
@@ -318,6 +321,27 @@
 
                                     </div>
 
+                                    <div class="row">
+
+                                        <div class="col s12 m12 l12">
+
+                                            <div id="geo-member" class="card scrollspy" style="height: 550px">
+
+                                            <div class="card-content">
+                                                <span class="card-title">Geolocalização dos Membros</span>
+                                                {{ geocode_result }}
+                                            </div>
+
+                                                <div id="map"></div>
+                                                <script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk&callback=initMap">
+                                                </script>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
 
                                     <div class="row">
                                         <div class="col s12 m12 l12">
@@ -435,6 +459,7 @@
                               <ul class="section table-of-contents">
                                 <li><a class="white-text" href="#group">Grupo</a></li>
                                 <li><a class="white-text" href="#members">Membros</a></li>
+                                <li><a class="white-text" href="#geo-member">Mapa Membros</a></li>
                                 <li><a class="white-text" href="#visitors">Visitantes</a></li>
                                 <li><a class="white-text" href="#mettings">Reuniões</a></li>
                                 <li><a class="white-text" href="#events">Eventos</a></li>

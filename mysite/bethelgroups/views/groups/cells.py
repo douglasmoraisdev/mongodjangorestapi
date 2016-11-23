@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 from django.urls import reverse
 
 import uuid
+import googlemaps
 
 from bethelgroups.models import *
 
@@ -15,6 +16,11 @@ logger = logging.getLogger(__name__)
 
 
 def cell(request, group_id):
+
+	# Google Maps Client
+	gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
+
+	#geocode_result = gmaps.geocode('2345 Avenida Adão Foques, Florida, Guaíba, Rio grande do Sul, Brasil')
 
 	template = loader.get_template('home/group/cells/cell.html')
 
@@ -82,7 +88,7 @@ def cell(request, group_id):
 		'users_count': users_count,
 		'group_data':group.extra_data,
 		'cell_id':group_id,
-		'events':events
+		'events':events,
 	}
 
 

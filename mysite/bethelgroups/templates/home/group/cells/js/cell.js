@@ -1,5 +1,5 @@
 // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-
+{% load static %}
 $('#member-modal-trigger').leanModal({
     dismissible: false,
     ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
@@ -80,5 +80,45 @@ function remove_user_save(user_id){
             alert("removido com sucesso");
 
         });
+
+}
+
+//Google Maps
+var map;
+
+
+function initMap() {
+    var myLatLng = {lat: -30.1291731, lng: -51.315149};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: myLatLng
+    });
+
+    var marker = new Array();
+
+    marker[0] = new google.maps.Marker({
+      position: {lat: -30.1291731, lng: -51.315149},
+      map: map,
+      title: 'Hello World!',
+      //icon:'{% static "upload/profile_images/" %}douglas.jpg'
+    });
+    marker[1] = new google.maps.Marker({
+      position: {lat: -30.1312171, lng: -51.3143318},
+      map: map,
+      title: 'Hello World!'
+    });
+    marker[2] = new google.maps.Marker({
+      position: {lat: -30.1515134802915, lng: -51.3381549802915},
+      map: map,
+      title: 'Hello World!'
+    });
+
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < marker.length; i++) {
+     bounds.extend(marker[i].getPosition());
+    }
+
+    map.fitBounds(bounds);    
 
 }
