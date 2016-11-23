@@ -97,22 +97,16 @@ function initMap() {
 
     var marker = new Array();
 
-    marker[0] = new google.maps.Marker({
-      position: {lat: -30.1291731, lng: -51.315149},
-      map: map,
-      title: 'Hello World!',
-      //icon:'{% static "upload/profile_images/" %}douglas.jpg'
-    });
-    marker[1] = new google.maps.Marker({
-      position: {lat: -30.1312171, lng: -51.3143318},
-      map: map,
-      title: 'Hello World!'
-    });
-    marker[2] = new google.maps.Marker({
-      position: {lat: -30.1515134802915, lng: -51.3381549802915},
-      map: map,
-      title: 'Hello World!'
-    });
+        {% for list in member_users %}
+            {{loop.index}}
+            marker[0] = new google.maps.Marker({
+              position: {lat: {{list.user.extra_data.addr_lat}}, lng: {{list.user.extra_data.addr_lat}} },
+              map: map,
+              title: '{{list.user.extra_data.first_name}}',
+              //icon:'{% static "upload/profile_images/" %}douglas.jpg'
+            });
+
+        {% endfor %}
 
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0; i < marker.length; i++) {
