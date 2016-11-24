@@ -95,42 +95,40 @@ function initMap() {
       center: myLatLng
     });
 
-    var marker = new Array();
+    var marcador = new Array();
+    var infowindow = new Array();
 
-        {% for list in member_users %}
+        {% for users in member_maps %}
 
-
-            var Aicon = {
-                url: '{% static "upload/profile_images/" %}{{list.user.extra_data.profile_image}}', // url
-                scaledSize: new google.maps.Size(50, 50), // scaled size
-                origin: new google.maps.Point(0,0), // origin
-                anchor: new google.maps.Point(0, {{forloop.counter}}) // anchor
-            };
-
-
-            marker[{{ forloop.counter0 }}] = new google.maps.Marker({
-              position: {lat: {{list.user.extra_data.addr_lat}}, lng:  {{list.user.extra_data.addr_lng}} },
+            marcador[{{ forloop.counter0 }}] = new  google.maps.Marker({
+              position: new google.maps.LatLng({{ users.users.0.user.extra_data.addr_lat }}, {{ users.users.0.user.extra_data.addr_lng }}),
               map: map,
-              title: '{{list.user.extra_data.first_name}}',
-              icon: Aicon
+              title: '{% for names in users.users %} -{{ names.user.extra_data.first_name }}{% endfor %}'
             });
+
+            var div = document.createElement('DIV');
+            div.innerHTML = '<div class="cardpanel"><ul class="collection">{% for list in users.users %}    <li class="collection-item avatar">        {% if list.user.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>   </li>{% endfor %}    </ul></div>';
+
+            infowindow[[{{ forloop.counter0 }}]] = new google.maps.InfoWindow({
+                content: 'Neste endereço: '+div.innerHTML
+            });
+
+            marcador[{{ forloop.counter0 }}].addListener('click', function() {
+                infowindow[[{{ forloop.counter0 }}]].open(map, marcador[{{ forloop.counter0 }}]);
+            });            
+
 
         {% endfor %}
 
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < marker.length; i++) {
-     bounds.extend(marker[i].getPosition());
-    }
-
-    var infowindow = new google.maps.InfoWindow(), marker;
-     
-    google.maps.event.addListener(marker[2], 'click', (function(marker, i) {
-        return function() {
-            infowindow.setContent("Conteúdo do marcador.");
-            infowindow.open(map, marker[2]);
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < marcador.length; i++) {
+            bounds.extend(marcador[i].getPosition());
         }
-    })(marker));   
 
-    map.fitBounds(bounds);    
+
+    map.fitBounds(bounds);
+    var markerCluster = new MarkerClusterer(map, marcador, {imagePath: '{% static "images/m" %}'});    
 
 }
+
+google.maps.event.addDomListener(window, 'load', initMap);

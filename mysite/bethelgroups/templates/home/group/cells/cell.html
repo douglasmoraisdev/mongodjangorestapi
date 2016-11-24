@@ -271,6 +271,7 @@
                                                 <div class="card-content">
 
                                                     <span class="card-title">Membros</span>
+
                                                     <p>{{ users_count }} membros</p>
                                                     <p></p>
 
@@ -329,11 +330,11 @@
 
                                             <div class="card-content">
                                                 <span class="card-title">Geolocalização dos Membros</span>
+
                                             </div>
 
                                                 <div id="map"></div>
-                                                <script async defer src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk&callback=initMap">
-                                                </script>
+
 
                                             </div>
 
@@ -475,9 +476,17 @@
         </div>
     </main>
 
+
+    <!-- Google Maps API -->
+    <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk"></script>
+    <script  src="{% static "js/richmarker.js"%}"></script>
+    <script  src="{% static "js/markerclusterer.js"%}"></script>
+
+
     <script>
         {% include "home/group/cells/js/cell.js" %}
-    </script>
+    </script>  
+
 
     <script>
         // Initialize collapse button

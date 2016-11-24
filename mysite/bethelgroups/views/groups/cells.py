@@ -27,6 +27,8 @@ def cell(request, group_id):
 	leader_users = []
 	host_users = []
 	member_users = []
+	member_maps = []
+	addr_maps_info = dict()
 	visitor_users = []
 	user_already_listed = []
 
@@ -61,6 +63,37 @@ def cell(request, group_id):
 					visitor_users.append(user_list)
 					user_already_listed.append(user_list.user.id)
 
+	# Members data for maps
+	tested_user_id = []
+	for usersA in users:
+
+		#Verify same address users
+		for usersB in users:
+
+			if (usersA.user.id != usersB.user.id):
+				if (usersB.user.id not in tested_user_id):				
+					if (usersA.user.extra_data['addr_lat'] == usersB.user.extra_data['addr_lat']) and (usersA.user.extra_data['addr_lng'] == usersB.user.extra_data['addr_lng']):
+
+						tested_user_id.append(usersA.user.id)
+						tested_user_id.append(usersB.user.id)
+						logger.error('Mesmo endereço: %s e %s' % (usersA.user.extra_data['first_name'], usersB.user.extra_data['first_name']))
+
+						addr_maps_info = {
+							'users' : [usersA, usersB]
+						}
+
+						member_maps.append(addr_maps_info)
+
+		#Add other members no duplied
+		if (usersA.user.id not in tested_user_id):
+
+			addr_maps_info = {
+				'users' : [usersA]
+			}
+
+			member_maps.append(addr_maps_info)
+
+			
 
 	events = Events()
 	events = events.get_events_by_group_id(group_id)
@@ -89,6 +122,7 @@ def cell(request, group_id):
 		'group_data':group.extra_data,
 		'cell_id':group_id,
 		'events':events,
+		'member_maps' : member_maps
 	}
 
 

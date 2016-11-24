@@ -47,7 +47,7 @@ db.users.insert({
 	"auth_type" : "password",
 	"auth_token" : "abacate",
 	"extra_data" : {"first_name" : "Tatiele", "last_name": "Morais", "profile_image": "tatiele.jpg",
-					"addr_lat":"-30.1515134802915", "addr_lng" : "-51.3381549802915"
+					"addr_lat":"-30.1515134802916", "addr_lng" : "-51.3381549802916"
 	}
 });
 db.users.insert({
@@ -63,7 +63,7 @@ db.users.insert({
 	"auth_type" : "password",
 	"auth_token" : "abacate",
 	"extra_data" : {"first_name" : "Indaia", "last_name": "Souza", "profile_image": "indaia.jpg",
-					"addr_lat":"-30.1291732", "addr_lng" : "-51.315148"
+					"addr_lat":"-30.1291731", "addr_lng" : "-51.315149"
 	}
 });
 db.users.insert({
@@ -79,7 +79,7 @@ db.users.insert({
 	"auth_type" : "password",
 	"auth_token" : "abacate",
 	"extra_data" : {"first_name" : "Camila", "last_name": "Maia", "profile_image": "camila.jpg",
-					"addr_lat":"-30.1312172", "addr_lng" : "-51.3143319"
+					"addr_lat":"-30.1312171", "addr_lng" : "-51.3143318"
 	}
 });
 db.users.insert({
