@@ -97,11 +97,11 @@ function initMap() {
 
     var marker = new Array();
 
-        {% for list in member_users %}
-            {{loop.index}}
-            marker[0] = new google.maps.Marker({
-              position: {lat: {{list.user.extra_data.addr_lat}}, lng: {{list.user.extra_data.addr_lat}} },
+        {% for list in member_users %}    
+            marker[{{ forloop.counter0 }}] = new google.maps.Marker({
+              position: {lat: {{list.user.extra_data.addr_lat}}, lng:  {{list.user.extra_data.addr_lng}} },
               map: map,
+              angle: 0.{{forloop.counter}}0,
               title: '{{list.user.extra_data.first_name}}',
               //icon:'{% static "upload/profile_images/" %}douglas.jpg'
             });
@@ -112,6 +112,15 @@ function initMap() {
     for (var i = 0; i < marker.length; i++) {
      bounds.extend(marker[i].getPosition());
     }
+
+    var infowindow = new google.maps.InfoWindow(), marker;
+     
+    google.maps.event.addListener(marker[2], 'click', (function(marker, i) {
+        return function() {
+            infowindow.setContent("Conteúdo do marcador.");
+            infowindow.open(map, marker[2]);
+        }
+    })(marker));   
 
     map.fitBounds(bounds);    
 

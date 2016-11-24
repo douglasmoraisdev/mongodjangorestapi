@@ -277,7 +277,7 @@
                                                     <ul class="collection">
 
                                                         {% for list in member_users %}
-
+                                                            
                                                         <li id="member-added-{{ list.user.id }}" class="collection-item avatar">
                                                             {% if list.user.extra_data.profile_image %}
                                                                 <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
@@ -329,7 +329,6 @@
 
                                             <div class="card-content">
                                                 <span class="card-title">Geolocalização dos Membros</span>
-                                                {{ geocode_result }}
                                             </div>
 
                                                 <div id="map"></div>
