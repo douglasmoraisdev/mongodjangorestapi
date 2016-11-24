@@ -97,13 +97,22 @@ function initMap() {
 
     var marker = new Array();
 
-        {% for list in member_users %}    
+        {% for list in member_users %}
+
+
+            var Aicon = {
+                url: '{% static "upload/profile_images/" %}{{list.user.extra_data.profile_image}}', // url
+                scaledSize: new google.maps.Size(50, 50), // scaled size
+                origin: new google.maps.Point(0,0), // origin
+                anchor: new google.maps.Point(0, {{forloop.counter}}) // anchor
+            };
+
+
             marker[{{ forloop.counter0 }}] = new google.maps.Marker({
               position: {lat: {{list.user.extra_data.addr_lat}}, lng:  {{list.user.extra_data.addr_lng}} },
               map: map,
-              angle: 0.{{forloop.counter}}0,
               title: '{{list.user.extra_data.first_name}}',
-              //icon:'{% static "upload/profile_images/" %}douglas.jpg'
+              icon: Aicon
             });
 
         {% endfor %}
