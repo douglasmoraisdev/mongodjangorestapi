@@ -1,5 +1,7 @@
 // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
 {% load static %}
+
+
 $('#member-modal-trigger').leanModal({
     dismissible: false,
     ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
@@ -17,7 +19,7 @@ $('#member-modal-trigger').leanModal({
         group = 'group'
         group_id = '{{ group_id }}'
 
-        $('#loader-member-cell-added').show();                    
+        $('#loader-member-cell-added').show();
 
         $.ajax({
             method: "GET",
@@ -38,6 +40,7 @@ $('#member-modal-trigger').leanModal({
 
     }
 });
+
 
 
 function add_day_group(){
@@ -77,11 +80,11 @@ function remove_user_save(user_id){
 
             remove_user(user_id);
             $('#loader-member-cell-added').hide();
-            alert("removido com sucesso");
 
         });
 
 }
+
 
 //Google Maps
 var map;
@@ -132,3 +135,27 @@ function initMap() {
 }
 
 google.maps.event.addDomListener(window, 'load', initMap);
+
+
+$('.confirm-delete-member-modal-trigger').leanModal({
+    dismissible: false,
+    ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+
+        //$('#').clone().appendTo('#list-user-delete');
+        //$('#display_user_delete')
+
+    },
+    complete: function(){
+        $('#list-user-delete').html('');
+    }
+    
+});
+
+function update_delete_modal(user_id){
+
+    $('#user_to_delete').val(user_id);
+
+    $('div#user-added-info-'+user_id).clone().appendTo('#list-user-delete');
+
+
+}

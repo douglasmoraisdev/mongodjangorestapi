@@ -280,19 +280,20 @@
                                                         {% for list in member_users %}
                                                             
                                                         <li id="member-added-{{ list.user.id }}" class="collection-item avatar">
-                                                            {% if list.user.extra_data.profile_image %}
-                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
-                                                            {% else %}
-                                                                <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
-                                                            {% endif %}
-                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
-                                                            <p>{{ roles.name }}</p>
-                                                            {%endfor%}
+                                                            <div id="user-added-info-{{ list.user.id}}">
+                                                                {% if list.user.extra_data.profile_image %}
+                                                                    <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                                {% else %}
+                                                                    <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                                {% endif %}
+                                                                <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                                <p>{{ roles.name }}</p>
+                                                                {%endfor%}
+                                                            </div>
 
                                                             <div class="secondary-content">
                                                             
-
-                                                                <a id="confirm-delete-member-modal-trigger" onclick="remove_user_save('{{list.user.id}}')" class="modal-trigger" data-target="confirm-delete-member-modal"><i class="material-icons activator">delete</i></a>
+                                                                <a id="confirm-delete-member-modal-trigger" href="#confirm-delete-member-modal" onclick="update_delete_modal('{{ list.user.id }}')" class="modal-trigger confirm-delete-member-modal-trigger"><i class="material-icons activator">delete</i></a>
                                                                 {% include "home/group/cells/modals/delete_member_confirm_modal.html" %}
                                                             
 
@@ -317,6 +318,7 @@
                                                 </div>
 
                                                 <div class="card-action">
+
 
                                                     <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
                                                     {% include "home/group/cells/modals/add_member_search_modal.html" %}
@@ -485,9 +487,7 @@
 
     <!-- Google Maps API -->
     <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk"></script>
-    <script  src="{% static "js/richmarker.js"%}"></script>
     <script  src="{% static "js/markerclusterer.js"%}"></script>
-
 
     <script>
         {% include "home/group/cells/js/cell.js" %}
