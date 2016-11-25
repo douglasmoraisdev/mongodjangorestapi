@@ -290,8 +290,14 @@
                                                             {%endfor%}
 
                                                             <div class="secondary-content">
-                                                                <a href="#!" onclick="remove_user_save('{{list.user.id}}')" class=""><i class="material-icons activator">delete</i></a>
+                                                            
+
+                                                                <a id="confirm-delete-member-modal-trigger" onclick="remove_user_save('{{list.user.id}}')" class="modal-trigger" data-target="confirm-delete-member-modal"><i class="material-icons activator">delete</i></a>
+                                                                {% include "home/group/cells/modals/delete_member_confirm_modal.html" %}
+                                                            
+
                                                                 <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>
+                                                            
                                                             </div>
                                                         </li>
 
