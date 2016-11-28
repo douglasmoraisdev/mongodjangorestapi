@@ -25,6 +25,7 @@ urlpatterns = [
 
     url(r'^reuniaocelula/get/(.+)/$', views.cell_metting.cell_metting, name='cell_metting'),
     url(r'^reuniaocelula/novo/(.+)/$', views.cell_metting.cell_metting_new, name='cell_metting_new'),
+    url(r'^reuniaocelula/editar/(.+)/(.+)/$', views.cell_metting.cell_metting_edit, name='cell_metting_edit'),
 
 
     url(r'^curso/get/(.+)/$', views.courses.course, name='curso'),
@@ -62,12 +63,14 @@ urlpatterns = [
     #ajax
     url(r'^add_servant_list$', views.users.add_servant_list, name='servos_add_list'),
 
-
     #ajax
     url(r'^get_member_autocomplete$', views.users.get_member_autocomplete, name='membro_autocomplete'),
 
     #ajax
     url(r'^add_member_list$', views.users.add_member_list, name='membro_add_list'),
+
+    #ajax
+    url(r'^add_member_list_presence$', views.users.add_member_list_presence, name='membro_add_list_presence'),
 
     #ajax
     url(r'^add_member_list_save$', views.users.add_member_list_save, name='membro_add_list_save'),

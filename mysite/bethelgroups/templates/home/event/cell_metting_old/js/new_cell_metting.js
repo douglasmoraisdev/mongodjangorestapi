@@ -27,7 +27,7 @@ $(document).ready(function () {
 
 
             user_selected = $('#user_searched_selected').val();
-            roles_selected = $('#cell-role-multiple').val();
+            roles_selectec = $('#cell-role-multiple').val();
 
             $('#loader-servant-cell-added').show();                    
 
@@ -35,7 +35,7 @@ $(document).ready(function () {
                 method: "GET",
                 dataType: "html",
                 url: "http://localhost:10/bethelgroups/add_servant_list",
-                data: { userid: user_selected, rolesid: roles_selected}
+                data: { userid: user_selected, rolesid: roles_selectec}
                 })
                 .fail(function(){
                     $('#loader-servant-cell-added').hide();
@@ -62,16 +62,16 @@ $(document).ready(function () {
         complete: function(){
 
 
-            user_selected = $('#member_searched_selected').val();
-            roles_selected = $('#member_role_selected').val();
+            user_selected = $('#user_searched_selected').val();
+            roles_selectec = $('#cell-role-multiple').val();
 
             $('#loader-member-cell-added').show();                    
 
             $.ajax({
                 method: "GET",
                 dataType: "html",
-                url: "http://localhost:10/bethelgroups/add_member_list_presence",
-                data: { userid: user_selected, rolesid: roles_selected}
+                url: "http://localhost:10/bethelgroups/add_member_list",
+                data: { userid: user_selected, rolesid: roles_selectec}
                 })
                 .fail(function(){
                     $('#loader-member-cell-added').hide();
@@ -146,5 +146,6 @@ jQuery.validator.setDefaults({
 });
 
 jQuery(function($){
-   $("#cell-zip").mask("99999-999");
+
+   
 });    

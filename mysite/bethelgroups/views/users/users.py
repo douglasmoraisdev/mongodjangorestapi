@@ -31,11 +31,15 @@ def user(request, user_id):
 	courses = Events()
 	courses = courses.get_user_courses(user_id)
 
+
+	member_maps = user
+
 	content = {
 		'User':user,
 		'Groups':groups,
 		'Events':events,
-		'Courses':courses
+		'Courses':courses,
+		'member_maps' : [user]
 	}
 	
 	return HttpResponse(template.render(content, request))
@@ -181,7 +185,31 @@ def add_member_list(request):
 
 	template = loader.get_template('home/group/cells/modals/member_item_list_add.html')
 
-	return HttpResponse(template.render(content,request))	
+	return HttpResponse(template.render(content,request))
+
+#ajax
+def add_member_list_presence(request):
+
+
+	user_list = dict()
+
+	user_id = request.GET.get('userid');
+	roles_ids = request.GET.getlist('rolesid[]');
+
+	user_selected = Users.objects(id=user_id)[0] #TODO mover como função nos Models
+	roles_selected = Roles.objects(id__in=roles_ids)
+
+	content = {
+		'user_name': user_selected,
+		'user_roles' : roles_selected,
+		'user_id': user_id,
+		'roles_ids': roles_ids,
+	}	
+
+	template = loader.get_template('home/event/cell_metting/modals/member_item_list_presence_add.html')
+
+	return HttpResponse(template.render(content,request))
+
 
 #ajax
 def add_member_list_save(request):

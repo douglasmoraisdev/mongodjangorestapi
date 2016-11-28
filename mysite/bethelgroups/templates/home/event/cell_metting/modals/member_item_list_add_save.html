@@ -12,8 +12,10 @@
     <p class="grey-text">
     {{ user_roles.0.name }}
     </p>
-    <a href="#!" onclick="remove_user('member-added-{{ user_id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
-
+    <div class="secondary-content">
+        <a href="#!" onclick="remove_user_save('{{ user_id }}')" class=""><i class="material-icons">delete</i></a>
+        <a href="http://localhost:10/bethelgroups/usuario/get/{{ user_id }}" class=""><i class="material-icons activator">search</i></a>
+    </div>
 
     <input type="hidden" name='member-added[]' id='member-added-x' value="{{ user_id }}"/>
 

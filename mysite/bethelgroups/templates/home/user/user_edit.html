@@ -15,6 +15,7 @@
     <!--Import jQuery before materialize.js-->
     <script src="{% static "js/jquery.js"%}"></script>
     <script src="{% static "js/materialize.js"%}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>    
     <script src="{% static "js/jquery.validate.min.js"%}"></script>
     <script src="{% static "js/materialize-stepper.js"%}"></script>
     <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
@@ -41,65 +42,67 @@
             <div class="container">
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
-                        <h3 class="light center-align blue-text">Cadastrar nova Célula</h3>
+                        <h3 class="light center-align blue-text">Editar Célula</h3>
+                        <h5 class="light center-align blue-text">Celula Alvorada</h5>
                         <div class="card">
                             <div class="card-content">
 
 
-                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="http://localhost:10/bethelgroups/celula/novo">
+                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="">
 
                                         {% csrf_token %}
 
-                                        <li class="step active">
+                                        <li class="step active">                                            
+
                                             <div class="step-title waves-effect waves-dark">Dados Básicos</div>
                                             <div class="step-content">
 
                                                 <div class="row">
                                       
 
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-name" name="cell-name" type="text" class="validate" maxlength="50">
-                                                            <label for="cell-name">Nome da Célula</label>
-                                                        </div>
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-name" name="cell-name" type="text" class="validate" maxlength="50" value="{{ cell_data.name }}" >
+                                                        <label for="cell-name">Nome da Célula</label>
+                                                    </div>
 
 
-                                                        <div class="input-field col s12 l6">
-                                                            <input id="cell-date" name="cell-date" type="date" class="datepicker">
-                                                            <label for="cell-date">Data de criação</label>
-                                                        </div>
+                                                    <div class="input-field col s12 l6">
+                                                        <input id="cell-date" name="cell-date" type="date" class="datepicker" value="{{ cell_data.extra_data.created_on_date }}">
+                                                        <label for="cell-date">Data de criação</label>
+                                                    </div>
 
 
-                                                        <div class="input-field col s12 l6">
-                                                            <select id="group-origin" name="group-origin">
-                                                                <option value="" disabled selected>Selecione</option>
-                                                                {% for item in Groups %}   
-                                                                <option value="{{ item.id }}">{{ item.name }}</option>
-                                                                {% endfor %}   
-                                                            </select>
-                                                            <label>Grupo de Origem</label>
-                                                        </div>
-
-
-                                                        <div class="input-field col s12 l12">
-                                                        <select multiple id="groups-up-multiple" name="groups-up-multiple">
-                                                          <option value="" disabled selected>Selecione</option>
-                                                              {% for item in Groups %}   
-                                                                <option value="{{ item.id }}">{{ item.name }}</option>
-                                                              {% endfor %}  
+                                                    <div class="input-field col s12 l6">
+                                                        <select id="group-origin" name="group-origin">
+                                                            <option value="" disabled selected>Selecione</option>
+                                                            {% for item in Groups %}   
+                                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                                            {% endfor %}   
                                                         </select>
-                                                            <label>Supervisionado por:</label>
-                                                        </div>
+                                                        <label>Grupo de Origem</label>
+                                                    </div>
 
 
-                                                        <div class="input-field col s12 l12">
-                                                        <select multiple id="groups-down-multiple" name="groups-down-multiple">
-                                                          <option value="" disabled selected>Selecione</option>
-                                                              {% for item in Groups %}   
-                                                                <option value="{{ item.id }}">{{ item.name }}</option>
-                                                              {% endfor %}  
-                                                        </select>
-                                                            <label>Supervisionando:</label>
-                                                        </div>
+                                                    <div class="input-field col s12 l12">
+                                                    <select multiple id="groups-up-multiple" name="groups-up-multiple">
+                                                      <option value="" disabled selected>Selecione</option>
+                                                          {% for item in Groups %}   
+                                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                                          {% endfor %}  
+                                                    </select>
+                                                        <label>Supervisionado por:</label>
+                                                    </div>
+
+
+                                                    <div class="input-field col s12 l12">
+                                                    <select multiple id="groups-down-multiple" name="groups-down-multiple">
+                                                      <option value="" disabled selected>Selecione</option>
+                                                          {% for item in Groups %}   
+                                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                                          {% endfor %}  
+                                                    </select>
+                                                        <label>Supervisionando:</label>
+                                                    </div>
 
 
                                                 </div>
@@ -117,35 +120,35 @@
                                                 <div class="row">
 
                                                         <div class="input-field col s6">
-                                                            <input id="cell-zip" name="cell-zip" type="text" class="validate" >
+                                                            <input id="cell-zip" name="cell-zip" type="text" class="validate" value="{{ cell_data.extra_data.addr_zip }}" >
                                                             <label for="cell-zip">CEP:</label>
                                                         </div>
                                                 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="cell-state" name="cell-state" type="text" class="validate" >
+                                                            <input id="cell-state" name="cell-state" type="text" class="validate" value="{{ cell_data.extra_data.addr_state }}">
                                                             <label for="cell-state">Estado:</label>
                                                         </div>
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="cell-city" name="cell-city" type="text" class="validate" >
+                                                            <input id="cell-city" name="cell-city" type="text" class="validate" value="{{ cell_data.extra_data.addr_city }}">
                                                             <label for="cell-city">Cidade:</label>
                                                         </div>
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="cell-neigh" name="cell-neigh" type="text" class="validate" >
+                                                            <input id="cell-neigh" name="cell-neigh" type="text" class="validate" value="{{ cell_data.extra_data.addr_neigh }}">
                                                             <label for="cell-neigh">Bairro:</label>
                                                         </div>
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="cell-street" name="cell-street" type="text" class="validate" >
+                                                            <input id="cell-street" name="cell-street" type="text" class="validate" value="{{ cell_data.extra_data.addr_street }}">
                                                             <label for="cell-street">Logradouro:</label>
                                                         </div>
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="cell-street-number" name="cell-street-number" type="text" class="validate" >
+                                                            <input id="cell-street-number" name="cell-street-number" type="text" class="validate" value="{{ cell_data.extra_data.addr_street_number }}">
                                                             <label for="cell-street-number">Nro/Complemento</label>
                                                         </div>                                                    
 
@@ -186,7 +189,7 @@
                                                         <div class="step-actions">
                                                             <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
                                                             <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
-                                                </div>
+                                                        </div>
                                             </div>
                                         </li>    
 
@@ -199,6 +202,28 @@
                                          
                                                 <ul class="collection" id="servant-cell-added">
                                                     
+                                                    {% for item in cell_leaders %}
+
+                                                        <li id="user-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ item.role.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('user-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+                                                            <input type="hidden" name='user-added[]' id='user-added-x' value="{{ item.user.id }}"/>
+                                                            <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for role_id in item.role %}{% if forloop.last %}{{ role_id.id }}{% else %}{{ role_id.id }},{% endif %}{% endfor %}"/>
+
+
+                                                        </li>
+
+                                                    {% endfor %}                                                    
 
                                                 </ul>
 
@@ -239,8 +264,29 @@
                                                 <div class="row">                                            
 
                                                 <ul class="collection" id="member-cell-added">
-                                                    
 
+                                                    {% for item in cell_members %}
+
+                                                        <li id="member-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ user_roles.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('member-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+
+                                                            <input type="hidden" name='member-added[]' id='member-added-x' value="{{ item.user.id }}"/>
+
+                                                        </li>
+
+                                                    {% endfor %}
+                                                    
                                                 </ul>
 
                                                 <div class="progress" id="loader-member-cell-added" style="display:none" >
@@ -269,7 +315,6 @@
                                         </li>                                                                                                          
 
 
-
                                         <li class="step">
                                             <div class="step-title waves-effect waves-dark">Finalizar</div>
                                             <div class="step-content">
@@ -283,13 +328,15 @@
 
                                     </ul>
 
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        {% include "default/back_fab.html" %}
+
 
     </div>
 

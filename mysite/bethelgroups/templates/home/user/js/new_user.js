@@ -70,7 +70,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 dataType: "html",
-                url: "http://localhost:10/bethelgroups/add_member_list_presence",
+                url: "http://localhost:10/bethelgroups/add_member_list",
                 data: { userid: user_selected, rolesid: roles_selected}
                 })
                 .fail(function(){
