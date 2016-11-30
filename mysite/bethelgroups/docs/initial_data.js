@@ -2,7 +2,8 @@ db.events.drop();
 db.groups.drop();
 
 
-db.events_types.drop()
+db.events_types.drop();
+db.events_types.insert({code:"subject", name:"Disciplina"});
 db.events_types.insert({code:"course", name:"Curso"});
 db.events_types.insert({code:"acamp", name:"Retiro"});
 db.events_types.insert({code:"event", name:"Evento"});

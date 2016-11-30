@@ -20,6 +20,7 @@
     <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
     <script src="{% static "js/materialize.clockpicker.js"%}"></script>
     <script src="{% static "js/jquery.maskedinput.min.js"%}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
 
 
     <!--Let browser know website is optimized for mobile-->
@@ -42,12 +43,12 @@
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
                         <h3 class="light center-align blue-text">Nova Disciplina</h3>
-                        <h5 class="light center-align blue-text">{{ Events.name }}</h5>
+                        <h5 class="light center-align blue-text">{{ course.name }}</h5>
                         <div class="card">
                             <div class="card-content">
 
 
-                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="http://localhost:10/bethelgroups/disciplina/novo/{{ Events.id }}/">
+                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="">
 
                                         {% csrf_token %}
 
@@ -59,20 +60,28 @@
                                       
 
                                                         <div class="input-field col s12 l12">
-                                                            <input id="course-name" name="course-name" type="text" class="validate" maxlength="50">
-                                                            <label for="course-name">Nome da Disciplina</label>
+                                                            <input id="subject-name" name="subject-name" type="text" class="validate" maxlength="50">
+                                                            <label for="subject-name">Nome da Disciplina</label>
                                                         </div>
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="course-date-start" name="course-date-start" type="date" class="datepicker">
-                                                            <label for="course-date-start">Data de Inicio</label>
+                                                            <input id="subject-date-start" name="subject-date-start" type="date" class="datepicker">
+                                                            <label for="subject-date-start">Data de Inicio</label>
                                                         </div>
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="course-date-end" name="course-date-end" type="date" class="datepicker">
-                                                            <label for="course-date-end">Data do Fim</label>
+                                                            <input id="subject-date-end" name="subject-date-end" type="date" class="datepicker">
+                                                            <label for="subject-date-end">Data do Fim</label>
+                                                        </div>
+
+                                                        <div class="input-field col s12 l6">
+                                                            <select id="subject-recorrent" name="subject-recorrent">
+                                                                <option value="N" selected>Não</option>
+                                                                <option value="Y">Sim</option>                                                                
+                                                            </select>
+                                                            <label>Recorrente</label>
                                                         </div>
 
 
@@ -93,40 +102,11 @@
                                                     <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Próximo</button>
                                                 </div>
                                             </div>
-                                        </li>                                        
-
-                                        <li class="step">
-                                            <div class="step-title waves-effect waves-dark">Horários</div>
-                                            <div class="step-content">
-                                                <div class="row">
-
-                                                    <div id="days_list">
-
-
-                                                    </div>
-
-                                                    <div id="row">
-                                                        <div class="col s12 m12">
-
-                                                            <a onclick="add_day_group()" class="waves-effect waves-light btn right">+ Horário</a>
-
-                                                        </div>
-                                                    </div>                                                    
-
-                                                </div>
-
-
-
-                                                        <div class="step-actions">
-                                                            <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
-                                                            <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
-                                                </div>
-                                            </div>
                                         </li>    
 
 
 
-                                       <li class="step">
+                                        <li class="step">
                                             <div class="step-title waves-effect waves-dark">Servos</div>
                                             <div class="step-content">
                                                 <div class="row">
@@ -146,14 +126,13 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="servant-modal-trigger" class="waves-effect waves-light btn right" data-target="servant-modal">+ Servo</a>
-                                                        {% include "home/event/course/modals/add_servant_search_modal.html" %}
+                                                        {% include "home/event/subject/modals/add_servant_search_modal.html" %}
 
 
                                                     </div>
                                                 </div>
 
                                                          
-
                                                 </div>
 
                                                     <div class="step-actions">
@@ -165,8 +144,7 @@
                                         </li>
 
 
-
-                                       <li class="step">
+                                        <li class="step">
                                             <div class="step-title waves-effect waves-dark">Membros</div>
                                             <div class="step-content">
                                                 <div class="row">                                            
@@ -185,7 +163,7 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="member-modal-trigger" class="waves-effect waves-light btn right modal-trigger" data-target="member-modal">+ Membro</a>
-                                                        {% include "home/event/course/modals/add_member_search_modal.html" %}
+                                                        {% include "home/event/subject/modals/add_member_search_modal.html" %}
 
 
                                                     </div>
@@ -199,8 +177,7 @@
                                                             <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
                                                 </div>
                                             </div>
-                                        </li>                                                                                                          
-
+                                        </li>   
 
 
                                         <li class="step">
@@ -216,26 +193,37 @@
 
                                     </ul>
 
-
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  
             </div>
         </div>
 
     </div>
 
-    <script>
-        {% include "home/event/course/js/course.js" %}
-    </script>
+        {% include "default/back_fab.html" %}
 
+
+    <script>
+        {% include "home/event/subject/js/new_subject.js" %}
+    </script>
+    
     <script src="{% static "js/datepicker_defaults.js"%}"></script>
     <script src="{% static "js/validator_messages_pt_br.js"%}"></script>
 
-    <script>
 
-    </script>    
+    <script>
+        //Time Picker:
+        $('.timepicker').pickatime({
+            default: 'now',
+            twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+            donetext: 'OK',
+          autoclose: false,
+          vibrate: true // vibrate the device when dragging clock hand
+        });
+
+    </script>
 </body>
 
 </html>

@@ -9,30 +9,21 @@ import uuid
 from bethelgroups.models import *
 
 
-def course(request, event_id):
+def subject(request, event_id):
 
-	template = loader.get_template('home/event/course/course.html')
-
-	member_maps = []
+	template = loader.get_template('home/event/subject/subject.html')
 	
-	subjects = Events()
-	subjects = subjects.get_event_childs(event_id)
-	
-	events = Events()
-	events = events.get_event_by_id(event_id)
+	member_maps = []	
 
-	group_origin_name = ''
-	if (events.host):
-		group_id = ObjectId(events.host.id)
-	
-		group = Groups()
-		group = group.get_group_by_id(group_id)
-		group_origin_name = group.name
+	subject = Events()
+	subject = subject.get_event_by_id(event_id)
 
-	users = events.get_event_users(event_id)
+	course = Events()
+	course = course.get_event_by_id(subject.parent_event.id)	
+
+	users = subject.get_event_users(event_id)
 	users_count = len(users)
 	
-
 	# Members data for maps
 	tested_user_id = []
 	for usersA in users:
@@ -61,35 +52,35 @@ def course(request, event_id):
 				'users' : [usersA]
 			}
 
-			member_maps.append(addr_maps_info)	
+			member_maps.append(addr_maps_info)
+
 
 	content = {
-		'Subjects': subjects,
-		'event_id': event_id,
-		'course_name': events.name,
-		'group_origin_name': group_origin_name,
+		'subject': subject,
+		'course': course,
 		'users_list': users,
 		'users_count': users_count,
-		'start_date': events.start_date,
-		'end_date': events.end_date,
-		'event_data': events.extra_data,
+		'start_date': subject.start_date,
+		'end_date': subject.end_date,
+		'event_data': subject.extra_data,
 		'member_maps' : member_maps
-
 	}
 
 	return HttpResponse(template.render(content, request))
 
 
-def course_new(request):
+def subject_new(request, course_id):
 
-	template = loader.get_template('home/event/course/course_new.html')
+	template = loader.get_template('home/event/subject/subject_new.html')
+
+	course = Events.objects.get(id=course_id)
 
 	content = {
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects,
-		'Events': Events.objects,
+		'course' : course
 	}
 
 
@@ -108,12 +99,11 @@ def course_new(request):
 		#roles_add 		
 		roles_obj = []
 
-		course_name = request.POST.get('course-name')
-		course_date_start = request.POST.get('course-date-start')
-		course_date_end = request.POST.get('course-date-end')
-		course_recorrent = request.POST.get('course-recorrent')
-		course_days = request.POST.getlist('cell-days-multiple[]')
-		course_hours = request.POST.getlist('cell-hours[]')
+		subject_name = request.POST.get('subject-name')
+		subject_date_start = request.POST.get('subject-date-start')
+		subject_date_end = request.POST.get('subject-date-end')
+		subject_days = request.POST.getlist('cell-days-multiple[]')
+		subject_hours = request.POST.getlist('cell-hours[]')
 		user_added = request.POST.getlist('user-added[]')
 		roles_added = request.POST.getlist('roles-added[]')
 		member_added = request.POST.getlist('member-added[]')
@@ -158,24 +148,24 @@ def course_new(request):
 
 		#extra data formater
 		extra_data = dict({
-			'created_on_date': course_date_start,
+			'created_on_date': subject_date_start,
 			'meet_day':days_list,
 			'meet_hour':hours_list
 		})		
 
-		course_type_id = Events_types.objects(code='course')[0].id
+		subject_type_id = Events_types.objects(code='subject')[0].id
 
 		course = Events()
 		course.add_event(
-				  name=course_name, 
+				  name=subject_name, 
 				  host=document_group_origin,
-				  parent_event=None,
+				  parent_event=course_id,
 				  groups_in=None,
-				  event_type=course_type_id,
+				  event_type=subject_type_id,
 				  user_roles=user_roles,
-				  start_date=course_date_start, 
-				  end_date=course_date_end,
-				  recorrent=course_recorrent,
+				  start_date=subject_date_start, 
+				  end_date=subject_date_end,
+				  recorrent='N',
 				  extra_data=extra_data)
 		
 
@@ -184,16 +174,22 @@ def course_new(request):
 	else:
 
 		return HttpResponse(template.render(content, request))
-
      
-def course_edit(request, course_id):
 
-	template = loader.get_template('home/event/course/course_edit.html')
+
+def subject_edit(request, course_id, subject_id):
+
+	template = loader.get_template('home/event/subject/subject_edit.html')
+
+	subject = Events.objects.get(id=subject_id)
+
+	course = Events.objects.get(id=course_id)
+
 
 	events = Events()
-	events = events.get_event_by_id(course_id)
+	events = events.get_event_by_id(subject_id)	
 
-	event_users = events.get_event_users(course_id)
+	event_users = events.get_event_users(subject_id)
 
 	event_leaders = []
 	event_members = []
@@ -210,12 +206,13 @@ def course_edit(request, course_id):
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects,
-		'event': events,
-		'event_id': course_id,
+		'subject' : subject,
+		'course' : course,
 		'event_users' : event_users,
 		'event_members': event_members,
-		'event_leaders': event_leaders		
+		'event_leaders': event_leaders			
 	}
+
 
 	if request.method == 'POST':
 
@@ -232,12 +229,11 @@ def course_edit(request, course_id):
 		#roles_add 		
 		roles_obj = []
 
-		course_name = request.POST.get('course-name')
-		course_date_start = request.POST.get('course-date-start')
-		course_date_end = request.POST.get('course-date-end')
-		course_recorrent = request.POST.get('course-recorrent')
-		course_days = request.POST.getlist('cell-days-multiple[]')
-		course_hours = request.POST.getlist('cell-hours[]')
+		subject_name = request.POST.get('subject-name')
+		subject_date_start = request.POST.get('subject-date-start')
+		subject_date_end = request.POST.get('subject-date-end')
+		subject_days = request.POST.getlist('cell-days-multiple[]')
+		subject_hours = request.POST.getlist('cell-hours[]')
 		user_added = request.POST.getlist('user-added[]')
 		roles_added = request.POST.getlist('roles-added[]')
 		member_added = request.POST.getlist('member-added[]')
@@ -282,24 +278,25 @@ def course_edit(request, course_id):
 
 		#extra data formater
 		extra_data = dict({
-			'created_on_date': course_date_start,
+			'created_on_date': subject_date_start,
 			'meet_day':days_list,
 			'meet_hour':hours_list
 		})		
 
-		course_type_id = Events_types.objects(code='course')[0].id
+		subject_type_id = Events_types.objects(code='subject')[0].id
 
 		course = Events()
 		course.edit_event(
-				  event_id=course_id,
-				  name=course_name, 
+				  event_id=subject_id,
+				  parent_event=course_id,
+				  name=subject_name, 
 				  host=document_group_origin,
-				  parent_event=None,
-				  event_type=course_type_id,
+				  groups_in=None,
+				  event_type=subject_type_id,
 				  user_roles=user_roles,
-				  start_date=course_date_start, 
-				  end_date=course_date_end,
-				  recorrent=course_recorrent,
+				  start_date=subject_date_start, 
+				  end_date=subject_date_end,
+				  recorrent='N',
 				  extra_data=extra_data)
 		
 
@@ -308,4 +305,3 @@ def course_edit(request, course_id):
 	else:
 
 		return HttpResponse(template.render(content, request))
-     
