@@ -20,7 +20,6 @@
     <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
     <script src="{% static "js/materialize.clockpicker.js"%}"></script>
     <script src="{% static "js/jquery.maskedinput.min.js"%}"></script>
-    <script src="{% static "js/letteravatar.js" %}"></script>
 
 
     <!--Let browser know website is optimized for mobile-->
@@ -43,12 +42,11 @@
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
                         <h3 class="light center-align blue-text">Novo Curso</h3>
-                        <h5 class="light center-align blue-text">{{ group_metting_name }}</h5>
                         <div class="card">
                             <div class="card-content">
 
 
-                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="">
+                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="http://localhost:10/bethelgroups/curso/novo">
 
                                         {% csrf_token %}
 
@@ -102,11 +100,40 @@
                                                     <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Próximo</button>
                                                 </div>
                                             </div>
+                                        </li>                                        
+
+                                        <li class="step">
+                                            <div class="step-title waves-effect waves-dark">Horários</div>
+                                            <div class="step-content">
+                                                <div class="row">
+
+                                                    <div id="days_list">
+
+
+                                                    </div>
+
+                                                    <div id="row">
+                                                        <div class="col s12 m12">
+
+                                                            <a onclick="add_day_group()" class="waves-effect waves-light btn right">+ Horário</a>
+
+                                                        </div>
+                                                    </div>                                                    
+
+                                                </div>
+
+
+
+                                                        <div class="step-actions">
+                                                            <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                            <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                                </div>
+                                            </div>
                                         </li>    
 
 
 
-                                        <li class="step">
+                                       <li class="step">
                                             <div class="step-title waves-effect waves-dark">Servos</div>
                                             <div class="step-content">
                                                 <div class="row">
@@ -133,6 +160,7 @@
                                                 </div>
 
                                                          
+
                                                 </div>
 
                                                     <div class="step-actions">
@@ -144,7 +172,8 @@
                                         </li>
 
 
-                                        <li class="step">
+
+                                       <li class="step">
                                             <div class="step-title waves-effect waves-dark">Membros</div>
                                             <div class="step-content">
                                                 <div class="row">                                            
@@ -177,7 +206,8 @@
                                                             <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
                                                 </div>
                                             </div>
-                                        </li>   
+                                        </li>                                                                                                          
+
 
 
                                         <li class="step">
@@ -193,37 +223,26 @@
 
                                     </ul>
 
+
                             </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
 
     </div>
 
-        {% include "default/back_fab.html" %}
-
-
     <script>
-        {% include "home/event/course/js/new_course.js" %}
+        {% include "home/event/course/js/course.js" %}
     </script>
-    
+
     <script src="{% static "js/datepicker_defaults.js"%}"></script>
     <script src="{% static "js/validator_messages_pt_br.js"%}"></script>
 
-
     <script>
-        //Time Picker:
-        $('.timepicker').pickatime({
-            default: 'now',
-            twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
-            donetext: 'OK',
-          autoclose: false,
-          vibrate: true // vibrate the device when dragging clock hand
-        });
 
-    </script>
+    </script>    
 </body>
 
 </html>

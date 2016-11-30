@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
-                        <h3 class="light center-align blue-text">Editar Reunião de Célula</h3>
+                        <h3 class="light center-align blue-text">Editar Curso</h3>
                         <h5 class="light center-align blue-text">{{ group_metting_name }}</h5>
                         <div class="card">
                             <div class="card-content">
@@ -56,86 +56,44 @@
                                             <div class="step-title waves-effect waves-dark">Dados Básicos</div>
                                             <div class="step-content">
 
-                                                <div class="row">                                      
+                                                <div class="row">
+                                      
 
-                                                    {% if not group_metting_name %}
-                                                    <div class="input-field col s12 l6">
-                                                        <select id="group-origin" name="group-origin">
-                                                            <option value="" disabled selected>Selecione</option>
-                                                            {% for item in Groups %}   
-                                                            <option value="{{ item.id }}">{{ item.name }}</option>
-                                                            {% endfor %}   
-                                                        </select>
-                                                        <label>Celula</label>
-                                                    </div>
-                                                    {% else %}
-                                                        <input type="hidden" name="group-origin" value="{{ group_id }}" >
-                                                    {% endif%}
-                                 
-
-                                                    <div class="input-field col s12 m12 l12">
-                                                        <input id="metting-cell-name" name="metting-cell-name" type="text" class="validate" maxlength="50" value="{{ event.name }}">
-                                                        <label for="metting-cell-name">Tema/Nome</label>
-                                                    </div>
-
-
-                                                    <div class="input-field col s12 l12">
-                                                        <input id="metting-cell-date" name="metting-cell-date" type="date" class="datepicker" value="{{ event.start_date }}">
-                                                        <label for="metting-cell-date">Data da reunião</label>
-                                                    </div>
-
-
-                                                    <div class="input-field col s6 l6">
-                                                        <input id="metting-cell-start-hour" name="metting-cell-start-hour" type="time" class="timepicker validate" data-rule-required="trues" data-rule-minlength="5" value="{{ event.extra_data.start_hour }}">
-                                                        <label for="metting-cell-start-hour">Horario de Inicio:</label>
-                                                    </div>
-
-                                                    <div class="input-field col s6 l6">
-                                                        <input id="metting-cell-end-hour" name="metting-cell-end-hour" type="time" class="timepicker validate" data-rule-required="trues" data-rule-minlength="5" value="{{ event.extra_data.end_hour }}" >
-                                                        <label for="metting-cell-end-hour">Horario Fim:</label>
-                                                    </div>
-
-
-                                                    <div class="input-field col s6 m6 l6">
-                                                        <select id="metting-has-offer" name="metting-has-offer">
-
-                                                                <option value="s">Sim</option>
-                                                                <option value="n">Não</option>                                                                
-
-                                                        </select>
-                                                        <label>Oferta na célula?</label>
-
-                                                    </div>
-
-                                                    <div class="input-field col s6 m6 l6">
-                                                        <input id="offer-value" name="offer-value" type="text" class="validate" maxlength="50"  value="{{ event.extra_data.offer_value }}">
-                                                        <label for="offer-value">Valor</label>
-                                                    </div>
-
-
-                                                    <div class="input-field col s6 m6 l6">
-                                                        <select id="metting-has-children" name="metting-has-children">
-
-                                                                <option value="s">Sim</option>
-                                                                <option value="n">Não</option>                                                                
-
-                                                        </select>
-                                                        <label>Crianças na Célula?</label>
-
-                                                    </div>
-
-                                                    <div class="input-field col s6 m6 l6">
-                                                        <input id="metting-children-qtd" name="metting-children-qtd" type="text" class="validate" maxlength="50"  value="{{ event.extra_data.children_qtd }}">
-                                                        <label for="metting-children-qtd">Nro de Crianças</label>
-                                                    </div>
-
-
-                                                    <div class="row">
-                                                        <div class="input-field col s12">
-                                                          <textarea id="metting-resume" name="metting-resume" class="materialize-textarea"> {{ event.extra_data.resume }}</textarea>
-                                                          <label for="metting-resume">Resumo da reunião</label>
+                                                        <div class="input-field col s12 l12">
+                                                            <input id="course-name" name="course-name" type="text" class="validate" maxlength="50" value="{{ event.name }}">
+                                                            <label for="course-name">Nome do Curso</label>
                                                         </div>
-                                                    </div>                                                                                                    
+
+
+                                                        <div class="input-field col s12 l6">
+                                                            <input id="course-date-start" name="course-date-start" type="date" class="datepicker" value="{{ event.start_date }}">
+                                                            <label for="course-date-start">Data de Inicio</label>
+                                                        </div>
+
+
+                                                        <div class="input-field col s12 l6">
+                                                            <input id="course-date-end" name="course-date-end" type="date" class="datepicker" value="{{ event.end_date }}">
+                                                            <label for="course-date-end">Data do Fim</label>
+                                                        </div>
+
+                                                        <div class="input-field col s12 l6">
+                                                            <select id="course-recorrent" name="course-recorrent">
+                                                                <option value="N" selected>Não</option>
+                                                                <option value="Y">Sim</option>                                                                
+                                                            </select>
+                                                            <label>Recorrente</label>
+                                                        </div>
+
+
+                                                        <div class="input-field col s12 l6">
+                                                            <select id="group-origin" name="group-origin">
+                                                                <option value="" disabled selected>Selecione</option>
+                                                                {% for item in Groups %}   
+                                                                <option value="{{ item.id }}">{{ item.name }}</option>
+                                                                {% endfor %}   
+                                                            </select>
+                                                            <label>Grupo Organizador</label>
+                                                        </div>
 
 
                                                 </div>
@@ -144,7 +102,7 @@
                                                     <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Próximo</button>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li>    
 
 
 
@@ -208,7 +166,6 @@
                                         </li>
 
 
-
                                         <li class="step">
                                             <div class="step-title waves-effect waves-dark">Membros</div>
                                             <div class="step-content">
@@ -216,7 +173,7 @@
 
                                                 <ul class="collection" id="member-cell-added">
 
-                                                    {% for item in cell_members %}
+                                                    {% for item in event_members %}
 
                                                         <li id="member-added-{{ item.user.id }}" class="collection-item avatar">
                                                             {% if item.user.extra_data.profile_image %}
@@ -266,44 +223,6 @@
                                         </li>    
 
 
-
-                                        <li class="step">
-                                            <div class="step-title waves-effect waves-dark">Visitantes</div>
-                                            <div class="step-content">
-                                                <div class="row">                                            
-
-                                                <ul class="collection" id="member-cell-added">
-                                                    
-
-                                                </ul>
-
-                                                <div class="progress" id="loader-member-cell-added" style="display:none" >
-                                                  <div class="indeterminate"></div>
-                                                </div>                                            
-
-
-                                                <div id="row">
-                                                    <div class="col s12 m12">
-
-                                                        <a id="member-modal-trigger" class="waves-effect waves-light btn right modal-trigger" data-target="member-modal">+ Membro</a>
-                                                        {% include "home/event/cell_metting/modals/add_member_search_modal.html" %}
-
-
-                                                    </div>
-                                                </div>
-
-
-                                                </div>
-
-                                                        <div class="step-actions">
-                                                            <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
-                                                            <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
-                                                </div>
-                                            </div>
-                                        </li>                                                                                                          
-
-
-
                                         <li class="step">
                                             <div class="step-title waves-effect waves-dark">Finalizar</div>
                                             <div class="step-content">
@@ -317,11 +236,10 @@
 
                                     </ul>
 
-
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>  
             </div>
         </div>
 
@@ -331,7 +249,7 @@
 
 
     <script>
-        {% include "home/event/cell_metting/js/new_cell_metting.js" %}
+        {% include "home/event/course/js/new_course.js" %}
     </script>
     
     <script src="{% static "js/datepicker_defaults.js"%}"></script>

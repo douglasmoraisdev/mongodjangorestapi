@@ -1,0 +1,23 @@
+{% load static %}
+
+
+    <li id="member-added-{{ user_id }}" class="collection-item valign-wrapper ">
+
+        <input type="checkbox" id="member_presence_{{ user_name.id }}" name="member_presence[]" value="{{ user_name.id }}" checked="checked" />
+        <label class="black-text" for="member_presence_{{ user_name.id }}"></label>
+
+        {% if user_name.extra_data.profile_image %}
+            <img class="circle" height="50px" src="{% static "upload/profile_images/" %}{{ user_name.extra_data.profile_image }}">
+        {% else %}
+            <img class="circle" height="50px" avatar="{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}">
+        {% endif %}
+
+        <div style="padding-right: 15px"></div>
+        {{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}
+    </li>
+
+
+</li>
+
+<script src="{% static "js/letteravatar.js" %}"></script>
+
