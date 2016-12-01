@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
-                        <h3 class="light center-align blue-text">Nova Reunião de Célula</h3>
+                        <h3 class="light center-align blue-text">Editar Reunião de Célula</h3>
                         <h5 class="light center-align blue-text">{{ group_metting_name }}</h5>
                         <div class="card">
                             <div class="card-content">
@@ -74,24 +74,24 @@
                                  
 
                                                     <div class="input-field col s12 m12 l12">
-                                                        <input id="metting-cell-name" name="metting-cell-name" type="text" class="validate" maxlength="50">
+                                                        <input id="metting-cell-name" name="metting-cell-name" type="text" class="validate" maxlength="50" value="{{ event.name }}">
                                                         <label for="metting-cell-name">Tema/Nome</label>
                                                     </div>
 
 
                                                     <div class="input-field col s12 l12">
-                                                        <input id="metting-cell-date" name="metting-cell-date" type="date" class="datepicker">
+                                                        <input id="metting-cell-date" name="metting-cell-date" type="date" class="datepicker" value="{{ event.start_date }}">
                                                         <label for="metting-cell-date">Data da reunião</label>
                                                     </div>
 
 
                                                     <div class="input-field col s6 l6">
-                                                        <input id="metting-cell-start-hour" name="metting-cell-start-hour" type="time" class="timepicker validate" data-rule-required="trues" data-rule-minlength="5" >
+                                                        <input id="metting-cell-start-hour" name="metting-cell-start-hour" type="time" class="timepicker validate" data-rule-required="trues" data-rule-minlength="5" value="{{ event.extra_data.start_hour }}">
                                                         <label for="metting-cell-start-hour">Horario de Inicio:</label>
                                                     </div>
 
                                                     <div class="input-field col s6 l6">
-                                                        <input id="metting-cell-end-hour" name="metting-cell-end-hour" type="time" class="timepicker validate" data-rule-required="trues" data-rule-minlength="5" >
+                                                        <input id="metting-cell-end-hour" name="metting-cell-end-hour" type="time" class="timepicker validate" data-rule-required="trues" data-rule-minlength="5" value="{{ event.extra_data.end_hour }}" >
                                                         <label for="metting-cell-end-hour">Horario Fim:</label>
                                                     </div>
 
@@ -108,7 +108,7 @@
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l6">
-                                                        <input id="offer-value" name="offer-value" type="text" class="validate" maxlength="50">
+                                                        <input id="offer-value" name="offer-value" type="text" class="validate" maxlength="50"  value="{{ event.extra_data.offer_value }}">
                                                         <label for="offer-value">Valor</label>
                                                     </div>
 
@@ -125,14 +125,14 @@
                                                     </div>
 
                                                     <div class="input-field col s6 m6 l6">
-                                                        <input id="metting-children-qtd" name="metting-children-qtd" type="text" class="validate" maxlength="50">
+                                                        <input id="metting-children-qtd" name="metting-children-qtd" type="text" class="validate" maxlength="50"  value="{{ event.extra_data.children_qtd }}">
                                                         <label for="metting-children-qtd">Nro de Crianças</label>
                                                     </div>
 
 
                                                     <div class="row">
                                                         <div class="input-field col s12">
-                                                          <textarea id="metting-resume" name="metting-resume" class="materialize-textarea"></textarea>
+                                                          <textarea id="metting-resume" name="metting-resume" class="materialize-textarea"> {{ event.extra_data.resume }}</textarea>
                                                           <label for="metting-resume">Resumo da reunião</label>
                                                         </div>
                                                     </div>                                                                                                    
@@ -154,7 +154,29 @@
                                                 <div class="row">
                                          
                                                 <ul class="collection" id="servant-cell-added">
-                                                    
+
+                                                    {% for item in event_leaders %}
+
+                                                        <li id="user-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ item.role.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('user-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+                                                            <input type="hidden" name='user-added[]' id='user-added-x' value="{{ item.user.id }}"/>
+                                                            <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for role_id in item.role %}{% if forloop.last %}{{ role_id.id }}{% else %}{{ role_id.id }},{% endif %}{% endfor %}"/>
+
+
+                                                        </li>
+
+                                                    {% endfor %}
 
                                                 </ul>
 
@@ -193,13 +215,20 @@
                                                 <div class="row">
                                                     <ul class="collection with-header" id="presence-list">
                                                         <li class="collection-header"><h5>Membros presentes</h5></li>
-                                                        {% for item in cell_members %}   
-                                                            <li class="collection-item valign-wrapper">
-                                                                <input type="checkbox" id="member_presence_{{ item.id }}" name="member_presence[]" value="{{ item.id }}"/>
-                                                                <label class="black-text" for="member_presence_{{ item.id }}"></label>
-                                                                <img class="circle" width="50" height="50" avatar="{{ item.extra_data.first_name }} {{ item.extra_data.last_name }}" />
+                                                        {% for item in event_members %}   
+                                                            <li class="collection-item valign-wrapper ">
+
+                                                                <input type="checkbox" id="member_presence_{{ item.user.id }}" name="member_presence[]" value="{{ item.user.id }}" checked="checked" />
+                                                                <label class="black-text" for="member_presence_{{ item.user.id }}"></label>
+
+                                                                {% if item.user.extra_data.profile_image %}
+                                                                    <img class="circle" height="50px" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                                {% else %}
+                                                                    <img class="circle" height="50px" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                                {% endif %}
+
                                                                 <div style="padding-right: 15px"></div>
-                                                                {{ item.extra_data.first_name }} {{ item.extra_data.last_name }}
+                                                                {{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}
                                                             </li>
                                                         {% endfor %}
                                                     </ul>                                                         
