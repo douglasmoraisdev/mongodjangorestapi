@@ -9,7 +9,7 @@ from bethelgroups.models import *
 
 def task(request, task_id):
 
-	template = loader.get_template('home/task/task.html')
+	template = loader.get_template('app/task/task.html')
 
 	tasks = Tasks()
 	tasks = tasks.get_task_by_id(task_id)
@@ -24,7 +24,7 @@ def task(request, task_id):
 
 def task_new(request):
 
-	template = loader.get_template('home/task/task_new.html')
+	template = loader.get_template('app/task/task_new.html')
 
 	content = {
 		'Users': Users.objects,

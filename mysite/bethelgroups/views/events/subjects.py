@@ -11,7 +11,7 @@ from bethelgroups.models import *
 
 def subject(request, event_id):
 
-	template = loader.get_template('home/event/subject/subject.html')
+	template = loader.get_template('app/event/subject/subject.html')
 	
 	member_maps = []	
 
@@ -71,7 +71,7 @@ def subject(request, event_id):
 
 def subject_new(request, course_id):
 
-	template = loader.get_template('home/event/subject/subject_new.html')
+	template = loader.get_template('app/event/subject/subject_new.html')
 
 	course = Events.objects.get(id=course_id)
 
@@ -179,7 +179,7 @@ def subject_new(request, course_id):
 
 def subject_edit(request, course_id, subject_id):
 
-	template = loader.get_template('home/event/subject/subject_edit.html')
+	template = loader.get_template('app/event/subject/subject_edit.html')
 
 	subject = Events.objects.get(id=subject_id)
 

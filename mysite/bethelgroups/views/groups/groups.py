@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 def group(request, group_id):
 
-	template = loader.get_template('home/group/group.html')
+	template = loader.get_template('app/group/group.html')
 
 	leader_users = []
 	host_users = []
@@ -91,7 +91,7 @@ def group(request, group_id):
 
 def group_new(request):
 
-	template = loader.get_template('home/group/group_new.html')
+	template = loader.get_template('app/group/group_new.html')
 
 
 	content = {
@@ -191,7 +191,7 @@ def group_new(request):
 # ok - prod
 def cell_new(request):
 
-	template = loader.get_template('home/group/cells/cell_new.html')
+	template = loader.get_template('app/group/cells/cell_new.html')
 
 
 	content = {
@@ -306,7 +306,7 @@ def cell_new(request):
 
 def grouptype_new(request):
 
-	template = loader.get_template('home/group/grouptype_new.html')
+	template = loader.get_template('app/group/grouptype_new.html')
 
 	content = {
 		'Users': Users.objects,

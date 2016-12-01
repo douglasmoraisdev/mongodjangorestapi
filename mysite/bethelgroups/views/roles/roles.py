@@ -11,7 +11,7 @@ from bethelgroups.models import *
 
 def role_new(request):
 
-	template = loader.get_template('home/role/role_new.html')
+	template = loader.get_template('app/role/role_new.html')
 
 	content = {
 		'Users': Users.objects,

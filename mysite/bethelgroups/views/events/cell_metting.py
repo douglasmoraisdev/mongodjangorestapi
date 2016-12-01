@@ -11,7 +11,7 @@ from bethelgroups.models import *
 
 def cell_metting(request, event_id):
 
-	template = loader.get_template('home/event/cell_metting/cell_metting.html')
+	template = loader.get_template('app/event/cell_metting/cell_metting.html')
 
 	group_name = ''
 	member_maps = []
@@ -81,7 +81,7 @@ def cell_metting(request, event_id):
 
 def cell_metting_new(request, group_id):
 
-	template = loader.get_template('home/event/cell_metting/cell_metting_new.html')
+	template = loader.get_template('app/event/cell_metting/cell_metting_new.html')
 
 	group_metting_name = ''
 	group_metting_id = ''
@@ -203,7 +203,7 @@ def cell_metting_new(request, group_id):
 
 def cell_metting_edit(request, group_id, event_id):
 
-	template = loader.get_template('home/event/cell_metting/cell_metting_edit.html')
+	template = loader.get_template('app/event/cell_metting/cell_metting_edit.html')
 
 	group_metting_name = ''
 	group_metting_id = ''

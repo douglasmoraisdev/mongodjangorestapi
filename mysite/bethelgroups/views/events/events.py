@@ -11,7 +11,7 @@ from bethelgroups.models import *
 
 def event(request, event_id):
 
-	template = loader.get_template('home/event/event.html')
+	template = loader.get_template('app/event/event.html')
 
 	group_name = ''
 		
@@ -46,7 +46,7 @@ def event(request, event_id):
 
 def event_new(request):
 
-	template = loader.get_template('home/event/event_new.html')
+	template = loader.get_template('app/event/event_new.html')
 
 	content = {
 		'Users': Users.objects,
@@ -141,7 +141,7 @@ def event_new(request):
 
 def new_course(request):
 
-	template = loader.get_template('home/event/course/course_new.html')
+	template = loader.get_template('app/event/course/course_new.html')
 
 	content = {
 		'Users': Users.objects,
@@ -242,7 +242,7 @@ def new_course(request):
 
 def course(request, event_id):
 
-	template = loader.get_template('home/event/course/event_course.html')
+	template = loader.get_template('app/event/course/event_course.html')
 	
 	
 	events = Events()
@@ -272,7 +272,7 @@ def course(request, event_id):
 
 def new_subject(request):
 
-	template = loader.get_template('home/event/course/event_new_course_subject.html')
+	template = loader.get_template('app/event/course/event_new_course_subject.html')
 
 	content = {
 		'Users': Users.objects,
@@ -365,7 +365,7 @@ def new_subject(request):
 
 def subject(request, event_id):
 
-	template = loader.get_template('home/event/course/event_course_subject.html')
+	template = loader.get_template('app/event/course/event_course_subject.html')
 	
 	
 	subject = Events()
@@ -394,7 +394,7 @@ def subject(request, event_id):
 # ok - prod
 def cell_metting_new(request):
 
-	template = loader.get_template('home/event/cell_metting/cell_metting_new.html')
+	template = loader.get_template('app/event/cell_metting/cell_metting_new.html')
 
 
 	content = {

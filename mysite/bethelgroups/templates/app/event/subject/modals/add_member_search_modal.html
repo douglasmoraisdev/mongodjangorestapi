@@ -1,0 +1,99 @@
+
+
+    <!-- Modal Structure -->
+    <div id="member-modal" class="modal modal-fixed-footer">
+        
+        <div class="modal-content">
+            <h4>Adicionar Membro</h4>
+
+            <div class="row">
+                    
+
+                <div class="input-field col s6">
+                    <div class="autocomplete" id="single">
+                        <div class="ac-input">
+                            <input type="text" id="memberSearch"  placeholder="Please input some letters" data-activates="singleDropdown" data-beloworigin="true" autocomplete="off">
+                        </div>
+                        <ul id="singleDropdown" class="dropdown-content ac-dropdown"></ul>
+                    </div>
+                    <label class="active" for="memberSearch">Buscar pessoa: </label>
+                </div>
+
+                <div class="input-field col s12">
+
+                    <div class="collection" id="result-search-member">
+
+
+                    </div>
+
+                </div>
+
+                <input type="hidden" id="member_searched_selected" />
+                <input type="hidden" id="member_role_selected" />
+
+            </div>
+
+        </div>
+
+
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        
+            $(function () {
+                var single = $('#memberSearch').materialize_autocomplete({
+                    multiple: {
+                        enable: false
+                    },
+
+                    dropdown: {
+                        el: '#singleDropdown-removethis'
+                    },
+
+                    hidden: {
+                        enable: true,
+                        el: "#userid",
+                    },
+
+                    onSelect: function (item) {
+                    },
+
+                    getData:function(value, callback){
+
+                        $.ajax({
+                            method: "GET",
+                            dataType: "html",
+                            url: "{{ base_url }}/get_member_autocomplete",
+                            data: { send: value }
+                            })
+                            .always(function(){
+                                //loading
+                            })
+                            .done(function( msg ) {
+
+                                $('#result-search-member').html('');
+                                $('#result-search-member').append(msg);                                
+
+                            });
+
+
+                    }
+
+                });
+
+            }); 
+
+
+            $('#memberSearch').blur(function(){
+              
+                    $('#memberSearch').val('');
+            });
+
+
+    </script>

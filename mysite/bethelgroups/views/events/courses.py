@@ -11,7 +11,7 @@ from bethelgroups.models import *
 
 def course(request, event_id):
 
-	template = loader.get_template('home/event/course/course.html')
+	template = loader.get_template('app/event/course/course.html')
 
 	member_maps = []
 	
@@ -82,7 +82,7 @@ def course(request, event_id):
 
 def course_new(request):
 
-	template = loader.get_template('home/event/course/course_new.html')
+	template = loader.get_template('app/event/course/course_new.html')
 
 	content = {
 		'Users': Users.objects,
@@ -188,7 +188,7 @@ def course_new(request):
      
 def course_edit(request, course_id):
 
-	template = loader.get_template('home/event/course/course_edit.html')
+	template = loader.get_template('app/event/course/course_edit.html')
 
 	events = Events()
 	events = events.get_event_by_id(course_id)

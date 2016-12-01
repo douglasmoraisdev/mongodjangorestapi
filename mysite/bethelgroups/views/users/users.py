@@ -15,7 +15,7 @@ from bethelgroups.models import *
 
 def user(request, user_id):
 
-	template = loader.get_template('home/user/user.html') 
+	template = loader.get_template('app/user/user.html') 
 
 	user_id = ObjectId(user_id)
 	
@@ -47,7 +47,7 @@ def user(request, user_id):
 
 def user_new(request):
 
-	template = loader.get_template('home/user/user_new.html')
+	template = loader.get_template('app/user/user_new.html')
 
 	content = {
 		'Users': Users.objects,
@@ -123,7 +123,7 @@ def get_servant_autocomplete(request):
 		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
 	}	
 
-	template = loader.get_template('home/group/cells/modals/servant_item_list_search.html')
+	template = loader.get_template('app/group/cells/modals/servant_item_list_search.html')
 
 	return HttpResponse(template.render(content,request))	
 
@@ -145,7 +145,7 @@ def add_servant_list(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('home/group/cells/modals/servant_item_list_add.html')
+	template = loader.get_template('app/group/cells/modals/servant_item_list_add.html')
 
 	return HttpResponse(template.render(content,request))
 
@@ -160,7 +160,7 @@ def get_member_autocomplete(request):
 		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
 	}	
 
-	template = loader.get_template('home/group/cells/modals/member_item_list_search.html')
+	template = loader.get_template('app/group/cells/modals/member_item_list_search.html')
 
 	return HttpResponse(template.render(content,request))	
 
@@ -183,7 +183,7 @@ def add_member_list(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('home/group/cells/modals/member_item_list_add.html')
+	template = loader.get_template('app/group/cells/modals/member_item_list_add.html')
 
 	return HttpResponse(template.render(content,request))
 
@@ -206,7 +206,7 @@ def add_member_list_presence(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('home/event/cell_metting/modals/member_item_list_presence_add.html')
+	template = loader.get_template('app/event/cell_metting/modals/member_item_list_presence_add.html')
 
 	return HttpResponse(template.render(content,request))
 
@@ -248,7 +248,7 @@ def add_member_list_save(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('home/group/cells/modals/member_item_list_add_save.html')
+	template = loader.get_template('app/group/cells/modals/member_item_list_add_save.html')
 
 	return HttpResponse(template.render(content,request))
 

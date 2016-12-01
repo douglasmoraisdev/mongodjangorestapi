@@ -22,7 +22,7 @@ def cell(request, group_id):
 
 	#geocode_result = gmaps.geocode('2345 Avenida Adão Foques, Florida, Guaíba, Rio grande do Sul, Brasil')
 
-	template = loader.get_template('home/group/cells/cell.html')
+	template = loader.get_template('app/group/cells/cell.html')
 
 	leader_users = []
 	host_users = []
@@ -132,7 +132,7 @@ def cell(request, group_id):
 
 def cell_new(request):
 
-	template = loader.get_template('home/group/cells/cell_new.html')
+	template = loader.get_template('app/group/cells/cell_new.html')
 
 
 	content = {
@@ -247,7 +247,7 @@ def cell_new(request):
 
 def cell_edit(request, group_id):
 
-	template = loader.get_template('home/group/cells/cell_edit.html')
+	template = loader.get_template('app/group/cells/cell_edit.html')
 
 	cell_members = []
 	cell_leaders = []

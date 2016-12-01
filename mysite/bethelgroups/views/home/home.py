@@ -22,7 +22,7 @@ def index(request):
     if ('user_id' in request.session):
         if (request.session['user_id'] != ''):
 
-            template = loader.get_template('home/index.html')
+            template = loader.get_template('app/index.html')
 
             user_id = request.session['user_id']
 
@@ -49,7 +49,7 @@ def index(request):
 
 def loginLogout(request):
 
-    template = loader.get_template('home/login.html')
+    template = loader.get_template('app/login.html')
 
     if (request.method == 'POST') and (request.POST.get('action') != 'logout'):
 
