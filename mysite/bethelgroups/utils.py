@@ -3,6 +3,8 @@
 '''
 from django.conf import settings
 import logging
+from bethelgroups.models import *
+from bson.objectid import ObjectId
 
 logger = logging.getLogger(__name__)
 
@@ -46,3 +48,42 @@ def get_users_geo(usersObj):
 			member_maps.append(addr_maps_info)
 
 	return member_maps
+
+def parse_users_multi_role(usersObj, rolesObj):
+
+	user_added = usersObj
+	roles_added = rolesObj
+
+	roles_obj = []
+	servant_roles = []
+
+
+	#servants added get list
+	for key, users in enumerate(user_added):
+		user_obj =	Users.objects.get(id=ObjectId(users))
+
+		for roles in roles_added[key].split(","):
+
+			roles_add = Roles.objects.get(id=ObjectId(roles))
+			roles_obj.append(roles_add)
+
+		servant_roles.append(User_roles(user=user_obj, role=roles_obj))
+
+		roles_obj = []
+
+	return servant_roles
+
+def parse_users_fixed_role(usersObj, roleCode):
+
+	member_added = usersObj
+
+	member_role_code = []
+	members_roles = []
+
+	member_role_code = Roles.objects.get(code=roleCode)
+	for key, users in enumerate(member_added):
+		user_obj =	Users.objects.get(id=ObjectId(users))
+
+		members_roles.append(User_roles(user=user_obj, role=[member_role_code]))
+
+	return members_roles	

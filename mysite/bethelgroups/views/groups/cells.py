@@ -36,12 +36,10 @@ def cell(request, group_id):
 
 	group_id = ObjectId(group_id)
 	
-	group = Groups()
-	group = group.get_group_by_id(group_id)
+	group = Groups().get_group_by_id(group_id)
 
 	group_type_id = group.group_type.id
-	group_type = Groups_types()
-	group_type = group_type.get_grouptype_by_id(ObjectId(group_type_id))
+	group_type = Groups_types().get_grouptype_by_id(ObjectId(group_type_id))
 
 	users = group.get_group_users(group_id)
 
@@ -67,14 +65,11 @@ def cell(request, group_id):
 
 	member_maps = utils.get_users_geo(users)	
 
-	events = Events()
-	events = events.get_events_by_group_id(group_id)
+	events = Events().get_events_by_group_id(group_id)
 
-	meetings = Events()
-	meetings = meetings.get_meetings_by_group_id(group_id)
+	meetings = Events().get_meetings_by_group_id(group_id)
 
-	generated_groups = Groups()
-	generated_groups = generated_groups.get_groups_generetad(group_id)
+	generated_groups = Groups().get_groups_generetad(group_id)
 
 	users_count = len(users)
 	content = {
@@ -96,8 +91,6 @@ def cell(request, group_id):
 		'events':events,
 		'member_maps' : member_maps
 	}
-
-
 	
 	return HttpResponse(template.render(content, request))
 
@@ -154,27 +147,8 @@ def cell_new(request):
 			seq_hash = input_name.replace('cell-days-multiple-','')
 			hours_list.append(request.POST.get('cell-hours-'+seq_hash))
 
-
-		#servants added get list
-		for key, users in enumerate(user_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			for roles in roles_added[key].split(","):
-
-				roles_add = Roles.objects.get(id=ObjectId(roles))
-				roles_obj.append(roles_add)
-
-			servant_roles.append(User_roles(user=user_obj, role=roles_obj))
-
-			roles_obj = []
-
-
-		#members added get list
-		member_role = Roles.objects.get(code="cell_member")
-		for key, users in enumerate(member_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			members_roles.append(User_roles(user=user_obj, role=[member_role]))
+		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
+		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
 
 
 		#join servants and users
@@ -285,26 +259,8 @@ def cell_edit(request, group_id):
 			hours_list.append(request.POST.get('cell-hours-'+seq_hash))
 
 
-		#servants added get list
-		for key, users in enumerate(user_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			for roles in roles_added[key].split(","):
-
-				roles_add = Roles.objects.get(id=ObjectId(roles))
-				roles_obj.append(roles_add)
-
-			servant_roles.append(User_roles(user=user_obj, role=roles_obj))
-
-			roles_obj = []
-
-
-		#members added get list
-		member_role = Roles.objects.get(code="cell_member")
-		for key, users in enumerate(member_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			members_roles.append(User_roles(user=user_obj, role=[member_role]))
+		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
+		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
 
 
 		#join servants and users

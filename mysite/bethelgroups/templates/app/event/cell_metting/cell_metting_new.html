@@ -9,19 +9,18 @@
 
     {% include "default/styles_css.html" %}
 
-    <link href="{% static "css/materialize-stepper.css" %}" rel="stylesheet">
-
 
     <!--Import jQuery before materialize.js-->
     <script src="{% static "js/jquery.js"%}"></script>
     <script src="{% static "js/materialize.js"%}"></script>
     <script src="{% static "js/jquery.validate.min.js"%}"></script>
-    <script src="{% static "js/materialize-stepper.js"%}"></script>
     <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
     <script src="{% static "js/materialize.clockpicker.js"%}"></script>
     <script src="{% static "js/jquery.maskedinput.min.js"%}"></script>
     <script src="{% static "js/letteravatar.js" %}"></script>
+    <script src="{% static "js/materialize-stepper.js"%}"></script>
 
+    <link href="{% static "css/materialize-stepper.css" %}" rel="stylesheet">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,7 +42,7 @@
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
                         <h3 class="light center-align blue-text">Nova Reunião de Célula</h3>
-                        <h5 class="light center-align blue-text">{{ group_metting_name }}</h5>
+                        <h5 class="light center-align blue-text">{{ group.name }}</h5>
                         <div class="card">
                             <div class="card-content">
 
@@ -58,7 +57,7 @@
 
                                                 <div class="row">                                      
 
-                                                    {% if not group_metting_name %}
+                                                    {% if not group.name %}
                                                     <div class="input-field col s12 l6">
                                                         <select id="group-origin" name="group-origin">
                                                             <option value="" disabled selected>Selecione</option>
@@ -69,7 +68,7 @@
                                                         <label>Celula</label>
                                                     </div>
                                                     {% else %}
-                                                        <input type="hidden" name="group-origin" value="{{ group_id }}" >
+                                                        <input type="hidden" name="group-origin" value="{{ group.id }}" >
                                                     {% endif%}
                                  
 
@@ -141,14 +140,14 @@
                                                 </div>
 
                                                 <div class="step-actions">
-                                                    <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Próximo</button>
+                                                    <button class="waves-effect waves-dark btn next-step">Próximo</button>
                                                 </div>
                                             </div>
                                         </li>
 
 
 
-                                        <li class="step">
+                                        <li class="step ">
                                             <div class="step-title waves-effect waves-dark">Servos</div>
                                             <div class="step-content">
                                                 <div class="row">

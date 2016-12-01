@@ -99,26 +99,8 @@ def course_new(request):
 			hours_list.append(request.POST.get('cell-hours-'+seq_hash))
 
 
-		#servants added get list
-		for key, users in enumerate(user_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			for roles in roles_added[key].split(","):
-
-				roles_add = Roles.objects.get(id=ObjectId(roles))
-				roles_obj.append(roles_add)
-
-			servant_roles.append(User_roles(user=user_obj, role=roles_obj))
-
-			roles_obj = []
-
-
-		#members added get list
-		member_role = Roles.objects.get(code="cell_member")
-		for key, users in enumerate(member_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			members_roles.append(User_roles(user=user_obj, role=[member_role]))
+		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
+		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
 
 
 		#join servants and users
@@ -223,26 +205,8 @@ def course_edit(request, course_id):
 			hours_list.append(request.POST.get('cell-hours-'+seq_hash))
 
 
-		#servants added get list
-		for key, users in enumerate(user_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			for roles in roles_added[key].split(","):
-
-				roles_add = Roles.objects.get(id=ObjectId(roles))
-				roles_obj.append(roles_add)
-
-			servant_roles.append(User_roles(user=user_obj, role=roles_obj))
-
-			roles_obj = []
-
-
-		#members added get list
-		member_role = Roles.objects.get(code="cell_member")
-		for key, users in enumerate(member_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			members_roles.append(User_roles(user=user_obj, role=[member_role]))
+		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
+		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
 
 
 		#join servants and users

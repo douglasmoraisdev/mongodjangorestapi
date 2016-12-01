@@ -17,8 +17,7 @@ def cell_metting(request, event_id):
 	group_name = ''
 	member_maps = []
 		
-	events = Events()
-	events = events.get_event_by_id(event_id)
+	events = Events().get_event_by_id(event_id)
 
 	if events.host:
 		group_id = ObjectId(events.host.id)
@@ -26,8 +25,7 @@ def cell_metting(request, event_id):
 		group_id = None
 	
 	if group_id:
-		group = Groups()
-		group = group.get_group_by_id(group_id)
+		group = Groups().get_group_by_id(group_id)
 		group_name = group.name
 
 	users = events.get_event_users(event_id)
@@ -55,15 +53,7 @@ def cell_metting_new(request, group_id):
 
 	template = loader.get_template('app/event/cell_metting/cell_metting_new.html')
 
-	group_metting_name = ''
-	group_metting_id = ''
-
-	group = Groups()
-	group = group.get_group_by_id(group_id)
-
-	if group.id:
-		group_metting_name = group.name
-		group_metting_id = group.id
+	group = Groups().get_group_by_id(group_id)
 
 	content = {
 		'Users': Users.objects,
@@ -72,28 +62,21 @@ def cell_metting_new(request, group_id):
 		'Roles': Roles.objects,
 		'Events': Events.objects,
 		'cell_members': Users.objects,
-		'group_metting_name' : group_metting_name,
-		'group_id':group_metting_id
+		'group' : group,
 	}
 
 
 	if request.method == 'POST':
 
-
 		document_group_origin = None
 		group_origin = None
-		groups_over = None
-		groups_under = None
 		servant_roles = []
 		members_roles = []
 		user_roles = []
-		days_list = []
-		hours_list = []
 		#user_obj
 		#roles_add 		
-		roles_obj = []
 
-		group_origin = request.POST.get('group-origin')
+		group_origin = group_id
 
 		metting_cell_name = request.POST.get('metting-cell-name')
 		metting_cell_date = request.POST.get('metting-cell-date')
@@ -110,26 +93,8 @@ def cell_metting_new(request, group_id):
 		member_added = request.POST.getlist('member_presence[]')
 		
 
-		#servants added get list
-		for key, users in enumerate(user_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			for roles in roles_added[key].split(","):
-
-				roles_add = Roles.objects.get(id=ObjectId(roles))
-				roles_obj.append(roles_add)
-
-			servant_roles.append(User_roles(user=user_obj, role=roles_obj))
-
-			roles_obj = []
-
-
-		#members added get list
-		member_role = Roles.objects.get(code="cell_member")
-		for key, users in enumerate(member_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			members_roles.append(User_roles(user=user_obj, role=[member_role]))
+		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
+		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
 
 
 		if group_origin:
@@ -223,13 +188,9 @@ def cell_metting_edit(request, group_id, event_id):
 
 		document_group_origin = None
 		group_origin = None
-		groups_over = None
-		groups_under = None
 		servant_roles = []
 		members_roles = []
 		user_roles = []
-		days_list = []
-		hours_list = []
 		#user_obj
 		#roles_add 		
 		roles_obj = []
@@ -251,27 +212,8 @@ def cell_metting_edit(request, group_id, event_id):
 		member_added = request.POST.getlist('member_presence[]')
 		
 
-		#servants added get list
-		for key, users in enumerate(user_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			for roles in roles_added[key].split(","):
-
-				roles_add = Roles.objects.get(id=ObjectId(roles))
-				roles_obj.append(roles_add)
-
-			servant_roles.append(User_roles(user=user_obj, role=roles_obj))
-
-			roles_obj = []
-
-
-		#members added get list
-		member_role = Roles.objects.get(code="cell_member")
-		for key, users in enumerate(member_added):
-			user_obj =	Users.objects.get(id=ObjectId(users))
-
-			members_roles.append(User_roles(user=user_obj, role=[member_role]))
-
+		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
+		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
 
 		if group_origin:
 			document_group_origin = Groups.objects.get(id=ObjectId(group_origin))
