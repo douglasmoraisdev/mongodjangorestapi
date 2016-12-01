@@ -134,7 +134,8 @@ def course_new(request):
 				  extra_data=extra_data)
 		
 
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('home'))
+
 
 	else:
 
@@ -240,7 +241,8 @@ def course_edit(request, course_id):
 				  extra_data=extra_data)
 		
 
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('course', args=(course_id,)))
+
 
 	else:
 

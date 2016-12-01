@@ -131,7 +131,8 @@ def cell_metting_new(request, group_id):
 				  end_date=metting_cell_date,
 				  extra_data=extra_data)
 
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('cell', args=(group_id,)))
+
 
 	else:
 
@@ -251,7 +252,7 @@ def cell_metting_edit(request, group_id, event_id):
 				  end_date=metting_cell_date,
 				  extra_data=extra_data)
 
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('cell_metting', args=(event_id,)))
 
 	else:
 

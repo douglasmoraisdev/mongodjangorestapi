@@ -184,7 +184,7 @@ def cell_new(request):
 			)
 		
 
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('home'))
 
 	else:
 
@@ -296,8 +296,7 @@ def cell_edit(request, group_id):
 			extra_data=extra_data
 			)
 		
-
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('cell', args=(group_id,)))
 
 	else:
 

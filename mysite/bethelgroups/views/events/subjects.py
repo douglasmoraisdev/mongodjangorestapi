@@ -124,7 +124,7 @@ def subject_new(request, course_id):
 				  extra_data=extra_data)
 		
 
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('course', args=(course_id,)))
 
 	else:
 
@@ -237,7 +237,7 @@ def subject_edit(request, course_id, subject_id):
 				  extra_data=extra_data)
 		
 
-		return HttpResponse('ok')
+		return HttpResponseRedirect(reverse('subject', args=(subject_id,)))
 
 	else:
 
