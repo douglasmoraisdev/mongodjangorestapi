@@ -67,7 +67,7 @@
                                         {% for roles in list.role %}
                                         <p>{{ roles.name }}</p>   
                                         {%endfor%}
-                                    <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                    <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                 </li>
                                 {% endfor%}
                             </ul>

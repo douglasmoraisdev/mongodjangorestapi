@@ -128,7 +128,7 @@
                                                     <ul class="collection">
                                                         {% for item in Subjects %}
                                                         <li class="collection-item">
-                                                            <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/disciplina/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/disciplina/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
                                                             </div>
                                                         </li>
                                                         {% endfor %}
@@ -140,7 +140,7 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="http://localhost:10/bethelgroups/disciplina/novo/{{event_id}}" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">add</i></a>
+                                                    <a href="{{ base_url }}/disciplina/novo/{{event_id}}" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">add</i></a>
 
                                                 </div>
 

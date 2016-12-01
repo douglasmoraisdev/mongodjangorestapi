@@ -14,7 +14,7 @@
     </p>
     <div class="secondary-content">
         <a href="#!" onclick="remove_user_save('{{ user_id }}')" class=""><i class="material-icons">delete</i></a>
-        <a href="http://localhost:10/bethelgroups/usuario/get/{{ user_id }}" class=""><i class="material-icons activator">search</i></a>
+        <a href="{{ base_url }}/usuario/get/{{ user_id }}" class=""><i class="material-icons activator">search</i></a>
     </div>
 
     <input type="hidden" name='member-added[]' id='member-added-x' value="{{ user_id }}"/>

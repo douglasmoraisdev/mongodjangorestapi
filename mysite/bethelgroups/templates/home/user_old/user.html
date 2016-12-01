@@ -102,7 +102,7 @@
                             <ul class="collection">
                                 {% for item in Groups %}                                                        
                                     <li class="collection-item">
-                                        <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/grupo/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                        <div>{{ item.name }}<a href="{{ base_url }}/grupo/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
                                     </li>
                                 {% endfor %}
 
@@ -133,7 +133,7 @@
                             <ul class="collection">
                                 {% for item in Events %}                                                        
                                     <li class="collection-item">
-                                        <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                        <div>{{ item.name }}<a href="{{ base_url }}/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
                                     </li>
                                 {% endfor %}
 
@@ -165,7 +165,7 @@
                             <ul class="collection">
                                 {% for item in Courses %}                                                        
                                     <li class="collection-item">
-                                        <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/curso/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                        <div>{{ item.name }}<a href="{{ base_url }}/curso/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
                                     </li>
                                 {% endfor %}
 

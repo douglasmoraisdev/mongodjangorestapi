@@ -84,7 +84,7 @@
                     $.ajax({
                         method: "GET",
                         dataType: "html",
-                        url: "http://localhost:10/bethelgroups/get_servant_autocomplete",
+                        url: "{{ base_url }}/get_servant_autocomplete",
                         data: { send: value }
                         })
                         .always(function(){

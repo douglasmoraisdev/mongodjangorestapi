@@ -87,33 +87,33 @@
 
                                                         <li class="collection-item">
                                                             <div>CPF: {{ group_data.addr_zip }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
                                                             <div>Data de Nascimento: {{ group_data.addr_state }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
                                                             <div>Sexo: {{ group_data.addr_city }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
                                                             <div>Telefone: {{ group_data.addr_neigh }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
                                                             <div>Email: {{ group_data.addr_street }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
@@ -128,39 +128,39 @@
 
                                                         <li class="collection-item">
                                                             <div>CEP: {{ group_data.addr_zip }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
                                                             <div>Estado: {{ group_data.addr_state }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
                                                             <div>Cidade: {{ group_data.addr_city }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
                                                             <div>Bairro: {{ group_data.addr_neigh }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
                                                             <div>Logradouro: {{ group_data.addr_street }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
                                                             <div>Nro/Complemento: {{ group_data.addr_street_number }}
-                                                                <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
@@ -213,7 +213,7 @@
                                                     <ul class="collection">
                                                         {% for item in Groups %}
                                                         <li class="collection-item">
-                                                            <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/reuniaocelula/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/reuniaocelula/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
                                                             </div>
                                                         </li>
                                                         {% endfor %}
@@ -225,7 +225,7 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="http://localhost:10/bethelgroups/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
 
                                                 </div>
 
@@ -248,7 +248,7 @@
                                                     <ul class="collection">
                                                         {% for item in Events %}
                                                         <li class="collection-item">
-                                                            <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
                                                             </div>
                                                         </li>
                                                         {% endfor %}

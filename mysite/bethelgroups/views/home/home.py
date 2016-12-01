@@ -1,10 +1,11 @@
-from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.http import HttpResponseForbidden
 from bson.objectid import ObjectId
 from django.urls import reverse
 from django.contrib import messages
+from django.conf import settings
+
 
 import uuid
 
@@ -38,7 +39,6 @@ def index(request):
                 'Roles': Roles.objects,
                 'Events': user_events,
                 'Courses': user_courses,
-                'base_url': settings.BASE_URL
             }
             return HttpResponse(template.render(content, request))
 

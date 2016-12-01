@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bethelgroups.context_processors.my_context',
             ],
         },
     },
@@ -172,4 +173,5 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 
 # Bethelgroups Settings
+#Base url WITHOUT end slash "/""
 BASE_URL = 'http://localhost:10/bethelgroups'

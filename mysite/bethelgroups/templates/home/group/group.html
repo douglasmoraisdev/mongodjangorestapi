@@ -67,7 +67,7 @@
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                        <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                     </li>
 
                                 {% endfor %}
@@ -80,7 +80,7 @@
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                        <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                     </li>
 
                                 {% endfor %}
@@ -94,7 +94,7 @@
 
                                         <li class="collection-item">
                                             <div>{{ list.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                             </div>
                                         </li>
 
@@ -109,7 +109,7 @@
                                     <li class="collection-header"><h5>Grupo de origem:</h5></li>
                                         <li class="collection-item">
                                             <div>{{ group_origin.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                             </div>
                                         </li>
                                 </ul>
@@ -123,7 +123,7 @@
 
                                         <li class="collection-item">
                                             <div>{{ list.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                             </div>
                                         </li>
 
@@ -139,7 +139,7 @@
 
                                         <li class="collection-item">
                                             <div>{{ list.name }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                             </div>
                                         </li>
 
@@ -159,39 +159,39 @@
 
                                     <li class="collection-item">
                                         <div>CEP: {{ group_data.addr_zip }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
 
                                     <li class="collection-item">
                                         <div>Estado: {{ group_data.addr_state }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
 
                                     <li class="collection-item">
                                         <div>Cidade:  {{ group_data.addr_city }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
                                     <li class="collection-item">
                                         <div>Bairro: {{ group_data.addr_neigh }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
                                     <li class="collection-item">
                                         <div>Logradouro: {{ group_data.addr_street }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
                                     <li class="collection-item">
                                         <div>Nro/Complemento: {{ group_data.addr_street_number }}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
@@ -205,7 +205,7 @@
 
                                     <li class="collection-item">
                                         <div>Frequência de reuniões: Semanal
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                         </div>
                                     </li>
 
@@ -219,7 +219,7 @@
                                                 <p>{{ item.key }} : {{group_data.meet_hour.key}}</p>
 
                                             {% endfor %}
-                                            <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
 
                                         </div>
                                     </li>                                                                                                                               
@@ -258,7 +258,7 @@
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                        <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                     </li>
 
                                 {% endfor %}   
@@ -299,7 +299,7 @@
                                             {% for roles in list.role %}
                                                 <p>{{ roles.name }}</p>
                                             {%endfor%}
-                                        <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
+                                        <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"><i class="material-icons">edit</i></a>
                                     </li>
 
                                 {% endfor %}   
@@ -336,7 +336,7 @@
                             <ul class="collection">
                                 {% for item in meetings %}
                                 <li class="collection-item">
-                                    <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                    <div>{{ item.name }}<a href="{{ base_url }}/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
                                 </li>
                                 {% endfor %}
 
@@ -370,7 +370,7 @@
                             <ul class="collection">
                                 {% for item in events %}
                                 <li class="collection-item">
-                                    <div>{{ item.name }}<a href="http://localhost:10/bethelgroups/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                    <div>{{ item.name }}<a href="{{ base_url }}/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
                                 </li>
                                 {% endfor %}
 

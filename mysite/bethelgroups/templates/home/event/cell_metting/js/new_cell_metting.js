@@ -34,7 +34,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 dataType: "html",
-                url: "http://localhost:10/bethelgroups/add_servant_list",
+                url: "{{ base_url }}/add_servant_list",
                 data: { userid: user_selected, rolesid: roles_selected}
                 })
                 .fail(function(){
@@ -70,7 +70,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 dataType: "html",
-                url: "http://localhost:10/bethelgroups/add_member_list_presence",
+                url: "{{ base_url }}/add_member_list_presence",
                 data: { userid: user_selected, rolesid: roles_selected}
                 })
                 .fail(function(){
