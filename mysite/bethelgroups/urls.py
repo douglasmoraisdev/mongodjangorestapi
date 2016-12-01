@@ -30,10 +30,12 @@ urlpatterns = [
 
     url(r'^curso/get/(.+)/$', views.courses.course, name='curso'),
     url(r'^curso/novo$', views.courses.course_new, name='curso_novo'),
+    url(r'^curso/editar/(.+)/$', views.courses.course_edit, name='curso_editar'),
 
 
-    url(r'^disciplina/get/(.+)/$', views.courses.subject, name='subject'),
-    url(r'^disciplina/novo/(.+)/$', views.courses.subject_new, name='subject_new'),
+    url(r'^disciplina/get/(.+)/$', views.subjects.subject, name='subject'),
+    url(r'^disciplina/novo/(.+)/$', views.subjects.subject_new, name='subject_new'),
+    url(r'^disciplina/editar/(.+)/(.+)/$', views.subjects.subject_edit, name='subject_edit'),
 
 
 

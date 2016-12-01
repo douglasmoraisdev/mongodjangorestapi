@@ -1,92 +1,46 @@
-$('select').material_select();
+// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+{% load static %}
 
 
-function anyThing() {
-    setTimeout(function() {
-        $('.stepper').nextStep();
-    }, 150);
-}
+$('#member-modal-trigger').leanModal({
+    dismissible: false,
+    ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 
-$(function() {
-    $('.stepper').activateStepper();    
+        $('#cell-role-multiple').prop('selectedIndex', 0); //Sets the first option as selected
+        $('#cell-role-multiple').material_select();    
+
+        $('#result-search-users').html('');
+    },                
+    complete: function(){
+
+
+        user_selected = $('#member_searched_selected').val();
+        roles_selectec = $('#member_role_selected').val();
+        group = 'group'
+        group_id = '{{ group_id }}'
+
+        $('#loader-member-cell-added').show();
+
+        $.ajax({
+            method: "GET",
+            dataType: "html",
+            url: "http://localhost:10/bethelgroups/add_member_list_save",
+            data: { userid: user_selected, rolesid: roles_selectec, origin: group, origin_id: group_id}
+            })
+            .fail(function( ){
+                $('#loader-member-cell-added').hide();
+                alert("Erro");
+            })                        
+            .done(function( msg ) {
+
+                $('#member-cell-added').append(msg);
+
+                $('#loader-member-cell-added').hide();
+            });
+
+    }
 });
 
-
-$(document).ready(function () {
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
-    $('#servant-modal-trigger').leanModal({
-        dismissible: false,
-        ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-
-            $('#cell-role-multiple').prop('selectedIndex', 0); //Sets the first option as selected
-            $('#cell-role-multiple').material_select();    
-
-            $('#result-search-users').html('');
-        },                
-        complete: function(){
-
-
-            user_selected = $('#user_searched_selected').val();
-            roles_selectec = $('#cell-role-multiple').val();
-
-            $('#loader-servant-cell-added').show();                    
-
-            $.ajax({
-                method: "GET",
-                dataType: "html",
-                url: "http://localhost:10/bethelgroups/add_servant_list",
-                data: { userid: user_selected, rolesid: roles_selectec}
-                })
-                .fail(function(){
-                    $('#loader-servant-cell-added').hide();
-                })                        
-                .done(function( msg ) {
-
-                    $('#servant-cell-added').append(msg);
-
-                    $('#loader-servant-cell-added').hide();
-                });
-
-        }
-    });
-
-    $('#member-modal-trigger').leanModal({
-        dismissible: false,
-        ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
-
-            $('#cell-role-multiple').prop('selectedIndex', 0); //Sets the first option as selected
-            $('#cell-role-multiple').material_select();    
-
-            $('#result-search-users').html('');
-        },                
-        complete: function(){
-
-
-            user_selected = $('#user_searched_selected').val();
-            roles_selectec = $('#cell-role-multiple').val();
-
-            $('#loader-member-cell-added').show();                    
-
-            $.ajax({
-                method: "GET",
-                dataType: "html",
-                url: "http://localhost:10/bethelgroups/add_member_list",
-                data: { userid: user_selected, rolesid: roles_selectec}
-                })
-                .fail(function(){
-                    $('#loader-member-cell-added').hide();
-                })                        
-                .done(function( msg ) {
-
-                    $('#member-cell-added').append(msg);
-
-                    $('#loader-member-cell-added').hide();
-                });
-
-        }
-    });            
-
-});
 
 
 function add_day_group(){
@@ -101,51 +55,107 @@ function add_day_group(){
 
 function remove_user(list_id){
 
-    $('#'+list_id).remove();
+    $('#member-added-'+list_id).remove();
 };
 
+function remove_user_save(user_id){
+
+    user_selected = user_id;
+    group = 'group'
+    group_id = '{{ group_id }}'
+
+    $('#loader-member-cell-added').show();                    
+
+    $.ajax({
+        method: "GET",
+        dataType: "html",
+        url: "http://localhost:10/bethelgroups/remove_member_list_save",
+        data: { userid: user_selected, origin: group, origin_id: group_id}
+        })
+        .fail(function( ){
+            $('#loader-member-cell-added').hide();
+            alert("Erro");
+        })                        
+        .done(function( msg ) {
+
+            remove_user(user_id);
+            $('#loader-member-cell-added').hide();
+
+        });
+
+}
 
 
-/* Field validators */
-jQuery.validator.setDefaults({
+//Google Maps
+var map;
 
-  rules: {
 
-    'cell-name': {
-      required: true,
-      minlength: 3,
-      maxlength: 25
+function initMap() {
+    var myLatLng = {lat: -30.1291731, lng: -51.315149};
+
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: myLatLng
+    });
+
+    var marcador = new Array();
+    var infowindow = new Array();
+
+        {% for users in member_maps %}
+
+            marcador[{{ forloop.counter0 }}] = new  google.maps.Marker({
+              position: new google.maps.LatLng({{ users.users.0.user.extra_data.addr_lat }}, {{ users.users.0.user.extra_data.addr_lng }}),
+              map: map,
+              title: '{% for names in users.users %} -{{ names.user.extra_data.first_name }}{% endfor %}'
+            });
+
+            var div = document.createElement('DIV');
+            div.innerHTML = '<div class="cardpanel"><ul class="collection">{% for list in users.users %}    <li class="collection-item avatar">        {% if list.user.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> <a href="http://localhost:10/bethelgroups/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>   </li>{% endfor %}    </ul></div>';
+
+            infowindow[[{{ forloop.counter0 }}]] = new google.maps.InfoWindow({
+                content: 'Neste endereço: '+div.innerHTML
+            });
+
+            marcador[{{ forloop.counter0 }}].addListener('click', function() {
+                infowindow[[{{ forloop.counter0 }}]].open(map, marcador[{{ forloop.counter0 }}]);
+            });            
+
+
+        {% endfor %}
+
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < marcador.length; i++) {
+            bounds.extend(marcador[i].getPosition());
+        }
+
+
+    map.fitBounds(bounds);
+    var markerCluster = new MarkerClusterer(map, marcador, {imagePath: '{% static "images/m" %}'});    
+
+}
+
+google.maps.event.addDomListener(window, 'load', initMap);
+
+
+$('.confirm-delete-member-modal-trigger').leanModal({
+    dismissible: false,
+    ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+
+        //$('#').clone().appendTo('#list-user-delete');
+        //$('#display_user_delete')
+
     },
-    'cell-date':'required',
-    'cell-zip':'required',
-	'cell-state':{
-		required:true,
-		minlength: 2,
-		maxlength: 25
-	},
-	'cell-city':{
-		required:true,
-		minlength: 3,
-		maxlength: 25
-	},
-	'cell-neigh':{
-		required:true,
-		minlength: 3,
-		maxlength: 25
-	},	
-	'cell-street':{
-		required:true,
-		minlength: 3,
-		maxlength: 25
-	},		
-	'cell-street-number':{
-		required:true,
-		maxlength: 25
-	},	
-  }
+    complete: function(){
+        $('#list-user-delete').html('');
+    }
+    
 });
 
-jQuery(function($){
+function update_delete_modal(user_id){
 
-   
-});    
+    $('#user_to_delete').val(user_id);
+
+    $('div#user-added-info-'+user_id).clone().appendTo('#list-user-delete');
+
+
+}

@@ -42,7 +42,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
-                        <h3 class="light center-align blue-text">Nova Disciplina</h3>
+                        <h3 class="light center-align blue-text">Editar Disciplina</h3>
                         <h5 class="light center-align blue-text">{{ course.name }}</h5>
                         <div class="card">
                             <div class="card-content">
@@ -60,7 +60,7 @@
                                       
 
                                                         <div class="input-field col s12 l12">
-                                                            <input id="subject-name" name="subject-name" type="text" class="validate" maxlength="50">
+                                                            <input id="subject-name" name="subject-name" type="text" class="validate" maxlength="50" value="{{ subject.name }}">
                                                             <label for="subject-name">Nome da Disciplina</label>
                                                         </div>
 
@@ -112,7 +112,29 @@
                                                 <div class="row">
                                          
                                                 <ul class="collection" id="servant-cell-added">
-                                                    
+
+                                                    {% for item in event_leaders %}
+
+                                                        <li id="user-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ item.role.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('user-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+                                                            <input type="hidden" name='user-added[]' id='user-added-x' value="{{ item.user.id }}"/>
+                                                            <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for role_id in item.role %}{% if forloop.last %}{{ role_id.id }}{% else %}{{ role_id.id }},{% endif %}{% endfor %}"/>
+
+
+                                                        </li>
+
+                                                    {% endfor %}
 
                                                 </ul>
 
@@ -150,8 +172,29 @@
                                                 <div class="row">                                            
 
                                                 <ul class="collection" id="member-cell-added">
-                                                    
 
+                                                    {% for item in event_members %}
+
+                                                        <li id="member-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ user_roles.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('member-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+
+                                                            <input type="hidden" name='member-added[]' id='member-added-x' value="{{ item.user.id }}"/>
+
+                                                        </li>
+
+                                                    {% endfor %}
+                                                    
                                                 </ul>
 
                                                 <div class="progress" id="loader-member-cell-added" style="display:none" >
@@ -177,7 +220,7 @@
                                                             <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
                                                 </div>
                                             </div>
-                                        </li>   
+                                        </li>     
 
 
                                         <li class="step">

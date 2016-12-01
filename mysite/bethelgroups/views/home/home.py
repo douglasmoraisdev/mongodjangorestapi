@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.http import HttpResponseForbidden
@@ -37,7 +38,7 @@ def index(request):
                 'Roles': Roles.objects,
                 'Events': user_events,
                 'Courses': user_courses,
-                'baseurl': request.get_full_path
+                'base_url': settings.BASE_URL
             }
             return HttpResponse(template.render(content, request))
 

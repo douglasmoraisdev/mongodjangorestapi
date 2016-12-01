@@ -171,6 +171,5 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 
-# Bethel Groups Settings
-
-EVENT_TYPE_COURSE = {'Evento': 'event', 'Curso' : 'course', 'Retiro': 'acamp'}
+# Bethelgroups Settings
+BASE_URL = 'http://localhost:10/bethelgroups'

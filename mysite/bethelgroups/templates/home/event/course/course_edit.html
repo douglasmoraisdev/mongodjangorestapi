@@ -42,8 +42,8 @@
             <div class="container">
                 <div class="row">
                     <div class="col l8 m10 s12 offset-l2 offset-m1">
-                        <h3 class="light center-align blue-text">Nova Disciplina</h3>
-                        <h5 class="light center-align blue-text">{{ course.name }}</h5>
+                        <h3 class="light center-align blue-text">Editar Curso</h3>
+                        <h5 class="light center-align blue-text">{{ group_metting_name }}</h5>
                         <div class="card">
                             <div class="card-content">
 
@@ -60,24 +60,24 @@
                                       
 
                                                         <div class="input-field col s12 l12">
-                                                            <input id="subject-name" name="subject-name" type="text" class="validate" maxlength="50">
-                                                            <label for="subject-name">Nome da Disciplina</label>
+                                                            <input id="course-name" name="course-name" type="text" class="validate" maxlength="50" value="{{ event.name }}">
+                                                            <label for="course-name">Nome do Curso</label>
                                                         </div>
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="subject-date-start" name="subject-date-start" type="date" class="datepicker">
-                                                            <label for="subject-date-start">Data de Inicio</label>
+                                                            <input id="course-date-start" name="course-date-start" type="date" class="datepicker" value="{{ event.start_date }}">
+                                                            <label for="course-date-start">Data de Inicio</label>
                                                         </div>
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <input id="subject-date-end" name="subject-date-end" type="date" class="datepicker">
-                                                            <label for="subject-date-end">Data do Fim</label>
+                                                            <input id="course-date-end" name="course-date-end" type="date" class="datepicker" value="{{ event.end_date }}">
+                                                            <label for="course-date-end">Data do Fim</label>
                                                         </div>
 
                                                         <div class="input-field col s12 l6">
-                                                            <select id="subject-recorrent" name="subject-recorrent">
+                                                            <select id="course-recorrent" name="course-recorrent">
                                                                 <option value="N" selected>Não</option>
                                                                 <option value="Y">Sim</option>                                                                
                                                             </select>
@@ -112,7 +112,29 @@
                                                 <div class="row">
                                          
                                                 <ul class="collection" id="servant-cell-added">
-                                                    
+
+                                                    {% for item in event_leaders %}
+
+                                                        <li id="user-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ item.role.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('user-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+                                                            <input type="hidden" name='user-added[]' id='user-added-x' value="{{ item.user.id }}"/>
+                                                            <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for role_id in item.role %}{% if forloop.last %}{{ role_id.id }}{% else %}{{ role_id.id }},{% endif %}{% endfor %}"/>
+
+
+                                                        </li>
+
+                                                    {% endfor %}
 
                                                 </ul>
 
@@ -126,7 +148,7 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="servant-modal-trigger" class="waves-effect waves-light btn right" data-target="servant-modal">+ Servo</a>
-                                                        {% include "home/event/subject/modals/add_servant_search_modal.html" %}
+                                                        {% include "home/event/cell_metting/modals/add_servant_search_modal.html" %}
 
 
                                                     </div>
@@ -150,8 +172,29 @@
                                                 <div class="row">                                            
 
                                                 <ul class="collection" id="member-cell-added">
-                                                    
 
+                                                    {% for item in event_members %}
+
+                                                        <li id="member-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ user_roles.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('member-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+
+                                                            <input type="hidden" name='member-added[]' id='member-added-x' value="{{ item.user.id }}"/>
+
+                                                        </li>
+
+                                                    {% endfor %}
+                                                    
                                                 </ul>
 
                                                 <div class="progress" id="loader-member-cell-added" style="display:none" >
@@ -163,7 +206,7 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="member-modal-trigger" class="waves-effect waves-light btn right modal-trigger" data-target="member-modal">+ Membro</a>
-                                                        {% include "home/event/subject/modals/add_member_search_modal.html" %}
+                                                        {% include "home/group/cells/modals/add_member_search_modal.html" %}
 
 
                                                     </div>
@@ -177,7 +220,7 @@
                                                             <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
                                                 </div>
                                             </div>
-                                        </li>   
+                                        </li>    
 
 
                                         <li class="step">
@@ -206,7 +249,7 @@
 
 
     <script>
-        {% include "home/event/subject/js/new_subject.js" %}
+        {% include "home/event/course/js/new_course.js" %}
     </script>
     
     <script src="{% static "js/datepicker_defaults.js"%}"></script>
