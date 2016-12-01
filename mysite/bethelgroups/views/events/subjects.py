@@ -3,6 +3,8 @@ from django.template import loader
 from django.http import HttpResponseForbidden
 from django.urls import reverse
 from bson.objectid import ObjectId
+from bethelgroups import utils
+
 
 import uuid
 
@@ -24,36 +26,7 @@ def subject(request, event_id):
 	users = subject.get_event_users(event_id)
 	users_count = len(users)
 	
-	# Members data for maps
-	tested_user_id = []
-	for usersA in users:
-
-		#Verify same address users
-		for usersB in users:
-
-			if (usersA.user.id != usersB.user.id):
-				if (usersB.user.id not in tested_user_id):				
-					if (usersA.user.extra_data['addr_lat'] == usersB.user.extra_data['addr_lat']) and (usersA.user.extra_data['addr_lng'] == usersB.user.extra_data['addr_lng']):
-
-						tested_user_id.append(usersA.user.id)
-						tested_user_id.append(usersB.user.id)
-						logger.error('Mesmo endereço: %s e %s' % (usersA.user.extra_data['first_name'], usersB.user.extra_data['first_name']))
-
-						addr_maps_info = {
-							'users' : [usersA, usersB]
-						}
-
-						member_maps.append(addr_maps_info)
-
-		#Add other members no duplied
-		if (usersA.user.id not in tested_user_id):
-
-			addr_maps_info = {
-				'users' : [usersA]
-			}
-
-			member_maps.append(addr_maps_info)
-
+	member_maps = utils.get_users_geo(users)
 
 	content = {
 		'subject': subject,

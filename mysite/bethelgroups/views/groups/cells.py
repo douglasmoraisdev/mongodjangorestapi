@@ -3,6 +3,8 @@ from django.template import loader
 from django.http import HttpResponseForbidden
 from bson.objectid import ObjectId
 from django.urls import reverse
+from bethelgroups import utils
+
 
 import uuid
 import googlemaps
@@ -18,7 +20,7 @@ logger = logging.getLogger(__name__)
 def cell(request, group_id):
 
 	# Google Maps Client
-	gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
+	#gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
 
 	#geocode_result = gmaps.geocode('2345 Avenida Adão Foques, Florida, Guaíba, Rio grande do Sul, Brasil')
 
@@ -63,37 +65,7 @@ def cell(request, group_id):
 					visitor_users.append(user_list)
 					user_already_listed.append(user_list.user.id)
 
-	# Members data for maps
-	tested_user_id = []
-	for usersA in users:
-
-		#Verify same address users
-		for usersB in users:
-
-			if (usersA.user.id != usersB.user.id):
-				if (usersB.user.id not in tested_user_id):				
-					if (usersA.user.extra_data['addr_lat'] == usersB.user.extra_data['addr_lat']) and (usersA.user.extra_data['addr_lng'] == usersB.user.extra_data['addr_lng']):
-
-						tested_user_id.append(usersA.user.id)
-						tested_user_id.append(usersB.user.id)
-						logger.error('Mesmo endereço: %s e %s' % (usersA.user.extra_data['first_name'], usersB.user.extra_data['first_name']))
-
-						addr_maps_info = {
-							'users' : [usersA, usersB]
-						}
-
-						member_maps.append(addr_maps_info)
-
-		#Add other members no duplied
-		if (usersA.user.id not in tested_user_id):
-
-			addr_maps_info = {
-				'users' : [usersA]
-			}
-
-			member_maps.append(addr_maps_info)
-
-			
+	member_maps = utils.get_users_geo(users)	
 
 	events = Events()
 	events = events.get_events_by_group_id(group_id)
