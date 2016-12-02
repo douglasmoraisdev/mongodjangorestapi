@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'bethelgroups.middleware.auth.SimpleMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.backends.dummy',
         'NAME': '/tmp/mysite.sqlite3',
     }
 }
