@@ -40,13 +40,7 @@ def index(request):
         'Courses': user_courses,
     }
     return HttpResponse(template.render(content, request))
-
-    '''
-        else:
-            return HttpResponseRedirect('/bethelgroups/login')
-    else:
-        return HttpResponseRedirect('/bethelgroups/login')
-    '''
+    
 
 def loginLogout(request):
 

@@ -176,3 +176,6 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # Bethelgroups Settings
 #Base url WITHOUT end slash "/""
 BASE_URL = 'http://localhost:10/bethelgroups'
+
+#Default Login URL
+LOGIN_URL = BASE_URL+'/login'

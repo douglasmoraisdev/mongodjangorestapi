@@ -5,11 +5,14 @@ from django.urls import reverse
 from bson.objectid import ObjectId
 from bethelgroups import utils
 
+from bethelgroups.decorators import *
+
+
 import uuid
 
 from bethelgroups.models import *
 
-
+@bethel_login_required
 def cell_metting(request, event_id):
 
 	template = loader.get_template('app/event/cell_metting/cell_metting.html')
