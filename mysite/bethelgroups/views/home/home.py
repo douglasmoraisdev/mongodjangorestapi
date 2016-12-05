@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.conf import settings
 
+from bethelgroups.decorators import *
 
 import uuid
 
@@ -16,36 +17,36 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
+@bethel_login_required
 def index(request):
 
-    if ('user_id' in request.session):
-        if (request.session['user_id'] != ''):
 
-            template = loader.get_template('app/index.html')
+    template = loader.get_template('app/index.html')
 
-            user_id = request.session['user_id']
+    user_id = request.session['user_id']
 
-            user = Users().get_user_by_id(user_id)
+    user = Users().get_user_by_id(user_id)
 
-            user_groups = Groups().get_user_groups_by_type(user_id)
-            user_events = Events().get_user_events_by_type(user_id)
-            user_courses = Events().get_user_courses(user_id)
+    user_groups = Groups().get_user_groups_by_type(user_id)
+    user_events = Events().get_user_events_by_type(user_id)
+    user_courses = Events().get_user_courses(user_id)
 
 
-            content = {
-                'user_name': user.user_name,
-                'Groups': user_groups,
-                'Roles': Roles.objects,
-                'Events': user_events,
-                'Courses': user_courses,
-            }
-            return HttpResponse(template.render(content, request))
+    content = {
+        'user_name': user.user_name,
+        'Groups': user_groups,
+        'Roles': Roles.objects,
+        'Events': user_events,
+        'Courses': user_courses,
+    }
+    return HttpResponse(template.render(content, request))
 
+    '''
         else:
             return HttpResponseRedirect('/bethelgroups/login')
     else:
         return HttpResponseRedirect('/bethelgroups/login')
+    '''
 
 def loginLogout(request):
 

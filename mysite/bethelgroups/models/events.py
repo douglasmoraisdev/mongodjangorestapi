@@ -124,6 +124,4 @@ class Events(Document):
 					user_events[etype.event_type.code] = [events[key]]
 
 
-		logger.error(user_events)
-
 		return user_events
