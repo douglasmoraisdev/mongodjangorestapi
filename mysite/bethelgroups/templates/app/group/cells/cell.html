@@ -108,7 +108,7 @@
                                                     {% if groups_over %}
                                                     <ul class="collection with-header">
                                                         <li class="collection-header">
-                                                            <h5>Supervisionado por:</h5>
+                                                            <h6>Supervisionado por:</h6>
                                                         </li>
                                                         {% for list in groups_over %}
 
@@ -124,7 +124,7 @@
                                                     {% endif %} {% if group_origin %}
                                                     <ul class="collection with-header">
                                                         <li class="collection-header">
-                                                            <h5>Grupo de origem:</h5>
+                                                            <h6>Grupo de origem:</h6>
                                                         </li>
                                                         <li class="collection-item">
                                                             <div>{{ group_origin.name }}
@@ -136,7 +136,7 @@
 
                                                     <ul class="collection with-header">
                                                         <li class="collection-header">
-                                                            <h5>Grupos que originou</h5>
+                                                            <h6>Grupos que originou</h6>
                                                         </li>
                                                         {% for list in generated_groups %}
 
@@ -152,7 +152,7 @@
 
                                                     <ul class="collection with-header">
                                                         <li class="collection-header">
-                                                            <h5>Supervisionando:</h5>
+                                                            <h6>Supervisionando:</h6>
                                                         </li>
                                                         {% for list in groups_under %}
 

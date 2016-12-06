@@ -1,7 +1,7 @@
 db.events.drop();
 db.groups.drop();
 
-
+/* Events Types */
 db.events_types.drop();
 db.events_types.insert({code:"subject", name:"Disciplina"});
 db.events_types.insert({code:"course", name:"Curso"});
@@ -10,7 +10,7 @@ db.events_types.insert({code:"event", name:"Evento"});
 db.events_types.insert({code:"meeting", name:"Reunião de Células"});
 
 
-
+/* Groups Types */
 db.groups_types.drop()
 db.groups_types.insert({code:"cell", name:"Célula"});
 db.groups_types.insert({code:"network", name:"Rede"});
@@ -43,6 +43,10 @@ db.permissions.drop()
 db.permissions.insert({target_obj:"groups", perms: "rwc", role: leader._id});
 db.permissions.insert({target_obj:"groups", perms: "r", role: cell_member._id});
 
+db.permissions.insert({target_obj:"events", perms: "rwc", role: leader._id});
+db.permissions.insert({target_obj:"events", perms: "r", role: cell_member._id});
+
+/* Users */
 db.users.drop();
 db.users.insert({
 	"user_name" : "msantos.douglas@gmail.com",

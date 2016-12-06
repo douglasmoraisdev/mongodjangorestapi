@@ -116,19 +116,34 @@ class Groups(Document):
 		return group
 
 	def get_user_groups_by_type(self, user_id):
+		'''
+			return a list of groups-type separated
+		'''
 
-		group = Groups.objects(user_roles__user=user_id)
+		groups_under = []
+
+		# Get user groups
+		groups = Groups.objects(user_roles__user=user_id)
+
+		# Get groups under (all groups that this group is over)
+		groups_under = Groups.objects(groups_over__in=groups)
 
 		user_groups = dict()
 
-		for key, gtype in enumerate(group):
+		for key, gtype in enumerate(groups):
 
 			if gtype.group_type.code in user_groups:
-				user_groups[gtype.group_type.code].append(group[key])
+				user_groups[gtype.group_type.code].append(groups[key])
 			else:
-				user_groups[gtype.group_type.code] = [group[key]]
+				user_groups[gtype.group_type.code] = [groups[key]]
 
 
+		for key, gtype in enumerate(groups_under):
+
+			if gtype.group_type.code in user_groups:
+				user_groups[gtype.group_type.code].append(groups_under[key])
+			else:
+				user_groups[gtype.group_type.code] = [groups_under[key]]				
 
 		return user_groups
 

@@ -112,8 +112,8 @@ def cell_new(request):
 	if request.method == 'POST':
 
 		group_origin = None
-		groups_over = None
-		groups_under = None
+		groups_over = []
+		groups_under = []
 		servant_roles = []
 		members_roles = []
 		user_roles = []
@@ -157,6 +157,12 @@ def cell_new(request):
 
 		for members in members_roles:
 			user_roles.append(members)
+
+		for gu in groups_down_multiple:			
+			groups_under.append(Groups.objects.get(id=gu))
+
+		for go in groups_up_multiple:			
+			groups_over.append(Groups.objects.get(id=go))	
 
 
 		#extra data formater
@@ -223,8 +229,8 @@ def cell_edit(request, group_id):
 	if request.method == 'POST':
 
 		group_origin = None
-		groups_over = None
-		groups_under = None
+		groups_over = []
+		groups_under = []
 		servant_roles = []
 		members_roles = []
 		user_roles = []
@@ -270,6 +276,12 @@ def cell_edit(request, group_id):
 		for members in members_roles:
 			user_roles.append(members)
 
+
+		for gu in groups_down_multiple:			
+			groups_under.append(Groups.objects.get(id=gu))
+
+		for go in groups_up_multiple:			
+			groups_over.append(Groups.objects.get(id=go))			
 
 		#extra data formater
 		extra_data = dict({

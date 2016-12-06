@@ -16,6 +16,9 @@ class Permissions(Document):
 		event_roles_user = dict()		
 		group_roles_user = dict()
 
+		event_perms = None
+		group_perms = None
+
 
 		#Get perms for Events
 		all_user_roles = []		
@@ -25,7 +28,8 @@ class Permissions(Document):
 				all_user_roles.append(rls)			
 			event_roles_user = {'type': 'events', 'roles': all_user_roles}			
 
-		event_perms = Permissions().get_app_perms(event_roles_user['type'], event_roles_user['roles'])
+		if event_roles_user:
+			event_perms = Permissions().get_app_perms(event_roles_user['type'], event_roles_user['roles'])
 
 
 		#Get perms for Groups
@@ -36,10 +40,11 @@ class Permissions(Document):
 				all_user_roles.append(rls)				
 			group_roles_user  = {'type': 'groups', 'roles': all_user_roles}
 
-		group_perms = Permissions().get_app_perms(group_roles_user['type'], group_roles_user['roles'])
+		if group_roles_user:
+			group_perms = Permissions().get_app_perms(group_roles_user['type'], group_roles_user['roles'])
 
 
-		return [event_perms, group_perms]
+		return {"events":event_perms, "groups":group_perms}
 
 		
 
