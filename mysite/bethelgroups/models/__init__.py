@@ -7,3 +7,4 @@ from .roles import *
 from .tasks import *
 from .financial_account import *
 from .financial_movement import *
+from .permissions import *

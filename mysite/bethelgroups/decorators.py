@@ -2,7 +2,7 @@ from django.conf import settings
 from django.http import HttpResponse, HttpResponseRedirect
 
 
-def bethel_login_required(func=None):
+def bethel_auth_required(func=None):
     '''
         Verify the login status of user
         if not logged in then redirect to login page configured on settings.LOGIN_URL
@@ -26,4 +26,4 @@ def bethel_login_required2(func=None, home_url=None, redirect_field_name=None):
         return HttpResponse('dale')
         #return func(request, *args, **kwargs)
 
-    return _decorated    
+    return _decorated

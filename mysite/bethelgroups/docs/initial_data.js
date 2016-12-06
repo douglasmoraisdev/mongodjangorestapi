@@ -20,19 +20,28 @@ db.groups_types.insert({code:"satelite_church", name:"Congregação"});
 db.groups_types.insert({code:"main_church", name:"Igreja Sede"});
 
 
-
 db.roles.drop()
 /* Courses roles */
-db.roles.insert({code:"student", name:"Aluno"});
-db.roles.insert({code:"teacher", name:"Professor"});
+var student = {code:"student", name:"Aluno"};
+db.roles.save(student);
+var teacher = {code:"teacher", name:"Professor"};
+db.roles.save(teacher);
 
 /* Group roles */
-db.roles.insert({code:"visitor", name:"Visitante"})
-db.roles.insert({code:"cell_member", name:"Membro em Célula"})
-db.roles.insert({code:"host", name:"Anfitrião"});
-db.roles.insert({code:"leader", name:"Lider"});
+var visitor = {code:"visitor", name:"Visitante"}
+db.roles.save(visitor);
+var cell_member = {code:"cell_member", name:"Membro em Célula"}
+db.roles.save(cell_member);
+var host = {code:"host", name:"Anfitrião"};
+db.roles.save(host);
+var leader = {code:"leader", name:"Lider"};
+db.roles.save(leader);
 
 
+/* Permissions */
+db.permissions.drop()
+db.permissions.insert({target_obj:"groups", perms: "rwc", role: leader._id});
+db.permissions.insert({target_obj:"groups", perms: "r", role: cell_member._id});
 
 db.users.drop();
 db.users.insert({

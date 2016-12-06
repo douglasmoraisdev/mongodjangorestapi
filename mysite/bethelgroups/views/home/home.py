@@ -17,7 +17,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-@bethel_login_required
+@bethel_auth_required
 def index(request):
 
 
@@ -27,15 +27,16 @@ def index(request):
 
     user = Users().get_user_by_id(user_id)
 
+    user_perms = request.session['user_perms']
+
     user_groups = Groups().get_user_groups_by_type(user_id)
     user_events = Events().get_user_events_by_type(user_id)
     user_courses = Events().get_user_courses(user_id)
 
-
     content = {
         'user_name': user.user_name,
+        'Roles': Roles.objects,        
         'Groups': user_groups,
-        'Roles': Roles.objects,
         'Events': user_events,
         'Courses': user_courses,
     }
@@ -63,10 +64,10 @@ def loginLogout(request):
             
         else:
 
-            user_perms
+            user_perms = Permissions().get_user_perms(user_id)
 
             request.session['user_id'] = str(user_id)
-            request.session['user_perms'] = str(user_id)
+            request.session['user_perms'] = str(user_perms)
             return HttpResponseRedirect('/bethelgroups/')
         
     else:

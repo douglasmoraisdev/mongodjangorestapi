@@ -12,7 +12,7 @@ import uuid
 
 from bethelgroups.models import *
 
-@bethel_login_required
+@bethel_auth_required
 def cell_metting(request, event_id):
 
 	template = loader.get_template('app/event/cell_metting/cell_metting.html')
