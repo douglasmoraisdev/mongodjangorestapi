@@ -173,6 +173,14 @@ SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 
+SESSION_COOKIE_PATH = '/;HttpOnly'
+SESSION_COOKIE_NAME = 'abracadabra'
+
+
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_NAME = 'honda_csrf_230'
+
+
 # Bethelgroups Settings
 #Base url WITHOUT end slash "/""
 BASE_URL = 'http://localhost:10/bethelgroups'

@@ -40,7 +40,7 @@ def index(request):
         'Courses': user_courses,
     }
     return HttpResponse(template.render(content, request))
-    
+
 
 def loginLogout(request):
 
@@ -50,6 +50,7 @@ def loginLogout(request):
 
         user_name = request.POST.get('user-name')
         password = request.POST.get('user-pass')
+        user_perms = dict()
 
         user = Users()
 
@@ -58,11 +59,14 @@ def loginLogout(request):
         if user_id == False:
 
             messages.error(request, u'Usuário e/ou senha inválidos')
-
             return HttpResponse(template.render('', request))
             
         else:
+
+            user_perms
+
             request.session['user_id'] = str(user_id)
+            request.session['user_perms'] = str(user_id)
             return HttpResponseRedirect('/bethelgroups/')
         
     else:

@@ -11,7 +11,7 @@ class Roles(Document):
 	roles_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
 	roles_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
 	#role_groups_scope = ListField(ReferenceField(Groups)) #scope = para ser exibido atribuido a 1-n grupos
-	#role_events_scope = ListField(ReferenceField(Events))	
+	#role_events_scope = ListField(ReferenceField(Events)) #scope = para ser exibido atribuido a 1-n eventos
 	view_order = IntField(max_length=5)
 	permissions = StringField(max_length=3) # r = read - rw = readwrite - rwc = readwritecreate
 	presence = StringField(max_length=1)# y or n
