@@ -66,6 +66,8 @@ def loginLogout(request):
 
 			user_perms = Permissions().get_user_perms(user_id)
 
+			print(user_perms)
+
 			request.session['user_id'] = str(user_id)
 			request.session['user_perms'] = user_perms
 			return HttpResponseRedirect('/bethelgroups/')

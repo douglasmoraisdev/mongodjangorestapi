@@ -1,5 +1,6 @@
 db.events.drop();
 db.groups.drop();
+db.system.drop();
 
 /* Events Types */
 db.events_types.drop();
@@ -37,6 +38,9 @@ db.roles.save(host);
 var leader = {code:"leader", name:"Lider"};
 db.roles.save(leader);
 
+/* System Roles */
+var admin = {code:"admin", name:"Administrador"};
+db.roles.save(admin);
 
 /* Permissions */
 db.permissions.drop()
@@ -46,16 +50,21 @@ db.permissions.insert({target_obj:"groups", perms: "r", role: cell_member._id});
 db.permissions.insert({target_obj:"events", perms: "rwc+", role: leader._id});
 db.permissions.insert({target_obj:"events", perms: "r", role: cell_member._id});
 
+db.permissions.insert({target_obj:"system", perms: "rwc+", role: admin._id});
+
+
 /* Users */
 db.users.drop();
-db.users.insert({
+var douglas = {
 	"user_name" : "msantos.douglas@gmail.com",
 	"auth_type" : "password",
 	"auth_token" : "abacate",
 	"extra_data" : {"first_name" : "Douglas", "last_name": "Morais", "profile_image": "douglas.jpg",
 					"addr_lat":"-30.1515134802916", "addr_lng" : "-51.3381549802916"
 	}
-});
+};
+db.users.save(douglas);
+
 db.users.insert({
 	"user_name" : "tatiele@gmail.com",
 	"auth_type" : "password",
@@ -105,3 +114,12 @@ db.users.insert({
 	}
 });
 
+/* System admins*/
+db.system.drop()
+db.system.insert({
+	"user_roles" : [
+			{
+				"user" : douglas._id,
+				"role" : [admin._id],
+			}],
+});

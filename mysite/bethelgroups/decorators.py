@@ -28,12 +28,9 @@ def bethel_auth_required(function=None, min_perm=''):
 				user_id = request.session['user_id']            
 				user_perms = request.session['user_perms']
 
-				user_events = None
-				events_perms = ''
-
-				user_groups = None
-				groups_perms = ''
 				
+				user_events = None
+				events_perms = ''				
 				if user_perms['events']:
 					events_perms = ''.join(user_perms['events']['perm_codes'])
 					if ('r' in events_perms):
@@ -42,6 +39,8 @@ def bethel_auth_required(function=None, min_perm=''):
 						user_events = Events().get_user_events_by_type(user_id, get_childs=True)						
 
 
+				user_groups = None
+				groups_perms = ''
 				if user_perms['groups']:
 					groups_perms = ''.join(user_perms['groups']['perm_codes'])
 					if ('r' in groups_perms):
@@ -49,11 +48,19 @@ def bethel_auth_required(function=None, min_perm=''):
 					if ('+' in groups_perms):
 						user_groups = Groups().get_user_groups_by_type(user_id, get_childs=True)
 
+
+				user_system = None
+				system_perms = ''
+				if user_perms['system']:
+					system_perms = ''.join(user_perms['system']['perm_codes'])
+
+
 				kwargs['user_apps'] = {
 						'events_obj': user_events,
 						'events_perm': events_perms,
 						'groups_obj': user_groups,
-						'groups_perm': groups_perms
+						'groups_perm': groups_perms,
+						'system_perm' : system_perms
 					}
 
 				#If min_perm was informed
