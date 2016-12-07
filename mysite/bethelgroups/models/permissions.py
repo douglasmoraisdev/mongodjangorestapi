@@ -21,23 +21,28 @@ class Permissions(Document):
 
 
 		#Get perms for Events
+		
 		all_user_roles = []		
 		user_events = Events().get_user_events(user_id)
 		for ur in user_events:
-			for rls in ur.user_roles[0].role:
-				all_user_roles.append(rls)			
-			event_roles_user = {'type': 'events', 'roles': all_user_roles}			
+			for us in ur.user_roles:
+				if us.user.id == user_id:
+					for rls in us.role:
+						all_user_roles.append(rls)
+			event_roles_user = {'type': 'events', 'roles': all_user_roles}
 
 		if event_roles_user:
 			event_perms = Permissions().get_app_perms(event_roles_user['type'], event_roles_user['roles'])
-
+		
 
 		#Get perms for Groups
 		all_user_roles = []		
-		user_groups = Groups().get_user_groups(user_id)			
+		user_groups = Groups().get_user_groups(user_id)
 		for ur in user_groups:
-			for rls in ur.user_roles[0].role:
-				all_user_roles.append(rls)				
+			for us in ur.user_roles:
+				if us.user.id == user_id:
+					for rls in us.role:
+						all_user_roles.append(rls)
 			group_roles_user  = {'type': 'groups', 'roles': all_user_roles}
 
 		if group_roles_user:
