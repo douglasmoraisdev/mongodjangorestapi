@@ -21,7 +21,7 @@ class Permissions(Document):
 
 
 		#Get perms for Events		
-		all_user_roles = []		
+		all_user_roles = []
 		user_events = Events().get_user_events(user_id)
 		for ur in user_events:
 			for us in ur.user_roles:
@@ -35,7 +35,7 @@ class Permissions(Document):
 		
 
 		#Get perms for Groups
-		all_user_roles = []		
+		all_user_roles = []
 		user_groups = Groups().get_user_groups(user_id)
 		for ur in user_groups:
 			for us in ur.user_roles:

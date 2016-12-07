@@ -29,6 +29,7 @@ def index(request, user_apps):
 
 	user_courses = Events().get_user_courses(user_id)
 
+
 	content = {
 		'user_name': user.user_name,
 		'Roles': Roles.objects,        

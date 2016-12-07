@@ -40,10 +40,10 @@ db.roles.save(leader);
 
 /* Permissions */
 db.permissions.drop()
-db.permissions.insert({target_obj:"groups", perms: "rwc", role: leader._id});
+db.permissions.insert({target_obj:"groups", perms: "rwc+", role: leader._id});
 db.permissions.insert({target_obj:"groups", perms: "r", role: cell_member._id});
 
-db.permissions.insert({target_obj:"events", perms: "rwc", role: leader._id});
+db.permissions.insert({target_obj:"events", perms: "rwc+", role: leader._id});
 db.permissions.insert({target_obj:"events", perms: "r", role: cell_member._id});
 
 /* Users */

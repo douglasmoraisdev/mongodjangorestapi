@@ -44,6 +44,8 @@ def bethel_auth_required(function=None, min_perm=''):
 					groups_perms = ''.join(user_perms['groups']['perm_codes'])
 					if ('r' in groups_perms):
 						user_groups = Groups().get_user_groups_by_type(user_id)
+					if ('+' in groups_perms):
+						user_groups = Groups().get_user_groups_by_type(user_id, get_childs=True)
 
 				kwargs['user_apps'] = {
 						'events_obj': user_events,
