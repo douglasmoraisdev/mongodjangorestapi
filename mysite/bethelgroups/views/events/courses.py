@@ -5,17 +5,21 @@ from django.urls import reverse
 from bson.objectid import ObjectId
 from bethelgroups import utils
 
+from bethelgroups.decorators import *
+
 
 import uuid
 
 from bethelgroups.models import *
 
-
-def course(request, event_id):
+@bethel_auth_required
+def course(request, event_id, user_apps):
 
 	template = loader.get_template('app/event/course/course.html')
 
 	member_maps = []
+
+	user = Users().get_user_by_id(request.session['user_id'])	
 	
 	subjects = Events()
 	subjects = subjects.get_event_childs(event_id)
@@ -46,14 +50,17 @@ def course(request, event_id):
 		'start_date': events.start_date,
 		'end_date': events.end_date,
 		'event_data': events.extra_data,
-		'member_maps' : member_maps
+		'member_maps' : member_maps,
+		'Users' : user,
+		'Groups_perm' : user_apps['groups_perm'],
+		'Events_perm' : user_apps['events_perm']		
 
 	}
 
 	return HttpResponse(template.render(content, request))
 
-
-def course_new(request):
+@bethel_auth_required
+def course_new(request, user_apps):
 
 	template = loader.get_template('app/event/course/course_new.html')
 
@@ -141,8 +148,8 @@ def course_new(request):
 
 		return HttpResponse(template.render(content, request))
 
-     
-def course_edit(request, course_id):
+@bethel_auth_required     
+def course_edit(request, course_id, user_apps):
 
 	template = loader.get_template('app/event/course/course_edit.html')
 

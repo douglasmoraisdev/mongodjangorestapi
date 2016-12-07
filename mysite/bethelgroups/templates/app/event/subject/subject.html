@@ -107,7 +107,9 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="/bethelgroups/disciplina/editar/{{ course.id }}/{{ subject.id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    {% if 'w' in Events_perm %}
+                                                        <a href="/bethelgroups/disciplina/editar/{{ course.id }}/{{ subject.id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    {% endif %}
                                                     <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
 
                                                 </div>
@@ -145,8 +147,10 @@
 
                                                 <div class="card-action">
 
-                                                    <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
-                                                    {% include "app/event/subject/modals/add_member_search_modal.html" %}
+                                                    {% if 'w' in Events_perm %}
+                                                        <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
+                                                        {% include "app/event/subject/modals/add_member_search_modal.html" %}
+                                                    {% endif %}
 
                                                 </div>
 

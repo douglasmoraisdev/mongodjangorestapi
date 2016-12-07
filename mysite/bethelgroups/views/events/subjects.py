@@ -5,23 +5,26 @@ from django.urls import reverse
 from bson.objectid import ObjectId
 from bethelgroups import utils
 
+from bethelgroups.decorators import *
 
 import uuid
 
 from bethelgroups.models import *
 
-
-def subject(request, event_id):
+@bethel_auth_required
+def subject(request, event_id, user_apps):
 
 	template = loader.get_template('app/event/subject/subject.html')
 	
-	member_maps = []	
+	member_maps = []
+
+	user = Users().get_user_by_id(request.session['user_id'])
 
 	subject = Events()
 	subject = subject.get_event_by_id(event_id)
 
 	course = Events()
-	course = course.get_event_by_id(subject.parent_event.id)	
+	course = course.get_event_by_id(subject.parent_event.id)
 
 	users = subject.get_event_users(event_id)
 	users_count = len(users)
@@ -36,13 +39,16 @@ def subject(request, event_id):
 		'start_date': subject.start_date,
 		'end_date': subject.end_date,
 		'event_data': subject.extra_data,
-		'member_maps' : member_maps
+		'member_maps' : member_maps,
+		'Users' : user,		
+		'Groups_perm' : user_apps['groups_perm'],
+		'Events_perm' : user_apps['events_perm']		
 	}
 
 	return HttpResponse(template.render(content, request))
 
-
-def subject_new(request, course_id):
+@bethel_auth_required
+def subject_new(request, course_id, user_apps):
 
 	template = loader.get_template('app/event/subject/subject_new.html')
 
@@ -131,8 +137,8 @@ def subject_new(request, course_id):
 		return HttpResponse(template.render(content, request))
      
 
-
-def subject_edit(request, course_id, subject_id):
+@bethel_auth_required
+def subject_edit(request, course_id, subject_id, user_apps):
 
 	template = loader.get_template('app/event/subject/subject_edit.html')
 

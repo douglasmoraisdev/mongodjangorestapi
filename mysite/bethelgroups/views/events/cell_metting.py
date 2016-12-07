@@ -13,7 +13,7 @@ import uuid
 from bethelgroups.models import *
 
 @bethel_auth_required
-def cell_metting(request, event_id):
+def cell_metting(request, event_id, user_apps):
 
 	template = loader.get_template('app/event/cell_metting/cell_metting.html')
 
@@ -21,6 +21,8 @@ def cell_metting(request, event_id):
 	member_maps = []
 		
 	events = Events().get_event_by_id(event_id)
+
+	user = Users().get_user_by_id(request.session['user_id'])
 
 	if events.host:
 		group_id = ObjectId(events.host.id)
@@ -46,13 +48,16 @@ def cell_metting(request, event_id):
 		'end_date': events.end_date,
 		'event_data': events.extra_data,
 		'event_id':events.id,
-		'member_maps' : member_maps
+		'member_maps' : member_maps,
+		'User' : user,
+		'Groups_perm' : user_apps['groups_perm'],
+		'Events_perm' : user_apps['events_perm']		
 	}
 
 	return HttpResponse(template.render(content, request))
 
-
-def cell_metting_new(request, group_id):
+@bethel_auth_required
+def cell_metting_new(request, group_id, user_apps):
 
 	template = loader.get_template('app/event/cell_metting/cell_metting_new.html')
 
@@ -141,8 +146,8 @@ def cell_metting_new(request, group_id):
 
 		return HttpResponse(template.render(content, request))
 
-
-def cell_metting_edit(request, group_id, event_id):
+@bethel_auth_required
+def cell_metting_edit(request, group_id, event_id, user_apps):
 
 	template = loader.get_template('app/event/cell_metting/cell_metting_edit.html')
 
