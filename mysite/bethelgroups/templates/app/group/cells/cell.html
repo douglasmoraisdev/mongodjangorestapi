@@ -253,8 +253,12 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="/bethelgroups/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
-                                                    <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
+                                                    {% if 'w' in Groups_perm %}
+                                                        <a href="/bethelgroups/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    {% endif %}
+                                                    {% if 'c' in Groups_perm %}
+                                                        <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
+                                                    {% endif %}
 
                                                 </div>
 
@@ -318,9 +322,10 @@
 
                                                 <div class="card-action">
 
-
-                                                    <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
-                                                    {% include "app/group/cells/modals/add_member_search_modal.html" %}
+                                                    {% if 'w' in Groups_perm %}                                                    
+                                                        <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
+                                                        {% include "app/group/cells/modals/add_member_search_modal.html" %}
+                                                    {% endif %}
 
                                                 </div>
 
@@ -378,7 +383,9 @@
 
                                                     <div class="card-action">
 
-                                                        <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                        {% if 'w' in Groups_perm %}
+                                                            <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                        {% endif %}
 
                                                     </div>
 
@@ -413,7 +420,9 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% if 'w' in Events_perm %}
+                                                        <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
 
                                                 </div>
 
@@ -449,7 +458,9 @@
 
                                                 <div class="card-action">
 
-                                                    <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% if 'w' in Events_perm %}
+                                                        <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
 
                                                 </div>
 

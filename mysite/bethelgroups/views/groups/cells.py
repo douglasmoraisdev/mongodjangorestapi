@@ -10,14 +10,15 @@ import uuid
 import googlemaps
 
 from bethelgroups.models import *
+from bethelgroups.decorators import *
 
 import logging
 
 logger = logging.getLogger(__name__)
 
 
-
-def cell(request, group_id):
+@bethel_auth_required
+def cell(request, group_id, user_apps):
 
 	# Google Maps Client
 	#gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
@@ -89,13 +90,15 @@ def cell(request, group_id):
 		'group_data':group.extra_data,
 		'cell_id':group_id,
 		'events':events,
-		'member_maps' : member_maps
+		'member_maps' : member_maps,
+		'Groups_perm' : user_apps['groups_perm'],
+		'Events_perm' : user_apps['events_perm'],		
 	}
 	
 	return HttpResponse(template.render(content, request))
 
-
-def cell_new(request):
+@bethel_auth_required(min_perm=[{'groups':'c'}])
+def cell_new(request, user_apps):
 
 	template = loader.get_template('app/group/cells/cell_new.html')
 
@@ -197,7 +200,8 @@ def cell_new(request):
 		return HttpResponse(template.render(content, request))
 
 
-def cell_edit(request, group_id):
+@bethel_auth_required(min_perm=[{'groups':'w'}])
+def cell_edit(request, group_id, user_apps):
 
 	template = loader.get_template('app/group/cells/cell_edit.html')
 

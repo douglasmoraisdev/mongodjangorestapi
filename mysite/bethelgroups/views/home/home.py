@@ -8,11 +8,11 @@ from django.conf import settings
 
 from bethelgroups.decorators import *
 
-import uuid
 
 from bethelgroups.models import *
 
 import logging
+import uuid
 
 
 logger = logging.getLogger(__name__)
@@ -28,10 +28,6 @@ def index(request, user_apps):
 	user = Users().get_user_by_id(user_id)
 
 	user_courses = Events().get_user_courses(user_id)
-
-	#user_perms = Permissions().get_user_perms(user_id)
-
-	print(user_apps)
 
 	content = {
 		'user_name': user.user_name,

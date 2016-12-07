@@ -20,8 +20,7 @@ class Permissions(Document):
 		group_perms = None
 
 
-		#Get perms for Events
-		
+		#Get perms for Events		
 		all_user_roles = []		
 		user_events = Events().get_user_events(user_id)
 		for ur in user_events:

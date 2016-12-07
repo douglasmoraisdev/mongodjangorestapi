@@ -187,3 +187,6 @@ BASE_URL = 'http://localhost:10/bethelgroups'
 
 #Default Login URL
 LOGIN_URL = BASE_URL+'/login'
+
+#Default 403 template
+FORBIDDEN_PAGE = BASE_URL+'/errou'
