@@ -35,8 +35,10 @@ def index(request, user_apps):
     content = {
         'user_name': user.user_name,
         'Roles': Roles.objects,        
-        'Groups': user_apps['groups'],
-        'Events': user_apps['events'],
+        'Groups': user_apps['groups_obj'],
+        'Events': user_apps['events_obj'],
+	'Groups_perm' : user_apps['groups_perm'],
+	'Events_perm' : user_apps['events_perm'],
         'Courses': user_courses,
     }
     return HttpResponse(template.render(content, request))
