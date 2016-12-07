@@ -108,7 +108,9 @@ class Events(Document):
 		return event
 
 
-	def get_user_events_by_type(self, user_id):
+	def get_user_events_by_type(self, user_id = '', get_childs=False):
+
+		events_under = []
 
 		events = Events.objects(user_roles__user=user_id)
 
@@ -116,12 +118,28 @@ class Events(Document):
 
 		for key, etype in enumerate(events):
 
-
 			if etype.event_type.code not in ['course']: #retorna tudos menos os cursos TODO: criar um list na conf
 				if etype.event_type.code in user_events:
 					user_events[etype.event_type.code].append(events[key])
 				else:
 					user_events[etype.event_type.code] = [events[key]]
+
+
+		# Get events under (all events that this event is over) IF get_childs == True
+		# TODO get groups over
+		'''
+		if get_childs:
+			events_under = Events.objects(groups_over__in=groups)
+
+			for key, etype in enumerate(events):
+
+				if etype.event_type.code not in ['course']: #retorna tudos menos os cursos TODO: criar um list na conf
+					if etype.event_type.code in user_events:
+						user_events[etype.event_type.code].append(events[key])
+					else:
+						user_events[etype.event_type.code] = [events[key]]
+		'''
+
 
 
 		return user_events

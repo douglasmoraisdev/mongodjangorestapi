@@ -38,6 +38,8 @@ def bethel_auth_required(function=None, min_perm=''):
 					events_perms = ''.join(user_perms['events']['perm_codes'])
 					if ('r' in events_perms):
 						user_events = Events().get_user_events_by_type(user_id)
+					if ('+' in events_perms):
+						user_events = Events().get_user_events_by_type(user_id, get_childs=True)						
 
 
 				if user_perms['groups']:

@@ -35,6 +35,8 @@ def cell(request, group_id, user_apps):
 	visitor_users = []
 	user_already_listed = []
 
+	user = Users().get_user_by_id(request.session['user_id'])
+
 	group_id = ObjectId(group_id)
 	
 	group = Groups().get_group_by_id(group_id)
@@ -90,6 +92,7 @@ def cell(request, group_id, user_apps):
 		'group_data':group.extra_data,
 		'cell_id':group_id,
 		'events':events,
+		'User' : user,		
 		'member_maps' : member_maps,
 		'Groups_perm' : user_apps['groups_perm'],
 		'Events_perm' : user_apps['events_perm'],		

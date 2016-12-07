@@ -32,6 +32,7 @@ def index(request, user_apps):
 
 	content = {
 		'user_name': user.user_name,
+		'User' : user,
 		'Roles': Roles.objects,        
 		'Groups': user_apps['groups_obj'],
 		'Events': user_apps['events_obj'],
