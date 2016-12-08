@@ -29,6 +29,10 @@ def index(request, user_apps):
 
 	user_courses = Events().get_user_courses(user_id)
 
+	#update user perms
+	user_perms = Permissions().get_user_perms(ObjectId(user_id))
+	request.session['user_perms'] = user_perms
+
 
 	content = {
 		'user_name': user.user_name,
@@ -65,8 +69,6 @@ def loginLogout(request):
 		else:
 
 			user_perms = Permissions().get_user_perms(user_id)
-
-			print(user_perms)
 
 			request.session['user_id'] = str(user_id)
 			request.session['user_perms'] = user_perms

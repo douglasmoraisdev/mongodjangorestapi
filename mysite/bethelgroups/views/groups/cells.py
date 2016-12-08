@@ -100,8 +100,7 @@ def cell(request, group_id, user_apps):
 	
 	return HttpResponse(template.render(content, request))
 
-#@bethel_auth_required(min_perm=[{'groups':'c'}])
-@bethel_auth_required
+@bethel_auth_required(min_perm=[{'groups':'c'}, {'system':'c'}])
 def cell_new(request, user_apps):
 
 	template = loader.get_template('app/group/cells/cell_new.html')
@@ -204,7 +203,7 @@ def cell_new(request, user_apps):
 		return HttpResponse(template.render(content, request))
 
 
-@bethel_auth_required(min_perm=[{'groups':'w'}])
+@bethel_auth_required(min_perm=[{'groups':'w'}, {'system':'w'}])
 def cell_edit(request, group_id, user_apps):
 
 	template = loader.get_template('app/group/cells/cell_edit.html')

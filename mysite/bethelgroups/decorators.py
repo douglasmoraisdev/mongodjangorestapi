@@ -65,22 +65,26 @@ def bethel_auth_required(function=None, min_perm=''):
 
 				#If min_perm was informed
 				if min_perm != '':
-					not_autorized = False
+					autorized = False				
 
 					for p in min_perm:
 
 						#groups
 						if 'groups' in p:
-							if p['groups'] not in groups_perms:
-								not_autorized = True
+							if p['groups'] in groups_perms:
+								autorized = True
 
 						#events
 						if 'events' in p:
-							if p['events'] not in events_perms:
-								not_autorized = True
+							if p['events'] in events_perms:
+								autorized = True
 
+						#system
+						if 'system' in p:
+							if p['system'] in system_perms:
+								autorized = True
 
-					if not_autorized:
+					if not autorized:
 						#TODO: a 403 default page template
 						#template = loader.get_template(settings.FORBIDDEN_PAGE)
 						#return HttpResponseForbidden(template.render(content, template))
