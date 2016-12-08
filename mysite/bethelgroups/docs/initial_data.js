@@ -44,13 +44,13 @@ db.roles.save(admin);
 
 /* Permissions */
 db.permissions.drop()
-db.permissions.insert({target_obj:"groups", perms: "rwc+", role: leader._id});
-db.permissions.insert({target_obj:"groups", perms: "r", role: cell_member._id});
+db.permissions.insert({target_app:"groups", perms: "rwc+", role: leader._id});
+db.permissions.insert({target_app:"groups", perms: "r", role: cell_member._id});
 
-db.permissions.insert({target_obj:"events", perms: "rwc+", role: leader._id});
-db.permissions.insert({target_obj:"events", perms: "r", role: cell_member._id});
+db.permissions.insert({target_app:"events", perms: "rwc+", role: leader._id});
+db.permissions.insert({target_app:"events", perms: "r", role: cell_member._id});
 
-db.permissions.insert({target_obj:"system", perms: "rwc+", role: admin._id});
+db.permissions.insert({target_app:"system", perms: "rwc+", role: admin._id});
 
 
 /* Users */

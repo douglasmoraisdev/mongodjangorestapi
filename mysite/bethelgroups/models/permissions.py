@@ -7,7 +7,7 @@ from bethelgroups.models.system import *
 
 
 class Permissions(Document):
-	target_obj = StringField(max_length=15) # sistem, groups, event, task, financial_account
+	target_app = StringField(max_length=15) # sistem, groups, event, task, financial_account
 	perms = StringField(max_length=4) # r = read - rw = readwrite - rwc = readwritecreate - + = see childs
 	role = ReferenceField(Roles) # id of leader, host, member
 	extra_data = DictField()
@@ -75,7 +75,7 @@ class Permissions(Document):
 		list_perms = []
 
 		for rl in roles:
-			perm = Permissions.objects(target_obj=app_code, role=rl)
+			perm = Permissions.objects(target_app=app_code, role=rl)
 			
 			for p in perm:
 				list_perms.append(p.perms)
