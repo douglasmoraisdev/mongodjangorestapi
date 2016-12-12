@@ -1,1 +1,64 @@
-todo list
+Todo list for version 1.0 release
+
+
+geral
+	Modal Buscar Servo 
+		melhor posicao componentes
+		validacao
+		botao cancelar
+		Nome completo
+		Foto dos usuarios
+		Mensagem de erro ao fechar modal sem usuario
+		filtro de Roles
+
+
+celula/
+	Google Maps, div "clicar para carregar mapa"
+	Google Maps, target _blank lupa usuarios
+	Contagem de membros
+
+
+
+
+celula/novo
+	Estado checkbox
+	Validacao JS Horarios
+
+reuniaocelula
+	participantes
+		foto letter avatar funcionando
+
+reuniaocelula/novo
+	preenchimento predefinido de servos
+	preenchimento predefinido de membros (somente do grupo)
+
+
+curso
+	Campos do detalhamento
+
+
+disciplina
+	Campos do detalhamento
+	Arquivos
+
+disciplina/novo
+	validação data inicio e final do curso
+	retirar "recorrente" e "grupo organizador"
+	preenchimento predefinido de servos
+	preenchimento predefinido de membros (somente do curso)
+
+
+login
+	layout
+
+MINOR
+
+curso/novo
+	Preenchimento automatico de servos e membros quando Grupo Organizador é preenchimento
+
+
+myprofile
+
+
+NEW
+	Busca
