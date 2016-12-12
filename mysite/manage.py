@@ -1,6 +1,17 @@
 #!/usr/bin/env python
-import os
+#import os
 import sys
+
+import os,sys
+virtenv = os.path.expanduser('') + '/home/morais/work/bethelgroups/venv/'
+virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
+try:
+   if sys.version.split(' ')[0].split('.')[0] == '3':
+       exec(compile(open(virtualenv, "rb").read(), virtualenv, 'exec'), dict(__file__=virtualenv))
+   else:
+       execfile(virtualenv, dict(__file__=virtualenv))
+except IOError:
+   pass
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
