@@ -183,7 +183,7 @@ CSRF_COOKIE_NAME = 'honda_csrf_230'
 
 # Bethelgroups Settings
 #Base url WITHOUT end slash "/""
-BASE_URL = 'http://localhost:10/bethelgroups'
+BASE_URL = 'http://localhost:10'
 
 #Default Login URL
 LOGIN_URL = BASE_URL+'/login'
