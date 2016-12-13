@@ -12,9 +12,9 @@ geral
 
 
 celula/
-	Google Maps, div "clicar para carregar mapa"
+	OK---- Google Maps, div "clicar para carregar mapa"
 	OK---- Google Maps, target _blank lupa usuarios
-	Contagem de membros
+	OK---- Contagem de membros
 
 
 

@@ -134,8 +134,6 @@ function initMap() {
 
 }
 
-google.maps.event.addDomListener(window, 'load', initMap);
-
 
 $('.confirm-delete-member-modal-trigger').leanModal({
     dismissible: false,

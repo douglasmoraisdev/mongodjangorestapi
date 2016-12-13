@@ -89,7 +89,6 @@ function remove_user_save(user_id){
 //Google Maps
 var map;
 
-
 function initMap() {
     var myLatLng = {lat: -30.1291731, lng: -51.315149};
 
@@ -133,9 +132,6 @@ function initMap() {
     var markerCluster = new MarkerClusterer(map, marcador, {imagePath: '{% static "images/m" %}'});    
 
 }
-
-google.maps.event.addDomListener(window, 'load', initMap);
-
 
 $('.confirm-delete-member-modal-trigger').leanModal({
     dismissible: false,

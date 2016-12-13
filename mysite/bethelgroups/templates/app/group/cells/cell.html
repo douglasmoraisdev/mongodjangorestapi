@@ -72,6 +72,8 @@
 
                                                     <span class="card-title activator">{{ group_name }}<i class="material-icons right">live_help</i></span>
                                                     <p>{{ group_type }} fundada em {{ group_data.created_on_date }}</p>
+                                                    <p>{{ users_count }} membros</p>
+                                                    <br/>
 
                                                     <ul class="collection with-header">
                                                         <li class="collection-header">
@@ -275,9 +277,6 @@
 
                                                     <span class="card-title">Membros</span>
 
-                                                    <p>{{ users_count }} membros</p>
-                                                    <p></p>
-
                                                     <ul class="collection">
 
                                                         {% for list in member_users %}
@@ -340,17 +339,20 @@
 
                                             <div id="geo-member" class="card scrollspy" style="height: 550px">
 
-                                            <div class="card-content">
-                                                <span class="card-title">Geolocalização dos Membros</span>
-
-                                            </div>
+                                                <div class="card-content">
+                                                    <span class="card-title">Geolocalização dos Membros</span>
+                                                      <p id="map_show" class="valign center-align">Clique no icone <a onclick="initMap();$('#map_show').hide()" class="btn-floating waves-effect orange darken-5 "><i class="material-icons activator">map</i></a> para exibir o mapa</p>
+                                                </div>
+ 
 
                                                 <div id="map"></div>
 
-
                                             </div>
 
+
                                         </div>
+
+
 
 
                                     </div>
