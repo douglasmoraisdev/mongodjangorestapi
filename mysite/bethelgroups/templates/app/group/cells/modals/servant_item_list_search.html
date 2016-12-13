@@ -3,7 +3,7 @@
 
 
 {% for item in users_result %}
-<a href="#!" id="row-{{ item.id }}" onclick="select_user('{{ item.id }}')" class="collection-item avatar">
+<a href="#!" id="row-{{ item.id }}" onclick="select_user('{{ item.id }}')" class="search collection-item avatar">
 	<span class="title">{{ item.extra_data.first_name }}</span>
 	<p>{{ item.extra_data.first_name }}</p>
 </a>
@@ -16,13 +16,13 @@
 
 	function select_user(user_id){
 
-		$('.collection-item').removeClass('active');
+		$('.search.collection-item').removeClass('active');
 
-		$('#row-'+user_id).addClass('active');
+		$('.search#row-'+user_id).addClass('active');
 
-		$('.collection-item').hide();
+		$('.search.collection-item').hide();
 
-		$('#row-'+user_id).show();
+		$('.search#row-'+user_id).show();
 
 		$('#user_searched_selected').val(user_id);
 

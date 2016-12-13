@@ -16,7 +16,6 @@ $(document).ready(function () {
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('#servant-modal-trigger').leanModal({
         dismissible: false,
-        ending_top: '10%',
         ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 
             $('#cell-role-multiple').prop('selectedIndex', 0); //Sets the first option as selected
@@ -26,27 +25,29 @@ $(document).ready(function () {
         },                
         complete: function(){
 
+            if (window.cancel_modal == false){
 
-            user_selected = $('#user_searched_selected').val();
-            roles_selected = $('#cell-role-multiple').val();
+                user_selected = $('#user_searched_selected').val();
+                roles_selected = $('#cell-role-multiple').val();
 
-            $('#loader-servant-cell-added').show();                    
+                $('#loader-servant-cell-added').show();                    
 
-            $.ajax({
-                method: "GET",
-                dataType: "html",
-                url: "{{ base_url }}/add_servant_list",
-                data: { userid: user_selected, rolesid: roles_selected}
-                })
-                .fail(function(){
-                    $('#loader-servant-cell-added').hide();
-                })                        
-                .done(function( msg ) {
+                $.ajax({
+                    method: "GET",
+                    dataType: "html",
+                    url: "{{ base_url }}/add_servant_list",
+                    data: { userid: user_selected, rolesid: roles_selected}
+                    })
+                    .fail(function(){
+                        $('#loader-servant-cell-added').hide();
+                    })                        
+                    .done(function( msg ) {
 
-                    $('#servant-cell-added').append(msg);
+                        $('#servant-cell-added').append(msg);
 
-                    $('#loader-servant-cell-added').hide();
-                });
+                        $('#loader-servant-cell-added').hide();
+                    });
+            }
 
         }
     });
