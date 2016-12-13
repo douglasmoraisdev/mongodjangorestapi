@@ -76,26 +76,6 @@
                                                             <label for="subject-date-end">Data do Fim</label>
                                                         </div>
 
-                                                        <div class="input-field col s12 l6">
-                                                            <select id="subject-recorrent" name="subject-recorrent">
-                                                                <option value="N" selected>Não</option>
-                                                                <option value="Y">Sim</option>                                                                
-                                                            </select>
-                                                            <label>Recorrente</label>
-                                                        </div>
-
-
-                                                        <div class="input-field col s12 l6">
-                                                            <select id="group-origin" name="group-origin">
-                                                                <option value="" disabled selected>Selecione</option>
-                                                                {% for item in Groups %}   
-                                                                <option value="{{ item.id }}">{{ item.name }}</option>
-                                                                {% endfor %}   
-                                                            </select>
-                                                            <label>Grupo Organizador</label>
-                                                        </div>
-
-
                                                 </div>
 
                                                 <div class="step-actions">

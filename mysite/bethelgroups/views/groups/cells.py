@@ -95,7 +95,8 @@ def cell(request, group_id, user_apps):
 		'User' : user,		
 		'member_maps' : member_maps,
 		'Groups_perm' : user_apps['groups_perm'],
-		'Events_perm' : user_apps['events_perm'],		
+		'Events_perm' : user_apps['events_perm'],
+		'System_perm' : user_apps['system_perm'],
 	}
 	
 	return HttpResponse(template.render(content, request))

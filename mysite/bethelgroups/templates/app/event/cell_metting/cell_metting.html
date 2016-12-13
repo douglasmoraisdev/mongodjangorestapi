@@ -128,8 +128,11 @@
                                                     <ul class="collection">
                                                         {% for list in users_list %}
                                                         <li class="collection-item avatar">
-                                                            <!-- <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }}"> -->
-                                                            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">                                    
+                                                            {% if list.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                            {% endif %}
                                                             <span class="title">{{ list.user.extra_data.first_name }}</span>
                                                                 {% for roles in list.role %}
                                                                 <p>{{ roles.name }}</p>   

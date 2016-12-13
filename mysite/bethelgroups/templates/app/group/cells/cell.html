@@ -422,7 +422,7 @@
 
                                                 <div class="card-action">
 
-                                                    {% if 'w' in Events_perm %}
+                                                    {% if 'w' in Events_perm or 'w' in System_perm %}
                                                         <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
                                                     {% endif %}
 

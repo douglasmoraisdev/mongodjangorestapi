@@ -30,7 +30,6 @@ def get_users_geo(usersObj):
 
 						tested_user_id.append(usersA.user.id)
 						tested_user_id.append(usersB.user.id)
-						logger.error('Mesmo endereço: %s e %s' % (usersA.user.extra_data['first_name'], usersB.user.extra_data['first_name']))
 
 						addr_maps_info = {
 							'users' : [usersA, usersB]

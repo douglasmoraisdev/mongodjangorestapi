@@ -22,8 +22,7 @@ celula/novo
 
 
 reuniaocelula
-	participantes
-		foto letter avatar funcionando
+	OK---- participantes, foto letter avatar funcionando
 
 
 reuniaocelula/novo
@@ -39,9 +38,10 @@ disciplina
 	Campos do detalhamento
 	Arquivos
 
+
 disciplina/novo
 	validação data inicio e final do curso
-	retirar "recorrente" e "grupo organizador"
+	OK---- retirar "recorrente" e "grupo organizador"
 	preenchimento predefinido de servos
 	preenchimento predefinido de membros (somente do curso)
 
