@@ -1,14 +1,24 @@
 {% load static %}
 
 
+<ul class="collection">
 
 {% for item in users_result %}
-<a href="#!" id="row-{{ item.id }}" onclick="select_user('{{ item.id }}')" class="search collection-item avatar">
-	<span class="title">{{ item.extra_data.first_name }}</span>
-	<p>{{ item.extra_data.first_name }}</p>
-</a>
-{% endfor %}
 
+<li style="cursor: pointer;" id="row-{{ item.id }}" onclick="select_user('{{ item.id }}')" class="search collection-item avatar">
+	{% if item.extra_data.profile_image %}
+	    <img class="circle" height="50" src="{% static "upload/profile_images/" %}{{ item.extra_data.profile_image }}">
+	{% else %}
+	    <img class="circle" height="50" avatar="{{ item.extra_data.first_name }} {{ item.extra_data.last_name }}">
+	{% endif %}
+
+		<span class="title">{{ item.extra_data.first_name }} {{ item.extra_data.last_name }}</span>
+		<p>{{ item.extra_data.addr_city }}</p>
+
+</li>
+
+	{% endfor %}
+</ul>
 
 <script src="{% static "js/letteravatar.js" %}"></script>
 

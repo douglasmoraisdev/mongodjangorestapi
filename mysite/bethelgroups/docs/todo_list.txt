@@ -5,9 +5,9 @@ geral
 	Modal Buscar Servo 
 		OK---- melhor posicao componentes
 		validacao
-		botao cancelar
+		OK---- botao cancelar
 		Nome completo
-		Foto dos usuarios
+		OK---- Foto dos usuarios
 		Mensagem de erro ao fechar modal sem usuario
 		filtro de Roles
 

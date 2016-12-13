@@ -2,6 +2,12 @@
 
 
 <li id="user-added-{{ user_id }}" class="collection-item avatar">
+    {% if user_name.extra_data.profile_image %}
+        <img class="circle" height="50" src="{% static "upload/profile_images/" %}{{ user_name.extra_data.profile_image }}">
+    {% else %}
+        <img class="circle" height="50" avatar="{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}">
+    {% endif %}
+
     <span class="title">{{ user_name.extra_data.first_name }}</span>
     <p class="grey-text">
     {% for item in user_roles %}
