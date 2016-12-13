@@ -16,6 +16,7 @@ $(document).ready(function () {
     // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('#servant-modal-trigger').leanModal({
         dismissible: false,
+        ending_top: '10%',
         ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
 
             $('#cell-role-multiple').prop('selectedIndex', 0); //Sets the first option as selected

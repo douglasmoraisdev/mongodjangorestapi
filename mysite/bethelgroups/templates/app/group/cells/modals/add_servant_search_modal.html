@@ -1,28 +1,14 @@
 <!-- Modal Structure -->
-<div id="servant-modal" class="modal modal-fixed-footer">
+<div id="servant-modal" class="modal modal-fixed-footer" >
     
     <div class="modal-content">
         <h4>Adicionar Servo</h4>
 
         <div class="row">
        
-
+           
 
             <div class="input-field col s12">
-                <!--<select multiple id="cell-role{{ fields_seq }}-multiple" name="cell-role{{ fields_seq }}-multiple">-->
-                <select multiple id="cell-role-multiple" name="cell-role-multiple">                    
-                  <option value="" disabled selected>Selecione</option>
-
-                      {% for item in Roles %}                    
-                        <option value="{{ item.id }}">{{ item.name }}</option>
-                      {% endfor %} 
-
-                </select>
-                <label>Função</label>
-
-            </div>            
-
-            <div class="input-field col s6">
                 <div class="autocomplete" id="single">
                     <div class="ac-input">
                         <input type="text" id="servosSearch"  placeholder="Please input some letters" data-activates="singleDropdown" data-beloworigin="true" autocomplete="off">
@@ -40,6 +26,20 @@
                 </div>
 
             </div>
+
+            <div class="input-field col s12">
+                <!--<select multiple id="cell-role{{ fields_seq }}-multiple" name="cell-role{{ fields_seq }}-multiple">-->
+                <select multiple id="cell-role-multiple" name="cell-role-multiple">                    
+                  <option value="" disabled selected>Selecione</option>
+
+                      {% for item in Roles %}                    
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                      {% endfor %} 
+
+                </select>
+                <label>Função</label>
+
+            </div>             
 
 
             <input type="hidden" id="user_searched_selected" />

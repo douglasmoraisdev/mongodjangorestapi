@@ -3,7 +3,7 @@ Todo list for version 1.0 release
 
 geral
 	Modal Buscar Servo 
-		melhor posicao componentes
+		OK---- melhor posicao componentes
 		validacao
 		botao cancelar
 		Nome completo
@@ -51,11 +51,17 @@ disciplina/novo
 login
 	 OK---- layout
 
+
+
+
+
 MINOR
 
 curso/novo
 	Preenchimento automatico de servos e membros quando Grupo Organizador é preenchimento
 
+login
+	cor de fundo e logo
 
 myprofile
 
