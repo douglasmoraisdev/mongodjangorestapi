@@ -17,15 +17,14 @@ celula/
 	OK---- Contagem de membros
 
 
-
-
 celula/novo
-	Estado checkbox
-	Validacao JS Horarios
+	OK---- Estado checkbox
+
 
 reuniaocelula
 	participantes
 		foto letter avatar funcionando
+
 
 reuniaocelula/novo
 	preenchimento predefinido de servos
@@ -58,6 +57,11 @@ MINOR
 
 curso/novo
 	Preenchimento automatico de servos e membros quando Grupo Organizador é preenchimento
+
+
+celula/novo
+	Validacao JS Horarios
+
 
 login
 	cor de fundo e logo
