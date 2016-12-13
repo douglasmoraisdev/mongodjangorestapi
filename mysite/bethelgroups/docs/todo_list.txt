@@ -4,12 +4,11 @@ Todo list for version 1.0 release
 geral
 	Modal Buscar Servo 
 		OK---- melhor posicao componentes
-		validacao
 		OK---- botao cancelar
-		Nome completo
+		OK----Nome completo
 		OK---- Foto dos usuarios
-		Mensagem de erro ao fechar modal sem usuario
-		filtro de Roles
+		OK---- filtro de Roles
+		OK----validacao
 
 
 celula/

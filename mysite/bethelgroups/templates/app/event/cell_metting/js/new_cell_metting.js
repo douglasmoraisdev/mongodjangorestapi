@@ -18,30 +18,9 @@ $(document).ready(function () {
         },                
         complete: function(){
 
-            if (window.cancel_modal == false){
+            $('#user_searched_selected').val('');
+            $('#cell-role-multiple').val('');
 
-                user_selected = $('#user_searched_selected').val();
-                roles_selected = $('#cell-role-multiple').val();
-
-                $('#loader-servant-cell-added').show();                    
-
-                $.ajax({
-                    method: "GET",
-                    dataType: "html",
-                    url: "{{ base_url }}/add_servant_list",
-                    data: { userid: user_selected, rolesid: roles_selected}
-                    })
-                    .fail(function(){
-                        $('#loader-servant-cell-added').hide();
-                    })                        
-                    .done(function( msg ) {
-
-                        $('#servant-cell-added').append(msg);
-
-                        $('#loader-servant-cell-added').hide();
-                    });
-
-            }
         }
     });
 

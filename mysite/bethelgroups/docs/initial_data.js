@@ -23,23 +23,23 @@ db.groups_types.insert({code:"main_church", name:"Igreja Sede"});
 
 db.roles.drop()
 /* Courses roles */
-var student = {code:"student", name:"Aluno"};
+var student = {code:"student", name:"Aluno", app_scope:["course","subject"]};
 db.roles.save(student);
-var teacher = {code:"teacher", name:"Professor"};
+var teacher = {code:"teacher", name:"Professor", app_scope:["course","subject"]};
 db.roles.save(teacher);
 
 /* Group roles */
-var visitor = {code:"visitor", name:"Visitante"}
+var visitor = {code:"visitor", name:"Visitante", app_scope:["cell", "cell_metting"]};
 db.roles.save(visitor);
-var cell_member = {code:"cell_member", name:"Membro em Célula"}
+var cell_member = {code:"cell_member", name:"Membro em Célula", app_scope:["cell", "cell_metting"]};
 db.roles.save(cell_member);
-var host = {code:"host", name:"Anfitrião"};
+var host = {code:"host", name:"Anfitrião", app_scope:["cell", "cell_metting"]};
 db.roles.save(host);
-var leader = {code:"leader", name:"Lider"};
+var leader = {code:"leader", name:"Lider", app_scope:["cell", "cell_metting"]};
 db.roles.save(leader);
 
 /* System Roles */
-var admin = {code:"admin", name:"Administrador"};
+var admin = {code:"admin", name:"Administrador", app_scope:["system"]};
 db.roles.save(admin);
 
 /* Permissions */

@@ -68,7 +68,7 @@ def course_new(request, user_apps):
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
-		'Roles': Roles.objects,
+		'Roles': Roles.objects(app_scope__in=["course"]),
 		'Events': Events.objects,
 	}
 
@@ -172,7 +172,7 @@ def course_edit(request, course_id, user_apps):
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
-		'Roles': Roles.objects,
+		'Roles': Roles.objects(app_scope__in=["course"]),
 		'event': events,
 		'event_id': course_id,
 		'event_users' : event_users,

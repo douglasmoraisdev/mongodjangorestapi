@@ -16,6 +16,7 @@ class Roles(Document):
 	permissions = StringField(max_length=3) # r = read - rw = readwrite - rwc = readwritecreate
 	presence = StringField(max_length=1)# y or n
 	extra_data = DictField()
+	app_scope = ListField(StringField(max_length=50)) #list with apps that a role is related to apper eg. cell, course, subject
 
 
 	def add_role(self, role_name, code, permissions='r', presence='y', roles_over=[], roles_under=[], view_order=0, extra_data=None):

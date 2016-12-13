@@ -110,7 +110,7 @@ def cell_new(request, user_apps):
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
-		'Roles': Roles.objects,
+		'Roles': Roles.objects(app_scope__in=["cell", "cell_metting"]),
 		'Events': Events.objects,
 	}
 
@@ -227,7 +227,7 @@ def cell_edit(request, group_id, user_apps):
 		'cell_leaders': cell_leaders,		
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
-		'Roles': Roles.objects,
+		'Roles': Roles.objects(app_scope__in=["cell", "cell_metting"]),
 		'Events': Events.objects,
 		'cell_data': Groups.objects.get(id=group_id),
 		'group_id': group_id

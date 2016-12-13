@@ -58,7 +58,7 @@ def subject_new(request, course_id, user_apps):
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
-		'Roles': Roles.objects,
+		'Roles': Roles.objects(app_scope__in=["subject"]),
 		'course' : course
 	}
 
@@ -166,7 +166,7 @@ def subject_edit(request, course_id, subject_id, user_apps):
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
-		'Roles': Roles.objects,
+		'Roles': Roles.objects(app_scope__in=["subject"]),
 		'subject' : subject,
 		'course' : course,
 		'event_users' : event_users,
