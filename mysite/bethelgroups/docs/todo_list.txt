@@ -5,15 +5,15 @@ geral
 	Modal Buscar Servo 
 		OK---- melhor posicao componentes
 		OK---- botao cancelar
-		OK----Nome completo
+		OK---- Nome completo
 		OK---- Foto dos usuarios
 		OK---- filtro de Roles
-		OK----validacao
+		OK---- validacao
 
 
 celula/
 	Google Maps, div "clicar para carregar mapa"
-	Google Maps, target _blank lupa usuarios
+	OK---- Google Maps, target _blank lupa usuarios
 	Contagem de membros
 
 

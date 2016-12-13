@@ -110,7 +110,7 @@ function initMap() {
             });
 
             var div = document.createElement('DIV');
-            div.innerHTML = '<div class="cardpanel"><ul class="collection">{% for list in users.users %}    <li class="collection-item avatar">        {% if list.user.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>   </li>{% endfor %}    </ul></div>';
+            div.innerHTML = '<div class="cardpanel"><ul class="collection">{% for list in users.users %}    <li class="collection-item avatar">        {% if list.user.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> <a target="_blank" href="{{ base_url }}/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>   </li>{% endfor %}    </ul></div>';
 
             infowindow[[{{ forloop.counter0 }}]] = new google.maps.InfoWindow({
                 content: 'Neste endereço: '+div.innerHTML
