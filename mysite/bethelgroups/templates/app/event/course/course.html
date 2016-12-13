@@ -176,13 +176,22 @@
                                                         {% endfor%}
                                                     </ul>
 
+                                                    <ul class="collection" id="member-course-added">
+                                                        
+
+                                                    </ul>
+
+                                                    <div class="progress" id="loader-member-course-added" style="display:none" >
+                                                      <div class="indeterminate"></div>
+                                                    </div>                                                     
+
 
                                                 </div>
 
                                                 <div class="card-action">
 
                                                     <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
-                                                    {% include "app/group/cells/modals/add_member_search_modal.html" %}
+                                                    {% include "app/event/course/modals/add_member_search_modal.html" %}
 
                                                 </div>
 
@@ -240,7 +249,7 @@
     <script  src="{% static "js/markerclusterer.js"%}"></script>
 
     <script>
-        {% include "app/event/cell_metting/js/cell_metting.js" %}
+        {% include "app/event/course/js/course.js" %}
     </script>  
 
 

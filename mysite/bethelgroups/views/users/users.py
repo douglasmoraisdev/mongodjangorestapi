@@ -213,7 +213,7 @@ def add_member_list_presence(request):
 
 #ajax
 def add_member_list_save(request):
-
+#TODO melhorar essa lógica
 
 	user_list = dict()
 	user_role = []
@@ -235,8 +235,11 @@ def add_member_list_save(request):
 	# Save on database
 
 	if (doc_type == 'group'):
-		user_group = Groups()
-		user_group.add_user_group(user_role, doc_id)
+		user_add = Groups()
+		user_add.add_user_group(user_role, doc_id)
+	elif (doc_type == 'event'):
+		user_add = Events()
+		user_add.add_user_event(user_role, doc_id)
 
 
 	# Render content to list
@@ -248,7 +251,12 @@ def add_member_list_save(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('app/group/cells/modals/member_item_list_add_save.html')
+	if (doc_type == 'group'):
+		template = loader.get_template('app/group/cells/modals/member_item_list_add_save.html')
+
+	elif (doc_type == 'event'):
+		template = loader.get_template('app/event/cell_metting/modals/member_item_list_add_save.html')
+
 
 	return HttpResponse(template.render(content,request))
 
@@ -272,8 +280,11 @@ def remove_member_list_save(request):
 	# Remove from database
 
 	if (doc_type == 'group'):
-		user_group = Groups()
-		user_group.remove_user_group(user_role, doc_id)
+		user_add = Groups()
+		user_add.remove_user_group(user_role, doc_id)
+	if (doc_type == 'event'):
+		user_add = Events()
+		user_add.remove_user_event(user_role, doc_id)		
 
 
 	# Render content response

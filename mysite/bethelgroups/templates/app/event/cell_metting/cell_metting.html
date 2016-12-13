@@ -139,6 +139,15 @@
                                                         {% endfor%}
                                                     </ul>
 
+                                                    <ul class="collection" id="member-metting-added">
+                                                        
+
+                                                    </ul>
+
+                                                    <div class="progress" id="loader-member-metting-added" style="display:none" >
+                                                      <div class="indeterminate"></div>
+                                                    </div>                                                      
+
 
                                                 </div>
 
@@ -146,7 +155,7 @@
 
                                                     {% if 'w' in Events_perm %}
                                                         <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
-                                                        {% include "app/group/cells/modals/add_member_search_modal.html" %}
+                                                        {% include "app/event/cell_metting/modals/add_member_search_modal.html" %}
                                                     {% endif %}
 
                                                 </div>

@@ -16,26 +16,26 @@ $('#member-modal-trigger').leanModal({
 
         user_selected = $('#member_searched_selected').val();
         roles_selectec = $('#member_role_selected').val();
-        group = 'group'
-        group_id = '{{ group_id }}'
+        origin = 'event'
+        event_id = '{{ event_id }}'
 
-        $('#loader-member-cell-added').show();
+        $('#loader-member-metting-added').show();
 
         $.ajax({
             method: "GET",
             dataType: "html",
             url: "{{ base_url }}/add_member_list_save",
-            data: { userid: user_selected, rolesid: roles_selectec, origin: group, origin_id: group_id}
+            data: { userid: user_selected, rolesid: roles_selectec, origin: origin, origin_id: event_id}
             })
             .fail(function( ){
-                $('#loader-member-cell-added').hide();
+                $('#loader-member-metting-added').hide();
                 alert("Erro");
             })                        
             .done(function( msg ) {
 
-                $('#member-cell-added').append(msg);
+                $('#member-metting-added').append(msg);
 
-                $('#loader-member-cell-added').hide();
+                $('#loader-member-metting-added').hide();
             });
 
     }
@@ -61,8 +61,8 @@ function remove_user(list_id){
 function remove_user_save(user_id){
 
     user_selected = user_id;
-    group = 'group'
-    group_id = '{{ group_id }}'
+    origin = 'event'
+    event_id = '{{ event_id }}'
 
     $('#loader-member-cell-added').show();                    
 
@@ -70,7 +70,7 @@ function remove_user_save(user_id){
         method: "GET",
         dataType: "html",
         url: "{{ base_url }}/remove_member_list_save",
-        data: { userid: user_selected, origin: group, origin_id: group_id}
+        data: { userid: user_selected, origin: origin, origin_id: event_id}
         })
         .fail(function( ){
             $('#loader-member-cell-added').hide();
