@@ -63,13 +63,17 @@ def cell_metting_new(request, group_id, user_apps):
 
 	group = Groups().get_group_by_id(group_id)
 
+	servant = Groups().get_group_users(group_id, ['leader', 'host'])
+	cell_members = Groups().get_group_users(group_id, ['cell_member'])
+
 	content = {
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects(app_scope__in=["cell_metting"]),
 		'Events': Events.objects,
-		'cell_members': Users.objects,
+		'cell_members': cell_members,
+		'servant': servant,
 		'group' : group,
 	}
 
@@ -96,10 +100,12 @@ def cell_metting_new(request, group_id, user_apps):
 		metting_children_qtd = request.POST.get('metting-children-qtd')
 		metting_resume = request.POST.get('metting-resume')
 
-		user_added = request.POST.getlist('user-added[]')
+		user_added = request.POST.getlist('servant_presence[]')
 		roles_added = request.POST.getlist('roles-added[]')
 		member_added = request.POST.getlist('member_presence[]')
 		
+		print(user_added)
+		print(roles_added)
 
 		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
 		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")

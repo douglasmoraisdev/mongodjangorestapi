@@ -86,7 +86,7 @@
                 $.ajax({
                     method: "GET",
                     dataType: "html",
-                    url: "{{ base_url }}/add_servant_list",
+                    url: "{{ base_url }}/add_servant_list_presence",
                     data: { userid: user_selected, rolesid: roles_selected}
                     })
                     .fail(function(){

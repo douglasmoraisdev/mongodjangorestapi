@@ -97,14 +97,23 @@ class Groups(Document):
 		return Groups.objects.get(id=group_id)			
 
 
-	def get_group_users(self, group_id, role=''):
+	def get_group_users(self, group_id, role=None):
 		'''
 		returns the user_roles of the groups by id
 		params:
 		role(optional): get by user role, eg: 'leaders or hosts'
 		'''
-
+		user_list = []
 		group = Groups.objects.get(id=group_id)
+
+		if (role != None):
+			for us in group.user_roles:
+				for rl in us.role:
+					if rl.code in role:
+						user_list.append(us)
+
+			return user_list
+
 
 		return group.user_roles
 

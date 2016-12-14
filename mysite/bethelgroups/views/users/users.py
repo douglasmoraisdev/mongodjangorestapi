@@ -150,6 +150,29 @@ def add_servant_list(request):
 	return HttpResponse(template.render(content,request))
 
 #ajax
+def add_servant_list_presence(request):
+
+
+	user_list = dict()
+
+	user_id = request.GET.get('userid');
+	roles_ids = request.GET.getlist('rolesid[]');
+
+	user_selected = Users.objects(id=user_id)[0] #TODO mover como função nos Models
+	roles_selected = Roles.objects(id__in=roles_ids)
+
+	content = {
+		'user_name': user_selected,
+		'user_roles' : roles_selected,
+		'user_id': user_id,
+		'roles_ids': roles_ids,
+	}	
+	
+	template = loader.get_template('app/event/cell_metting/modals/servant_item_list_presence_add.html')
+
+	return HttpResponse(template.render(content,request))	
+
+#ajax
 def get_member_autocomplete(request):
 
 	user_list = dict()

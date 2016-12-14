@@ -66,6 +66,9 @@ urlpatterns = [
     url(r'^add_servant_list$', views.users.add_servant_list, name='add_servant_list'),
 
     #ajax
+    url(r'^add_servant_list_presence$', views.users.add_servant_list_presence, name='add_servant_list_presence'),    
+
+    #ajax
     url(r'^get_member_autocomplete$', views.users.get_member_autocomplete, name='get_member_autocomplete'),
 
     #ajax

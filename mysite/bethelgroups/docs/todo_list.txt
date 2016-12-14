@@ -26,8 +26,8 @@ reuniaocelula
 
 
 reuniaocelula/novo
-	preenchimento predefinido de servos
-	preenchimento predefinido de membros (somente do grupo)
+	** preenchimento predefinido de servos
+	OK---- preenchimento predefinido de membros (somente do grupo)
 
 
 curso

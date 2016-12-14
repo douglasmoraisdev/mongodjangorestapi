@@ -154,7 +154,42 @@
                                          
                                                 <ul class="collection" id="servant-cell-added">
                                                     
+                                                    {% for item in servant %}
+                                                        <li class="collection-item valign-wrapper">
 
+                                                            <input type="checkbox" id="servant_presence_{{ item.user.id }}" name="servant_presence[]" value="{{ item.user.id }}" checked="checked" />
+                                                            <label class="black-text" for="servant_presence_{{ item.user.id }}"></label>
+
+                                                            <label class="black-text" for="member_presence_{{ item.user.id }}"></label>
+
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" height="50px" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" height="50px" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}                                                            
+
+                                                            <div style="padding-right: 15px"></div>
+                                                            {{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}
+                                                            <div style="padding-right: 5px"></div>
+                                                            <p class="grey-text">
+                                                            {% for rl in item.role %}
+                                                                {% if forloop.last %}
+                                                                    {{ rl.name }}
+                                                                {% else %}
+                                                                    {{ rl.name }},
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            </p>
+
+                                                            <div style="padding-right: 15px"></div>                                                            
+
+                                                            <input type="hidden" name='user-added[]' id='user-added-x' value="{{ user_id }}"/>
+                                                            <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for rl in item.role %}{% if forloop.last %}{{ rl.id }}{% else %}{{ rl.id }},{% endif %}{% endfor %}"/>
+
+
+                                                        </li>
+                                                    {% endfor %}
+                                                    
                                                 </ul>
 
 
@@ -192,13 +227,21 @@
                                                 <div class="row">
                                                     <ul class="collection with-header" id="presence-list">
                                                         <li class="collection-header"><h5>Membros presentes</h5></li>
-                                                        {% for item in cell_members %}   
+                                                        {% for item in cell_members %}
                                                             <li class="collection-item valign-wrapper">
-                                                                <input type="checkbox" id="member_presence_{{ item.id }}" name="member_presence[]" value="{{ item.id }}"/>
-                                                                <label class="black-text" for="member_presence_{{ item.id }}"></label>
-                                                                <img class="circle" width="50" height="50" avatar="{{ item.extra_data.first_name }} {{ item.extra_data.last_name }}" />
+                                                                <input type="checkbox" id="member_presence_{{ item.user.id }}" name="member_presence[]" value="{{ item.user.id }}"/>
+                                                                <label class="black-text" for="member_presence_{{ item.user.id }}"></label>
+
+
+                                                                {% if item.user.extra_data.profile_image %}
+                                                                    <img class="circle" height="50px" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                                {% else %}
+                                                                    <img class="circle" height="50px" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                                {% endif %}   
+
+
                                                                 <div style="padding-right: 15px"></div>
-                                                                {{ item.extra_data.first_name }} {{ item.extra_data.last_name }}
+                                                                {{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}
                                                             </li>
                                                         {% endfor %}
                                                     </ul>                                                         
