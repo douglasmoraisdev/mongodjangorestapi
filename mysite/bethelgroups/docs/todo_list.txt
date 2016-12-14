@@ -26,8 +26,18 @@ reuniaocelula
 
 
 reuniaocelula/novo
-	** preenchimento predefinido de servos
+	OK---- preenchimento predefinido de servos 
+	* TODO: BUG ao adicionar um servo e remover a presença de outro a lista roles/user_ids fica descompassada. 
+		Reproduzir: 
+			Crie um metting de uma cell de 2 servants
+			Desmarque o segundo e adicionem um terceiro
+			Resultado: O terceiro ficará com o role do segundo
 	OK---- preenchimento predefinido de membros (somente do grupo)
+
+
+reuniaocelula/editar
+	preenchimento predefinido de servos 
+	preenchimento predefinido de membros (somente do grupo)	
 
 
 curso
@@ -48,8 +58,6 @@ disciplina/novo
 
 login
 	 OK---- layout
-
-
 
 
 
