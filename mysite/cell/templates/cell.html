@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+
+    <!-- CSS STYLES -->
+    {% include "default/styles_css.html" %}
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+    <script src="{% static "js/plugins.min.js" %}"></script>
+    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>
+    <script src="{% static "js/chart.bundle.min.js"%}"></script>    
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 80%; }
+    </style>    
+
+
+</head>
+
+<body class="grey lighten-1">
+
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+
+    <!--Header -->
+    {% include "default/header_default.html" %}
+    <!--Header -->
+
+    <main>
+
+
+        <!-- START MAIN -->
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+
+                {% include "default/side_nav.html" %}
+
+
+                <!-- Page Layout here -->
+                <div class="content">
+
+
+                    <!--start container-->
+                    <div style="padding-top: 16px">
+
+                        <div class="row">
+
+                            <div class="col s12 m10 l10">
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="group" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title activator">{{ group_name }}<i class="material-icons right">live_help</i></span>
+                                                    <p>{{ group_type }} fundada em {{ group_data.created_on_date }}</p>
+                                                    <p>{{ users_count }} membros</p>
+                                                    <br/>
+
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Lideres</h6>
+                                                        </li>
+                                                        {% for list in leader_users %}
+
+                                                        <li class="collection-item avatar">
+                                                            {% if list.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                            {% endif %}
+                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <p>{{ roles.name }}</p>
+                                                            {%endfor%}
+                                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                        </li>
+
+                                                        {% endfor %} {% for list in host_users %}
+
+                                                        <li class="collection-item avatar">
+                                                            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <p>{{ roles.name }}</p>
+                                                            {%endfor%}
+                                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                        </li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                    {% if groups_over %}
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Supervisionado por:</h6>
+                                                        </li>
+                                                        {% for list in groups_over %}
+
+                                                        <li class="collection-item">
+                                                            <div>{{ list.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+                                                    </ul>
+
+                                                    {% endif %} {% if group_origin %}
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Grupo de origem:</h6>
+                                                        </li>
+                                                        <li class="collection-item">
+                                                            <div>{{ group_origin.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    {% endif %} {% if generated_groups %}
+
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Grupos que originou</h6>
+                                                        </li>
+                                                        {% for list in generated_groups %}
+
+                                                        <li class="collection-item">
+                                                            <div>{{ list.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% endif %} {% if groups_under %}
+
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Supervisionando:</h6>
+                                                        </li>
+                                                        {% for list in groups_under %}
+
+                                                        <li class="collection-item">
+                                                            <div>{{ list.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% endif %}
+
+                                                </div>
+
+                                                <div class="card-reveal">
+                                                    <span class="card-title grey-text text-darken-4">+ Detalhes do Grupo<i class="material-icons right">close</i></span>
+
+
+                                                    <ul class="collection with-header">
+
+                                                        <li class="collection-header">
+                                                            <h5>Endereço</h5>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>CEP: {{ group_data.addr_zip }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li class="collection-item">
+                                                            <div>Estado: {{ group_data.addr_state }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li class="collection-item">
+                                                            <div>Cidade: {{ group_data.addr_city }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Bairro: {{ group_data.addr_neigh }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Logradouro: {{ group_data.addr_street }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Nro/Complemento: {{ group_data.addr_street_number }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+
+
+
+                                                    <ul class="collection with-header">
+
+                                                        <li class="collection-header">
+                                                            <h5>Dias e Horários</h5>
+                                                        </li>
+
+                                                        <li class="collection-item">
+                                                            <div>Frequência de reuniões: Semanal
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li class="collection-item">
+                                                            <div>
+
+                                                                <!-- TODO make work -->
+                                                                {% for key, item in group_data.meet_day.items %}
+
+                                                                <p>{{ item.key }} : {{group_data.meet_hour.key}}</p>
+
+                                                                {% endfor %}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+
+                                                            </div>
+                                                        </li>
+
+                                                    </ul>
+
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Groups_perm %}
+                                                        <a href="/bethelgroups/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    {% endif %}
+                                                    {% if 'c' in Groups_perm %}
+                                                        <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col s12 l6">
+                                            <div id="members-chart" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Frequência em reuniões</span>
+
+
+                                                        <canvas id="mett_freq_chart" width="400" height="400"></canvas>
+
+
+
+                                                </div>
+
+                                                <div class="card-action">
+                                                    <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">search</i></a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col s12 l6">
+                                            <div id="next-mettings" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Próximas reuniões</span>
+
+
+                                                        <ul class="collection">
+
+
+                                                            <li class="collection-item">                                                                
+                                                                <div>01/16 - Agendada<a href="#!" class="secondary-content"><i class="material-icons">search</i></a></div>
+                                                            </li>
+
+
+                                                            <li class="collection-item">
+                                                                <div>12/16 - Agendada<a href="#!" class="secondary-content"><i class="material-icons">search</i></a></div>
+                                                            </li>
+
+
+                                                            <li class="collection-item">
+                                                                <div>19/16 - Agendada<a href="#!" class="secondary-content"><i class="material-icons">search</i></a></div>
+                                                            </li>
+
+
+                                                        </ul>
+
+
+
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm or 'w' in System_perm %}
+                                                        <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>                                    
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="members" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Membros</span>
+
+                                                    <ul class="collection">
+
+                                                        {% for list in member_users %}
+                                                            
+                                                        <li id="member-added-{{ list.user.id }}" class="collection-item avatar">
+                                                            <div id="user-added-info-{{ list.user.id}}">
+                                                                {% if list.user.extra_data.profile_image %}
+                                                                    <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                                {% else %}
+                                                                    <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                                {% endif %}
+                                                                <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                                <p>{{ roles.name }}</p>
+                                                                {%endfor%}
+                                                            </div>
+
+                                                            <div class="secondary-content">
+                                                            
+                                                                <a id="confirm-delete-member-modal-trigger" href="#confirm-delete-member-modal" onclick="update_delete_modal('{{ list.user.id }}')" class="modal-trigger confirm-delete-member-modal-trigger"><i class="material-icons activator">delete</i></a>
+                                                                {% include "app/group/cells/modals/delete_member_confirm_modal.html" %}
+                                                            
+
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>
+                                                            
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                    <ul class="collection" id="member-cell-added">
+                                                        
+
+                                                    </ul>
+
+                                                    <div class="progress" id="loader-member-cell-added" style="display:none" >
+                                                      <div class="indeterminate"></div>
+                                                    </div>                                                   
+
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Groups_perm %}                                                    
+                                                        <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
+                                                        {% include "app/group/cells/modals/add_member_search_modal.html" %}
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="row">
+
+                                        <div class="col s12 m12 l12">
+
+                                            <div id="geo-member" class="card scrollspy" style="height: 550px">
+
+                                                <div class="card-content">
+                                                    <span class="card-title">Geolocalização dos Membros</span>
+                                                      <p id="map_show" class="valign center-align">Clique no icone <a onclick="initMap();$('#map_show').hide()" class="btn-floating waves-effect orange darken-5 "><i class="material-icons activator">map</i></a> para exibir o mapa</p>
+                                                </div>
+ 
+
+                                                <div id="map"></div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                                <div id="visitors" class="card scrollspy">
+                                                    <div class="card-content">
+
+                                                        <span class="card-title">Visitantes</span>
+
+                                                        <ul class="collection">
+
+                                                            {% for list in visitor_users %}
+
+                                                            <li class="collection-item avatar">
+                                                                <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                                <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                                <p>{{ roles.name }}</p>
+                                                                {%endfor%}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </li>
+
+                                                            {% endfor %}
+
+                                                        </ul>
+
+                                                    </div>
+
+
+                                                    <div class="card-action">
+
+                                                        {% if 'w' in Groups_perm %}
+                                                            <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                        {% endif %}
+
+                                                    </div>
+
+                                                </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="mettings" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Reuniões de Células</span>
+                                                    <p>{{ meetings.count }} Reunião(ões)</p>
+                                                    <p></p>
+
+
+                                                    <ul class="collection">
+                                                        {% for item in meetings %}
+                                                        <li class="collection-item">
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/reuniaocelula/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            </div>
+                                                        </li>
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div>
+
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm or 'w' in System_perm %}
+                                                        <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="events" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Eventos do Grupo</span>
+                                                    <p>{{ events.count }} Evento(s)</p>
+                                                    <p></p>
+
+
+                                                    <ul class="collection">
+                                                        {% for item in events %}
+                                                        <li class="collection-item">
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            </div>
+                                                        </li>
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div>
+
+
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm %}
+                                                        <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                            </div>
+
+
+
+                            <div class="col hide-on-small-only m2 l2">
+                              <ul class="section table-of-contents">
+                                <li><a class="white-text" href="#group">Grupo</a></li>
+                                <li><a class="white-text" href="#members-chart">Gráfico</a></li>
+                                <li><a class="white-text" href="#next-mettings">Próximas reuniões</a></li>
+                                <li><a class="white-text" href="#members">Membros</a></li>                                
+                                <li><a class="white-text" href="#geo-member">Membros - Mapa</a></li>
+                                <li><a class="white-text" href="#visitors">Visitantes</a></li>
+                                <li><a class="white-text" href="#mettings">Reuniões</a></li>
+                                <li><a class="white-text" href="#events">Eventos</a></li>
+                              </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Google Maps API -->
+    <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk"></script>
+    <script  src="{% static "js/markerclusterer.js"%}"></script>
+
+    <script>
+        {% include "app/group/cells/js/cell.js" %}
+    </script>  
+
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+
+      $(document).ready(function(){
+        $('.scrollspy').scrollSpy({
+            scrollOffset: 100
+        });
+
+
+        $('.table-of-contents').pushpin({
+          //top: 100,
+          //bottom: 1000,
+          offset: 80
+        });        
+
+
+      });
+
+
+    // Any of the following formats may be used
+    var ctx = $("#mett_freq_chart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["01/10", "08/10", "15/10", "21/10", "28/10"],
+            datasets: [{
+                label: 'Pessoas presentes',
+                data: [9, 3, 2, 10, 4],
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",              
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }],              
+            }
+        }
+    });
+
+
+    </script>
+
+
+</body>
+
+
+</html>

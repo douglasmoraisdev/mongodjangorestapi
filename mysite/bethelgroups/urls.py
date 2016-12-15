@@ -45,14 +45,6 @@ urlpatterns = [
     url(r'^tipogrupo/novo$', views.groups.grouptype_new, name='grouptype_new'),
 
 
-
-    #Celulas
-    url(r'^celula/get/(.+)/$', views.cells.cell, name='cell'),    
-    url(r'^celula/novo$', views.cells.cell_new, name='cell_new'),
-    url(r'^celula/editar/(.+)/$', views.cells.cell_edit, name='cell_edit'),
-
-
-
     #ajax
     url(r'usuarios_roles_list$', views.users.usuarios_roles_list, name='usuarios_roles_list'),
 

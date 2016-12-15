@@ -1,0 +1,37 @@
+<!-- Modal Structure -->
+<div id="confirm-delete-member-modal" class="modal">
+    
+    <div class="modal-content">
+        <h4>Confirma exclusão de membro?</h4>
+
+        <div class="row">
+                
+
+            <div class="input-field col s12">
+
+                <ul class="collection">
+
+                    <li id="list-user-delete" class="collection-item avatar">
+
+                    </li>            
+                    
+
+                </ul>
+
+                <input type="hidden" id="user_to_delete" value="">
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="modal-footer">
+        <a href="#!" onclick="remove_user_save($('#user_to_delete').val())" class=" modal-action modal-close waves-effect waves-green btn-flat">Sim</a>    
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Não</a>
+    </div>
+
+
+</div>
