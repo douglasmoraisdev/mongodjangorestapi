@@ -140,6 +140,7 @@ def cell_new(request, user_apps):
 		cell_street_number = request.POST.get('cell-street-number')
 		cell_days = request.POST.getlist('cell-days-multiple[]')
 		cell_hours = request.POST.getlist('cell-hours[]')
+		meet_freq = request.POST.get('group-meeting-freq')
 		user_added = request.POST.getlist('user-added[]')
 		roles_added = request.POST.getlist('roles-added[]')
 		member_added = request.POST.getlist('member-added[]')
@@ -182,7 +183,9 @@ def cell_new(request, user_apps):
 			'addr_street' : cell_street,
 			'addr_street_number' : cell_street_number,
 			'meet_day':days_list,
-			'meet_hour':hours_list
+			'meet_hour':hours_list,
+			'meet_freq' : meet_freq
+
 		})		
 
 
@@ -226,7 +229,7 @@ def cell_edit(request, group_id, user_apps):
 		'Users': Users.objects,
 		'cell_members': cell_members,
 		'cell_leaders': cell_leaders,		
-		'Groups': Groups.objects,
+		'Groups': Groups.objects(id__nin=[group_id]),
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects(app_scope__in=["cell", "cell_metting"]),
 		'Events': Events.objects,
@@ -258,6 +261,7 @@ def cell_edit(request, group_id, user_apps):
 		cell_street_number = request.POST.get('cell-street-number')
 		cell_days = request.POST.getlist('cell-days-multiple[]')
 		cell_hours = request.POST.getlist('cell-hours[]')
+		meet_freq = request.POST.get('group-meeting-freq')
 		user_added = request.POST.getlist('user-added[]')
 		roles_added = request.POST.getlist('roles-added[]')
 		member_added = request.POST.getlist('member-added[]')
@@ -300,8 +304,9 @@ def cell_edit(request, group_id, user_apps):
 			'addr_neigh' : cell_neigh,
 			'addr_street' : cell_street,
 			'addr_street_number' : cell_street_number,
-			'meet_day':days_list,
-			'meet_hour':hours_list
+			'meet_day' : days_list,
+			'meet_hour' : hours_list,
+			'meet_freq' : meet_freq
 		})		
 
 

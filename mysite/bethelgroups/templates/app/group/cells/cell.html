@@ -16,8 +16,8 @@
     <script src="{% static "js/letteravatar.js" %}"></script>
     <script src="{% static "js/plugins.min.js" %}"></script>
     <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
-    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
-
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>
+    <script src="{% static "js/chart.bundle.min.js"%}"></script>    
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,6 +26,8 @@
       html, body { height: 100%; margin: 0; padding: 0; }
       #map { height: 80%; }
     </style>    
+
+
 </head>
 
 <body class="grey lighten-1">
@@ -271,6 +273,72 @@
 
 
                                     <div class="row">
+                                        <div class="col s12 l6">
+                                            <div id="members-chart" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Frequência em reuniões</span>
+
+
+                                                        <canvas id="mett_freq_chart" width="400" height="400"></canvas>
+
+
+
+                                                </div>
+
+                                                <div class="card-action">
+                                                    <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">search</i></a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col s12 l6">
+                                            <div id="next-mettings" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Próximas reuniões</span>
+
+
+                                                        <ul class="collection">
+
+
+                                                            <li class="collection-item">                                                                
+                                                                <div>01/16 - Agendada<a href="#!" class="secondary-content"><i class="material-icons">search</i></a></div>
+                                                            </li>
+
+
+                                                            <li class="collection-item">
+                                                                <div>12/16 - Agendada<a href="#!" class="secondary-content"><i class="material-icons">search</i></a></div>
+                                                            </li>
+
+
+                                                            <li class="collection-item">
+                                                                <div>19/16 - Agendada<a href="#!" class="secondary-content"><i class="material-icons">search</i></a></div>
+                                                            </li>
+
+
+                                                        </ul>
+
+
+
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm or 'w' in System_perm %}
+                                                        <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>                                    
+
+
+                                    <div class="row">
                                         <div class="col s12 m12 l12">
                                             <div id="members" class="card scrollspy">
                                                 <div class="card-content">
@@ -333,6 +401,8 @@
 
                                     </div>
 
+
+
                                     <div class="row">
 
                                         <div class="col s12 m12 l12">
@@ -351,9 +421,6 @@
 
 
                                         </div>
-
-
-
 
                                     </div>
 
@@ -478,7 +545,9 @@
                             <div class="col hide-on-small-only m2 l2">
                               <ul class="section table-of-contents">
                                 <li><a class="white-text" href="#group">Grupo</a></li>
-                                <li><a class="white-text" href="#members">Membros</a></li>
+                                <li><a class="white-text" href="#members-chart">Gráfico</a></li>
+                                <li><a class="white-text" href="#next-mettings">Próximas reuniões</a></li>
+                                <li><a class="white-text" href="#members">Membros</a></li>                                
                                 <li><a class="white-text" href="#geo-member">Membros - Mapa</a></li>
                                 <li><a class="white-text" href="#visitors">Visitantes</a></li>
                                 <li><a class="white-text" href="#mettings">Reuniões</a></li>
@@ -529,6 +598,41 @@
 
       });
 
+
+    // Any of the following formats may be used
+    var ctx = $("#mett_freq_chart");
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["01/10", "08/10", "15/10", "21/10", "28/10"],
+            datasets: [{
+                label: 'Pessoas presentes',
+                data: [9, 3, 2, 10, 4],
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(75,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",              
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }],              
+            }
+        }
+    });
 
 
     </script>
