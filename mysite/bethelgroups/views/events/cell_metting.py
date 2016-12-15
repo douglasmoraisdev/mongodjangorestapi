@@ -174,15 +174,15 @@ def cell_metting_edit(request, group_id, event_id, user_apps):
 		group_users = group.get_group_users(group_id)	
 
 
-	event_leaders = []
-	event_members = []
+	group_servant = Groups().get_group_users(group_id, ['leader', 'host'])
+	group_members = Groups().get_group_users(group_id, ['cell_member'])
+	
+	present_servant = Events().get_event_users(event_id, ['leader', 'host'])
+	present_members = Events().get_event_users(event_id, ['cell_member'])
 
-	for user in event_users:
-		for codes in user.role:
-			if 'cell_member' == codes.code:
-				event_members.append(user)
-			elif codes.code in ['leader', 'host']:
-				event_leaders.append(user)		
+
+	not_present_servant = [x for x in group_servant if x not in present_servant]
+	not_present_members = [x for x in group_members if x not in present_members]
 
 	content = {
 		'Users': Users.objects,
@@ -190,11 +190,13 @@ def cell_metting_edit(request, group_id, event_id, user_apps):
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects(app_scope__in=["cell_metting"]),
 		'Events': Events.objects,
-		'event_members': event_members,
-		'event_leaders': event_leaders,		
 		'group_metting_name' : group_metting_name,
 		'event' : events,
-		'event_id':group_metting_id
+		'event_id':group_metting_id,
+		'present_servant' : present_servant,
+		'not_present_servant' : not_present_servant,		
+		'present_members' : present_members,
+		'not_present_members' : not_present_members
 	}
 
 
@@ -222,7 +224,7 @@ def cell_metting_edit(request, group_id, event_id, user_apps):
 		metting_children_qtd = request.POST.get('metting-children-qtd')
 		metting_resume = request.POST.get('metting-resume')
 
-		user_added = request.POST.getlist('user-added[]')
+		user_added = request.POST.getlist('servant_presence[]')
 		roles_added = request.POST.getlist('roles-added[]')
 		member_added = request.POST.getlist('member_presence[]')
 		

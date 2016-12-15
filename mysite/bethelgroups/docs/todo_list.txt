@@ -11,6 +11,10 @@ geral
 		OK---- validacao
 
 
+login
+	 OK---- layout
+
+
 celula/
 	OK---- Google Maps, div "clicar para carregar mapa"
 	OK---- Google Maps, target _blank lupa usuarios
@@ -36,8 +40,15 @@ reuniaocelula/novo
 
 
 reuniaocelula/editar
-	preenchimento predefinido de servos 
-	preenchimento predefinido de membros (somente do grupo)	
+	OK---- preenchimento predefinido de servos 
+	OK---- preenchimento predefinido de membros (somente do grupo)	
+
+
+disciplina/novo
+	validação data inicio e final do curso
+	OK---- retirar "recorrente" e "grupo organizador"
+	OK---- preenchimento predefinido de servos
+	OK---- preenchimento predefinido de membros (somente do curso)
 
 
 curso
@@ -47,17 +58,6 @@ curso
 disciplina
 	Campos do detalhamento
 	Arquivos
-
-
-disciplina/novo
-	validação data inicio e final do curso
-	OK---- retirar "recorrente" e "grupo organizador"
-	preenchimento predefinido de servos
-	preenchimento predefinido de membros (somente do curso)
-
-
-login
-	 OK---- layout
 
 
 

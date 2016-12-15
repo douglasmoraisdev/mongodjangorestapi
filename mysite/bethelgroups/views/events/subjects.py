@@ -54,12 +54,17 @@ def subject_new(request, course_id, user_apps):
 
 	course = Events.objects.get(id=course_id)
 
+	servant = Events().get_event_users(course_id, ['teacher'])
+	members = Events().get_event_users(course_id, ['student'])	
+
 	content = {
 		'Users': Users.objects,
 		'Groups': Groups.objects,
 		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects(app_scope__in=["subject"]),
-		'course' : course
+		'course' : course,
+		'servant' : servant,
+		'members' : members
 	}
 
 
@@ -83,9 +88,9 @@ def subject_new(request, course_id, user_apps):
 		subject_date_end = request.POST.get('subject-date-end')
 		subject_days = request.POST.getlist('cell-days-multiple[]')
 		subject_hours = request.POST.getlist('cell-hours[]')
-		user_added = request.POST.getlist('user-added[]')
+		user_added = request.POST.getlist('servant_presence[]')
 		roles_added = request.POST.getlist('roles-added[]')
-		member_added = request.POST.getlist('member-added[]')
+		member_added = request.POST.getlist('member_presence[]')
 		group_origin = request.POST.get('group-origin')		
 
 		days_input_names = [name for name in request.POST.keys() if name.startswith('cell-days-multiple-')]
@@ -96,7 +101,7 @@ def subject_new(request, course_id, user_apps):
 
 
 		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
-		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
+		members_roles = utils.parse_users_fixed_role(member_added, "student")
 
 
 		#join servants and users
@@ -157,7 +162,7 @@ def subject_edit(request, course_id, subject_id, user_apps):
 
 	for user in event_users:
 		for codes in user.role:
-			if 'cell_member' == codes.code:
+			if 'student' == codes.code:
 				event_members.append(user)
 			elif codes.code in ['leader', 'host', 'teacher']:
 				event_leaders.append(user)	
@@ -208,7 +213,7 @@ def subject_edit(request, course_id, subject_id, user_apps):
 
 
 		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
-		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
+		members_roles = utils.parse_users_fixed_role(member_added, "student")
 
 
 		#join servants and users

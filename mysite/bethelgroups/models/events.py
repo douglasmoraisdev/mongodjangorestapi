@@ -93,9 +93,23 @@ class Events(Document):
 		return Events.objects(parent_event=event_id)
 
 
-	def get_event_users(self, event_id):
-
+	def get_event_users(self, event_id, role=None):
+		'''
+		returns the user_roles of the groups by id
+		params:
+		role(optional): get by user role, eg: 'leaders or hosts'
+		'''
+		user_list = []
 		event = Events.objects.get(id=event_id)
+
+		if (role != None):
+			for us in event.user_roles:
+				for rl in us.role:
+					if rl.code in role:
+						user_list.append(us)
+
+			return user_list		
+
 
 		return event.user_roles
 

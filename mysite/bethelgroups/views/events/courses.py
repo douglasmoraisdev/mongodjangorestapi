@@ -107,7 +107,7 @@ def course_new(request, user_apps):
 
 
 		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
-		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
+		members_roles = utils.parse_users_fixed_role(member_added, "student")
 
 
 		#join servants and users
@@ -214,7 +214,7 @@ def course_edit(request, course_id, user_apps):
 
 
 		servant_roles = utils.parse_users_multi_role(user_added, roles_added)
-		members_roles = utils.parse_users_fixed_role(member_added, "cell_member")
+		members_roles = utils.parse_users_fixed_role(member_added, "student")
 
 
 		#join servants and users
