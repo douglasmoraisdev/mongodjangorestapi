@@ -1,6 +1,5 @@
 from django.db import models
 from mongoengine import *
-from bethel_core.models.groups_types import *
 from bethel_core.models.users import *
 
 
@@ -12,7 +11,6 @@ logger = logging.getLogger(__name__)
 class Groups(Document):
 	meta = {'allow_inheritance': True}
 	name = StringField(max_length=50)
-	#group_type = ReferenceField(Groups_types)
 	user_roles = EmbeddedDocumentListField(User_roles)
 	origin = ReferenceField("self", reverse_delete_rule = NULLIFY)
 	groups_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
@@ -109,10 +107,10 @@ class Groups(Document):
 
 		for key, gtype in enumerate(groups):
 
-			if gtype.group_type.code in user_groups:
-				user_groups[gtype.group_type.code].append(groups[key])
+			if gtype._cls in user_groups:
+				user_groups[gtype._cls].append(groups[key])
 			else:
-				user_groups[gtype.group_type.code] = [groups[key]]
+				user_groups[gtype._cls] = [groups[key]]
 
 
 		# Get groups under (all groups that this group is over) IF get_childs == True
@@ -121,10 +119,10 @@ class Groups(Document):
 
 			for key, gtype in enumerate(groups_under):
 
-				if gtype.group_type.code in user_groups:
-					user_groups[gtype.group_type.code].append(groups_under[key])
+				if gtype._cls in user_groups:
+					user_groups[gtype._cls].append(groups_under[key])
 				else:
-					user_groups[gtype.group_type.code] = [groups_under[key]]				
+					user_groups[gtype._cls] = [groups_under[key]]				
 
 		return user_groups
 
@@ -136,10 +134,10 @@ class Groups(Document):
 
 		for key, gtype in enumerate(group):
 
-			if gtype.group_type.code in user_groups:
-				user_groups[gtype.group_type.code].append(group[key])
+			if gtype._cls in user_groups:
+				user_groups[gtype._cls].append(group[key])
 			else:
-				user_groups[gtype.group_type.code] = [group[key]]
+				user_groups[gtype._cls] = [group[key]]
 
 
 

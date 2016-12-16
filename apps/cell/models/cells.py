@@ -2,7 +2,6 @@ from django.db import models
 from mongoengine import *
 
 from bethel_core.models.groups import *
-from bethel_core.models.groups_types import *
 from bethel_core.models.users import *
 
 import logging

@@ -1,7 +1,6 @@
 from .events import *
 from .events_types import *
 from .groups import *
-from .groups_types import *
 from .users import *
 from .roles import *
 from .tasks import *
