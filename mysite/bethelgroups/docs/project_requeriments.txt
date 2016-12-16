@@ -1,7 +1,0 @@
-project requeriments:
-
-	http://django-test-addons.readthedocs.io/en/latest/main.html#testing-mongodb
-
-
-	* For unit tests on mongodb:
-		sudo pip3 install django-test-addons
