@@ -9,7 +9,7 @@ from bethel_core import utils
 import uuid
 import googlemaps
 
-from bethel_core.models import *
+from cell.models import *
 from bethel_core.decorators import *
 
 import logging
@@ -17,8 +17,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-@bethel_auth_required
-def cell(request, group_id, user_apps):
+#@bethel_auth_required
+def cell(request, group_id, user_apps=''):
 
 	# Google Maps Client
 	#gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
@@ -39,7 +39,7 @@ def cell(request, group_id, user_apps):
 
 	group_id = ObjectId(group_id)
 	
-	group = Groups().get_group_by_id(group_id)
+	group = Cells().get_group_by_id(group_id)
 
 	group_type_id = group.group_type.id
 	group_type = Groups_types().get_grouptype_by_id(ObjectId(group_type_id))
@@ -72,7 +72,7 @@ def cell(request, group_id, user_apps):
 
 	meetings = Events().get_meetings_by_group_id(group_id)
 
-	generated_groups = Groups().get_groups_generetad(group_id)
+	generated_groups = Cells().get_groups_generetad(group_id)
 
 	users_count = len(users)
 	content = {
@@ -189,8 +189,8 @@ def cell_new(request, user_apps):
 		})		
 
 
-		cell = Groups()
-		cell.add_cell(
+		cell = Cells()
+		cell.add_group(
 			name=cell_name,
 			group_origin=group_origin,
 			groups_over=groups_over,
@@ -214,7 +214,7 @@ def cell_edit(request, group_id, user_apps):
 	cell_members = []
 	cell_leaders = []
 
-	group = Groups()
+	group = Cells()
 	group_users = group.get_group_users(group_id)	
 
 	for user in group_users:
@@ -309,7 +309,7 @@ def cell_edit(request, group_id, user_apps):
 		})		
 
 
-		cell = Groups()
+		cell = Cells()
 		cell.edit_cell(
 			cell_id=group_id,
 			name=cell_name,

@@ -1,5 +1,7 @@
 from django.db import models
 from mongoengine import *
+
+from bethel_core.models.groups import *
 from bethel_core.models.groups_types import *
 from bethel_core.models.users import *
 
@@ -8,25 +10,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class Groups(Document):
-	name = StringField(max_length=50)
-	group_type = ReferenceField(Groups_types)
-	user_roles = EmbeddedDocumentListField(User_roles)
-	origin = ReferenceField("self", reverse_delete_rule = NULLIFY)
-	groups_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
-	groups_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
-	extra_data = DictField()
+class Cells(Groups):
+	cell_origin = StringField(max_length=50)
 
 
-	'''
-		ADD DATA METHODS		
-	'''
+	def add_group(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
 
-	def add_group(self, name, group_type, group_origin, groups_over, groups_under, user_roles, extra_data=None):
-
-		Groups.objects.create(
+		Cells.objects.create(
 			name=name,
-			group_type=group_type,
 			origin=group_origin,
 			groups_over=groups_over,
 			groups_under=groups_under,
@@ -38,15 +29,15 @@ class Groups(Document):
 
 		cell_type_id = Groups_types.objects(code='cell')[0]
 
-		Groups.objects.create(
+		Cells.objects.create(
 			name=name,
-			group_type=cell_type_id,
+			#group_type=cell_type_id,
 			origin=group_origin,
 			groups_over=groups_over,
 			groups_under=groups_under,
 			user_roles = user_roles,
 			extra_data=extra_data
-		)	
+		)
 
 	def add_user_group(self, user_roles, group_id):
 
@@ -79,11 +70,12 @@ class Groups(Document):
 
 	'''
 		GET DATA METHODS		
-	'''
+	''
 
 	def get_group_by_id(self, group_id):
 
-		return Groups.objects.get(id=group_id)
+		return Cells.objects.get(id=group_id)
+	'''
 
 
 	def get_groups_over_by_id(self, group_id):

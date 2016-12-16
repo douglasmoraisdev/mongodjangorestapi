@@ -10,44 +10,15 @@ logger = logging.getLogger(__name__)
 
 
 class Groups(Document):
+	meta = {'allow_inheritance': True}
 	name = StringField(max_length=50)
-	group_type = ReferenceField(Groups_types)
+	#group_type = ReferenceField(Groups_types)
 	user_roles = EmbeddedDocumentListField(User_roles)
 	origin = ReferenceField("self", reverse_delete_rule = NULLIFY)
 	groups_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
 	groups_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
 	extra_data = DictField()
 
-
-	'''
-		ADD DATA METHODS		
-	'''
-
-	def add_group(self, name, group_type, group_origin, groups_over, groups_under, user_roles, extra_data=None):
-
-		Groups.objects.create(
-			name=name,
-			group_type=group_type,
-			origin=group_origin,
-			groups_over=groups_over,
-			groups_under=groups_under,
-			user_roles = user_roles,
-			extra_data=extra_data
-		)
-
-	def add_cell(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
-
-		cell_type_id = Groups_types.objects(code='cell')[0]
-
-		Groups.objects.create(
-			name=name,
-			group_type=cell_type_id,
-			origin=group_origin,
-			groups_over=groups_over,
-			groups_under=groups_under,
-			user_roles = user_roles,
-			extra_data=extra_data
-		)	
 
 	def add_user_group(self, user_roles, group_id):
 
