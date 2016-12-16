@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+
+    <!-- BOOTSTRAP & STYLES -->
+    {% include "default/styles_css.html" %}
+    <!-- END OF BOOTSTRAP & STYLES -->
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+    <script src="{% static "js/plugins.min.js" %}"></script>
+    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 80%; }
+    </style>    
+</head>
+
+<body class="grey lighten-1">
+
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+
+    <!--Header -->
+    {% include "default/header_default.html" %}
+    <!--Header -->
+
+    <main>
+
+
+        <!-- START MAIN -->
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+
+                {% include "default/side_nav.html" %}
+
+
+                <!-- Page Layout here -->
+                <div class="content">
+
+
+                    <!--start container-->
+                    <div style="padding-top: 16px">
+
+                        <div class="row">
+
+                            <div class="col s12 m10 l10">
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="metting" class="card scrollspy">
+
+                                                <div class="card-content">
+
+                                                    <span class="card-title">{{ course_name }}</span>
+
+
+                                                    <ul class="collection">
+                                                            <li class="collection-item">
+                                                                <p>Data do evento: {{ start_date }}</p>
+                                                            </li>
+                                                            <li class="collection-item">
+                                                                <p>Realizado por: {{ group_name }}</p>
+                                                            </li>
+                                                            <li class="collection-item">
+                                                                <p>{{ users_count }} participantes</p>
+                                                            </li>                                                                                                                                                                
+                                                            <li class="collection-item">
+                                                                <div>Resumo: {{ event_data.resume }}</div>
+                                                            </li>
+                                                            <li class="collection-item">
+                                                                <div>Hora de inicio: {{ event_data.start_hour }}</div>
+                                                            </li>
+                                                            <li class="collection-item">
+                                                                <div>Hora de fim: {{ event_data.end_hour }}</div>
+                                                            </li>
+                                                            <li class="collection-item">
+                                                                <div>Oferta: R$ {{ event_data.offer_value }}</div>
+                                                            </li>
+                                                            <li class="collection-item">
+                                                                <div>Crianças: {{ event_data.children_qtd }}</div>
+                                                            </li>                                                                                                            
+                                                    </ul>
+                                                    
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm %}
+                                                        <a href="/bethel_core/curso/editar/{{ event_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    {% endif %}
+                                                    <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="members" class="card scrollspy">
+
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Disciplinas</span>
+
+                                                    <ul class="collection">
+                                                        {% for item in Subjects %}
+                                                        <li class="collection-item">
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/disciplina/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            </div>
+                                                        </li>
+                                                        {% endfor %}
+
+                                                    </ul>
+
+
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm %}
+                                                        <a href="{{ base_url }}/disciplina/novo/{{event_id}}" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">add</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="members" class="card scrollspy">
+
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Participantes</span>
+
+                                                    <ul class="collection">
+                                                        {% for list in users_list %}
+                                                        <li class="collection-item avatar">
+                                                            {% if list.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                            {% endif %}
+                                                            <span class="title">{{ list.user.extra_data.first_name }}</span>
+                                                                {% for roles in list.role %}
+                                                                <p>{{ roles.name }}</p>   
+                                                                {%endfor%}
+                                                            
+                                                        </li>
+                                                        {% endfor%}
+                                                    </ul>
+
+                                                    <ul class="collection" id="member-course-added">
+                                                        
+
+                                                    </ul>
+
+                                                    <div class="progress" id="loader-member-course-added" style="display:none" >
+                                                      <div class="indeterminate"></div>
+                                                    </div>                                                     
+
+
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
+                                                    {% include "app/event/course/modals/add_member_search_modal.html" %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col s12 m12 l12">
+
+                                            <div id="geo-member" class="card scrollspy" style="height: 550px">
+
+                                            <div class="card-content">
+                                                <span class="card-title">Geolocalização dos Participantes</span>
+                                                <p id="map_show" class="valign center-align">Clique no icone <a onclick="initMap();$('#map_show').hide()" class="btn-floating waves-effect orange darken-5 "><i class="material-icons activator">map</i></a> para exibir o mapa</p>
+
+
+                                            </div>
+
+                                                <div id="map"></div>
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+                            </div>
+
+
+                            <div class="col hide-on-small-only m2 l2">
+                              <ul class="section table-of-contents">
+                                <li><a class="white-text" href="#metting">Reunião</a></li>
+                                <li><a class="white-text" href="#members">Participantes</a></li>
+                                <li><a class="white-text" href="#geo-member">Participantes - Mapa</a></li>
+                              </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Google Maps API -->
+    <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk"></script>
+    <script  src="{% static "js/markerclusterer.js"%}"></script>
+
+    <script>
+        {% include "app/event/course/js/course.js" %}
+    </script>  
+
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+
+      $(document).ready(function(){
+        $('.scrollspy').scrollSpy({
+            scrollOffset: 100
+        });
+
+
+        $('.table-of-contents').pushpin({
+          //top: 100,
+          //bottom: 1000,
+          offset: 80
+        });        
+
+
+      });
+
+
+
+    </script>
+
+
+</body>
+
+
+</html>

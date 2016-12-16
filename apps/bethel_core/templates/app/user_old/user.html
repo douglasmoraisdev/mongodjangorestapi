@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+    <!--Import Google Icon Font-->
+     
+    <!--Import materialize.css-->
+
+    <!-- BOOTSTRAP & STYLES -->
+    {% include "default/styles_css.html" %}
+    <!-- END OF BOOTSTRAP & STYLES -->
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+
+    <header>
+    <!--Header -->
+    {% include "default/header_default.html" %}
+    <!--Header -->
+    </header>
+
+    <!-- Page Layout here -->
+    <main>
+
+    <div class="row">
+
+        <div class="col s12 m4 l3">
+
+
+        </div>
+
+        <div class="col s12 m8 l9">
+            <!-- Note that "m8 l9" was added -->
+            <!-- Teal page content
+
+                This content will be:
+            9-columns-wide on large screens,
+            8-columns-wide on medium screens,
+            12-columns-wide on small screens  -->
+
+
+            <div id="main_content">
+
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card">
+                            <div class="card-content white-text">
+
+                                <img class="round" width="100" height="100" avatar="{{ User.extra_data.first_name }} {{ User.extra_data.last_name }}">
+
+                                <span class="card-title activator white-text">{{ User.extra_data.first_name }} {{ User.extra_data.last_name }}<i class="material-icons right">live_help</i></span>
+                            </div>
+
+
+                            <ul class="collection">
+                                {% for item in users_list %}
+                                <li class="collection-item avatar">
+                                    <img class="circle" width="60" height="60" avatar="{{ item.name }}">
+                                    <span class="title">{{ item.name }}</span>
+                                        {% for roles in item.role %}
+                                        <p>{{ roles }}</p>   
+                                        {%endfor%}
+                                    <a href="#!" class="secondary-content"><i class="material-icons">edit</i></a>
+                                </li>
+                                {% endfor%}
+                            </ul>
+
+
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Sobre os Eventos<i class="material-icons right">close</i></span>
+                                <p>Dados do grupo</p>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card   darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title">Grupos do Usuário</span>
+                                <p>{{ Groups.count }} Grupo(s)</p>
+                                <p></p>
+
+                            </div>
+
+                            <ul class="collection">
+                                {% for item in Groups %}                                                        
+                                    <li class="collection-item">
+                                        <div>{{ item.name }}<a href="{{ base_url }}/grupo/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+
+                            <div class="card-action">
+                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card   darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title">Eventos do Usuário</span>
+                                <p>{{ Events.count }} Evento(s)</p>
+                                <p></p>
+
+                            </div>
+
+                            <ul class="collection">
+                                {% for item in Events %}                                                        
+                                    <li class="collection-item">
+                                        <div>{{ item.name }}<a href="{{ base_url }}/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+
+                            <div class="card-action">
+                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>                
+
+
+                <div class="row">
+                    <div class="col s12 m11">
+                        <div class="card   darken-1">
+                            <div class="card-content white-text">
+
+                                <span class="card-title">Cursos do Usuário</span>
+                                <p>{{ Courses.count }} Curso(s)</p>
+                                <p></p>
+
+                            </div>
+
+                            <ul class="collection">
+                                {% for item in Courses %}                                                        
+                                    <li class="collection-item">
+                                        <div>{{ item.name }}<a href="{{ base_url }}/curso/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a></div>
+                                    </li>
+                                {% endfor %}
+
+                            </ul>
+
+
+                            <div class="card-action">
+                                <button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>   
+
+
+            </div>
+
+        </div>     
+
+
+    </div>
+
+    </main>
+
+
+
+    <!-- Footer 
+    {% include "default/footer_default.html" %}
+    Footer -->
+
+
+
+
+        <!--<button class="btn waves-effect waves-light "><i class=" material-icons">add</i></button>-->
+
+        <div class="fixed-action-btn vertical" style="bottom: 45px; right: 24px;">
+            <a class="btn-floating btn-large waves-effect waves-light red">
+                <i class="large material-icons">add</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating blue"><i class="material-icons">supervisor_account</i></a></li>
+                <li><a class="btn-floating green"><i class="material-icons">today</i></a></li>
+            </ul>
+        </div>
+
+
+
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+    </script>
+
+
+</body>
+
+
+</html>

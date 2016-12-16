@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+
+    {% include "default/styles_css.html" %}
+
+    <link href="{% static "css/materialize-stepper.css" %}" rel="stylesheet">
+
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js"%}"></script>
+    <script src="{% static "js/materialize.js"%}"></script>
+    <script src="{% static "js/jquery.validate.min.js"%}"></script>
+    <script src="{% static "js/materialize-stepper.js"%}"></script>
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>    
+    <script src="{% static "js/materialize.clockpicker.js"%}"></script>
+    <script src="{% static "js/jquery.maskedinput.min.js"%}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body class="grey lighten-1">
+
+    <!--Header -->
+    {% include "default/header_default.html" %}
+    <!--Header -->
+
+
+
+    <!-- Page Layout here -->
+    <div class="row">
+
+        <div class="section grey lighten-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col l8 m10 s12 offset-l2 offset-m1">
+                        <h3 class="light center-align blue-text">Editar Curso</h3>
+                        <h5 class="light center-align blue-text">{{ group_metting_name }}</h5>
+                        <div class="card">
+                            <div class="card-content">
+
+
+                                    <ul id="form-add-cell" class="stepper linear" data-method="POST" data-action="">
+
+                                        {% csrf_token %}
+
+                                        <li class="step active">
+                                            <div class="step-title waves-effect waves-dark">Dados Básicos</div>
+                                            <div class="step-content">
+
+                                                <div class="row">
+                                      
+
+                                                        <div class="input-field col s12 l12">
+                                                            <input id="course-name" name="course-name" type="text" class="validate" maxlength="50" value="{{ event.name }}">
+                                                            <label for="course-name">Nome do Curso</label>
+                                                        </div>
+
+
+                                                        <div class="input-field col s12 l6">
+                                                            <input id="course-date-start" name="course-date-start" type="date" class="datepicker" value="{{ event.start_date }}">
+                                                            <label for="course-date-start">Data de Inicio</label>
+                                                        </div>
+
+
+                                                        <div class="input-field col s12 l6">
+                                                            <input id="course-date-end" name="course-date-end" type="date" class="datepicker" value="{{ event.end_date }}">
+                                                            <label for="course-date-end">Data do Fim</label>
+                                                        </div>
+
+                                                        <div class="input-field col s12 l6">
+                                                            <select id="course-recorrent" name="course-recorrent">
+                                                                <option value="N" selected>Não</option>
+                                                                <option value="Y">Sim</option>                                                                
+                                                            </select>
+                                                            <label>Recorrente</label>
+                                                        </div>
+
+
+                                                        <div class="input-field col s12 l6">
+                                                            <select id="group-origin" name="group-origin">
+                                                                <option value="" disabled selected>Selecione</option>
+                                                                {% for item in Groups %}   
+                                                                <option value="{{ item.id }}">{{ item.name }}</option>
+                                                                {% endfor %}   
+                                                            </select>
+                                                            <label>Grupo Organizador</label>
+                                                        </div>
+
+
+                                                </div>
+
+                                                <div class="step-actions">
+                                                    <button class="waves-effect waves-dark btn next-step" data-feedback="anyThing">Próximo</button>
+                                                </div>
+                                            </div>
+                                        </li>    
+
+
+
+                                        <li class="step">
+                                            <div class="step-title waves-effect waves-dark">Servos</div>
+                                            <div class="step-content">
+                                                <div class="row">
+                                         
+                                                <ul class="collection" id="servant-cell-added">
+
+                                                    {% for item in event_leaders %}
+
+                                                        <li id="user-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ item.role.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('user-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+                                                            <input type="hidden" name='user-added[]' id='user-added-x' value="{{ item.user.id }}"/>
+                                                            <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for role_id in item.role %}{% if forloop.last %}{{ role_id.id }}{% else %}{{ role_id.id }},{% endif %}{% endfor %}"/>
+
+
+                                                        </li>
+
+                                                    {% endfor %}
+
+                                                </ul>
+
+
+                                                <div class="progress" id="loader-servant-cell-added" style="display:none" >
+                                                  <div class="indeterminate"></div>
+                                                </div>
+
+
+                                                <div id="row">
+                                                    <div class="col s12 m12">
+
+                                                        <a id="servant-modal-trigger" class="waves-effect waves-light btn right" data-target="servant-modal">+ Servo</a>
+                                                        {% include "app/event/cell_metting/modals/add_servant_search_modal.html" %}
+
+
+                                                    </div>
+                                                </div>
+
+                                                         
+                                                </div>
+
+                                                    <div class="step-actions">
+                                                        <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                        <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                                    </div>
+
+                                            </div>
+                                        </li>
+
+
+                                        <li class="step">
+                                            <div class="step-title waves-effect waves-dark">Membros</div>
+                                            <div class="step-content">
+                                                <div class="row">                                            
+
+                                                <ul class="collection" id="member-cell-added">
+
+                                                    {% for item in event_members %}
+
+                                                        <li id="member-added-{{ item.user.id }}" class="collection-item avatar">
+                                                            {% if item.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                            {% endif %}
+
+                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <p class="grey-text">
+                                                            {{ user_roles.0.name }}
+                                                            </p>
+                                                            <a href="#!" onclick="remove_user('member-added-{{ item.user.id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+
+                                                            <input type="hidden" name='member-added[]' id='member-added-x' value="{{ item.user.id }}"/>
+
+                                                        </li>
+
+                                                    {% endfor %}
+                                                    
+                                                </ul>
+
+                                                <div class="progress" id="loader-member-cell-added" style="display:none" >
+                                                  <div class="indeterminate"></div>
+                                                </div>                                            
+
+
+                                                <div id="row">
+                                                    <div class="col s12 m12">
+
+                                                        <a id="member-modal-trigger" class="waves-effect waves-light btn right modal-trigger" data-target="member-modal">+ Membro</a>
+                                                        {% include "app/group/cells/modals/add_member_search_modal.html" %}
+
+
+                                                    </div>
+                                                </div>
+
+
+                                                </div>
+
+                                                        <div class="step-actions">
+                                                            <button class="waves-effect waves-dark btn next-step">PRÓXIMO</button>
+                                                            <button class="waves-effect waves-dark btn-flat previous-step">VOLTAR</button>
+                                                </div>
+                                            </div>
+                                        </li>    
+
+
+                                        <li class="step">
+                                            <div class="step-title waves-effect waves-dark">Finalizar</div>
+                                            <div class="step-content">
+
+                                                Clique em "Cadastrar" para finalizar o cadastro
+                                                <div class="step-actions">
+                                                    <button onclick="$('#form-add-cell').submit()" class="waves-effect waves-dark btn" >Cadastrar</button>
+                                                </div>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+
+    </div>
+
+        {% include "default/back_fab.html" %}
+
+
+    <script>
+        {% include "app/event/course/js/new_course.js" %}
+    </script>
+    
+    <script src="{% static "js/datepicker_defaults.js"%}"></script>
+    <script src="{% static "js/validator_messages_pt_br.js"%}"></script>
+
+
+    <script>
+        //Time Picker:
+        $('.timepicker').pickatime({
+            default: 'now',
+            twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+            donetext: 'OK',
+          autoclose: false,
+          vibrate: true // vibrate the device when dragging clock hand
+        });
+
+    </script>
+</body>
+
+</html>
