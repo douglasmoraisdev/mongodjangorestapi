@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'bethel_core.apps.BethelcoreConfig',
     'cell.apps.CellsConfig',
+    'cell_metting.apps.CellmettingsConfig',    
     'user.apps.UsersConfig',    
     'django.contrib.admin',
     'django.contrib.auth',

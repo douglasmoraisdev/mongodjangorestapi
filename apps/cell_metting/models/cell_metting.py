@@ -1,26 +1,15 @@
 from django.db import models
 from mongoengine import *
 from bethel_core.models.groups import *
+from bethel_core.models.events import *
 # Create your models here.
 
-class Events(Document):
-
-	meta = {'allow_inheritance': True}
-
-	parent_event = ReferenceField("self", reverse_delete_rule = NULLIFY)
-	name = StringField(max_length=50)	
-	host = ReferenceField(Groups)
-	groups_in = ListField(ReferenceField(Groups))
-	user_roles = EmbeddedDocumentListField(User_roles)
-	start_date = StringField(max_length=50)
-	end_date = StringField(max_length=50)
-	recorrent = StringField(max_length=1)
-	extra_data = DictField()
+class Cell_mettings(Events):
 
 
-	def add_event(self, name,  parent_event, event_type, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
+	def add_event(self, name,  parent_event, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
 
-		Events.objects.create(
+		Cell_mettings.objects.create(
 			name=name,
 			parent_event=parent_event,
 			host=host,
@@ -55,15 +44,11 @@ class Events(Document):
 
 
 	def get_events_by_group_id(self, group_id):
-		#TODO usar o _cls para separar por tipos de eventos		
+		
+		course_id = Events_types.objects(code='course')[0].id
+		meeting_id = Events_types.objects(code='meeting')[0].id	
 
-		#course_id = Events_types.objects(code='course')[0].id
-		#meeting_id = Events_types.objects(code='meeting')[0].id	
-
-		#events = Events.objects(host=group_id, event_type__nin=[course_id, meeting_id])
-
-		#temp
-		events = Events.objects(host=group_id)
+		events = Events.objects(host=group_id, event_type__nin=[course_id, meeting_id])
 
 		return events
 
@@ -78,15 +63,10 @@ class Events(Document):
 
 
 	def get_meetings_by_group_id(self, group_id):
-		#TODO usar _cls para separa por tipos de eventos
 
+		meeting_id = Events_types.objects(code='meeting')[0].id
 
-		#meeting_id = Events_types.objects(code='meeting')[0].id
-
-		#meetings = Events.objects(host=group_id, event_type=meeting_id)		
-
-		#temp
-		meetings = Events.objects(host=group_id)
+		meetings = Events.objects(host=group_id, event_type=meeting_id)		
 
 		return meetings			
 

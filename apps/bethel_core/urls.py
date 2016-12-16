@@ -13,15 +13,9 @@ urlpatterns = [
     url(r'^atividade/novo$', views.tasks.task_new, name='task_new'),
 
 
-
     #Eventos e Cursos
     url(r'^evento/get/(.+)/$', views.events.event, name='event'),
     url(r'^evento/novo$', views.events.event_new, name='event_new'),
-
-
-    url(r'^reuniaocelula/get/(.+)/$', views.cell_metting.cell_metting, name='cell_metting'),
-    url(r'^reuniaocelula/novo/(.+)/$', views.cell_metting.cell_metting_new, name='cell_metting_new'),
-    url(r'^reuniaocelula/editar/(.+)/(.+)/$', views.cell_metting.cell_metting_edit, name='cell_metting_edit'),
 
 
     url(r'^curso/get/(.+)/$', views.courses.course, name='course'),

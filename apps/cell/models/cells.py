@@ -10,8 +10,6 @@ logger = logging.getLogger(__name__)
 
 
 class Cells(Groups):
-	cell_origin = StringField(max_length=50)
-
 
 	def add_group(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
 

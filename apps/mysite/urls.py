@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^', include('bethel_core.urls')),
     url(r'^bethel_core/', include('bethel_core.urls')),
     url(r'^celula/', include('cell.urls')),
-    url(r'^usuario/', include('user.urls')),    
+    url(r'^reuniaocelula/', include('cell_metting.urls')),    
+    url(r'^usuario/', include('user.urls')),
     url(r'^admin/', admin.site.urls),
 ]
