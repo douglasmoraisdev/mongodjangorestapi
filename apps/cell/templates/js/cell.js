@@ -24,7 +24,7 @@ $('#member-modal-trigger').leanModal({
         $.ajax({
             method: "GET",
             dataType: "html",
-            url: "{{ base_url }}/add_member_list_save",
+            url: "{{ base_url }}/usuario/add_member_list_save",
             data: { userid: user_selected, rolesid: roles_selectec, origin: group, origin_id: group_id}
             })
             .fail(function( ){

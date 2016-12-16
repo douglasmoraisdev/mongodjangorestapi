@@ -123,7 +123,7 @@ def get_servant_autocomplete(request):
 		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
 	}	
 
-	template = loader.get_template('app/group/cells/modals/servant_item_list_search.html')
+	template = loader.get_template('modals/servant_item_list_search.html')
 
 	return HttpResponse(template.render(content,request))	
 
@@ -145,7 +145,7 @@ def add_servant_list(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('app/group/cells/modals/servant_item_list_add.html')
+	template = loader.get_template('modals/servant_item_list_add.html')
 
 	return HttpResponse(template.render(content,request))
 
@@ -168,7 +168,7 @@ def add_servant_list_presence(request):
 		'roles_ids': roles_ids,
 	}	
 	
-	template = loader.get_template('app/event/cell_metting/modals/servant_item_list_presence_add.html')
+	template = loader.get_template('modals/servant_item_list_presence_add.html')
 
 	return HttpResponse(template.render(content,request))	
 
@@ -183,7 +183,7 @@ def get_member_autocomplete(request):
 		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
 	}	
 
-	template = loader.get_template('app/group/cells/modals/member_item_list_search.html')
+	template = loader.get_template('modals/member_item_list_search.html')
 
 	return HttpResponse(template.render(content,request))	
 
@@ -206,7 +206,7 @@ def add_member_list(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('app/group/cells/modals/member_item_list_add.html')
+	template = loader.get_template('modals/member_item_list_add.html')
 
 	return HttpResponse(template.render(content,request))
 
@@ -229,7 +229,7 @@ def add_member_list_presence(request):
 		'roles_ids': roles_ids,
 	}	
 
-	template = loader.get_template('app/event/cell_metting/modals/member_item_list_presence_add.html')
+	template = loader.get_template('modals/member_item_list_presence_add.html')
 
 	return HttpResponse(template.render(content,request))
 
@@ -275,10 +275,10 @@ def add_member_list_save(request):
 	}	
 
 	if (doc_type == 'group'):
-		template = loader.get_template('app/group/cells/modals/member_item_list_add_save.html')
+		template = loader.get_template('modals/member_item_list_add_save.html')
 
 	elif (doc_type == 'event'):
-		template = loader.get_template('app/event/cell_metting/modals/member_item_list_add_save.html')
+		template = loader.get_template('modals/member_item_list_add_save.html')
 
 
 	return HttpResponse(template.render(content,request))

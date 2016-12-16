@@ -17,7 +17,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-#@bethel_auth_required
+@bethel_auth_required
 def cell(request, group_id, user_apps=''):
 
 	# Google Maps Client
@@ -33,7 +33,7 @@ def cell(request, group_id, user_apps=''):
 	member_maps = []
 	addr_maps_info = dict()
 	visitor_users = []
-	user_already_listed = []
+	user_already_listed = []	
 
 	user = Users().get_user_by_id(request.session['user_id'])
 
@@ -41,8 +41,7 @@ def cell(request, group_id, user_apps=''):
 	
 	group = Cells().get_group_by_id(group_id)
 
-	group_type_id = group.group_type.id
-	group_type = Groups_types().get_grouptype_by_id(ObjectId(group_type_id))
+	group_type = group._cls
 
 	users = group.get_group_users(group_id)
 
@@ -78,7 +77,7 @@ def cell(request, group_id, user_apps=''):
 	content = {
 		'group_id':group.id,
 		'group_name':group.name,
-		'group_type':group_type.name,
+		'group_type':group_type,
 		'groups_over':group.groups_over,
 		'groups_under':group.groups_under,
 		'group_origin':group.origin,

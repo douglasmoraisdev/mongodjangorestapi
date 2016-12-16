@@ -51,7 +51,7 @@ $(document).ready(function () {
             $.ajax({
                 method: "GET",
                 dataType: "html",
-                url: "{{ base_url }}/add_member_list",
+                url: "{{ base_url }}/usuario/add_member_list",
                 data: { userid: user_selected, rolesid: roles_selected}
                 })
                 .fail(function(){
