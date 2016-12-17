@@ -3,7 +3,7 @@
 import sys
 
 import os,sys
-virtenv = os.path.expanduser('') + '/home/morais/work/bethel_core/venv/'
+virtenv = os.path.expanduser('') + '/home/morais/work/bethelgroups/venv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 try:
    if sys.version.split(' ')[0].split('.')[0] == '3':

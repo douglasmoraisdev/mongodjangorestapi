@@ -258,7 +258,7 @@
                                                 <div class="card-action">
 
                                                     {% if 'w' in Groups_perm %}
-                                                        <a href="/bethel_core/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                        <a href="{{ base_url }}/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
                                                     {% endif %}
                                                     {% if 'c' in Groups_perm %}
                                                         <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
@@ -287,7 +287,7 @@
                                                 </div>
 
                                                 <div class="card-action">
-                                                    <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">search</i></a>
+                                                    <a id="" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger"><i class="material-icons activator">search</i></a>
                                                 </div>
 
                                             </div>
@@ -364,7 +364,7 @@
                                                             <div class="secondary-content">
                                                             
                                                                 <a id="confirm-delete-member-modal-trigger" href="#confirm-delete-member-modal" onclick="update_delete_modal('{{ list.user.id }}')" class="modal-trigger confirm-delete-member-modal-trigger"><i class="material-icons activator">delete</i></a>
-                                                                {% include "modals/delete_member_confirm_modal.html" %}
+                                                                {% include "user_modals/delete_member_confirm_modal.html" %}
                                                             
 
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>
@@ -391,7 +391,7 @@
 
                                                     {% if 'w' in Groups_perm %}                                                    
                                                         <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
-                                                        {% include "modals/add_member_search_modal.html" %}
+                                                        {% include "user_modals/add_member_search_modal.html" %}
                                                     {% endif %}
 
                                                 </div>

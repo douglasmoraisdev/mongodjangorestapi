@@ -17,7 +17,7 @@ from cell_metting.models import *
 @bethel_auth_required
 def cell_metting(request, event_id, user_apps):
 
-	template = loader.get_template('app/event/cell_metting/cell_metting.html')
+	template = loader.get_template('cell_metting.html')
 
 	group_name = ''
 	member_maps = []
@@ -53,7 +53,8 @@ def cell_metting(request, event_id, user_apps):
 		'member_maps' : member_maps,
 		'User' : user,
 		'Groups_perm' : user_apps['groups_perm'],
-		'Events_perm' : user_apps['events_perm']		
+		'Events_perm' : user_apps['events_perm'],
+		'System_perm' : user_apps['system_perm']
 	}
 
 	return HttpResponse(template.render(content, request))
@@ -186,7 +187,6 @@ def cell_metting_edit(request, group_id, event_id, user_apps):
 	content = {
 		'Users': Users.objects,
 		'Groups': Groups.objects,
-		'Groups_types': Groups_types.objects,
 		'Roles': Roles.objects(app_scope__in=["cell_metting"]),
 		'Events': Events.objects,
 		'group_metting_name' : group_metting_name,
@@ -253,15 +253,13 @@ def cell_metting_edit(request, group_id, event_id, user_apps):
 			'resume' : metting_resume
 		})
 
-		id_cell_metting_type = Events_types.objects(code='meeting')[0].id
 
-		evento = Events()
+		evento = Cell_mettings()
 		evento.edit_event(
 				  name=metting_cell_name, 
 				  event_id=event_id,
 				  parent_event='',
 				  host=document_group_origin,
-				  event_type=id_cell_metting_type,
 				  user_roles=user_roles,
 				  start_date=metting_cell_date, 
 				  end_date=metting_cell_date,

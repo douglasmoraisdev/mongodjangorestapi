@@ -31,17 +31,6 @@ class Cell_mettings(Events):
 
 		Events.objects.filter(id=event_id).update(pull__user_roles__user=user[0].user)			
 
-	def edit_event(self, event_id, name, parent_event, event_type, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
-
-		Events.objects.filter(id=event_id).update(
-			name=name,
-			user_roles = user_roles,
-			start_date=start_date,
-			end_date=end_date,
-			recorrent=recorrent,
-			extra_data=extra_data
-		)
-
 
 	def get_events_by_group_id(self, group_id):
 		

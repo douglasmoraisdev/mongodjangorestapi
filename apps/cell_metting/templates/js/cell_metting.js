@@ -24,7 +24,7 @@ $('#member-modal-trigger').leanModal({
         $.ajax({
             method: "GET",
             dataType: "html",
-            url: "{{ base_url }}/add_member_list_save",
+            url: "{{ base_url }}/usuario/add_member_list_save",
             data: { userid: user_selected, rolesid: roles_selectec, origin: origin, origin_id: event_id}
             })
             .fail(function( ){
@@ -69,7 +69,7 @@ function remove_user_save(user_id){
     $.ajax({
         method: "GET",
         dataType: "html",
-        url: "{{ base_url }}/remove_member_list_save",
+        url: "{{ base_url }}/usuario/remove_member_list_save",
         data: { userid: user_selected, origin: origin, origin_id: event_id}
         })
         .fail(function( ){

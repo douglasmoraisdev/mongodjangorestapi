@@ -104,8 +104,8 @@
 
                                                 <div class="card-action">
 
-                                                    {% if 'w' in Events_perm %}
-                                                        <a href="/bethel_core/reuniaocelula/editar/{{ group_origin_id }}/{{ event_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    {% if 'w' in Events_perm or 'w' in System_perm %}
+                                                        <a href="{{ base_url }}/reuniaocelula/editar/{{ group_origin_id }}/{{ event_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
                                                     {% endif %}
                                                     <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
 
@@ -158,7 +158,7 @@
 
                                                     {% if 'w' in Events_perm %}
                                                         <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
-                                                        {% include "app/event/cell_metting/modals/add_member_search_modal.html" %}
+                                                        {% include "user_modals/add_member_search_modal.html" %}
                                                     {% endif %}
 
                                                 </div>
@@ -218,7 +218,7 @@
     <script  src="{% static "js/markerclusterer.js"%}"></script>
 
     <script>
-        {% include "app/event/cell_metting/js/cell_metting.js" %}
+        {% include "js/cell_metting.js" %}
     </script>  
 
 

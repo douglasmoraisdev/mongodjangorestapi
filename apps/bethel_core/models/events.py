@@ -42,7 +42,7 @@ class Events(Document):
 
 		Events.objects.filter(id=event_id).update(pull__user_roles__user=user[0].user)			
 
-	def edit_event(self, event_id, name, parent_event, event_type, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
+	def edit_event(self, event_id, name, parent_event,  user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
 
 		Events.objects.filter(id=event_id).update(
 			name=name,
@@ -124,18 +124,15 @@ class Events(Document):
 
 	def get_user_events(self, user_id):
 
-		course_id = Events_types.objects(code='course')[0].id
-
-		event = Events.objects(user_roles__user=user_id, event_type__ne=course_id)
+		event = Events.objects(user_roles__user=user_id, _cls__ne='Events.Course')
 
 		return event
 
 
 	def get_user_courses(self, user_id):
 
-		type_course_id = Events_types.objects(code='course')[0].id
-		
-		event = Events.objects(user_roles__user=user_id, event_type=type_course_id)
+	
+		event = Events.objects(user_roles__user=user_id, _cls='Events.Course')
 
 		return event
 
@@ -150,11 +147,11 @@ class Events(Document):
 
 		for key, etype in enumerate(events):
 
-			if etype.event_type.code not in ['course']: #retorna tudos menos os cursos TODO: criar um list na conf
-				if etype.event_type.code in user_events:
-					user_events[etype.event_type.code].append(events[key])
+			if etype._cls not in ['Events.Courses']: #retorna tudos menos os cursos TODO: criar um list na conf
+				if etype._cls in user_events:
+					user_events[etype._cls].append(events[key])
 				else:
-					user_events[etype.event_type.code] = [events[key]]
+					user_events[etype._cls] = [events[key]]
 
 
 		# Get events under (all events that this event is over) IF get_childs == True
@@ -165,11 +162,11 @@ class Events(Document):
 
 			for key, etype in enumerate(events):
 
-				if etype.event_type.code not in ['course']: #retorna tudos menos os cursos TODO: criar um list na conf
-					if etype.event_type.code in user_events:
-						user_events[etype.event_type.code].append(events[key])
+				if etype._cls not in ['course']: #retorna tudos menos os cursos TODO: criar um list na conf
+					if etype._cls in user_events:
+						user_events[etype._cls].append(events[key])
 					else:
-						user_events[etype.event_type.code] = [events[key]]
+						user_events[etype._cls] = [events[key]]
 		'''
 
 
