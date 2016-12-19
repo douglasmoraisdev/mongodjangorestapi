@@ -5,6 +5,7 @@ from bson.objectid import ObjectId
 from django.urls import reverse
 from bethel_core import utils
 
+from django.utils.translation import *
 
 import uuid
 import googlemaps

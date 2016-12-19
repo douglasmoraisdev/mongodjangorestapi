@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+{% load i18n %}
 
 <head>
 
@@ -73,7 +74,7 @@
                                                 <div class="card-content">
 
                                                     <span class="card-title activator">{{ group_name }}<i class="material-icons right">live_help</i></span>
-                                                    <p>{{ group_type }} fundada em {{ group_data.created_on_date }}</p>
+                                                    <p>{% trans group_type %} fundada em {{ group_data.created_on_date }}</p>
                                                     <p>{{ users_count }} membros</p>
                                                     <br/>
 
