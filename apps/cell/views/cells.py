@@ -101,6 +101,86 @@ def cell(request, group_id, user_apps=''):
 	
 	return HttpResponse(template.render(content, request))
 
+
+@bethel_auth_required
+def cell_detail(request, group_id, user_apps=''):
+
+	template = loader.get_template('cell_detail.html')
+
+	leader_users = []
+	host_users = []
+	member_users = []
+	member_maps = []
+	addr_maps_info = dict()
+	visitor_users = []
+	user_already_listed = []	
+
+	user = Users().get_user_by_id(request.session['user_id'])
+
+	group_id = ObjectId(group_id)
+	
+	group = Cells().get_group_by_id(group_id)
+
+	group_type = group._cls
+
+	users = group.get_group_users(group_id)
+
+	for key, user_list in enumerate(users):
+		for role in user_list.role:
+
+			if user_list.user.id not in user_already_listed:
+				if role.code == 'leader':
+					leader_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+				if role.code == 'host':
+					host_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+				if role.code == 'cell_member':
+					member_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+				if role.code == 'visitor':
+					visitor_users.append(user_list)
+					user_already_listed.append(user_list.user.id)
+
+	member_maps = utils.get_users_geo(users)	
+
+	events = Events().get_events_by_group_id(group_id)
+
+	meetings = Events().get_meetings_by_group_id(group_id)
+
+	generated_groups = Cells().get_groups_generetad(group_id)
+
+	users_count = len(users)
+	content = {
+		'group_id':group.id,
+		'group_name':group.name,
+		'group_type':group_type,
+		'groups_over':group.groups_over,
+		'groups_under':group.groups_under,
+		'group_origin':group.origin,
+		'generated_groups': generated_groups,
+		'leader_users' : leader_users,
+		'host_users' : host_users,
+		'member_users' : member_users,
+		'visitor_users' : visitor_users,
+		'meetings' : meetings,
+		'users_count': users_count,
+		'group_data':group.extra_data,
+		'cell_id':group_id,
+		'events':events,
+		'User' : user,		
+		'member_maps' : member_maps,
+		'Groups_perm' : user_apps['groups_perm'],
+		'Events_perm' : user_apps['events_perm'],
+		'System_perm' : user_apps['system_perm'],
+	}
+	
+	return HttpResponse(template.render(content, request))
+
+
 @bethel_auth_required(min_perm=[{'groups':'c'}, {'system':'c'}])
 def cell_new(request, user_apps):
 

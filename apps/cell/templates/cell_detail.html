@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load i18n %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+
+    <!-- CSS STYLES -->
+    {% include "default/styles_css.html" %}
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/letteravatar.js" %}"></script>
+    <script src="{% static "js/plugins.min.js" %}"></script>
+    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
+    <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>
+    <script src="{% static "js/chart.bundle.min.js"%}"></script>    
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 80%; }
+    </style>    
+
+
+</head>
+
+<body class="grey lighten-1">
+
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+
+    <!--Header -->
+    {% include "default/header_default.html" %}
+    <!--Header -->
+
+    <main>
+
+
+        <!-- START MAIN -->
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+
+                {% include "default/side_nav.html" %}
+
+
+                <!-- Page Layout here -->
+                <div class="content">
+
+
+                    <!--start container-->
+                    <div style="padding-top: 16px">
+
+                        <div class="row">
+
+                            <div class="col s12 m10 l10">
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="group" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title activator">{{ group_name }}<i class="material-icons right">live_help</i></span>
+                                                    <p>{% trans group_type %} fundada em {{ group_data.created_on_date }}</p>
+                                                    <p>{{ users_count }} membros</p>
+                                                    <br/>
+
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Lideres</h6>
+                                                        </li>
+                                                        {% for list in leader_users %}
+
+                                                        <li class="collection-item avatar">
+                                                            {% if list.user.extra_data.profile_image %}
+                                                                <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                            {% else %}
+                                                                <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                            {% endif %}
+                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <p>{{ roles.name }}</p>
+                                                            {%endfor%}
+                                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                        </li>
+
+                                                        {% endfor %} {% for list in host_users %}
+
+                                                        <li class="collection-item avatar">
+                                                            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <p>{{ roles.name }}</p>
+                                                            {%endfor%}
+                                                            <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                        </li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                    {% if groups_over %}
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Supervisionado por:</h6>
+                                                        </li>
+                                                        {% for list in groups_over %}
+
+                                                        <li class="collection-item">
+                                                            <div>{{ list.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+                                                    </ul>
+
+                                                    {% endif %} {% if group_origin %}
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Grupo de origem:</h6>
+                                                        </li>
+                                                        <li class="collection-item">
+                                                            <div>{{ group_origin.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    {% endif %} {% if generated_groups %}
+
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Grupos que originou</h6>
+                                                        </li>
+                                                        {% for list in generated_groups %}
+
+                                                        <li class="collection-item">
+                                                            <div>{{ list.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% endif %} {% if groups_under %}
+
+                                                    <ul class="collection with-header">
+                                                        <li class="collection-header">
+                                                            <h6>Supervisionando:</h6>
+                                                        </li>
+                                                        {% for list in groups_under %}
+
+                                                        <li class="collection-item">
+                                                            <div>{{ list.name }}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+                                                    </ul>
+                                                    {% endif %}
+
+                                                </div>
+
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Groups_perm %}
+                                                        <a href="{{ base_url }}/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    {% endif %}
+                                                    {% if 'c' in Groups_perm %}
+                                                        <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!--
+                                    <div class="row">
+                                        <div class="col s12 m6 l3">
+                                            <div class="card">
+                                                <div class="card-content  green white-text">
+                                                    <p class="card-stats-title"><i class="mdi-social-group-add"></i> New Clients</p>
+                                                    <h4 class="card-stats-number">566</h4>
+                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6 l3">
+                                            <div class="card">
+                                                <div class="card-content pink lighten-1 white-text">
+                                                    <p class="card-stats-title"><i class="mdi-editor-insert-drive-file"></i> New Invoice</p>
+                                                    <h4 class="card-stats-number">1806</h4>
+                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-down"></i> 3% <span class="deep-purple-text text-lighten-5">from last month</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6 l3">
+                                            <div class="card">
+                                                <div class="card-content blue-grey white-text">
+                                                    <p class="card-stats-title"><i class="mdi-action-trending-up"></i> Today Profit</p>
+                                                    <h4 class="card-stats-number">$806.52</h4>
+                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-up"></i> 80% <span class="blue-grey-text text-lighten-5">from yesterday</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 m6 l3">
+                                            <div class="card">
+                                                <div class="card-content purple white-text">
+                                                    <p class="card-stats-title"><i class="mdi-editor-attach-money"></i>Total Sales</p>
+                                                    <h4 class="card-stats-number">$8990.63</h4>
+                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-up"></i> 70% <span class="purple-text text-lighten-5">last month</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    -->
+                                    
+                                    <!-- First Chart-->
+                                    <div class="row">
+                                        <div class="col s12 m8 l8">
+                                            <div class="card">
+                                                <div class="card-move-up waves-effect waves-block waves-light">
+                                                    <div class="move-up cyan darken-1">
+                                                        <div>
+                                                            <span class="chart-title white-text">Revenue</span>
+                                                            <div class="chart-revenue cyan darken-2 white-text">
+                                                                <p class="chart-revenue-total">$4,500.85</p>
+                                                                <p class="chart-revenue-per"><i class="mdi-navigation-arrow-drop-up"></i> 21.80 %</p>
+                                                            </div>
+                                                            <div class="switch chart-revenue-switch right">
+                                                                <label class="cyan-text text-lighten-5">
+                                                                  Month
+                                                                  <input type="checkbox">
+                                                                  <span class="lever"></span> Year
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="trending-line-chart-wrapper">
+                                                            <canvas id="trending-line-chart" height="155" width="668" style="width: 668px; height: 155px;"></canvas>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-content">
+                                                    <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
+                                                    <div class="col s12 m3 l3">
+                                                        <div id="doughnut-chart-wrapper">
+                                                            <canvas id="doughnut-chart" height="98" width="148" style="width: 148px; height: 98px;"></canvas>
+                                                            <div class="doughnut-chart-status">4500
+                                                                <p class="ultra-small center-align">Sold</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col s12 m2 l2">
+                                                        <ul class="doughnut-chart-legend">
+                                                            <li class="mobile ultra-small"><span class="legend-color"></span>Mobile</li>
+                                                            <li class="kitchen ultra-small"><span class="legend-color"></span> Kitchen</li>
+                                                            <li class="home ultra-small"><span class="legend-color"></span> Home</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col s12 m5 l6">
+                                                        <div class="trending-bar-chart-wrapper">
+                                                            <canvas id="trending-bar-chart" height="95" width="318" style="width: 318px; height: 95px;"></canvas>                                                
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-reveal">
+                                                    <span class="card-title grey-text text-darken-4">Revenue by Month <i class="mdi-navigation-close right"></i></span>
+                                                    <table class="responsive-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-field="id">ID</th>
+                                                                <th data-field="month">Month</th>
+                                                                <th data-field="item-sold">Item Sold</th>
+                                                                <th data-field="item-price">Item Price</th>
+                                                                <th data-field="total-profit">Total Profit</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>January</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>February</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>March</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>April</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>5</td>
+                                                                <td>May</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>6</td>
+                                                                <td>June</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>7</td>
+                                                                <td>July</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>8</td>
+                                                                <td>August</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>9</td>
+                                                                <td>Septmber</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>10</td>
+                                                                <td>Octomber</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>11</td>
+                                                                <td>November</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>12</td>
+                                                                <td>December</td>
+                                                                <td>122</td>
+                                                                <td>100</td>
+                                                                <td>$122,00.00</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col s12 m4 l4">
+                                            <div class="card">
+                                                <div class="card-move-up teal waves-effect waves-block waves-light">
+                                                    <div class="move-up">
+                                                        <p class="margin white-text">Browser Stats</p>
+                                                        <canvas id="trending-radar-chart" height="130" width="343" style="width: 343px; height: 130px;"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="card-content  teal darken-2">
+                                                    <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
+                                                    <div class="line-chart-wrapper">
+                                                        <p class="margin white-text">Revenue by country</p>
+                                                        <canvas id="line-chart" height="119" width="315" style="width: 315px; height: 119px;"></canvas>
+                                                    </div>
+                                                </div>
+                                                <div class="card-reveal">
+                                                    <span class="card-title grey-text text-darken-4">Revenue by country <i class="mdi-navigation-close right"></i></span>
+                                                    <table class="responsive-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th data-field="country-name">Country Name</th>
+                                                                <th data-field="item-sold">Item Sold</th>
+                                                                <th data-field="total-profit">Total Profit</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>USA</td>
+                                                                <td>65</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>UK</td>
+                                                                <td>76</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Canada</td>
+                                                                <td>65</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Brazil</td>
+                                                                <td>76</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                            <tr>
+
+                                                                <td>India</td>
+                                                                <td>65</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>France</td>
+                                                                <td>76</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Austrelia</td>
+                                                                <td>65</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Russia</td>
+                                                                <td>76</td>
+                                                                <td>$452.55</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Members -->
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="members" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Membros</span>
+
+                                                    <ul class="collection">
+
+                                                        {% for list in member_users %}
+                                                            
+                                                        <li id="member-added-{{ list.user.id }}" class="collection-item avatar">
+                                                            <div id="user-added-info-{{ list.user.id}}">
+                                                                {% if list.user.extra_data.profile_image %}
+                                                                    <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
+                                                                {% else %}
+                                                                    <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                                {% endif %}
+                                                                <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                                <p>{{ roles.name }}</p>
+                                                                {%endfor%}
+                                                            </div>
+
+                                                            <div class="secondary-content">
+                                                            
+                                                                <a id="confirm-delete-member-modal-trigger" href="#confirm-delete-member-modal" onclick="update_delete_modal('{{ list.user.id }}')" class="modal-trigger confirm-delete-member-modal-trigger"><i class="material-icons activator">delete</i></a>
+                                                                {% include "user_modals/delete_member_confirm_modal.html" %}
+                                                            
+
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>
+                                                            
+                                                            </div>
+                                                        </li>
+
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                    <ul class="collection" id="member-cell-added">
+                                                        
+
+                                                    </ul>
+
+                                                    <div class="progress" id="loader-member-cell-added" style="display:none" >
+                                                      <div class="indeterminate"></div>
+                                                    </div>                                                   
+
+                                                </div>
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Groups_perm %}                                                    
+                                                        <a id="member-modal-trigger" class="btn-floating btn-move-up waves-effect orange darken-5 right modal-trigger" data-target="member-modal"><i class="material-icons activator">add</i></a>
+                                                        {% include "user_modals/add_member_search_modal.html" %}
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <!-- Geolocation Members-->
+                                    <div class="row">
+
+                                        <div class="col s12 m12 l12">
+
+                                            <div id="geo-member" class="card scrollspy" style="height: 550px">
+
+                                                <div class="card-content">
+                                                    <span class="card-title">Geolocalização dos Membros</span>
+                                                      <p id="map_show" class="valign center-align">Clique no icone <a onclick="initMap();$('#map_show').hide()" class="btn-floating waves-effect orange darken-5 "><i class="material-icons activator">map</i></a> para exibir o mapa</p>
+                                                </div>
+ 
+
+                                                <div id="map"></div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Visitors -->
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                                <div id="visitors" class="card scrollspy">
+                                                    <div class="card-content">
+
+                                                        <span class="card-title">Visitantes</span>
+
+                                                        <ul class="collection">
+
+                                                            {% for list in visitor_users %}
+
+                                                            <li class="collection-item avatar">
+                                                                <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                                <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                                <p>{{ roles.name }}</p>
+                                                                {%endfor%}
+                                                                <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
+                                                            </li>
+
+                                                            {% endfor %}
+
+                                                        </ul>
+
+                                                    </div>
+
+
+                                                    <div class="card-action">
+
+                                                        {% if 'w' in Groups_perm %}
+                                                            <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                        {% endif %}
+
+                                                    </div>
+
+                                                </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Cell Mettings-->
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="mettings" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Reuniões de Células</span>
+                                                    <p>{{ meetings.count }} Reunião(ões)</p>
+                                                    <p></p>
+
+
+                                                    <ul class="collection">
+                                                        {% for item in meetings %}
+                                                        <li class="collection-item">
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/reuniaocelula/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            </div>
+                                                        </li>
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div>
+
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm or 'w' in System_perm %}
+                                                        <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Group Events-->
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="events" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title">Eventos do Grupo</span>
+                                                    <p>{{ events.count }} Evento(s)</p>
+                                                    <p></p>
+
+
+                                                    <ul class="collection">
+                                                        {% for item in events %}
+                                                        <li class="collection-item">
+                                                            <div>{{ item.name }}<a href="{{ base_url }}/evento/get/{{ item.id }}/" class="secondary-content"><i class="material-icons">send</i></a>
+                                                            </div>
+                                                        </li>
+                                                        {% endfor %}
+
+                                                    </ul>
+
+                                                </div>
+
+
+
+                                                <div class="card-action">
+
+                                                    {% if 'w' in Events_perm %}
+                                                        <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    {% endif %}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                            </div>
+
+
+
+                            <div class="col hide-on-small-only m2 l2">
+                              <ul class="section table-of-contents">
+                                <li><a class="white-text" href="#group">Grupo</a></li>
+                                <li><a class="white-text" href="#members-chart">Gráfico</a></li>
+                                <li><a class="white-text" href="#next-mettings">Próximas reuniões</a></li>
+                                <li><a class="white-text" href="#members">Membros</a></li>                                
+                                <li><a class="white-text" href="#geo-member">Membros - Mapa</a></li>
+                                <li><a class="white-text" href="#visitors">Visitantes</a></li>
+                                <li><a class="white-text" href="#mettings">Reuniões</a></li>
+                                <li><a class="white-text" href="#events">Eventos</a></li>
+                              </ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Google Maps API -->
+    <script  src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk"></script>
+    <script  src="{% static "js/markerclusterer.js"%}"></script>
+
+    <script>
+        {% include "js/cell_detail.js" %}
+    </script>  
+
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+
+      $(document).ready(function(){
+        $('.scrollspy').scrollSpy({
+            scrollOffset: 100
+        });
+
+
+        $('.table-of-contents').pushpin({
+          //top: 100,
+          //bottom: 1000,
+          offset: 80
+        });        
+
+
+      });
+
+
+
+    </script>
+
+
+</body>
+
+
+</html>

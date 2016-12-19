@@ -18,7 +18,6 @@
 	border-radius: 50%;
 }
 
-
 body {
     background-color: #f9f9f9
 }
@@ -1993,3 +1992,7 @@ position: relative;
 .pinned {
 position: fixed !important;
 }
+
+.card-stats-title{text-align:center}
+.card-stats-number{text-align:center}
+.card-stats-compare{text-align:center}
