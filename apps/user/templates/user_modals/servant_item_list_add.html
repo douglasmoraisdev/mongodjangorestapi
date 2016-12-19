@@ -1,0 +1,29 @@
+{% load static %}
+
+
+<li id="user-added-{{ user_id }}" class="collection-item avatar">
+    {% if user_name.extra_data.profile_image %}
+        <img class="circle" height="50" src="{% static "upload/profile_images/" %}{{ user_name.extra_data.profile_image }}">
+    {% else %}
+        <img class="circle" height="50" avatar="{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}">
+    {% endif %}
+
+    <span class="title">{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}</span>
+    <p class="grey-text">
+    {% for item in user_roles %}
+	    {% if forloop.last %}
+    		{{ item.name }}
+	    {% else %}
+    		{{ item.name }}, 	    
+    	{% endif %}
+    {% endfor %}
+    </p>
+    <a href="#!" onclick="remove_user('user-added-{{ user_id }}')" class="secondary-content"><i class="material-icons">delete</i></a>
+
+
+    <input type="hidden" name='user-added[]' id='user-added-x' value="{{ user_id }}"/>
+    <input type="hidden" name='roles-added[]' id='roles-added-x' value="{% for role_id in roles_ids %}{% if forloop.last %}{{ role_id }}{% else %}{{ role_id }},{% endif %}{% endfor %}"/>
+
+</li>
+
+<script src="{% static "js/letteravatar.js" %}"></script>
