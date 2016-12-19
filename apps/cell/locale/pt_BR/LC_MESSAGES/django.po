@@ -17,6 +17,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: cell/templates/cell.html:77
+
+msgctxt "list_plural"
 msgid "Groups.Cells"
-msgstr "Celula"
+msgstr "Células"
+
+msgctxt "list_plural"
+msgid "Events.Cell_mettings"
+msgstr "Reuniões de Células"
+
+msgid "Groups.Cells"
+msgstr "Célula"
+
+msgid "Events.Cell_mettings"
+msgstr "Reunião de Célula"
