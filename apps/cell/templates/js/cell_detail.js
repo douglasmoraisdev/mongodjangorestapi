@@ -44,7 +44,7 @@ function initMap() {
 
 
     map.fitBounds(bounds);
-    var markerCluster = new MarkerClusterer(map, marcador, {imagePath: '{% static "images/m" %}'});    
+    var markerCluster = new MarkerClusterer(map, marcador, {imagePath: '{% static "images/m" %}'});
 
 }
 
