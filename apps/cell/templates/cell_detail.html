@@ -15,10 +15,11 @@
     <script src="{% static "js/jquery.js" %}"></script>
     <script src="{% static "js/materialize.js" %}"></script>
     <script src="{% static "js/letteravatar.js" %}"></script>
-    <script src="{% static "js/plugins.min.js" %}"></script>
     <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
     <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>
-    <script src="{% static "js/chart.bundle.min.js"%}"></script>    
+    <script src="{% static "cell/js/chart.min.js"%}"></script>        
+
+    <script src="{% static "cell/js/plugins.js"%}"></script>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -190,55 +191,10 @@
 
                                     </div>
 
-
-                                    <!--
-                                    <div class="row">
-                                        <div class="col s12 m6 l3">
-                                            <div class="card">
-                                                <div class="card-content  green white-text">
-                                                    <p class="card-stats-title"><i class="mdi-social-group-add"></i> New Clients</p>
-                                                    <h4 class="card-stats-number">566</h4>
-                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s12 m6 l3">
-                                            <div class="card">
-                                                <div class="card-content pink lighten-1 white-text">
-                                                    <p class="card-stats-title"><i class="mdi-editor-insert-drive-file"></i> New Invoice</p>
-                                                    <h4 class="card-stats-number">1806</h4>
-                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-down"></i> 3% <span class="deep-purple-text text-lighten-5">from last month</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s12 m6 l3">
-                                            <div class="card">
-                                                <div class="card-content blue-grey white-text">
-                                                    <p class="card-stats-title"><i class="mdi-action-trending-up"></i> Today Profit</p>
-                                                    <h4 class="card-stats-number">$806.52</h4>
-                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-up"></i> 80% <span class="blue-grey-text text-lighten-5">from yesterday</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col s12 m6 l3">
-                                            <div class="card">
-                                                <div class="card-content purple white-text">
-                                                    <p class="card-stats-title"><i class="mdi-editor-attach-money"></i>Total Sales</p>
-                                                    <h4 class="card-stats-number">$8990.63</h4>
-                                                    <p class="card-stats-compare"><i class="mdi-hardware-keyboard-arrow-up"></i> 70% <span class="purple-text text-lighten-5">last month</span>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    -->
                                     
                                     <!-- First Chart-->
                                     <div class="row">
-                                        <div class="col s12 m8 l8">
+                                        <div class="col s12 m12 l12">
                                             <div class="card">
                                                 <div class="card-move-up waves-effect waves-block waves-light">
                                                     <div class="move-up cyan darken-1">
@@ -262,7 +218,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-content">
-                                                    <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
+                                                    <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="material-icons activator">add</i></a>
                                                     <div class="col s12 m3 l3">
                                                         <div id="doughnut-chart-wrapper">
                                                             <canvas id="doughnut-chart" height="98" width="148" style="width: 148px; height: 98px;"></canvas>
@@ -286,7 +242,7 @@
                                                 </div>
 
                                                 <div class="card-reveal">
-                                                    <span class="card-title grey-text text-darken-4">Revenue by Month <i class="mdi-navigation-close right"></i></span>
+                                                    <span class="card-title grey-text text-darken-4">Revenue by Month <i class="material-icons right">close</i></span>
                                                     <table class="responsive-table">
                                                         <thead>
                                                             <tr>
@@ -390,78 +346,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="col s12 m4 l4">
-                                            <div class="card">
-                                                <div class="card-move-up teal waves-effect waves-block waves-light">
-                                                    <div class="move-up">
-                                                        <p class="margin white-text">Browser Stats</p>
-                                                        <canvas id="trending-radar-chart" height="130" width="343" style="width: 343px; height: 130px;"></canvas>
-                                                    </div>
-                                                </div>
-                                                <div class="card-content  teal darken-2">
-                                                    <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="mdi-content-add activator"></i></a>
-                                                    <div class="line-chart-wrapper">
-                                                        <p class="margin white-text">Revenue by country</p>
-                                                        <canvas id="line-chart" height="119" width="315" style="width: 315px; height: 119px;"></canvas>
-                                                    </div>
-                                                </div>
-                                                <div class="card-reveal">
-                                                    <span class="card-title grey-text text-darken-4">Revenue by country <i class="mdi-navigation-close right"></i></span>
-                                                    <table class="responsive-table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th data-field="country-name">Country Name</th>
-                                                                <th data-field="item-sold">Item Sold</th>
-                                                                <th data-field="total-profit">Total Profit</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>USA</td>
-                                                                <td>65</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>UK</td>
-                                                                <td>76</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Canada</td>
-                                                                <td>65</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Brazil</td>
-                                                                <td>76</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                            <tr>
-
-                                                                <td>India</td>
-                                                                <td>65</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>France</td>
-                                                                <td>76</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Austrelia</td>
-                                                                <td>65</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Russia</td>
-                                                                <td>76</td>
-                                                                <td>$452.55</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
                                     <!-- Members -->
