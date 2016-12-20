@@ -59,21 +59,21 @@ function initMap() {
 //var randomScalingFactor = function(){ return Math.round(Math.random()*10)};
 var trendingLineChart;
 var data = {
-    labels : ["Apple","Samsung","SONY","Motorola","Nokia","Microsoft","Xiaomi"],
+    labels : ["01/11/16", "08/11/16", "15/11/16", "22/11/16", "29/11/16", "05/12/16", "13/12/16"],
     datasets : [
         {
-            label: "First dataset",
+            label: "Membros",
             fillColor : "rgba(128, 222, 234, 0.6)",
             strokeColor : "#ffffff",
-            pointColor : "#00bcd4",
+            pointColor : "#FFbcd4",
             pointStrokeColor : "#ffffff",
             pointHighlightFill : "#ffffff",
             pointHighlightStroke : "#ffffff",
             data: [100, 50, 20, 40, 80, 50, 80]
         },
         {
-            label: "Second dataset",
-            fillColor : "rgba(128, 222, 234, 0.3)",
+            label: "Visitantes",
+            fillColor : "rgba(128, 122, 111, 0.3)",
             strokeColor : "#80deea",
             pointColor : "#00bcd4",
             pointStrokeColor : "#80deea",
@@ -84,6 +84,7 @@ var data = {
     ]
 };
 
+/*
 setInterval(function(){
   // Get a random index point
   var indexToUpdate = Math.round(Math.random() * (data.labels.length-1));
@@ -100,40 +101,42 @@ setInterval(function(){
     
   
 }, 2000);
-
+*/
 
 /*
 Polor Chart Widget
+PESSOAS
 */
  
 var doughnutData = [
     {
-        value: 3000,
+        value: 13,
         color:"#F7464A",
         highlight: "#FF5A5E",
-        label: "Mobile"
+        label: "Membros"
     },
     {
-        value: 500,
+        value: 4,
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "Kitchen"
+        label: "Visitantes"
     },
     {
-        value: 1000,
+        value: 3,
         color: "#FDB45C",
         highlight: "#FFC870",
-        label: "Home"
+        label: "Servos"
     }
 
 ];
 
 /*
 Trending Bar Chart
+POR MES
 */
 
 var dataBarChart = {
-    labels : ["JAN","FEB","MAR","APR","MAY","JUNE"],
+    labels : ["JAN","FEV","MAR","ABR","MAI","JUN"],
     datasets: [
         {
             label: "Bar dataset",
@@ -146,6 +149,7 @@ var dataBarChart = {
     ]
 };
 
+/*
 var nReloads1 = 0;
 var min1 = 1;
 var max1 = 10;
@@ -163,24 +167,6 @@ function updateBarChart() {
 }
 setInterval(updateBarChart, 5000);
 
-/*
-Trending Bar Chart
-*/
-var radarChartData = {
-    labels: ["Chrome", "Mozilla", "Safari", "IE10", "iPhone"],
-    datasets: [
-        {
-            label: "First dataset",
-            fillColor: "rgba(255,255,255,0.2)",
-            strokeColor: "#fff",
-            pointColor: "#00796b",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "#fff",
-            data: [5,6,7,8,6]
-        }
-    ],
-};
     
 
 var nReloads2 = 0;
@@ -199,47 +185,12 @@ function trendingRadarChartupdate() {
     }
 }
 setInterval(trendingRadarChartupdate, 5000);
-        
-/*
-Pie chart 
 */
-var pieData = [
-                {
-                    value: 300,
-                    color:"#F7464A",
-                    highlight: "#FF5A5E",
-                    label: "America"
-                },
-                {
-                    value: 50,
-                    color: "#46BFBD",
-                    highlight: "#5AD3D1",
-                    label: "Canada"
-                },
-                {
-                    value: 100,
-                    color: "#FDB45C",
-                    highlight: "#FFC870",
-                    label: "UK"
-                },
-                {
-                    value: 40,
-                    color: "#949FB1",
-                    highlight: "#A8B3C5",
-                    label: "Europe"
-                },
-                {
-                    value: 120,
-                    color: "#4D5360",
-                    highlight: "#616774",
-                    label: "Australia"
-                }
-
-            ];
 
 window.onload = function(){
     var trendingLineChart = document.getElementById("trending-line-chart").getContext("2d");
-    window.trendingLineChart = new Chart(trendingLineChart).Line(data, {        
+    window.trendingLineChart = new Chart(trendingLineChart).Line(data, {  
+        multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>",
         scaleShowGridLines : true,///Boolean - Whether grid lines are shown across the chart        
         scaleGridLineColor : "rgba(255,255,255,0.4)",//String - Colour of the grid lines        
         scaleGridLineWidth : 1,//Number - Width of the grid lines       
@@ -274,7 +225,7 @@ window.onload = function(){
         tooltipCaretSize: 10,// Number - Size of the caret on the tooltip       
         tooltipCornerRadius: 6,// Number - Pixel radius of the tooltip border       
         tooltipXOffset: 10,// Number - Pixel offset from point x to tooltip edge
-        responsive: true
+        responsive: true,
         });
 
         var doughnutChart = document.getElementById("doughnut-chart").getContext("2d");
@@ -299,12 +250,5 @@ window.onload = function(){
         });
 
 
-        
-        if (typeof getContext != "undefined") {
-            var polarChartCountry = document.getElementById("polar-chart-country").getContext("2d");
-            window.polarChartCountry = new Chart(polarChartCountry).PolarArea(polarData, {
-                segmentStrokeWidth : 1,         
-                responsive:true
-            });
-        }
+    
 };
