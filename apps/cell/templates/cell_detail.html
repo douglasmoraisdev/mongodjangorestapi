@@ -68,6 +68,23 @@
 
                             <div class="col s12 m10 l10">
 
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+                                            <div id="group" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                {% for key, value in mettings_presence.items %}
+
+                                                    {{ key }}: {{ value }}<br/>
+
+                                                {% endfor %}
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
 
                                     <div class="row">
                                         <div class="col s12 m12 l12">

@@ -3,6 +3,8 @@ from mongoengine import *
 
 from bethel_core.models.groups import *
 from bethel_core.models.users import *
+from bethel_core.models.roles import *
+from cell_metting.models import *
 
 import logging
 
@@ -65,14 +67,6 @@ class Cells(Groups):
 			extra_data=extra_data
 		)	
 
-	'''
-		GET DATA METHODS		
-	''
-
-	def get_group_by_id(self, group_id):
-
-		return Cells.objects.get(id=group_id)
-	'''
 
 
 	def get_groups_over_by_id(self, group_id):
@@ -167,3 +161,41 @@ class Cells(Groups):
 		groups = Groups.objects(origin=group_id)
 
 		return groups
+
+
+
+	'''
+		REPORT LEVEL DATA
+	'''
+
+	def get_cell_presence(self, group_id):
+
+		report = dict()
+
+		servants_count = dict()
+		members_count = dict()
+
+		presence = []
+
+		leader_id = Roles.objects(code='leader')[0].id
+		host_id = Roles.objects(code='host')[0].id
+
+		member_id = Roles.objects(code='cell_member')[0].id
+
+		metting = Cell_mettings.objects(host=group_id)
+	
+		for item in metting:
+			for rl in item.user_roles:
+				for cd in rl.role:
+					presence.append({item.start_date:cd.code})
+				
+
+
+		print(presence)	
+
+		report['servants'] = servants_count
+		report['members'] = members_count		
+
+
+		return report
+

@@ -125,6 +125,11 @@ def cell_detail(request, group_id, user_apps=''):
 
 	users = group.get_group_users(group_id)
 
+
+	#For report
+	mettings_presence = Cells().get_cell_presence(group_id)
+
+
 	for key, user_list in enumerate(users):
 		for role in user_list.role:
 
@@ -176,6 +181,8 @@ def cell_detail(request, group_id, user_apps=''):
 		'Groups_perm' : user_apps['groups_perm'],
 		'Events_perm' : user_apps['events_perm'],
 		'System_perm' : user_apps['system_perm'],
+
+		'mettings_presence' : mettings_presence
 	}
 	
 	return HttpResponse(template.render(content, request))
