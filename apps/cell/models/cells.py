@@ -1,5 +1,7 @@
 from django.db import models
 from mongoengine import *
+from collections import Counter
+
 
 from bethel_core.models.groups import *
 from bethel_core.models.users import *
@@ -168,34 +170,95 @@ class Cells(Groups):
 		REPORT LEVEL DATA
 	'''
 
-	def get_cell_presence(self, group_id):
+	def get_cell_presence_graph(self, group_id):
+
+		presence_evolution = []
+		key_presence = []
+
+		leader_presence = []
+		member_presence = []
+		visitor_presence = []
 
 		report = dict()
 
-		servants_count = dict()
-		members_count = dict()
+		metting = Cell_mettings.objects(host=group_id).order_by('start_date')
 
-		presence = []
-
-		leader_id = Roles.objects(code='leader')[0].id
-		host_id = Roles.objects(code='host')[0].id
-
-		member_id = Roles.objects(code='cell_member')[0].id
-
-		metting = Cell_mettings.objects(host=group_id)
-	
+		#presence labels by day	
 		for item in metting:
+			servants_count = 0
+			members_count = 0
+			visitor_count = 0
 			for rl in item.user_roles:
 				for cd in rl.role:
-					presence.append({item.start_date:cd.code})
+					if cd.code == 'leader':
+						servants_count += 1
+					if cd.code == 'cell_member':
+						members_count += 1
+					if cd.code == 'visitor':
+						visitor_count += 1
+
+
+			presence_evolution.append({item.start_date : {'leader' : servants_count, 
+														  'member' : members_count, 
+														  'visitor' : visitor_count
+														  }})
+
+		for node in presence_evolution:
+
+			#labels
+			for key, value in enumerate(node):
+				key_presence.append(value)
+
+			# presence by role
+			for item in node[value]:
 				
+				if 'leader' == item:
+					leader_presence.append(node[value]['leader'])
+
+				if 'member' == item:
+					member_presence.append(node[value]['member'])
+
+				if 'visitor' == item:
+					visitor_presence.append(node[value]['visitor'])
+								
 
 
-		print(presence)	
+		report['presence_days'] = key_presence
+		report['presence_evolution'] = presence_evolution
 
-		report['servants'] = servants_count
-		report['members'] = members_count		
-
+		report['roles_presence'] = {'leader':leader_presence, 
+									'member': member_presence,
+									'visitor':visitor_presence
+									}
 
 		return report
 
+	def get_total_roles(self, group_id):
+
+		cell = Cells.objects.get(id=group_id)
+
+		report = dict()
+		
+		servants_count = 0
+		members_count = 0
+		visitor_count = 0
+
+		for roles in cell.user_roles:
+
+			for rl in roles.role:
+				if rl.code == 'leader':
+					servants_count += 1
+
+				if rl.code == 'cell_member':
+					members_count += 1
+
+				if rl.code == 'visitor':
+					visitor_count += 1			
+
+
+		report['leader'] = servants_count
+		report['member'] = members_count
+		report['visitor'] = visitor_count
+		report['total_persons'] = cell.user_roles.count()
+
+		return report

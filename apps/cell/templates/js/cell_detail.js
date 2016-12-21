@@ -59,7 +59,7 @@ function initMap() {
 //var randomScalingFactor = function(){ return Math.round(Math.random()*10)};
 var trendingLineChart;
 var data = {
-    labels : ["01/11/16", "08/11/16", "15/11/16", "22/11/16", "29/11/16", "05/12/16", "13/12/16"],
+    labels : {{ presence_days|safe }},
     datasets : [
         {
             label: "Membros",
@@ -69,39 +69,30 @@ var data = {
             pointStrokeColor : "#ffffff",
             pointHighlightFill : "#ffffff",
             pointHighlightStroke : "#ffffff",
-            data: [100, 50, 20, 40, 80, 50, 80]
+            data: {{ roles_presence.member|safe }}
         },
         {
-            label: "Visitantes",
+            label: "Servos",
             fillColor : "rgba(128, 122, 111, 0.3)",
             strokeColor : "#80deea",
-            pointColor : "#00bcd4",
+            pointColor : "#46bfbd",
             pointStrokeColor : "#80deea",
             pointHighlightFill : "#80deea",
             pointHighlightStroke : "#80deea",
-            data: [60, 20, 90, 80, 50, 85, 40]
-        }
+            data: {{ roles_presence.leader|safe }}
+        },
+        {
+            label: "Visitantes",
+            fillColor : "rgba(222, 222, 111, 0.3)",
+            strokeColor : "#80deea",
+            pointColor : "#fdb45c",
+            pointStrokeColor : "#80deea",
+            pointHighlightFill : "#80deea",
+            pointHighlightStroke : "#80deea",
+            data: {{ roles_presence.visitor|safe }}
+        }        
     ]
 };
-
-/*
-setInterval(function(){
-  // Get a random index point
-  var indexToUpdate = Math.round(Math.random() * (data.labels.length-1));
-  if (typeof trendingLineChart != "undefined"){
-      // Update one of the points in the second dataset
-      if(trendingLineChart.datasets[0].points[indexToUpdate].value){
-            trendingLineChart.datasets[0].points[indexToUpdate].value = Math.round(Math.random() * 100);
-      }
-      if(trendingLineChart.datasets[1].points[indexToUpdate].value){
-            trendingLineChart.datasets[1].points[indexToUpdate].value = Math.round(Math.random() * 100);    
-      }
-      trendingLineChart.update();
-  }
-    
-  
-}, 2000);
-*/
 
 /*
 Polor Chart Widget
@@ -110,22 +101,22 @@ PESSOAS
  
 var doughnutData = [
     {
-        value: 13,
+        value: {{ total_roles.member }},
         color:"#F7464A",
         highlight: "#FF5A5E",
         label: "Membros"
     },
     {
-        value: 4,
+        value: {{ total_roles.leader }},
         color: "#46BFBD",
         highlight: "#5AD3D1",
-        label: "Visitantes"
+        label: "Servos"
     },
     {
-        value: 3,
+        value: {{ total_roles.visitor }},
         color: "#FDB45C",
         highlight: "#FFC870",
-        label: "Servos"
+        label: "Visitantes"
     }
 
 ];
@@ -149,48 +140,11 @@ var dataBarChart = {
     ]
 };
 
-/*
-var nReloads1 = 0;
-var min1 = 1;
-var max1 = 10;
-var l1 =0;
-var trendingBarChart;
-function updateBarChart() { 
-    if (typeof trendingBarChart != "undefined") {
-        nReloads1++;    
-        var x = Math.floor(Math.random() * (max1 - min1 + 1)) + min1;
-        trendingBarChart.addData([x], dataBarChart.labels[l1]);
-        trendingBarChart.removeData();
-        l1++;
-        if( l1 == dataBarChart.labels.length){ l1 = 0;} 
-    }
-}
-setInterval(updateBarChart, 5000);
-
-    
-
-var nReloads2 = 0;
-var min2 = 1;
-var max2 = 10;
-var l2 =0;
-var trendingRadarChart;
-function trendingRadarChartupdate() {   
-    if (typeof trendingRadarChart != "undefined") {
-        nReloads2++;
-        var x = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;   
-        trendingRadarChart.addData([x], radarChartData.labels[l2]);
-        var y = trendingRadarChart.removeData();
-        l2++;
-        if( l2 == radarChartData.labels.length){ l2 = 0;}
-    }
-}
-setInterval(trendingRadarChartupdate, 5000);
-*/
 
 window.onload = function(){
     var trendingLineChart = document.getElementById("trending-line-chart").getContext("2d");
     window.trendingLineChart = new Chart(trendingLineChart).Line(data, {  
-        multiTooltipTemplate: "<%= datasetLabel %> - <%= value %>",
+        multiTooltipTemplate: "<%= datasetLabel %>:  <%= value %>",
         scaleShowGridLines : true,///Boolean - Whether grid lines are shown across the chart        
         scaleGridLineColor : "rgba(255,255,255,0.4)",//String - Colour of the grid lines        
         scaleGridLineWidth : 1,//Number - Width of the grid lines       

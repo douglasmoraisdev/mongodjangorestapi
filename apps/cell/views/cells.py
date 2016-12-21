@@ -126,10 +126,6 @@ def cell_detail(request, group_id, user_apps=''):
 	users = group.get_group_users(group_id)
 
 
-	#For report
-	mettings_presence = Cells().get_cell_presence(group_id)
-
-
 	for key, user_list in enumerate(users):
 		for role in user_list.role:
 
@@ -158,6 +154,12 @@ def cell_detail(request, group_id, user_apps=''):
 
 	generated_groups = Cells().get_groups_generetad(group_id)
 
+	#For report
+	mettings_presence = Cells().get_cell_presence_graph(group_id)
+
+	total_roles = Cells().get_total_roles(group_id)
+
+
 	users_count = len(users)
 	content = {
 		'group_id':group.id,
@@ -182,7 +184,11 @@ def cell_detail(request, group_id, user_apps=''):
 		'Events_perm' : user_apps['events_perm'],
 		'System_perm' : user_apps['system_perm'],
 
-		'mettings_presence' : mettings_presence
+		'presence_days' : mettings_presence['presence_days'],
+		'presence_evolution' : mettings_presence['presence_evolution'],
+		'roles_presence' : mettings_presence['roles_presence'],
+
+		'total_roles' : total_roles
 	}
 	
 	return HttpResponse(template.render(content, request))
@@ -291,6 +297,7 @@ def cell_new(request, user_apps):
 	else:
 
 		return HttpResponse(template.render(content, request))
+
 
 @bethel_auth_required(min_perm=[{'groups':'w'}, {'system':'w'}])
 def cell_edit(request, group_id, user_apps):

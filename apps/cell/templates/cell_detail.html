@@ -73,11 +73,7 @@
                                             <div id="group" class="card scrollspy">
                                                 <div class="card-content">
 
-                                                {% for key, value in mettings_presence.items %}
-
-                                                    {{ key }}: {{ value }}<br/>
-
-                                                {% endfor %}
+                                                {{ total_roles }}
 
                                                 </div>
                                             </div>
@@ -236,7 +232,7 @@
                                                     <div class="col s12 m3 l3">
                                                         <div id="doughnut-chart-wrapper">
                                                             <canvas id="doughnut-chart" height="98" width="148" style="width: 148px; height: 98px;"></canvas>
-                                                            <div class="doughnut-chart-status">20
+                                                            <div class="doughnut-chart-status">{{ total_roles.total_persons }}
                                                                 <p class="ultra-small center-align">Pessoas</p>
                                                             </div>
                                                         </div>
@@ -244,8 +240,9 @@
                                                     <div class="col s12 m2 l2">
                                                         <ul class="doughnut-chart-legend">
                                                             <li class="mobile ultra-small"><span class="legend-color"></span>Membros</li>
-                                                            <li class="kitchen ultra-small"><span class="legend-color"></span>Servos</li>
                                                             <li class="home ultra-small"><span class="legend-color"></span>Visitantes</li>
+                                                            <li class="kitchen ultra-small"><span class="legend-color"></span>Servos</li>
+
                                                         </ul>
                                                     </div>
                                                     <div class="col s12 m5 l6">
