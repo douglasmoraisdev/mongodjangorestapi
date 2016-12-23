@@ -215,19 +215,31 @@
                                                             <span class="chart-title white-text">Evolução da Célula - Frequência</span>
 
                                                             <div class="switch chart-revenue-switch right">
+
+
+                                                                <select id="groups-up-multiple" name="groups-up-multiple">
+                                                                    <option value="" disabled selected>Selecione</option>
+                                                                    <option value="1">Mensal</option>
+                                                                    <option value="1">Anual</option>
+                                                                    <option value="1">Total</option>                                                                    
+                                                                </select>
+                                                                <label>Visualizando: </label>
+
                                                                 <label class="cyan-text text-lighten-5">
-                                                                  Mês
+                                                                  Detalhado 
                                                                   <input type="checkbox">
-                                                                  <span class="lever"></span> Ano
+                                                                  <span class="lever"></span> Agrupado
                                                                 </label>
-                                                            </div>
+
+                                                            </div>                                                            
+
                                                         </div>
                                                         <div class="trending-line-chart-wrapper">
                                                             <canvas id="trending-line-chart" height="155" width="668" style="width: 668px; height: 155px;"></canvas>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card-content">
+                                                <div class="card-content ">
                                                     <a class="btn-floating btn-move-up waves-effect waves-light darken-2 right"><i class="material-icons activator">add</i></a>
                                                     <div class="col s12 m3 l3">
                                                         <div id="doughnut-chart-wrapper">
