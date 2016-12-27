@@ -18,8 +18,11 @@
     <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
     <script src="{% static "js/jquery.materialize-autocomplete.js"%}"></script>
     <script src="{% static "cell/js/chart.min.js"%}"></script>        
-
     <script src="{% static "cell/js/plugins.js"%}"></script>
+
+    <script src="{% static "cell/js/jquery.orgchart.js"%}"></script>
+
+    <link href="{% static "cell/css/jquery.orgchart.css" %}" rel="stylesheet">
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -436,6 +439,52 @@
                                     </div>
 
 
+                                    <div class="row">
+
+                                        <div class="col s12 m12 l12">
+
+                                        <div class="card" >
+                                            <div class="card-content">
+
+                                            <div class="card-title">
+                                                Estrutura de Grupos
+                                            </div>
+
+                                                <ul id="ul-data" style="display: none">
+                                                  <li>Igreja Batista Betel
+                                                    <ul>
+                                                      <li>Setor 1</li>
+                                                      <li>Setor 2
+                                                        <ul>
+                                                          <li>Celula Centro</li>
+                                                          <li>Celula Alvorada
+                                                            <ul>
+                                                              <li>Celula Centro II</li>
+                                                              <li>Celula Fatima</li>
+                                                            </ul>
+                                                          </li>
+                                                        </ul>
+                                                      </li>
+                                                    </ul>
+                                                  </li>                                                  
+                                                </ul>
+                                            <div id="chart-container">                                                
+                                            </div>
+                                            <script>
+                                            $('#chart-container').orgchart({
+                                                'data' : $('#ul-data')
+                                            });
+                                            </script>
+
+
+                                            </div>
+                                        </div>
+
+                                        </div>
+
+                                    </div>                                    
+
+
                                     <!-- Geolocation Members-->
                                     <div class="row">
 
@@ -606,7 +655,7 @@
     <script  src="{% static "js/markerclusterer.js"%}"></script>
 
     <script>
-        {% include "js/cell_detail.js" %}
+        {% include "js/cell_detail.js" %}   
     </script>  
 
 
