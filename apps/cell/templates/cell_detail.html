@@ -221,7 +221,7 @@
 
 
                                                                 <select id="groups-up-multiple" name="groups-up-multiple">
-                                                                    <option value="" disabled selected>Selecione</option>
+                                                                    <option value="" disabled selected>Período</option>
                                                                     <option value="1">Mensal</option>
                                                                     <option value="1">Anual</option>
                                                                     <option value="1">Total</option>                                                                    
@@ -230,8 +230,9 @@
 
                                                                 <label class="cyan-text text-lighten-5">
                                                                   Detalhado 
-                                                                  <input type="checkbox">
-                                                                  <span class="lever"></span> Agrupado
+                                                                  <input id="group-chart" type="checkbox" onclick="updateGroupChart()">
+                                                                  <span class="lever"></span> 
+                                                                  Agrupado
                                                                 </label>
 
                                                             </div>                                                            
