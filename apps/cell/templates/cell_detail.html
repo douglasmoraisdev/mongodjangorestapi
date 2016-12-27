@@ -450,31 +450,61 @@
                                                 Estrutura de Grupos
                                             </div>
 
-                                                <ul id="ul-data" style="display: none">
-                                                  <li>Igreja Batista Betel
-                                                    <ul>
-                                                      <li>Setor 1</li>
-                                                      <li>Setor 2
-                                                        <ul>
-                                                          <li>Celula Centro</li>
-                                                          <li>Celula Alvorada
-                                                            <ul>
-                                                              <li>Celula Centro II</li>
-                                                              <li>Celula Fatima</li>
-                                                            </ul>
-                                                          </li>
-                                                        </ul>
-                                                      </li>
-                                                    </ul>
-                                                  </li>                                                  
-                                                </ul>
                                             <div id="chart-container">                                                
                                             </div>
                                             <script>
+                                            var datasource = {
+                                              'name': 'Igreja Batista Guaíba',
+                                              'title': 'general manager',
+                                              'className': 'top-level',
+                                              'children': [
+                                                { 'name': 'Setor 2', 'title': 'department manager', 'className': 'middle-level'},                                              
+                                                { 'name': 'Setor 1', 'title': 'department manager', 'className': 'middle-level',
+                                                  'children': [
+                                                    { 'name': 'Celula Alvorada', 'title': 'senior engineer', 'className': 'bottom-level',
+                                                      'children': [
+                                                        { 'name': 'Celula Alvorada II', 'title': 'senior engineer', 'className': 'bottom-level' },
+                                                        { 'name': 'Celula Fátima', 'title': 'senior engineer', 'className': 'bottom-level' },
+                                                      ]
+                                                     },
+                                                    { 'name': 'Celula Centro', 'title': 'senior engineer', 'className': 'bottom-level' }
+                                                  ]
+                                                }
+                                              ]};
+
+
                                             $('#chart-container').orgchart({
-                                                'data' : $('#ul-data')
-                                            });
+                                                    'data' : datasource,
+                                                    'pan': true,
+                                                    'zoom': true,
+                                                    'draggable' : true,
+                                                    //'nodeContent': 'title'
+                                                })
+                                                .on('touchmove', function(event) {
+                                                    event.preventDefault();
+                                                });
                                             </script>
+                                            <style>
+                                                .orgchart .top-level .title {
+                                                  background-color: #006699;
+                                                }
+                                                .orgchart .top-level .content {
+                                                  border-color: #006699;
+                                                }
+                                                .orgchart .middle-level .title {
+                                                  background-color: #009933;
+                                                }
+                                                .orgchart .middle-level .content {
+                                                  border-color: #009933;
+                                                }
+                                                .orgchart .bottom-level .title {
+                                                  background-color: #993366;
+                                                }
+                                                .orgchart .bottom-level .content {
+                                                  border-color: #993366;
+                                                }                                                
+
+                                            </style>
 
 
                                             </div>
