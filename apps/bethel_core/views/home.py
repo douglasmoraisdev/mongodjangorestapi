@@ -84,3 +84,15 @@ def loginLogout(request):
 
 		return HttpResponse(template.render('', request))
 
+
+@bethel_auth_required(min_perm=[{'system':'+'}])
+def global_search(request, searchquery, user_apps):
+
+	content = {
+		'result': 'resultados',
+	}
+
+
+	template = loader.get_template('globalsearch_results.html')
+
+	return HttpResponse(template.render(content, request))

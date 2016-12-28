@@ -1,6 +1,3 @@
-{% load static %}
-<script src="{% static "js/custom_scripts.js"%}"></script>    
-
     <!-- START HEADER -->
     <header id="header" class="page-topbar">
         <!-- start header nav-->
@@ -11,9 +8,8 @@
                       <li><a href="{{ base_url }}" class="brand-logo darken-1">Portal Bethel</a></li>
                     </ul>
                     <div class="header-search-wrapper hide-on-med-and-down">
-                        <i class="material-icons" style="cursor: pointer" id="icon-search" onclick="searchExecute()">search</i>
-                        <i class="material-icons" style="display:none;cursor: pointer" id="btn-close-search" onclick="closeSearch()">close</i>
-                        <input type="text" onkeyup="globalSearch(event)" id="globalsearch" name="globalsearch" class="header-search-input z-depth-2" placeholder="Busca"/>
+                        <i class="material-icons">search</i>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Busca"/>
                     </div>
 
                     <ul class="right hide-on-med-and-down">
