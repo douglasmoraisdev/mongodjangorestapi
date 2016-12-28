@@ -24,9 +24,16 @@ class Users(Document):
 			extra_data = extra_data
 			)
 
+
+	def get_all(self, search):
+
+		return Users.objects(extra_data__first_name__icontains=search)
+
+
 	def get_user_by_id(self, user_id):
 
 		return Users.objects.get(id=user_id)
+
 
 	def is_auth(self, user_name, auth_token):
 

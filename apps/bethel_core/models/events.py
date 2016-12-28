@@ -54,6 +54,10 @@ class Events(Document):
 		)
 
 
+	def get_all(self, search):
+		
+		return Events.objects(name__icontains=search)
+
 	def get_events_by_group_id(self, group_id):
 		#TODO usar o _cls para separar por tipos de eventos		
 

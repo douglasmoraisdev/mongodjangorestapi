@@ -11,6 +11,10 @@ from bethel_core.decorators import *
 
 from bethel_core.models import *
 
+from user.models import *
+from cell.models import *
+from cell_metting.models import *
+
 import logging
 import uuid
 
@@ -88,8 +92,17 @@ def loginLogout(request):
 @bethel_auth_required(min_perm=[{'system':'+'}])
 def global_search(request, searchquery, user_apps):
 
+	users = Users().get_all(searchquery)
+	groups = Cells().get_all(searchquery)
+	mettings = Cell_mettings().get_all(searchquery)
+	#courses = Courses.get_all()
+
 	content = {
-		'result': 'resultados',
+		'query' : searchquery,
+		'Users' : users,
+		'Groups' : groups,
+		'Courses' : '',
+		'Cell_mettings' : mettings
 	}
 
 

@@ -51,6 +51,11 @@ class Groups(Document):
 		GET DATA METHODS		
 	'''
 
+	def get_all(self, search):
+		
+		return Groups.objects(name__icontains=search)
+
+
 	def get_group_by_id(self, group_id):
 
 		return Groups.objects.get(id=group_id)

@@ -8,7 +8,7 @@ function searchExecute(){
 	        })
 	        .fail(function( ){
 	            alert("Erro");
-	        	$('#main-row').show(500);
+	            closeSearch();
 	        })                        
 	        .done(function( msg ) {
 
@@ -57,4 +57,7 @@ function closeSearch(){
 
 	$('#globalsearch').val('');
 	$('#main-row').show(500);
+	$('#globalsearch-result').html('')
+
 }
+
