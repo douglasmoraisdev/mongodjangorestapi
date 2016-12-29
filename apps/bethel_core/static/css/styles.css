@@ -1996,3 +1996,9 @@ position: fixed !important;
 .card-stats-title{text-align:center}
 .card-stats-number{text-align:center}
 .card-stats-compare{text-align:center}
+
+
+.dataTables_filter{
+    text-align: left !important;
+    float: left !important;
+}

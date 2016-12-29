@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="col s12 m10 l10">
+<div class="col s12 m12 l12">
 
 
         <div class="row">
@@ -19,185 +19,136 @@
 
         <div class="row">
             <div class="col s12 l12">
-                <div id="users-search" class="card scrollspy-search">
+                <div id="users-search" class="card">
                     <div class="card-content">
 
-                        <span class="card-title">
-                        <i class="material-icons">accessibility</i>
-                        Usuarios ({{ Users.count }})
-                        </span>
+                        <ul class="collapsible" data-collapsible="accordion">
 
-                        <div>
-                          <table id="data-table-users" class="responsive-table display" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                </tr>
-                            </thead>                        
-                         
-                            <tbody>
-                            {% for itens in Users %}
+                            <li>
+                              <div class="collapsible-header"><i class="material-icons">accessibility</i>Usuários ({{ Users.count }})</div>
+                              <div class="collapsible-body">
 
-                                <tr>
-                                    <td>{{ itens.extra_data.first_name }} {{ itens.extra_data.last_name }}</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                </tr>
+                                    <div class="card-content">
+                                      <table id="data-table-users" class="responsive-table display" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                            </tr>
+                                        </thead>                        
+                                     
+                                        <tbody>
+                                        {% for itens in Users %}
 
-                            {% endfor %}
+                                            <tr>
+                                                <td>{{ itens.extra_data.first_name }} {{ itens.extra_data.last_name }}</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                            </tr>
 
-                            </tbody>
-                          </table>
-                        </div>
+                                        {% endfor %}
+
+                                        </tbody>
+                                      </table>
+                                    </div>
+
+                                </div>          
+                            </li>
+
+                            <li>
+                              <div class="collapsible-header"><i class="material-icons">group_work</i> Grupos ({{ Groups.count }})</div>
+                              <div class="collapsible-body">
+                                    <div class="card-content">
+                                      <table id="data-table-groups" class="responsive-table display" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                            </tr>
+                                        </thead>                        
+                                     
+                                        <tbody>
+                                        {% for itens in Groups %}
+
+                                            <tr>
+                                                <td>{{ itens.name }}</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                            </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                      </table>
+                                    </div>
+                              </div>
+                            </li>
+
+                            <li>
+                              <div class="collapsible-header"><i class="material-icons">event</i>Reuniões de Célula ({{ Cell_mettings.count }})</div>
+                              <div class="collapsible-body">
+                                    <div class="card-content">
+                                      <table id="data-table-metting" class="responsive-table display" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Nome</th>
+                                                <th>Position</th>
+                                                <th>Office</th>
+                                                <th>Age</th>
+                                                <th>Start date</th>
+                                            </tr>
+                                        </thead>                        
+                                     
+                                        <tbody>
+                                        {% for itens in Cell_mettings %}
+
+                                            <tr>
+                                                <td>{{ itens.name }}</td>
+                                                <td>System Architect</td>
+                                                <td>Edinburgh</td>
+                                                <td>61</td>
+                                                <td>2011/04/25</td>
+                                            </tr>
+
+                                        {% endfor %}
+
+                                        </tbody>
+                                      </table>
+                                    </div>           
+
+
+                              </div>
+                            </li>
+
+                        </ul>
 
                     </div>
                 </div>
             </div>
-
-            <div class="col s12 l12">
-                <div id="groups-search" class="card scrollspy-search">
-                    <div class="card-content">
-
-                        <span class="card-title">
-                        <i class="material-icons">group_work</i>                        
-                        Grupos ({{ Groups.count }})
-                        </span>
-
-                        <div>
-                          <table id="data-table-groups" class="responsive-table display" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                </tr>
-                            </thead>                        
-                         
-                            <tbody>
-                            {% for itens in Groups %}
-
-                                <tr>
-                                    <td>{{ itens.name }}</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                </tr>
-
-                            {% endfor %}
-
-                            </tbody>
-                          </table>
-                        </div>                   
-
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="col s12 l12">
-                <div id="mettings-search" class="card scrollspy-search">
-                    <div class="card-content">
-
-                        <span class="card-title">
-                        <i class="material-icons">event</i>                        
-                        Reuniões de Célula ({{ Cell_mettings.count }})
-                        </span>
-                        <div>
-                          <table id="data-table-metting" class="responsive-table display" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                </tr>
-                            </thead>                        
-                         
-                            <tbody>
-                            {% for itens in Cell_mettings %}
-
-                                <tr>
-                                    <td>{{ itens.name }}</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                </tr>
-
-                            {% endfor %}
-
-                            </tbody>
-                          </table>
-                        </div> 
-
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="col s12 l12">
-                <div id="course-search" class="card scrollspy-search">
-                    <div class="card-content">
-
-                        <span class="card-title">
-                        <i class="material-icons">assignment_turned_in</i>                                                
-                        Cursos ({{ Courses.count }})
-                        </span>
-                        <br/>
-
-                        {% for itens in Courses %}
-                            {{ itens.name }}<br/>
-                        {% endfor %}
-
-
-                    </div>
-
-                </div>
-            </div>                   
-
         </div>
 
 
 </div>
 
-<div class="col hide-on-small-only m2 l2">
-  <ul class="section table-of-contents-search">
-    <li><a class="white-text" href="#users-search">Usuarios</a></li>
-    <li><a class="white-text" href="#groups-search">Grupos</a></li>
-    <li><a class="white-text" href="#mettings-search">Reuniões de Célula</a></li>
-    <li><a class="white-text" href="#course-search">Cursos</a></li>
-  </ul>
-</div>
-
-
 <script>
 
         $(document).ready(function(){
-
-            $('.scrollspy-search').scrollSpy({
-                scrollOffset: 80
-            });
-
-
-            $('.table-of-contents-search').pushpin({
-              //top: 100,
-              //bottom: 1000,
-              offset: 80
-            });             
+         
+            $('.collapsible').collapsible();
 
             var dataTableOptions = {
                     bLengthChange: false,
+                    dom: '<"top">rt<"bottom"lpf><"clear">',
                     language: {
                         emptyTable:     "Nenhum resultado encontrado",
                         info:           "Mostrando _START_ de _END_ até _TOTAL_ resultados",
