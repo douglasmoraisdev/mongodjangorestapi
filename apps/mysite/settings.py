@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'cell.apps.CellsConfig',
     'cell_metting.apps.CellmettingsConfig',    
     'user.apps.UsersConfig',
-    'overview.apps.OverviewConfig',    
+    'overview.apps.OverviewConfig',
+    'mig.apps.MigConfig',    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

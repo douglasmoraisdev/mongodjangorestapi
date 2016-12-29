@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^reuniaocelula/', include('cell_metting.urls')),    
     url(r'^usuario/', include('user.urls')),
     url(r'^overview/', include('overview.urls')),
+    url(r'^mig/', include('mig.urls')),
 
     url(r'^admin/', admin.site.urls),
 ]

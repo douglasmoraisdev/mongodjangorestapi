@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+{% load i18n %}
+
+<head>
+
+    <title>Portal Betel</title>
+
+
+    <!-- CSS STYLES -->
+    {% include "default/styles_css.html" %}
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/materialize.js" %}"></script>
+    <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
+
+
+
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 80%; }
+    </style>    
+
+
+</head>
+
+<body class="grey lighten-1">
+
+
+    <!--Header -->
+    {% include "default/header_default.html" %}
+    <!--Header -->
+
+    <main>
+
+
+        <!-- START MAIN -->
+        <div id="main">
+            <!-- START WRAPPER -->
+            <div class="wrapper">
+
+                {% include "default/side_nav.html" %}
+
+
+                <!-- Page Layout here -->
+                <div class="content">
+
+
+                    <!--start container-->
+                    <div style="padding-top: 16px">
+
+                        <div class="row" id="main-row">
+
+                            <div class="col s12 m10 l10">
+
+
+                                    <div class="row">
+                                        <div class="col s12 m12 l12">
+
+                                            <div id="group" class="card scrollspy">
+                                                <div class="card-content">
+
+                                                    <span class="card-title "><i class="material-icons">cloud_download</i>  Migration Tool: Portal Prover</span>
+                                                    
+                                                    <br />                                                    
+
+                                                    Resultado: {{ result_msg }}
+                                                    <br />                     
+                                                    Inseridos: {{ result_count }}
+
+                                                    <br />
+                                                    {{ csv_data }}
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script src="{% static "js/jquery.dataTables.min.js"%}"></script>        
+
+    <script>
+        {% include "js/cell.js" %}
+    </script>  
+
+
+    <script>
+        // Initialize collapse button
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 240
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        });
+
+    </script>
+
+
+</body>
+
+
+</html>

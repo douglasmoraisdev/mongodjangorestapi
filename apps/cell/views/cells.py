@@ -194,7 +194,8 @@ def cell_detail(request, group_id, user_apps=''):
 	return HttpResponse(template.render(content, request))
 
 
-@bethel_auth_required(min_perm=[{'groups':'c'}, {'system':'c'}])
+#@bethel_auth_required(min_perm=[{'groups':'c'}, {'system':'c'}])
+@bethel_auth_required
 def cell_new(request, user_apps):
 
 	template = loader.get_template('cell_new.html')
