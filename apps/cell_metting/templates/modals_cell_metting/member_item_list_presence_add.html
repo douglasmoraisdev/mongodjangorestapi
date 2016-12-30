@@ -9,11 +9,11 @@
         {% if user_name.extra_data.profile_image %}
             <img class="circle" height="50px" src="{% static "upload/profile_images/" %}{{ user_name.extra_data.profile_image }}">
         {% else %}
-            <img class="circle" height="50px" avatar="{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}">
+            <img class="circle" height="50px" avatar="{{ user_name.first_name }} {{ user_name.last_name }}">
         {% endif %}
 
         <div style="padding-right: 15px"></div>
-        {{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}
+        {{ user_name.first_name }} {{ user_name.last_name }}
 
         <div style="padding-right: 15px"></div>
 

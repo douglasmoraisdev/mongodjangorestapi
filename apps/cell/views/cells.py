@@ -81,7 +81,7 @@ def cell(request, group_id, user_apps=''):
 		'group_type':group_type,
 		'groups_over':group.groups_over,
 		'groups_under':group.groups_under,
-		'group_origin':group.origin,
+		#'group_origin':group.origin,
 		'generated_groups': generated_groups,
 		'leader_users' : leader_users,
 		'host_users' : host_users,

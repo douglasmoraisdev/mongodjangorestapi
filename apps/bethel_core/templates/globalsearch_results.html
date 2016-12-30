@@ -33,22 +33,22 @@
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
+                                                <th>Profissão</th>
+                                                <th>Cidade</th>
+                                                <th>Bairro</th>
+                                                <th>Dt Nascimento</th>
                                             </tr>
-                                        </thead>                        
+                                        </thead>
                                      
                                         <tbody>
                                         {% for itens in Users %}
 
                                             <tr>
-                                                <td>{{ itens.extra_data.first_name }} {{ itens.extra_data.last_name }}</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
-                                                <td>61</td>
-                                                <td>2011/04/25</td>
+                                                <td>{{ itens.first_name }} {{ itens.last_name }}</td>
+                                                <td>{{ itens.profession }}</td>
+                                                <td>{{ itens.city }}</td>
+                                                <td>{{ itens.neigh }}</td>
+                                                <td>{{ itens.birthday }}</td>
                                             </tr>
 
                                         {% endfor %}
@@ -57,7 +57,7 @@
                                       </table>
                                     </div>
 
-                                </div>          
+                                </div>
                             </li>
 
                             <li>
@@ -68,7 +68,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <th>Position</th>
+                                                <th>Id</th>
                                                 <th>Office</th>
                                                 <th>Age</th>
                                                 <th>Start date</th>
@@ -80,7 +80,7 @@
 
                                             <tr>
                                                 <td>{{ itens.name }}</td>
-                                                <td>System Architect</td>
+                                                <td>{{ itens.id }}</td>
                                                 <td>Edinburgh</td>
                                                 <td>61</td>
                                                 <td>2011/04/25</td>

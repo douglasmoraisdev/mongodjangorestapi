@@ -5,10 +5,10 @@
     {% if user_name.extra_data.profile_image %}
         <img class="circle" height="50" src="{% static "upload/profile_images/" %}{{ user_name.extra_data.profile_image }}">
     {% else %}
-        <img class="circle" height="50" avatar="{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}">
+        <img class="circle" height="50" avatar="{{ user_name.first_name }} {{ user_name.last_name }}">
     {% endif %}
 
-    <span class="title">{{ user_name.extra_data.first_name }} {{ user_name.extra_data.last_name }}</span>
+    <span class="title">{{ user_name.first_name }} {{ user_name.last_name }}</span>
     <p class="grey-text">
     {% for item in user_roles %}
 	    {% if forloop.last %}

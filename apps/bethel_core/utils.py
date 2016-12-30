@@ -26,7 +26,7 @@ def get_users_geo(usersObj):
 
 			if (usersA.user.id != usersB.user.id):
 				if (usersB.user.id not in tested_user_id):				
-					if (usersA.user.extra_data['addr_lat'] == usersB.user.extra_data['addr_lat']) and (usersA.user.extra_data['addr_lng'] == usersB.user.extra_data['addr_lng']):
+					if (usersA.user.addr_lat == usersB.user.addr_lat) and (usersA.user.addr_lng == usersB.user.addr_lng):
 
 						tested_user_id.append(usersA.user.id)
 						tested_user_id.append(usersB.user.id)

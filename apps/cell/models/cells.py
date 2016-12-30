@@ -26,11 +26,12 @@ class Cells(Groups):
 			extra_data=extra_data
 		)
 
-	def add_cell(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
+	def add_cell(self, mig_id, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
 
-		cell_type_id = Groups_types.objects(code='cell')[0]
+		#cell_type_id = Groups_types.objects(code='cell')[0]
 
 		Cells.objects.create(
+			mig_id = mig_id,
 			name=name,
 			#group_type=cell_type_id,
 			origin=group_origin,
@@ -38,12 +39,6 @@ class Cells(Groups):
 			groups_under=groups_under,
 			user_roles = user_roles,
 			extra_data=extra_data
-		)
-
-	def add_user_group(self, user_roles, group_id):
-
-		Groups.objects.filter(id=group_id).update(
-			add_to_set__user_roles = user_roles
 		)
 
 	'''

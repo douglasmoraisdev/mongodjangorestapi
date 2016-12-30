@@ -74,9 +74,9 @@
                                                     {% if User.extra_data.profile_image %}
                                                         <img class="circle" height="100px" src="{% static "upload/profile_images/" %}{{ User.extra_data.profile_image }}">
                                                     {% else %}
-                                                        <img class="circle" height="100px" avatar="{{ User.extra_data.first_name }} {{ User.extra_data.last_name }}">
+                                                        <img class="circle" height="100px" avatar="{{ User.first_name }} {{ User.last_name }}">
                                                     {% endif %}
-                                                    <span class="card-title">{{ User.extra_data.first_name }} {{ User.extra_data.last_name }}<i class="material-icons right">live_help</i></span>
+                                                    <span class="card-title">{{ User.first_name }} {{ User.last_name }}<i class="material-icons right">live_help</i></span>
 
 
                                                     <ul class="collection with-header">

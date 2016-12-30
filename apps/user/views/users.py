@@ -120,7 +120,7 @@ def get_servant_autocomplete(request):
 	search = request.GET.get('send')
 
 	content = {
-		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
+		'users_result': Users.objects(first_name__icontains=search) #TODO mover como função do Model
 	}	
 
 	template = loader.get_template('user_modals/servant_item_list_search.html')
@@ -180,7 +180,7 @@ def get_member_autocomplete(request):
 	search = request.GET.get('send')
 
 	content = {
-		'users_result': Users.objects(extra_data__first_name__icontains=search) #TODO mover como função do Model
+		'users_result': Users.objects(first_name__icontains=search) #TODO mover como função do Model
 	}	
 
 	template = loader.get_template('user_modals/member_item_list_search.html')

@@ -87,9 +87,9 @@
                                                             {% if list.user.extra_data.profile_image %}
                                                                 <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
                                                             {% else %}
-                                                                <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                                <img class="circle" avatar="{{ list.user.first_name }} {{ list.user.last_name }}">
                                                             {% endif %}
-                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <span class="title">{{ list.user.first_name }} {{ list.user.last_name }}</span> {% for roles in list.role %}
                                                             <p>{{ roles.name }}</p>
                                                             {%endfor%}
                                                             <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
@@ -99,7 +99,7 @@
 
                                                         <li class="collection-item avatar">
                                                             <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
-                                                            <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                            <span class="title">{{ list.user.first_name }} {{ list.user.last_name }}</span> {% for roles in list.role %}
                                                             <p>{{ roles.name }}</p>
                                                             {%endfor%}
                                                             <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
@@ -354,9 +354,9 @@
                                                                 {% if list.user.extra_data.profile_image %}
                                                                     <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}">
                                                                 {% else %}
-                                                                    <img class="circle" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
+                                                                    <img class="circle" avatar="{{ list.user.first_name }} {{ list.user.last_name }}">
                                                                 {% endif %}
-                                                                <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                                <span class="title">{{ list.user.first_name }} {{ list.user.last_name }}</span> {% for roles in list.role %}
                                                                 <p>{{ roles.name }}</p>
                                                                 {%endfor%}
                                                             </div>
@@ -436,8 +436,8 @@
                                                             {% for list in visitor_users %}
 
                                                             <li class="collection-item avatar">
-                                                                <img class="circle" width="60" height="60" avatar="{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}">
-                                                                <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> {% for roles in list.role %}
+                                                                <img class="circle" width="60" height="60" avatar="{{ list.user.first_name }} {{ list.user.last_name }}">
+                                                                <span class="title">{{ list.user.first_name }} {{ list.user.last_name }}</span> {% for roles in list.role %}
                                                                 <p>{{ roles.name }}</p>
                                                                 {%endfor%}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>

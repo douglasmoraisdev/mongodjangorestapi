@@ -246,10 +246,10 @@
                                                             {% if item.user.extra_data.profile_image %}
                                                                 <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
                                                             {% else %}
-                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                                <img class="circle" avatar="{{ item.user.first_name }} {{ item.user.last_name }}">
                                                             {% endif %}
 
-                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <span class="title">{{ item.user.first_name }} {{ item.user.last_name }}</span>
                                                             <p class="grey-text">
                                                             {{ item.role.0.name }}
                                                             </p>
@@ -309,10 +309,10 @@
                                                             {% if item.user.extra_data.profile_image %}
                                                                 <img class="circle" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
                                                             {% else %}
-                                                                <img class="circle" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                                <img class="circle" avatar="{{ item.user.first_name }} {{ item.user.last_name }}">
                                                             {% endif %}
 
-                                                            <span class="title">{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}</span>
+                                                            <span class="title">{{ item.user.first_name }} {{ item.user.last_name }}</span>
                                                             <p class="grey-text">
                                                             {{ user_roles.0.name }}
                                                             </p>

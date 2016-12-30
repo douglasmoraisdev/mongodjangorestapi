@@ -7,14 +7,12 @@ from bethel_core import utils
 
 from django.utils.translation import *
 
-import csv
 
+from mig.models import *
 
 import uuid
 import googlemaps
 
-from cell.models import *
-from user.models import *
 
 from bethel_core.decorators import *
 
@@ -26,60 +24,42 @@ logger = logging.getLogger(__name__)
 def prover(request,  user_apps=''):
 
 
-	result_msg = ''
-	result_count = 0
+	#Usuarios
+	res_mig_user = Mig().mig_users()
 
-	csv_data = []
+	result_msg_user = res_mig_user['result_msg']
+	result_count_user = res_mig_user['result_count']
 
-	cvs_path = 'mig/static/upload/pessoas.csv'
+	
+	#Celulas
+	res_mig_cell = Mig().mig_groups()
 
-	with open(cvs_path) as f:
-		reader = csv.reader(f)
-
-		for row in reader:
-
-			csv_data.append([{
-				'first_name' : row[4].replace(row[4].split(" ")[0],"", 1),
-				'last_name' : row[4].replace(row[4].split(" ")[0],"", 1), #retira o primeiro nome do nom
-				'user_name' : row[15]
-			}])
-
-	#Add to the Users Model
-
-	for item in csv_data:
-
-		name = '"'+item[0]['first_name']+'"'
-
-		extra = dict()
-		extra['last_name'] = item[0]['last_name']		
-		extra['first_name'] = item[0]['first_name'],
-		extra['other_key'] = name.replace(" ", "",1),
-		extra['other_key2'] = 'banana'
+	result_msg_cells = res_mig_cell['result_msg']
+	result_count_cells = res_mig_cell['result_count']
 
 
-		try:
-			Users().add_user(
-				user_name=item[0]['user_name'],
+	#Funcoes
+	res_mig_roles = Mig().mig_groups_roles()
 
-				auth_type='password',
-				auth_token='abacate',
-				extra_data = extra,
-			)
+	result_msg_roles = res_mig_roles['result_msg']
+	result_count_roles = res_mig_roles['result_count']
+	
 
-			result_msg = 'Sucesso'
-			result_count += 1
-		except Exception as err:
-			result_msg = format(err)
 
 
 	template = loader.get_template('prover.html')
 
-
+	result_count = 'to model all'
+	csv_data = 'to model all'
 
 	
 	content = {
-		'result_msg' : result_msg,
-		'result_count' : result_count,
+		'result_msg_user' : result_msg_user,
+		'result_count_user' : result_count_user,
+		'result_msg_cells' : result_msg_cells,
+		'result_count_cells' : result_count_cells,
+		'result_msg_roles' : result_msg_roles,
+		'result_count_roles' : result_count_roles,
 		'csv_data': csv_data
 
 	}

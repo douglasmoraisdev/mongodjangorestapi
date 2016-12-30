@@ -105,11 +105,11 @@ function initMap() {
             marcador[{{ forloop.counter0 }}] = new  google.maps.Marker({
               position: new google.maps.LatLng({{ users.users.0.user.extra_data.addr_lat }}, {{ users.users.0.user.extra_data.addr_lng }}),
               map: map,
-              title: '{% for names in users.users %} -{{ names.user.extra_data.first_name }}{% endfor %}'
+              title: '{% for names in users.users %} -{{ names.user.first_name }}{% endfor %}'
             });
 
             var div = document.createElement('DIV');
-            div.innerHTML = '<div class="cardpanel"><ul class="collection">{% for list in users.users %}    <li class="collection-item avatar">        {% if list.user.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ list.user.extra_data.first_name }} {{ list.user.extra_data.last_name }}</span> <a target="_blank" href="{{ base_url }}/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>   </li>{% endfor %}    </ul></div>';
+            div.innerHTML = '<div class="cardpanel"><ul class="collection">{% for list in users.users %}    <li class="collection-item avatar">        {% if list.user.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ list.user.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ list.user.first_name }} {{ list.user.last_name }}</span> <a target="_blank" href="{{ base_url }}/usuario/get/{{ list.user.id }}" class=""><i class="material-icons activator">search</i></a>   </li>{% endfor %}    </ul></div>';
 
             infowindow[[{{ forloop.counter0 }}]] = new google.maps.InfoWindow({
                 content: 'Neste endereço: '+div.innerHTML

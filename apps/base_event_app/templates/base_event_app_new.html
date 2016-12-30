@@ -165,11 +165,11 @@
                                                             {% if item.user.extra_data.profile_image %}
                                                                 <img class="circle" height="50px" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
                                                             {% else %}
-                                                                <img class="circle" height="50px" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                                <img class="circle" height="50px" avatar="{{ item.user.first_name }} {{ item.user.last_name }}">
                                                             {% endif %}                                                            
 
                                                             <div style="padding-right: 15px"></div>
-                                                            {{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}
+                                                            {{ item.user.first_name }} {{ item.user.last_name }}
                                                             <div style="padding-right: 5px"></div>
                                                             <p class="grey-text">
                                                             {% for rl in item.role %}
@@ -236,12 +236,12 @@
                                                                 {% if item.user.extra_data.profile_image %}
                                                                     <img class="circle" height="50px" src="{% static "upload/profile_images/" %}{{ item.user.extra_data.profile_image }}">
                                                                 {% else %}
-                                                                    <img class="circle" height="50px" avatar="{{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}">
+                                                                    <img class="circle" height="50px" avatar="{{ item.user.first_name }} {{ item.user.last_name }}">
                                                                 {% endif %}   
 
 
                                                                 <div style="padding-right: 15px"></div>
-                                                                {{ item.user.extra_data.first_name }} {{ item.user.extra_data.last_name }}
+                                                                {{ item.user.first_name }} {{ item.user.last_name }}
                                                             </li>
                                                         {% endfor %}
                                                     </ul>                                                         

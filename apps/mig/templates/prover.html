@@ -16,7 +16,8 @@
     <script src="{% static "js/materialize.js" %}"></script>
     <script src="{% static "js/perfect-scrollbar.min.js" %}"></script>
 
-
+    <script src="{% static "js/custom_scripts.js"%}"></script>
+    <script src="{% static "js/jquery.dataTables.min.js"%}"></script>   
 
 
     <!--Let browser know website is optimized for mobile-->
@@ -70,12 +71,33 @@
                                                     
                                                     <br />                                                    
 
-                                                    Resultado: {{ result_msg }}
-                                                    <br />                     
-                                                    Inseridos: {{ result_count }}
+                                                    Users:
+                                                    <br />
+
+                                                    Resultado: {{ result_msg_user }}
+                                                    <br />
+                                                    Inseridos: {{ result_count_user }}
+                                                    <br />
 
                                                     <br />
-                                                    {{ csv_data }}
+
+                                                    Cells:
+                                                    <br />
+
+                                                    Resultado: {{ result_msg_cells }}
+                                                    <br />
+                                                    Inseridos: {{ result_count_cells }}
+                                                    <br />
+
+                                                                                                                                                      <br />
+
+                                                    Groups x Roles:
+                                                    <br />
+
+                                                    Resultado: {{ result_msg_roles }}
+                                                    <br />
+                                                    Inseridos: {{ result_count_roles }}
+                                                    <br />     
 
                                                 </div>
 
@@ -87,6 +109,9 @@
                             </div>
 
 
+                        </div>
+
+                        <div class="row" id="globalsearch-result">
                         </div>
 
                     </div>

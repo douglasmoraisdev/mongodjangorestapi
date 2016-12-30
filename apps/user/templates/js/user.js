@@ -110,11 +110,11 @@ function initMap() {
             marcador[{{ forloop.counter0 }}] = new  google.maps.Marker({
               position: new google.maps.LatLng({{ users.extra_data.addr_lat }}, {{ users.extra_data.addr_lng }}),
               map: map,
-              title: '{{ users.extra_data.first_name }} {{ users.extra_data.last_name }}'
+              title: '{{ users.first_name }} {{ users.last_name }}'
             });
 
             var div = document.createElement('DIV');
-            div.innerHTML = '<div class="cardpanel"><ul class="collection"><li class="collection-item avatar"> {% if users.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ users.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ users.extra_data.first_name }} {{ users.extra_data.last_name }}</span> <a href="{{ base_url }}/usuario/get/{{ users.id }}" class=""><i class="material-icons activator">search</i></a>   </li>   </ul></div>';
+            div.innerHTML = '<div class="cardpanel"><ul class="collection"><li class="collection-item avatar"> {% if users.extra_data.profile_image %}            <img class="circle" src="{% static "upload/profile_images/" %}{{ users.extra_data.profile_image }}"> {% endif %}        <span class="title">{{ users.first_name }} {{ users.last_name }}</span> <a href="{{ base_url }}/usuario/get/{{ users.id }}" class=""><i class="material-icons activator">search</i></a>   </li>   </ul></div>';
 
             infowindow[[{{ forloop.counter0 }}]] = new google.maps.InfoWindow({
                 content: 'Neste endereço: '+div.innerHTML

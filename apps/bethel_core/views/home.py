@@ -89,7 +89,8 @@ def loginLogout(request):
 		return HttpResponse(template.render('', request))
 
 
-@bethel_auth_required(min_perm=[{'system':'+'}])
+#@bethel_auth_required(min_perm=[{'system':'+'}])
+@bethel_auth_required
 def global_search(request, searchquery, user_apps):
 
 	users = Users().get_all(searchquery)

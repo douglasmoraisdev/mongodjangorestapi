@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 
 class Groups(Document):
 	meta = {'allow_inheritance': True}
+
+	mig_id = StringField(max_length=50)	
 	name = StringField(max_length=50)
 	user_roles = EmbeddedDocumentListField(User_roles)
 	origin = ReferenceField("self", reverse_delete_rule = NULLIFY)

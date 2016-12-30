@@ -4,8 +4,8 @@
 
 {% for item in users_result %}
 <a href="#!" id="row-{{ item.id }}" onclick="select_user('{{ item.id }}')" class="collection-item avatar">
-	<span class="title">{{ item.extra_data.first_name }}</span>
-	<p>{{ item.extra_data.first_name }}</p>
+	<span class="title">{{ item.first_name }}</span>
+	<p>{{ item.first_name }}</p>
 </a>
 {% endfor %}
 
