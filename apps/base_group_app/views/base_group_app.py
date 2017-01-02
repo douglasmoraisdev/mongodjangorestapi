@@ -20,11 +20,6 @@ logger = logging.getLogger(__name__)
 @bethel_auth_required
 def cell(request, group_id, user_apps=''):
 
-	# Google Maps Client
-	#gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
-
-	#geocode_result = gmaps.geocode('2345 Avenida Adão Foques, Florida, Guaíba, Rio grande do Sul, Brasil')
-
 	template = loader.get_template('cell.html')
 
 	leader_users = []

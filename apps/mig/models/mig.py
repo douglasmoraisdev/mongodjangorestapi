@@ -29,32 +29,40 @@ class Mig(models.Model):
 		with open(cvs_path) as f:
 			reader = csv.reader(f)
 
+			iters = 0
 			for row in reader:
 
-				csv_data.append([{
-					'mig_id' : row[0],
+				if iters > 0:				
+					csv_data.append([{
+						'mig_id' : row[0],
 
-					'first_name' : row[4].split(" ")[0],
-					'last_name' : row[4].replace(row[4].split(" ")[0],"", 1).strip(), #retira o primeiro nome do nom
-					'user_name' : row[15],
-					'cpf' : row[3],
-					'birthday' : row[5],
+						'first_name' : row[4].split(" ")[0],
+						'last_name' : row[4].replace(row[4].split(" ")[0],"", 1).strip(), #retira o primeiro nome do nom
+						'user_name' : row[15],
+						'cpf' : row[3],
+						'birthday' : row[5],
 
-					'zipcode' : row[16],
-					'street' : row[17],
-					'street_number' : row[18],
-					'addr_obs' : row[19],
-					'neigh' : row[20],
-					'city' : row[21],
-					'state' : row[22],
+						'zipcode' : row[16],
+						'street' : row[17],
+						'street_number' : row[18],
+						'addr_obs' : row[19],
+						'neigh' : row[20],
+						'city' : row[21],
+						'state' : row[22],
 
-					'profession' : row[29]
+						'profession' : row[29]
 
-				}])
+					}])
+				else:
+					iters += 1
+
 
 		#Add to the Users Model
 
 		for item in csv_data:
+
+			iters -= 1
+			#print(iters)
 
 			extra = dict()
 
@@ -78,8 +86,6 @@ class Mig(models.Model):
 					neigh = item[0]['neigh'],
 					city = item[0]['city'],
 					state = item[0]['state'],
-					addr_lat = '',
-					addr_lng = '',
 
 					profession = item[0]['profession'],
 
@@ -88,8 +94,10 @@ class Mig(models.Model):
 
 				result_msg = 'Sucesso'
 				result_count += 1
+
 			except Exception as err:
-				result_msg = format(err)
+				result_msg = format(err)+' '+item[0]['mig_id']
+				return {'result_msg': result_msg, 'result_count' : result_count}
 
 		return {'result_msg': result_msg, 'result_count' : result_count}
 
@@ -174,12 +182,13 @@ class Mig(models.Model):
 
 				id_user = item[0]['id_user']
 				id_group = item[0]['id_group']
+				role = item[0]['role']
 
 				user_obj = Users.objects.get(mig_id=id_user)
 
-				if item[0]['role'] == 'LÍDER':
+				if role == 'LÍDER':
 					roles_obj = Roles.objects.get(code="leader")
-				elif item[0]['role'] == 'ANFITRIÃO':
+				elif role == 'ANFITRIÃO':
 					roles_obj = Roles.objects.get(code="host")				
 				else:
 					roles_obj = Roles.objects.get(code="cell_member")				
@@ -215,7 +224,7 @@ class Mig(models.Model):
 		cvs_path_groups = 'mig/static/upload/grupos_x_encontro_precenca_participantes.csv'
 
 		with open(cvs_path_groups) as f:
-			reader = csv.reader(f, delimiter=';')
+			reader = csv.reader(f, delimiter=',')
 
 			for row in reader:
 
@@ -288,7 +297,7 @@ class Mig(models.Model):
 		cvs_path_groups = 'mig/static/upload/grupos_x_encontro_precenca_participantes.csv'
 
 		with open(cvs_path_groups) as f:
-			reader = csv.reader(f, delimiter=';')
+			reader = csv.reader(f, delimiter=',')
 
 			for row in reader:
 

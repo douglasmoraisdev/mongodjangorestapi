@@ -6,6 +6,8 @@ import logging
 from bethel_core.models import *
 from bson.objectid import ObjectId
 
+import googlemaps
+
 logger = logging.getLogger(__name__)
 
 
@@ -26,7 +28,7 @@ def get_users_geo(usersObj):
 
 			if (usersA.user.id != usersB.user.id):
 				if (usersB.user.id not in tested_user_id):				
-					if (usersA.user.addr_lat == usersB.user.addr_lat) and (usersA.user.addr_lng == usersB.user.addr_lng):
+					if (usersA.user.geolocation['coordinates'] == usersB.user.geolocation['coordinates']):
 
 						tested_user_id.append(usersA.user.id)
 						tested_user_id.append(usersB.user.id)
@@ -86,3 +88,26 @@ def parse_users_fixed_role(usersObj, roleCode):
 		members_roles.append(User_roles(user=user_obj, role=[member_role_code]))
 
 	return members_roles	
+
+def generate_geolocation(address):
+
+	default_no_found = (-30.1169633,-51.3392944)
+
+	geocode_result = []
+
+	# Google Maps Client
+	gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
+
+	if address.strip() != '':
+		#geocode_result = gmaps.geocode(address=address , region='br')
+
+		if geocode_result == []:
+			geocode_result = default_no_found
+
+	else:
+		geocode_result = default_no_found
+
+	if geocode_result == default_no_found:
+		return geocode_result
+	else:
+		return (geocode_result[0]['geometry']['location']['lat'] , geocode_result[0]['geometry']['location']['lng'])

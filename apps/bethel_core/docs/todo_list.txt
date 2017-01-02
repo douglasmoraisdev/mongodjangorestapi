@@ -1,11 +1,13 @@
+Todo list for version 1.2 release
+
+
+! Guaiba está hardcoded na geolocalizacao default (bethel_core/utils.py/getgeolocation default_no_found)
+
 Todo list for version 1.1 release
 
 
 celula/
 	Frequencia de reunioes
-
-
-
 
 
 

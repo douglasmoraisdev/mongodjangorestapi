@@ -3,6 +3,8 @@ from mongoengine import *
 from bethel_core.models.roles import *
 from bethel_core.models.tasks import *
 
+from bethel_core import utils
+
 
 import logging
 
@@ -29,42 +31,62 @@ class Users(Document):
 	neigh = StringField(max_length=255)
 	city = StringField(max_length=255)
 	state = StringField(max_length=255)
-	addr_lat = StringField(max_length=255)	
-	addr_lng = StringField(max_length=255)	
 
 	profession = StringField(max_length=255)
 
 	extra_data = DictField()
 
+	#internal generated
+	geolocation = PointField()
+
+
 	def add_user(self, mig_id, user_name, auth_type, auth_token, first_name, last_name, cpf, 
-		birthday, zipcode, street, street_number, addr_obs, neigh, city, state, addr_lat, addr_lng,
+		birthday, zipcode, street, street_number, addr_obs, neigh, city, state,
 		profession,
 		extra_data=None):
 
-		Users.objects.create(
-			mig_id = mig_id,
-			
-			user_name = user_name,
-			auth_type = auth_type,
-			auth_token = auth_token,
 
-			first_name = first_name,
-			last_name = last_name,
-			cpf = cpf,
-			birthday = birthday,
+		user_geolocation = None
 
-			zipcode = zipcode,
-			street = street,
-			street_number = street_number,
-			addr_obs = addr_obs,
-			neigh = neigh,
-			city = city,
-			state = state,
+		if street.strip() == '':
+			user_geolocation = utils.generate_geolocation("")
+		else:
+			user_geolocation = utils.generate_geolocation("%s %s, %s, %s, %s" % (street_number, street, neigh, city, state))
 
-			profession = profession,
+		if user_geolocation != None:
+			user_geolocation = user_geolocation
 
-			extra_data = extra_data
+		try:
+		
+			Users.objects.create(
+				mig_id = mig_id,
+				
+				user_name = user_name,
+				auth_type = auth_type,
+				auth_token = auth_token,
+
+				first_name = first_name,
+				last_name = last_name,
+				cpf = cpf,
+				birthday = birthday,
+
+				zipcode = zipcode,
+				street = street,
+				street_number = street_number,
+				addr_obs = addr_obs,
+				neigh = neigh,
+				city = city,
+				state = state,
+
+				profession = profession,
+
+				extra_data = extra_data,
+
+				geolocation	= user_geolocation
 			)
+
+		except Exception as err:
+			print("ERRO AO ADICIONAR USUARIO %s" % format(err))
 
 
 	def get_all(self, search):
