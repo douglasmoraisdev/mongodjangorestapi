@@ -80,7 +80,7 @@
 
                                             <tr>
                                                 <td>{{ itens.name }}</td>
-                                                <td>{{ itens.id }}</td>
+                                                <td><a href="{{ base_url }}/celula/get/{{ itens.id }}" target="_blank">Ver</a></td>
                                                 <td>Edinburgh</td>
                                                 <td>61</td>
                                                 <td>2011/04/25</td>
@@ -102,8 +102,8 @@
                                         <thead>
                                             <tr>
                                                 <th>Nome</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
+                                                <th>Id</th>
+                                                <th>Celula</th>
                                                 <th>Age</th>
                                                 <th>Start date</th>
                                             </tr>
@@ -114,8 +114,8 @@
 
                                             <tr>
                                                 <td>{{ itens.name }}</td>
-                                                <td>System Architect</td>
-                                                <td>Edinburgh</td>
+                                                <td><a href="{{base_url}}/reuniaocelula/get/{{ itens.id }}" target="_blank"> Ver </a></td>
+                                                <td>{{ itens.host.name }}</td>
                                                 <td>61</td>
                                                 <td>2011/04/25</td>
                                             </tr>

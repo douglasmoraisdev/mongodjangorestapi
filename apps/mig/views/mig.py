@@ -38,12 +38,25 @@ def prover(request,  user_apps=''):
 	result_count_cells = res_mig_cell['result_count']
 
 
-	#Funcoes
+	#Celulas x Funcoes
 	res_mig_roles = Mig().mig_groups_roles()
 
 	result_msg_roles = res_mig_roles['result_msg']
 	result_count_roles = res_mig_roles['result_count']
 	
+
+	#Encontros
+	res_mig_meeting = Mig().mig_metting()
+
+	result_msg_mettings = res_mig_meeting['result_msg']
+	result_count_mettings = res_mig_meeting['result_count']	
+
+
+	#Encontros x Presença
+	res_mig_meeting_presence = Mig().mig_metting_presence()
+
+	result_msg_mettings_presence = res_mig_meeting_presence['result_msg']
+	result_count_mettings_presence = res_mig_meeting_presence['result_count']	
 
 
 
@@ -60,6 +73,10 @@ def prover(request,  user_apps=''):
 		'result_count_cells' : result_count_cells,
 		'result_msg_roles' : result_msg_roles,
 		'result_count_roles' : result_count_roles,
+		'result_msg_mettings' : result_msg_mettings,
+		'result_count_mettings' : result_count_mettings,
+		'result_msg_mettings_presence' : result_msg_mettings_presence,
+		'result_count_mettings_presence' : result_count_mettings_presence,			
 		'csv_data': csv_data
 
 	}

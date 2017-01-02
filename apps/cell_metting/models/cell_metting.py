@@ -7,10 +7,11 @@ from bethel_core.models.events import *
 class Cell_mettings(Events):
 
 
-	def add_event(self, name,  parent_event, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
+	def add_event(self, name,parent_event, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None,  mig_id=''):
 
 		Cell_mettings.objects.create(
 			name=name,
+			mig_id = mig_id,
 			parent_event=parent_event,
 			host=host,
 			groups_in=groups_in,

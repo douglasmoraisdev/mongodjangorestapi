@@ -7,8 +7,9 @@ class Events(Document):
 
 	meta = {'allow_inheritance': True}
 
+	mig_id = StringField(max_length=50)
 	parent_event = ReferenceField("self", reverse_delete_rule = NULLIFY)
-	name = StringField(max_length=50)	
+	name = StringField(max_length=50)
 	host = ReferenceField(Groups)
 	groups_in = ListField(ReferenceField(Groups))
 	user_roles = EmbeddedDocumentListField(User_roles)
@@ -18,10 +19,11 @@ class Events(Document):
 	extra_data = DictField()
 
 
-	def add_event(self, name,  parent_event, event_type, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None):
+	def add_event(self, name,parent_event, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None,  mig_id=''):
 
 		Events.objects.create(
 			name=name,
+			mig_id = mig_id,
 			parent_event=parent_event,
 			host=host,
 			groups_in=groups_in,
