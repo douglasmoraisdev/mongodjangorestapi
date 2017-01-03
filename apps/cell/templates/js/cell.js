@@ -102,8 +102,6 @@ function initMap() {
 
         {% for users in member_maps %}
 
-            console.log({{ users.users.0.user.geolocation.coordinates | safe }})
-
             marcador[{{ forloop.counter0 }}] = new  google.maps.Marker({
               position: new google.maps.LatLng({{ users.users.0.user.geolocation.coordinates.0 }} , {{ users.users.0.user.geolocation.coordinates.1 }}),
               map: map,

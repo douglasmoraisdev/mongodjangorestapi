@@ -3,8 +3,9 @@
 '''
 from django.conf import settings
 import logging
-from bethel_core.models import *
 from bson.objectid import ObjectId
+
+import bethel_core as core
 
 import googlemaps
 
@@ -61,14 +62,14 @@ def parse_users_multi_role(usersObj, rolesObj):
 
 	#servants added get list
 	for key, users in enumerate(user_added):
-		user_obj =	Users.objects.get(id=ObjectId(users))
+		user_obj = core.models.users.Users.objects.get(id=ObjectId(users))
 
 		for roles in roles_added[key].split(","):
 
-			roles_add = Roles.objects.get(id=ObjectId(roles))
+			roles_add = core.models.roles.Roles.objects.get(id=ObjectId(roles))
 			roles_obj.append(roles_add)
 
-		servant_roles.append(User_roles(user=user_obj, role=roles_obj))
+		servant_roles.append(core.models.users.User_roles(user=user_obj, role=roles_obj))
 
 		roles_obj = []
 
@@ -81,11 +82,11 @@ def parse_users_fixed_role(usersObj, roleCode):
 	member_role_code = []
 	members_roles = []
 
-	member_role_code = Roles.objects.get(code=roleCode)
+	member_role_code = core.models.roles.Roles.objects.get(code=roleCode)
 	for key, users in enumerate(member_added):
-		user_obj =	Users.objects.get(id=ObjectId(users))
+		user_obj =	core.models.users.Users.objects.get(id=ObjectId(users))
 
-		members_roles.append(User_roles(user=user_obj, role=[member_role_code]))
+		members_roles.append(core.models.users.User_roles(user=user_obj, role=[member_role_code]))
 
 	return members_roles	
 

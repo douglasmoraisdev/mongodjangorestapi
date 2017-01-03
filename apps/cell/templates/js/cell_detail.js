@@ -18,7 +18,7 @@ function initMap() {
         {% for users in member_maps %}
 
             marcador[{{ forloop.counter0 }}] = new  google.maps.Marker({
-              position: new google.maps.LatLng({{ users.users.0.user.extra_data.addr_lat }}, {{ users.users.0.user.extra_data.addr_lng }}),
+              position: new google.maps.LatLng({{ users.users.0.user.geolocation.coordinates.0 }} , {{ users.users.0.user.geolocation.coordinates.1 }}),
               map: map,
               title: '{% for names in users.users %} -{{ names.user.first_name }}{% endfor %}'
             });

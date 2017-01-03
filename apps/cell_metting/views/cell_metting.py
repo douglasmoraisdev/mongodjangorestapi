@@ -153,20 +153,22 @@ def cell_metting_new(request, group_id, user_apps):
 		return HttpResponse(template.render(content, request))
 
 @bethel_auth_required
-def cell_metting_edit(request, group_id, event_id, user_apps):
+def cell_metting_edit(request, event_id, user_apps):
 
 	template = loader.get_template('cell_metting_edit.html')
 
 	group_metting_name = ''
 	group_metting_id = ''
 
-	group = Groups()
-	group = group.get_group_by_id(group_id)
-
 	events = Events()
 	events = events.get_event_by_id(event_id)
 
-	event_users = events.get_event_users(event_id)
+	event = events.get_event_users(event_id)
+
+	group_id = events.host.id
+
+	group = Groups()
+	group = group.get_group_by_id(group_id)	
 
 	if group.id:
 		group_metting_name = group.name

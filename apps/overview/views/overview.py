@@ -16,11 +16,11 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-@bethel_auth_required(min_perm=[{'system':'+'}])
-def home(request, user_apps):
+#@bethel_auth_required(min_perm=[{'system':'+'}])
+bethel_auth_required
+def home(request, user_apps=''):
 
 
 	template = loader.get_template('overview.html')
 
 	return HttpResponse(template.render([], request))
-

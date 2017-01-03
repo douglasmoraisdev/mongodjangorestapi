@@ -1,17 +1,20 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.http import HttpResponseForbidden
-from bson.objectid import ObjectId
 from django.urls import reverse
-from bethel_core import utils
-
 from django.utils.translation import *
+
+from bethel_core import utils
+from bethel_core.decorators import *
+
+from cell.models import *
+
+from bson.objectid import ObjectId
 
 import uuid
 import googlemaps
 
-from cell.models import *
-from bethel_core.decorators import *
+
 
 import logging
 
@@ -167,7 +170,7 @@ def cell_detail(request, group_id, user_apps=''):
 		'group_type':group_type,
 		'groups_over':group.groups_over,
 		'groups_under':group.groups_under,
-		'group_origin':group.origin,
+		#'group_origin':group.origin,
 		'generated_groups': generated_groups,
 		'leader_users' : leader_users,
 		'host_users' : host_users,
@@ -300,7 +303,8 @@ def cell_new(request, user_apps):
 		return HttpResponse(template.render(content, request))
 
 
-@bethel_auth_required(min_perm=[{'groups':'w'}, {'system':'w'}])
+#@bethel_auth_required(min_perm=[{'groups':'w'}, {'system':'w'}])
+@bethel_auth_required
 def cell_edit(request, group_id, user_apps):
 
 	template = loader.get_template('cell_edit.html')

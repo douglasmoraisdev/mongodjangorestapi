@@ -29,7 +29,7 @@ def prover(request,  user_apps=''):
 
 	result_msg_user = res_mig_user['result_msg']
 	result_count_user = res_mig_user['result_count']
-
+	
 	#Celulas
 	res_mig_cell = Mig().mig_groups()
 
@@ -56,7 +56,7 @@ def prover(request,  user_apps=''):
 
 	result_msg_mettings_presence = res_mig_meeting_presence['result_msg']
 	result_count_mettings_presence = res_mig_meeting_presence['result_count']	
-
+	
 
 	template = loader.get_template('prover.html')
 

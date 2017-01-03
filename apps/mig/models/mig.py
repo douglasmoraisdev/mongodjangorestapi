@@ -27,7 +27,7 @@ class Mig(models.Model):
 		cvs_path = 'mig/static/upload/pessoas.csv'
 
 		with open(cvs_path) as f:
-			reader = csv.reader(f)
+			reader = csv.reader(f, delimiter=',')
 
 			iters = 0
 			for row in reader:
@@ -62,7 +62,7 @@ class Mig(models.Model):
 		for item in csv_data:
 
 			iters -= 1
-			#print(iters)
+			print(iters)
 
 			extra = dict()
 
