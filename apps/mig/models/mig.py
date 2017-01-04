@@ -355,3 +355,4 @@ class Mig(models.Model):
 
 
 		return {'result_msg': result_msg, 'result_count' : result_count}
+

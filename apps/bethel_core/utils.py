@@ -6,6 +6,7 @@ import logging
 from bson.objectid import ObjectId
 
 import bethel_core as core
+import mig as migr
 
 import googlemaps
 
@@ -96,19 +97,41 @@ def generate_geolocation(address):
 
 	geocode_result = []
 
-	# Google Maps Client
-	gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
+	#First search a already stored geolocation
+	stored_geo = migr.models.mig_geostore.Mig_geostore.get_stored_geo(address)
 
-	if address.strip() != '':
-		#geocode_result = gmaps.geocode(address=address , region='br')
+	if stored_geo:
 
-		if geocode_result == []:
+		print('found geolocation stored')
+
+		geocode_result = (str(stored_geo))
+
+		print('geocode stored: %s' % geocode_result)
+
+
+	#calls google api for location
+	else:
+
+		print('geolocation stored not found')		
+
+		# Google Maps Client
+		gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
+
+		if address.strip() != '':
+			geocode_result = gmaps.geocode(address=address , region='br')
+
+			if geocode_result == []:
+				geocode_result = default_no_found
+			else:
+				geocode_result = (geocode_result[0]['geometry']['location']['lat'] , geocode_result[0]['geometry']['location']['lng'])
+
+
+		else:
 			geocode_result = default_no_found
 
-	else:
-		geocode_result = default_no_found
+		print("Storing geolocation: %s %s %s" % (address, geocode_result[0], geocode_result[1]))
+		#store the geolocation
+		migr.models.mig_geostore.Mig_geostore.insert_stored_geo(address, str(geocode_result[0]), str(geocode_result[1]))
 
 	if geocode_result == default_no_found:
 		return geocode_result
-	else:
-		return (geocode_result[0]['geometry']['location']['lat'] , geocode_result[0]['geometry']['location']['lng'])
