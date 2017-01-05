@@ -20,6 +20,15 @@ class Groups(Document):
 	extra_data = DictField()
 
 
+	zipcode = StringField(max_length=255)
+	street = StringField(max_length=255)
+	street_number = StringField(max_length=255)
+	addr_obs = StringField(max_length=255)
+	neigh = StringField(max_length=255)
+	city = StringField(max_length=255)
+	state = StringField(max_length=255)	
+
+
 	def add_user_group(self, user_roles, group_id):
 
 		Groups.objects.filter(id=group_id).update(

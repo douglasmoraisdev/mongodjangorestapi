@@ -102,17 +102,12 @@ def generate_geolocation(address):
 
 	if stored_geo:
 
-		print('found geolocation stored')
-
-		geocode_result = (str(stored_geo))
-
-		print('geocode stored: %s' % geocode_result)
+		geocode_result = stored_geo
 
 
 	#calls google api for location
 	else:
 
-		print('geolocation stored not found')		
 
 		# Google Maps Client
 		gmaps = googlemaps.Client(key='AIzaSyD1FfhbFJv88cNCVu5xcHBt0rw4eeJYQOk')
@@ -129,9 +124,10 @@ def generate_geolocation(address):
 		else:
 			geocode_result = default_no_found
 
-		print("Storing geolocation: %s %s %s" % (address, geocode_result[0], geocode_result[1]))
 		#store the geolocation
 		migr.models.mig_geostore.Mig_geostore.insert_stored_geo(address, str(geocode_result[0]), str(geocode_result[1]))
 
 	if geocode_result == default_no_found:
 		return geocode_result
+
+	return geocode_result

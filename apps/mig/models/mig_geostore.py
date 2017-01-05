@@ -32,7 +32,7 @@ class Mig_geostore(Document):
 			geolocation = Mig_geostore.objects(address=address)
 
 			if (geolocation != None) and (geolocation != []):
-				return (geolocation[0].lat, geolocation[0].lng)
+				return (float(geolocation[0].lat), float(geolocation[0].lng))
 			else:
 				return False
 

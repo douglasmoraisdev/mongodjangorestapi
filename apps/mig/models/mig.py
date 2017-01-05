@@ -110,7 +110,7 @@ class Mig(models.Model):
 
 		csv_data = []
 
-		cvs_path_groups = 'mig/static/upload/grupos_x_participantes.csv'
+		cvs_path_groups = 'mig/static/upload/grupos.csv'
 
 		with open(cvs_path_groups) as f:
 			reader = csv.reader(f, delimiter=';')
@@ -122,32 +122,53 @@ class Mig(models.Model):
 					csv_data.append([{
 						'id_group' : row[0],
 						'group_name' : row[1].strip(),
+
+						'zipcode' : row[16],
+						'street' : row[17],
+						'street_number' : row[18],
+						'addr_obs' : row[19],
+						'neigh' : row[20],
+						'city' : row[21],
+						'state' : row[22],
+
 					}])
 
 					ids_added.append(row[0])					
 
 		#Add to the Group/Cells Model
+		iters = 0
 		for item in csv_data:
 
-			extra = dict()
+			if iters > 0:
+				extra = dict()
 
-			try:
-				Cells().add_cell(
-					mig_id = item[0]['id_group'],
-					name = item[0]['group_name'],
+				try:
+					Cells().add_cell(
+						mig_id = item[0]['id_group'],
+						name = item[0]['group_name'],
 
-					group_origin = '',
-					groups_over = [],
-					groups_under = [],
-					user_roles = [],
+						group_origin = '',
+						groups_over = [],
+						groups_under = [],
+						user_roles = [],
 
-					extra_data = extra,
-				)
+						zipcode = item[0]['zipcode'],
+						street = item[0]['street'],
+						street_number = item[0]['street_number'],
+						addr_obs = item[0]['addr_obs'],
+						neigh = item[0]['neigh'],
+						city = item[0]['city'],
+						state = item[0]['state'],						
 
-				result_msg = 'Sucesso'
-				result_count += 1
-			except Exception as err:
-				result_msg = format(err)
+						extra_data = extra,
+					)
+
+					result_msg = 'Sucesso'
+					result_count += 1
+				except Exception as err:
+					result_msg = format(err)
+			else:
+				iters += 1
 
 
 		return {'result_msg': result_msg, 'result_count' : result_count}

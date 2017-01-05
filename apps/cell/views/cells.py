@@ -167,6 +167,7 @@ def cell_detail(request, group_id, user_apps=''):
 	content = {
 		'group_id':group.id,
 		'group_name':group.name,
+		'group' : group,
 		'group_type':group_type,
 		'groups_over':group.groups_over,
 		'groups_under':group.groups_under,
@@ -178,7 +179,6 @@ def cell_detail(request, group_id, user_apps=''):
 		'visitor_users' : visitor_users,
 		'meetings' : meetings,
 		'users_count': users_count,
-		'group_data':group.extra_data,
 		'cell_id':group_id,
 		'events':events,
 		'User' : user,		

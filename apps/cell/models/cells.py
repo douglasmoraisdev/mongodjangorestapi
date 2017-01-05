@@ -26,7 +26,9 @@ class Cells(Groups):
 			extra_data=extra_data
 		)
 
-	def add_cell(self, mig_id, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
+	def add_cell(self, mig_id, name, group_origin, groups_over, groups_under, 
+		user_roles, zipcode,  street,  street_number,  addr_obs,  neigh,  city,  state, 
+	 	extra_data=None):
 
 		#cell_type_id = Groups_types.objects(code='cell')[0]
 
@@ -38,7 +40,17 @@ class Cells(Groups):
 			groups_over=groups_over,
 			groups_under=groups_under,
 			user_roles = user_roles,
+			
+			zipcode = zipcode,
+			street = street,
+			street_number = street_number,
+			addr_obs = addr_obs,
+			neigh = neigh,
+			city = city,
+			state = state,
+
 			extra_data=extra_data
+
 		)
 
 	'''

@@ -31,31 +31,31 @@ def prover(request,  user_apps=''):
 	result_count_user = res_mig_user['result_count']
 	
 	#Celulas
-	#res_mig_cell = Mig().mig_groups()
+	res_mig_cell = Mig().mig_groups()
 
-	#result_msg_cells = res_mig_cell['result_msg']
-	#result_count_cells = res_mig_cell['result_count']
+	result_msg_cells = res_mig_cell['result_msg']
+	result_count_cells = res_mig_cell['result_count']
 
 
 	#Celulas x Funcoes
-	#res_mig_roles = Mig().mig_groups_roles()
+	res_mig_roles = Mig().mig_groups_roles()
 
-	#result_msg_roles = res_mig_roles['result_msg']
-	#result_count_roles = res_mig_roles['result_count']
+	result_msg_roles = res_mig_roles['result_msg']
+	result_count_roles = res_mig_roles['result_count']
 	
 
 	#Encontros
-	#res_mig_meeting = Mig().mig_metting()
+	res_mig_meeting = Mig().mig_metting()
 
-	#result_msg_mettings = res_mig_meeting['result_msg']
-	#result_count_mettings = res_mig_meeting['result_count']	
+	result_msg_mettings = res_mig_meeting['result_msg']
+	result_count_mettings = res_mig_meeting['result_count']	
 
 
 	#Encontros x Presença
-	#res_mig_meeting_presence = Mig().mig_metting_presence()
+	res_mig_meeting_presence = Mig().mig_metting_presence()
 
-	#result_msg_mettings_presence = res_mig_meeting_presence['result_msg']
-	#result_count_mettings_presence = res_mig_meeting_presence['result_count']	
+	result_msg_mettings_presence = res_mig_meeting_presence['result_msg']
+	result_count_mettings_presence = res_mig_meeting_presence['result_count']	
 	
 
 	template = loader.get_template('prover.html')
@@ -67,14 +67,14 @@ def prover(request,  user_apps=''):
 	content = {
 		'result_msg_user' : result_msg_user,
 		'result_count_user' : result_count_user,
-		#'result_msg_cells' : result_msg_cells,
-		#'result_count_cells' : result_count_cells,
-		#'result_msg_roles' : result_msg_roles,
-		#'result_count_roles' : result_count_roles,
-		#'result_msg_mettings' : result_msg_mettings,
-		#'result_count_mettings' : result_count_mettings,
-		#'result_msg_mettings_presence' : result_msg_mettings_presence,
-		#'result_count_mettings_presence' : result_count_mettings_presence,			
+		'result_msg_cells' : result_msg_cells,
+		'result_count_cells' : result_count_cells,
+		'result_msg_roles' : result_msg_roles,
+		'result_count_roles' : result_count_roles,
+		'result_msg_mettings' : result_msg_mettings,
+		'result_count_mettings' : result_count_mettings,
+		'result_msg_mettings_presence' : result_msg_mettings_presence,
+		'result_count_mettings_presence' : result_count_mettings_presence,			
 		'csv_data': csv_data
 
 	}
