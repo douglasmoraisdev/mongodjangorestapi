@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from rest_framework import routers
+
+from cell.views import *
 
 urlpatterns = [
     url(r'^', include('bethel_core.urls')),
@@ -26,4 +29,15 @@ urlpatterns = [
     url(r'^mig/', include('mig.urls')),
 
     url(r'^admin/', admin.site.urls),
+]
+
+
+#router = routers.DefaultRouter()
+#router.register(r'cells', cells_api.CellsViewSet)
+
+# Wire up our API using automatic URL routing.
+# Additionally, we include login URLs for the browsable API.
+urlpatterns = [
+#    url(r'^', include(cells.urls)),
+#    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

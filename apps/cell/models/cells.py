@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class Cells(Groups):
+	model = 'Cells'
 
 	def add_group(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
 

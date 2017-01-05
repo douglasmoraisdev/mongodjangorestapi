@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-#import os
+import os
 import sys
 
-import os,sys
-virtenv = os.path.expanduser('') + '/home/morais/bethelenv/venv/'
+virtenv = os.path.expanduser('') + '/home/douglas/virtualenvs/bethelenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 try:
    if sys.version.split(' ')[0].split('.')[0] == '3':
