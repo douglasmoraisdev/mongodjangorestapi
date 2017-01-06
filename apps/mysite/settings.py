@@ -42,6 +42,9 @@ INSTALLED_APPS = [
 
     'rest_framework_mongoengine',
     'rest_framework',
+
+    'corsheaders',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,6 +62,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 #    'bethel_core.middleware.auth.BethelAuth'
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -187,6 +192,11 @@ SESSION_COOKIE_NAME = 'abracadabra'
 
 CSRF_COOKIE_HTTPONLY = True
 CSRF_COOKIE_NAME = 'honda_csrf_230'
+
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:81',
+)
 
 
 # Bethelgroups Settings
