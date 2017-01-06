@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class Groups(Document):
-	#model = 'groups'
 	meta = {'allow_inheritance': True}
 
 	mig_id = StringField(max_length=50)	
