@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from rest_framework import routers
+from rest_framework_mongoengine import routers
 
 from cell.views import *
 
+'''
 urlpatterns = [
     url(r'^', include('bethel_core.urls')),
     url(r'^bethel_core/', include('bethel_core.urls')),
@@ -30,14 +31,14 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
 ]
+'''
 
-
-#router = routers.DefaultRouter()
-#router.register(r'cells', cells_api.CellsViewSet)
+router = routers.DefaultRouter()
+router.register(r'cells', cells_api.CellsViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-#    url(r'^', include(cells.urls)),
-#    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

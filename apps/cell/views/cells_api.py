@@ -4,10 +4,10 @@ from cell.serializers import CellSerializer
 from cell.models import *
 
 
-from rest_framework_mongoengine.viewsets import GenericViewSet
+from rest_framework_mongoengine.viewsets import GenericViewSet, ModelViewSet
 
 
-class CellsViewSet(GenericViewSet):
+class CellsViewSet(ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
