@@ -15,6 +15,10 @@ logger = logging.getLogger(__name__)
 
 class Cells(Groups):
 
+	def get_cell_details(cell_id):
+		pass
+
+
 	def add_group(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
 
 		Cells.objects.create(
@@ -65,6 +69,9 @@ class Cells(Groups):
 	'''
 
 	def edit_cell(self, cell_id, name, group_origin, groups_over, groups_under, user_roles=None, extra_data=None):
+
+
+		print(cell_id, name, group_origin, groups_over, groups_under)
 
 
 		Groups.objects.filter(id=cell_id).update(

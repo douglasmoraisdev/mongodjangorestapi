@@ -23,19 +23,19 @@ from user.views import *
 from overview.views import *
 from bethel_core.views import *
 
-'''
+
 urlpatterns = [
-    url(r'^', include('bethel_core.urls')),
-    url(r'^bethel_core/', include('bethel_core.urls')),
-   xurl(r'^celula/', include('cell.urls')),
-   xurl(r'^reuniaocelula/', include('cell_metting.urls')),
-   xurl(r'^usuario/', include('user.urls')),
-   xurl(r'^overview/', include('overview.urls')),
+   url(r'^', include('bethel_core.urls')),
+   url(r'^bethel_core/', include('bethel_core.urls')),
+   url(r'^celula/', include('cell.urls')),
+   url(r'^reuniaocelula/', include('cell_metting.urls')),
+   url(r'^usuario/', include('user.urls')),
+   url(r'^overview/', include('overview.urls')),
     
 
     url(r'^admin/', admin.site.urls),
 ]
-'''
+
 
 router = routers.DefaultRouter()
 
@@ -55,3 +55,4 @@ urlpatterns = [
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+

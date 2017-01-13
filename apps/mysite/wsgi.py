@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.10/howto/deployment/wsgi/
 """
 
 import os,sys
-virtenv = os.path.expanduser('') + '/home/morais/work/bethelgroups/venv/'
+virtenv = os.path.expanduser('') + '/home/douglas/virtualenvs/bethelenv/'
 virtualenv = os.path.join(virtenv, 'bin/activate_this.py')
 try:
    if sys.version.split(' ')[0].split('.')[0] == '3':

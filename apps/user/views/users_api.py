@@ -19,6 +19,6 @@ class UsersViewSet(ModelViewSet):
 
     #Override
     def list(self, request):
-        queryset = Users.objects()
+        queryset = Users.objects().limit(4)
         serializer = UsersSerializer(queryset, many=True)
         return Response(serializer.data)

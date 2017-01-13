@@ -122,8 +122,15 @@ class Mig(models.Model):
 					csv_data.append([{
 						'id_group' : row[0],
 						'group_name' : row[1].strip(),
-						'zip' : row[16],
-						'street' : row[16],						
+
+						'zipcode' : row[16],
+						'street' : row[17],	
+						'street_number' : row[18],
+						'addr_obs' : row[19],
+						'neigh' : row[20],
+						'city' : row[21],
+						'state' : row[22]
+
 					}])
 
 					ids_added.append(row[0])					
@@ -144,6 +151,14 @@ class Mig(models.Model):
 						groups_over = [],
 						groups_under = [],
 						user_roles = [],
+
+						zipcode = item[0]['zipcode'],
+						street = item[0]['street'],
+						street_number = item[0]['street_number'],
+						addr_obs = item[0]['addr_obs'],
+						neigh = item[0]['neigh'],
+						city = item[0]['city'],
+						state = item[0]['state'],
 
 						extra_data = extra,
 					)

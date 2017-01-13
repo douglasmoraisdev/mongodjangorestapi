@@ -1,0 +1,20 @@
+How to initial-data Mongodb
+
+datafile.js:
+db.users.insert({code:"john", name:"john@doe.com"});
+
+
+#./mongo server:27017/dbname --quiet my_commands.js
+mongo betheldb --quiet events_types.js
+
+
+
+How to Backup-Restore
+
+- At root path bethel_groups!!
+
+dump
+mongodump --db=betheldb
+
+restore
+mongorestore --db=betheldb dump/betheldb/

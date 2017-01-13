@@ -39,7 +39,6 @@ class Users(Document):
 	#internal generated
 	geolocation = PointField()
 
-
 	def add_user(self, mig_id, user_name, auth_type, auth_token, first_name, last_name, cpf, 
 		birthday, zipcode, street, street_number, addr_obs, neigh, city, state,
 		profession,
@@ -113,7 +112,7 @@ class Users(Document):
 
 
 class User_roles(EmbeddedDocument):
-	user = ReferenceField(Users)
-	role = ListField(ReferenceField(Roles))
-	task = ListField(ReferenceField(Tasks))
+	user = ReferenceField(Users, dbref=True)
+	role = ListField(ReferenceField(Roles, dbref=True))
+	task = ListField(ReferenceField(Tasks, dbref=True))
 	extra_data = DictField()

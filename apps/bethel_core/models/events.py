@@ -3,20 +3,23 @@ from mongoengine import *
 from bethel_core.models.groups import *
 # Create your models here.
 
-class Events(Document):
+class Events(Document):	
 
-	meta = {'allow_inheritance': True}
+	meta = {'allow_inheritance': True,  'indexes':['mig_id','name']}
 
 	mig_id = StringField(max_length=50)
 	parent_event = ReferenceField("self", reverse_delete_rule = NULLIFY)
 	name = StringField(max_length=50)
-	host = ReferenceField(Groups)
-	groups_in = ListField(ReferenceField(Groups))
-	user_roles = EmbeddedDocumentListField(User_roles)
+	host = ReferenceField(Groups, dbref=True)
+	groups_in = ListField(ReferenceField(Groups, dbref=True))
+	user_roles = ListField(EmbeddedDocumentField(User_roles))
+	#user_roles = EmbeddedDocumentListField(User_roles)
 	start_date = StringField(max_length=50)
 	end_date = StringField(max_length=50)
 	recorrent = StringField(max_length=1)
 	extra_data = DictField()
+
+
 
 
 	def add_event(self, name,parent_event, user_roles, start_date, end_date, groups_in=[], host='', recorrent='', extra_data=None,  mig_id=''):

@@ -18,10 +18,11 @@ class CellsViewSet(ModelViewSet):
     """
     queryset = Cells.objects.all()
     serializer_class = CellSerializer    
+    depth = 5
 
 
     #Override
     def list(self, request):
         queryset = Cells.objects()
         serializer = CellSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data)    

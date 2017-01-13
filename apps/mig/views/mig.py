@@ -36,7 +36,7 @@ def prover(request,  user_apps=''):
 	result_msg_cells = res_mig_cell['result_msg']
 	result_count_cells = res_mig_cell['result_count']
 
-
+	
 	#Celulas x Funcoes
 	res_mig_roles = Mig().mig_groups_roles()
 

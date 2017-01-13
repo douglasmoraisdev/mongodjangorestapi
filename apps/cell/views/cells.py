@@ -84,7 +84,7 @@ def cell(request, group_id, user_apps=''):
 		'group_type':group_type,
 		'groups_over':group.groups_over,
 		'groups_under':group.groups_under,
-		#'group_origin':group.origin,
+		'group_origin':group.origin,
 		'generated_groups': generated_groups,
 		'leader_users' : leader_users,
 		'host_users' : host_users,
@@ -384,6 +384,8 @@ def cell_edit(request, group_id, user_apps):
 		for members in members_roles:
 			user_roles.append(members)
 
+		if group_origin:
+			group_origin = Groups.objects.get(id=group_origin)
 
 		for gu in groups_down_multiple:			
 			groups_under.append(Groups.objects.get(id=gu))
@@ -404,7 +406,6 @@ def cell_edit(request, group_id, user_apps):
 			'meet_hour' : hours_list,
 			'meet_freq' : meet_freq
 		})		
-
 
 		cell = Cells()
 		cell.edit_cell(
