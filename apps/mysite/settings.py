@@ -59,7 +59,7 @@ MIDDLEWARE_CLASSES =[
 ]
 
 MIDDLEWARE_CLASSES = [
-    'django_pudb.PudbMiddleware',
+    #'django_pudb.PudbMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

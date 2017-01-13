@@ -147,7 +147,7 @@ class Mig(models.Model):
 						mig_id = item[0]['id_group'],
 						name = item[0]['group_name'],
 
-						group_origin = '',
+						group_origin = None,
 						groups_over = [],
 						groups_under = [],
 						user_roles = [],
@@ -286,7 +286,7 @@ class Mig(models.Model):
 					Cell_mettings().add_event(
 						mig_id = id_metting,
 						name = name,
-						parent_event = '',
+						parent_event = None,
 						start_date = data,
 						end_date = '',
 						groups_in = [],

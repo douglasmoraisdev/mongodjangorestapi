@@ -14,9 +14,9 @@ class Groups(Document):
 	mig_id = StringField(max_length=50)	
 	name = StringField(max_length=50)
 	user_roles = EmbeddedDocumentListField(User_roles)
-	origin = ReferenceField("self", reverse_delete_rule = NULLIFY)
-	groups_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
-	groups_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
+	origin = ReferenceField("self", reverse_delete_rule = NULLIFY, dbref=True)
+	groups_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY, dbref=True))
+	groups_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY, dbref=True))
 	extra_data = DictField()
 
 
