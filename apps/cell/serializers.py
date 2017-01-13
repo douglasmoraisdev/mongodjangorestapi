@@ -15,4 +15,4 @@ class CellSerializer(DocumentSerializer):
 	class Meta:
 		model = Cells
 		depth = 1
-		fields = ('id', 'name', 'street', 'street_number', 'user_roles', 'origin')
+		fields = '__all__'

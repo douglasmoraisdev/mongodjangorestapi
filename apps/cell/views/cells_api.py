@@ -23,6 +23,6 @@ class CellsViewSet(ModelViewSet):
 
     #Override
     def list(self, request):
-        queryset = Cells.objects()
+        queryset = self.queryset
         serializer = CellSerializer(queryset, many=True)
         return Response(serializer.data)    

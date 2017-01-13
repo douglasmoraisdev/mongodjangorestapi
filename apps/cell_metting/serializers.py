@@ -13,8 +13,6 @@ from rest_framework.fields import CharField
 
 class CellMettingSerializer(DocumentSerializer):
 	
-	id = CharField(max_length=200)
-	name = CharField(max_length=200)
 	user_roles = UserroleSerializer(User_roles, many=True)
 
 
