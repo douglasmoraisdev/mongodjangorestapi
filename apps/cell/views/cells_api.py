@@ -27,8 +27,3 @@ class CellsViewSet(ModelViewSet):
         serializer = CellSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    #Override
-    def retrieve(self, request, id=None):
-        queryset = Cells.objects(id=id)
-        serializer = CellSerializer(queryset, many=True)
-        return Response(serializer.data)

@@ -5,15 +5,27 @@ from django.conf import settings
 import logging
 from bson.objectid import ObjectId
 
+
 import bethel_core as core
 import mig as migr
 
 import googlemaps
 
+import hashlib
+
 logger = logging.getLogger(__name__)
 
 
 def get_users_geo(usersObj):
+	'''
+		Parse a user_object in a list of agrouped address for google maps
+		if 2 ou more users have the same address they are agrouped
+	'''
+	return 0
+
+
+
+def get_users_geo_old(usersObj):
 	'''
 		Parse a user_object in a list of agrouped address for google maps
 		if 2 ou more users have the same address they are agrouped
@@ -29,7 +41,10 @@ def get_users_geo(usersObj):
 		for usersB in users:
 
 			if (usersA.user.id != usersB.user.id):
-				if (usersB.user.id not in tested_user_id):				
+				if (usersB.user.id not in tested_user_id or True):				
+
+					print('comparing [%s] x [%s]' % (usersA.user.first_name , usersB.user.first_name))
+
 					if (usersA.user.geolocation['coordinates'] == usersB.user.geolocation['coordinates']):
 
 						tested_user_id.append(usersA.user.id)

@@ -13,12 +13,12 @@ class UsersViewSet(ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Users.objects.all()
+    queryset = BUsers.objects.all()
     serializer_class = UsersSerializer    
 
 
     #Override
     def list(self, request):
-        queryset = Users.objects().limit(4)
+        queryset = BUsers.objects().limit(4)
         serializer = UsersSerializer(queryset, many=True)
         return Response(serializer.data)
