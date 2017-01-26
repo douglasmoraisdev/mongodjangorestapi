@@ -8,9 +8,9 @@ from rest_framework.serializers import SerializerMethodField
 
 class CellSerializer(DocumentSerializer):
 
-	user_roles = UserroleSerializer(BUser_roles, many=True)
-	members_count = SerializerMethodField()
-	members_geolocation = SerializerMethodField()
+	user_roles = UserroleSerializer(BUser_roles, many=True, read_only=True)
+	members_count = SerializerMethodField(read_only=True)
+	members_geolocation = SerializerMethodField(read_only=True)
 
 
 	class Meta:
