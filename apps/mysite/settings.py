@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_mongoengine',
     'rest_framework',
 
+    'oauth2_provider',
     'corsheaders',
 
     'django.contrib.admin',
@@ -63,13 +64,14 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 #    'bethel_core.middleware.auth.BethelAuth'
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',    
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -101,6 +103,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.dummy',
         'NAME': '/tmp/apps.sqlite3',
+    }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join('/home/douglas/work/docker/bethelauth/db.sqlite3'),
     }
 }
 
@@ -196,13 +206,14 @@ SESSION_COOKIE_PATH = '/;HttpOnly'
 SESSION_COOKIE_NAME = 'abracadabra'
 
 
-CSRF_COOKIE_HTTPONLY = True
-CSRF_COOKIE_NAME = 'honda_csrf_230'
+#CSRF_COOKIE_HTTPONLY = True
+#CSRF_COOKIE_NAME = 'honda_csrf_230'
 
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:81',
-)
+#CORS_ORIGIN_WHITELIST = (
+#    'localhost:81',
+#)
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Bethelgroups Settings
@@ -214,3 +225,9 @@ LOGIN_URL = BASE_URL+'/login'
 
 #Default 403 template
 FORBIDDEN_PAGE = BASE_URL+'/errou'
+
+
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend'
+)

@@ -9,15 +9,15 @@ from rest_framework_mongoengine.viewsets import GenericViewSet, ModelViewSet, Re
 
 from bethel_core.decorators import *
 
+from oauth2_provider.views.generic import ProtectedResourceView
 
 
-
-class CellsViewSet(ModelViewSet):
+class CellsViewSet(ProtectedResourceView, ModelViewSet):
     """
     API endpoint that allows cells to be viewed or edited.
     """
     queryset = Cells.objects.all()
-    serializer_class = CellSerializer    
+    serializer_class = CellSerializer
     depth = 5
 
 
@@ -26,4 +26,3 @@ class CellsViewSet(ModelViewSet):
         queryset = self.queryset
         serializer = CellSerializer(queryset, many=True)
         return Response(serializer.data)
-
