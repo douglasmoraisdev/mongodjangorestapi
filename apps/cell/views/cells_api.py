@@ -11,6 +11,7 @@ from rest_framework_mongoengine.viewsets import ModelViewSet
 from oauth2_provider.views.generic import ProtectedResourceView
 from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
 
+
 class CellsViewSet(ProtectedResourceView, ModelViewSet):
     """
     API endpoint that allows cells to be viewed or edited.

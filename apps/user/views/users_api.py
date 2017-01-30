@@ -23,7 +23,7 @@ class UsersViewSet(ProtectedResourceView, ModelViewSet):
 
     # OAuth
     permission_classes = [IsAuthenticated, TokenHasReadWriteScope]
-    required_scopes = ['cells']
+    required_scopes = ['users']
 
     #Override
     def list(self, request):
