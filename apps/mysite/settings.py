@@ -109,8 +109,8 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'NAME': os.path.join('/home/douglas/work/docker/bethelauth/db.sqlite3'),
+        'NAME': '/tmp/apps.sqlite3',
+
     }
 }
 
@@ -216,12 +216,15 @@ SESSION_COOKIE_NAME = 'abracadabra'
 CORS_ORIGIN_ALLOW_ALL = True
 
 
+ALLOWED_HOSTS = ['bethel-api-dmsantos.c9users.io']
+
+
 # Bethelgroups Settings
 #Base url WITHOUT end slash "/""
-BASE_URL = 'http://localhost:10'
+BASE_URL = 'http://localhost:333'
 
 #Default Login URL
-LOGIN_URL = BASE_URL+'/login'
+LOGIN_URL = 'https://bethel-api-dmsantos.c9users.io/accounts/login/'
 
 #Default 403 template
 FORBIDDEN_PAGE = BASE_URL+'/errou'
@@ -234,7 +237,7 @@ AUTHENTICATION_BACKENDS = (
 
 OAUTH2_PROVIDER = {
     # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'cells': 'Access to your groups'}
 }
 
 REST_FRAMEWORK = {
