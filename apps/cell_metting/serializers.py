@@ -18,5 +18,5 @@ class CellMettingSerializer(DocumentSerializer):
 
 	class Meta:
 		model = Events
-		fields = ('id', 'name', 'user_roles')
+		fields = ('id', 'host', 'name', 'user_roles', 'start_date', 'end_date', 'txt_obs', 'event_income', 'status_acomplished')
 		depth = 2

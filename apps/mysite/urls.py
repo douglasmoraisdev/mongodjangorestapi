@@ -22,6 +22,7 @@ from cell_metting.views import *
 from user.views import *
 from overview.views import *
 from bethel_core.views import *
+from apigateway.views import *
 
 
 urlpatterns = [
@@ -45,6 +46,9 @@ router.register(r'celula', cells_api.CellsViewSet)
 router.register(r'reuniaocelula', cell_metting_api.CellMettingsViewSet)
 router.register(r'usuario', users_api.UsersViewSet)
 router.register(r'overview', overview_api.OverviewViewSet)
+
+router.register(r'apigateway', apigateway.ApiGatewayViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

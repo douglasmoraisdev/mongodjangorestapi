@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'cell_metting.apps.CellmettingsConfig',    
     'user.apps.UsersConfig',
     'overview.apps.OverviewConfig',
-    'mig.apps.MigConfig',    
+    'mig.apps.MigConfig',
+    'apigateway.apps.ApiGatewayConfig',
 
     'rest_framework_mongoengine',
     'rest_framework',

@@ -32,6 +32,7 @@ class Users(Document):
 	city = StringField(max_length=255)
 	state = StringField(max_length=255)
 
+	phones = ListField(StringField(max_length=10))
 	profession = StringField(max_length=255)
 
 	extra_data = DictField()

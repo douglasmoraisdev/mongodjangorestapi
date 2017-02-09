@@ -14,11 +14,9 @@ class Groups(Document):
 	mig_id = StringField(max_length=50)	
 	name = StringField(max_length=50)
 	user_roles = EmbeddedDocumentListField(User_roles)
-	origin = ReferenceField("self", reverse_delete_rule = NULLIFY, dbref=True)
-	groups_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY, dbref=True))
-	groups_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY, dbref=True))
-	extra_data = DictField()
-
+	origin = ReferenceField("self", reverse_delete_rule = NULLIFY)
+	groups_over = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
+	groups_under = ListField(ReferenceField("self", reverse_delete_rule = NULLIFY))
 
 	zipcode = StringField(max_length=255)
 	street = StringField(max_length=255)
@@ -26,7 +24,15 @@ class Groups(Document):
 	addr_obs = StringField(max_length=255)
 	neigh = StringField(max_length=255)
 	city = StringField(max_length=255)
-	state = StringField(max_length=255)	
+	state = StringField(max_length=255)
+	
+	#implement
+	phones = ListField(StringField(max_length=10))
+	
+	#creation_date
+	#activity_schedule (horarios)
+	
+	extra_data = DictField()	
 
 
 	def add_user_group(self, user_roles, group_id):

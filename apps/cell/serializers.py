@@ -1,10 +1,12 @@
 from .models import Cells
 
-from user.models import BUser_roles
-from user.serializers import UserroleSerializer
 
 from rest_framework_mongoengine.serializers import DocumentSerializer, EmbeddedDocumentSerializer
 from rest_framework.serializers import SerializerMethodField
+
+from user.models import BUser_roles
+from user.serializers import UserroleSerializer
+
 
 class CellSerializer(DocumentSerializer):
 
@@ -16,7 +18,21 @@ class CellSerializer(DocumentSerializer):
 	class Meta:
 		model = Cells
 		depth = 2
-		fields = ('id', 'name', 'user_roles', 'members_count', 'members_geolocation')
+		fields = (  'id', 
+					'name', 
+					'origin', 
+					'user_roles', 
+					'members_count', 
+					'members_geolocation',
+					
+					'zipcode',
+					'street',
+					'street_number',
+					'addr_obs',
+					'neigh',
+					'city',
+					'state',					
+				)
 
 
 	def get_members_count(self, obj):

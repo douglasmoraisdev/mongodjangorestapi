@@ -8,7 +8,7 @@ class UsersSerializer(DocumentSerializer):
 
     class Meta:
         model = BUsers
-        fields = ('user_name', 'first_name', 'city')
+        fields = ('user_name', 'first_name', 'city', 'phones')
 
 class UserroleSerializer(EmbeddedDocumentSerializer):
 

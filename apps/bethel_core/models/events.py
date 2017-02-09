@@ -8,14 +8,24 @@ class Events(Document):
 	meta = {'allow_inheritance': True,  'indexes':['mig_id','name']}
 
 	mig_id = StringField(max_length=50)
+	
 	parent_event = ReferenceField("self", reverse_delete_rule = NULLIFY, dbref=True)
 	name = StringField(max_length=50)
+	
 	host = ReferenceField(Groups, dbref=True)
 	groups_in = ListField(ReferenceField(Groups, dbref=True))
+	
 	user_roles = ListField(EmbeddedDocumentField(User_roles))
+	
 	start_date = StringField(max_length=50)
 	end_date = StringField(max_length=50)
 	recorrent = StringField(max_length=1)
+	status_acomplished = StringField(max_length=20)
+	
+	txt_obs = StringField(max_length=225)
+	
+	event_income = StringField(max_length=5)
+	
 	extra_data = DictField()
 
 

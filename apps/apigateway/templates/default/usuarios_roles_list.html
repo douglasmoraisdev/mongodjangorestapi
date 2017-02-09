@@ -1,0 +1,65 @@
+<div class="row">
+
+    <div class="input-field col s6">
+        <select id="user-group{{ fields_seq }}" name="user-group{{ fields_seq }}">
+              <option value="" disabled selected>Selecione</option>
+              {% for item in Users %}                    
+                <option value="{{ item.id }}">{{ item.first_name }}</option>
+              {% endfor %} 
+
+        </select>
+        <label>Usuário</label>
+    </div>
+
+    <div class="input-field col s6">
+        <select multiple id="group-role{{ fields_seq }}-multiple" name="group-role{{ fields_seq }}-multiple">
+          <option value="" disabled selected>Selecione</option>
+
+              {% for item in Roles %}                    
+                <option value="{{ item.id }}">{{ item.name }}</option>
+              {% endfor %} 
+
+        </select>
+        <label>Função</label>
+
+    </div>
+
+
+
+</div>
+
+
+<!--
+<div id="usuarios-tasks-list-container{{ fields_seq }}">
+
+</div>
+
+<div id="row">
+    <div class="col s12 m12">
+
+        <a onclick="add_user_task('{{ fields_seq }}')" class="waves-effect waves-light btn right">+ Atividade</a>
+
+    </div>
+</div>
+--> 
+
+
+<script>
+        $('select').material_select();
+
+        function add_user_task(field_seq){
+
+          appended = $("<div id='appended'></div>")
+
+          $('#user-list-div').append(appended);
+
+          $(appended).load("usuarios_tasks_list/"+field_seq);
+          
+          $('#usuarios-tasks-list-container'+field_seq).append(appended.show());
+
+        };        
+
+  
+
+
+</script>

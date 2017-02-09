@@ -27,6 +27,7 @@ Todo list for version 1.1 release
 
 celula/
 	Frequencia de reunioes
+	Horarios de reuniões
 
 
 
