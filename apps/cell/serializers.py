@@ -7,13 +7,20 @@ from rest_framework.serializers import SerializerMethodField
 from user.models import BUser_roles
 from user.serializers import UserroleSerializer
 
+from cell_metting.serializers import MettingsofCellSerializer
+from cell_metting.models import Cell_mettings
+
 
 class CellSerializer(DocumentSerializer):
+	'''
+		Cell main data
+	'''
 
 	user_roles = UserroleSerializer(BUser_roles, many=True, read_only=True)
 	members_count = SerializerMethodField(read_only=True)
 	members_geolocation = SerializerMethodField(read_only=True)
-
+	mettings = SerializerMethodField(read_only=True)
+	
 
 	class Meta:
 		model = Cells
@@ -31,7 +38,9 @@ class CellSerializer(DocumentSerializer):
 					'addr_obs',
 					'neigh',
 					'city',
-					'state',					
+					'state',
+					
+					'mettings'
 				)
 
 
@@ -82,3 +91,36 @@ class CellSerializer(DocumentSerializer):
 
 
 		return grouped_coordinates
+
+
+	def get_mettings(self, obj):
+		
+		queryset = Cell_mettings.objects(host=str(obj.id))
+		serializer = MettingsofCellSerializer(queryset, many=True)
+		return serializer.data
+
+
+
+class CellofMettingSerializer(DocumentSerializer):
+	'''
+		Used to display cells data on a cell_metting
+	'''
+
+	user_roles = UserroleSerializer(BUser_roles, many=True, read_only=True)
+	mettings = SerializerMethodField(read_only=True)
+
+	class Meta:
+		model = Cells
+		depth = 2
+		fields = (  'id', 
+					'name', 
+					'user_roles', 
+					
+					'mettings'
+				)
+
+	def get_mettings(self, obj):
+		
+		queryset = Cell_mettings.objects(host=str(obj.id))
+		serializer = MettingsofCellSerializer(queryset, many=True)
+		return serializer.data
