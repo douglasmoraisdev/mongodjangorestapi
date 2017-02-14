@@ -24,7 +24,7 @@ class Events(Document):
 	
 	txt_obs = StringField(max_length=225)
 	
-	event_income = StringField(max_length=5)
+	event_income = StringField(max_length=50)
 	
 	extra_data = DictField()
 

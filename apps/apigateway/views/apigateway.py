@@ -10,11 +10,12 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework_mongoengine.viewsets import ModelViewSet		
 
-from oauth2_provider.views.generic import ProtectedResourceView
-from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
+#from oauth2_provider.views.generic import ProtectedResourceView
+#from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
 
 
-class ApiGatewayViewSet(ProtectedResourceView, ModelViewSet):
+#class ApiGatewayViewSet(ProtectedResourceView, ModelViewSet):
+class ApiGatewayViewSet(ModelViewSet):    
     """
     API endpoint that allows cells to be viewed or edited.
     """
@@ -23,8 +24,8 @@ class ApiGatewayViewSet(ProtectedResourceView, ModelViewSet):
     depth = 5
 
     # OAuth
-    permission_classes = [IsAuthenticated, TokenHasReadWriteScope]
-    required_scopes = ['cells']
+    #permission_classes = [IsAuthenticated, TokenHasReadWriteScope]
+    #required_scopes = ['cells']
 
     def list(self, request):
         

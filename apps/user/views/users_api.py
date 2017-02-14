@@ -8,12 +8,13 @@ from rest_framework.permissions import IsAuthenticated
 
 from rest_framework_mongoengine.viewsets import ModelViewSet
 
-from oauth2_provider.views.generic import ProtectedResourceView
-from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
+#from oauth2_provider.views.generic import ProtectedResourceView
+#from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope
 
 
 
-class UsersViewSet(ProtectedResourceView, ModelViewSet):
+#class UsersViewSet(ProtectedResourceView, ModelViewSet):
+class UsersViewSet(ModelViewSet):    
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -22,8 +23,8 @@ class UsersViewSet(ProtectedResourceView, ModelViewSet):
 
 
     # OAuth
-    permission_classes = [IsAuthenticated, TokenHasReadWriteScope]
-    required_scopes = ['users']
+    #permission_classes = [IsAuthenticated, TokenHasReadWriteScope]
+    #required_scopes = ['users']
 
     #Override
     def list(self, request):

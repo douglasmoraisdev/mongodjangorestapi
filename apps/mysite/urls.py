@@ -47,7 +47,7 @@ router.register(r'reuniaocelula', cell_metting_api.CellMettingsViewSet)
 router.register(r'usuario', users_api.UsersViewSet)
 router.register(r'overview', overview_api.OverviewViewSet)
 
-router.register(r'apigateway', apigateway.ApiGatewayViewSet)
+#router.register(r'apigateway', apigateway.ApiGatewayViewSet)
 
 
 # Wire up our API using automatic URL routing.

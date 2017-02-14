@@ -61,15 +61,14 @@ MIDDLEWARE_CLASSES =[
 ]
 
 MIDDLEWARE_CLASSES = [
-    #'django_pudb.PudbMiddleware',
+    'django_pudb.PudbMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-#    'bethel_core.middleware.auth.BethelAuth'
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'oauth2_provider.middleware.OAuth2TokenMiddleware',    

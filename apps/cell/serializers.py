@@ -7,8 +7,9 @@ from rest_framework.serializers import SerializerMethodField
 from user.models import BUser_roles
 from user.serializers import UserroleSerializer
 
-from cell_metting.serializers import MettingsofCellSerializer
 from cell_metting.models import Cell_mettings
+
+import cell_metting as clm
 
 
 class CellSerializer(DocumentSerializer):
@@ -29,8 +30,8 @@ class CellSerializer(DocumentSerializer):
 					'name', 
 					'origin', 
 					'user_roles', 
-					'members_count', 
-					'members_geolocation',
+					'members_count', #read_only
+					'members_geolocation', #read_only
 					
 					'zipcode',
 					'street',
@@ -40,9 +41,15 @@ class CellSerializer(DocumentSerializer):
 					'city',
 					'state',
 					
-					'mettings'
+					'mettings' #read_only
 				)
+				
 
+	def update(self, instance, validated_data):
+	    #instance.email = validated_data.get('email', instance.email)
+	    instance.name = validated_data.get('name', instance.name)+'balblabal'
+	    print(validated_data)
+	    return instance
 
 	def get_members_count(self, obj):
 		return obj.user_roles.count()
@@ -96,7 +103,7 @@ class CellSerializer(DocumentSerializer):
 	def get_mettings(self, obj):
 		
 		queryset = Cell_mettings.objects(host=str(obj.id))
-		serializer = MettingsofCellSerializer(queryset, many=True)
+		serializer = clm.serializers.MettingsofCellSerializer(queryset, many=True)
 		return serializer.data
 
 
@@ -122,5 +129,5 @@ class CellofMettingSerializer(DocumentSerializer):
 	def get_mettings(self, obj):
 		
 		queryset = Cell_mettings.objects(host=str(obj.id))
-		serializer = MettingsofCellSerializer(queryset, many=True)
+		serializer = clm.serializers.MettingsofCellSerializer(queryset, many=True)
 		return serializer.data
