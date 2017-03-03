@@ -1,1 +1,0 @@
-docker start $1
