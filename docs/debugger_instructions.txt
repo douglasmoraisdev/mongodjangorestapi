@@ -1,0 +1,9 @@
+Trace a line>
+from pudb import set_trace; set_trace()
+
+
+Add to settings.py
+MIDDLEWARE_CLASSES = [
+	...
+    'django_pudb.PudbMiddleware',
+    ...

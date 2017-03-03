@@ -1,0 +1,113 @@
+Todo list for version 1.2 release
+
+Relatorios:
+	Overview:
+		
+		Usuarios (Total/Por Tipo/Por Genero/Por Idade)
+		Grupos (Total/Por Tipo)
+		Reuniões de Célula (Total)
+		Cursos (Total)
+
+		Filtros(por campos) / Campos a Exibir por entidade
+
+		Gerar PDF e CSV
+
+		Funções
+
+		Multiplicação por Celula/Setor
+		Presença por Celula/Setor
+		Lideres por Celula/Setor
+
+
+
+! Guaiba está hardcoded na geolocalizacao default (core/utils.py/getgeolocation default_no_found)
+
+Todo list for version 1.1 release
+
+
+celula/
+	Frequencia de reunioes
+
+
+
+Todo list for version 1.0 release
+
+
+geral
+	Modal Buscar Servo 
+		OK---- melhor posicao componentes
+		OK---- botao cancelar
+		OK---- Nome completo
+		OK---- Foto dos usuarios
+		OK---- filtro de Roles
+		OK---- validacao
+
+
+login
+	 OK---- layout
+
+
+celula/
+	OK---- Google Maps, div "clicar para carregar mapa"
+	OK---- Google Maps, target _blank lupa usuarios
+	OK---- Contagem de membros
+
+
+celula/novo
+	OK---- Estado checkbox
+
+
+reuniaocelula
+	OK---- participantes, foto letter avatar funcionando
+
+
+reuniaocelula/novo
+	OK---- preenchimento predefinido de servos 
+	* TODO: BUG ao adicionar um servo e remover a presença de outro a lista roles/user_ids fica descompassada. 
+		Reproduzir: 
+			Crie um metting de uma group de 2 servants
+			Desmarque o segundo e adicionem um terceiro
+			Resultado: O terceiro ficará com o role do segundo
+	OK---- preenchimento predefinido de membros (somente do grupo)
+
+
+reuniaocelula/editar
+	OK---- preenchimento predefinido de servos 
+	OK---- preenchimento predefinido de membros (somente do grupo)	
+
+
+disciplina/novo
+	validação data inicio e final do curso
+	OK---- retirar "recorrente" e "grupo organizador"
+	OK---- preenchimento predefinido de servos
+	OK---- preenchimento predefinido de membros (somente do curso)
+
+
+curso
+	Campos do detalhamento
+
+
+disciplina
+	Campos do detalhamento
+	Arquivos
+
+
+
+MINOR
+
+curso/novo
+	Preenchimento automatico de servos e membros quando Grupo Organizador é preenchimento
+
+
+celula/novo
+	Validacao JS Horarios
+
+
+login
+	cor de fundo e logo
+
+myprofile
+
+
+NEW
+	Busca

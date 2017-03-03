@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"betheldb.groups"},{"v":1,"key":{"_cls":1},"name":"_cls_1","ns":"betheldb.groups","background":false}]}
