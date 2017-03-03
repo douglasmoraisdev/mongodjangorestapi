@@ -42,34 +42,20 @@ class CellMettingSerializer(DocumentSerializer):
 	
 	def update(self, instance, validated_data, data=None):
 
-		#host = Cells.objects.get(id=ObjectId(validated_data.get('host')))
+		#Alternative method
+		#Cell_mettings.objects.filter(id=instance.id).update(**validated_data)
+		#return Cell_mettings.objects.get(id=instance.id)
 		
-		#instance.name = validated_data.get('name', instance.name)
-		#instance.event_income = validated_data.get('event_income', instance.event_income)
-		#instance.txt_obs = validated_data.get('txt_obs', instance.txt_obs)
-		#instance.host = validated_data.get('host', instance.host)
+		instance.modify(**validated_data)
 		
-		#from pudb import set_trace; set_trace()
-		
-		#instance.name = validated_data.get('name', instance.name)		
-		#instance.save()
-		
-		Cell_mettings.objects.filter(id=instance.id).update(**validated_data)
-		#return instance
-		return Cell_mettings.objects.get(id=instance.id)
+		return self.data
 		
 	def create(self, validated_data):
-	
-		#from pudb import set_trace; set_trace()
-		
-		
-	
+
 		instance = Cell_mettings.objects.create(**validated_data)
 		
-		#instance.name = validated_data.get('name', instance.name)
-
-		#instance.save()
-		return instance		
+		#return instance		
+		return instance
 
 		
 	def get_cell(self, obj):
@@ -77,7 +63,7 @@ class CellMettingSerializer(DocumentSerializer):
 		if obj.host:
 			queryset = Cells.objects(id=obj.host.id)
 			serializer = CellofMettingSerializer(queryset, many=True)
-			return serializer.data		
+			return serializer.data
 
 
 class MettingsofCellSerializer(DocumentSerializer):

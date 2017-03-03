@@ -31,22 +31,8 @@ class CellMettingsViewSet(ModelViewSet):
 	def update(self, request, pk=None, id=None):
 		
 		instance = self.get_object()
-		serializer = self.serializer_class(instance, data=request.data, partial=False)
+		serializer = self.serializer_class(instance, data=request.data, partial=True)
 		serializer.is_valid(raise_exception=True)
 		serializer.save()
 		
 		return Response(serializer.data)
-
-
-	'''
-	def create(self, request, *args, **kwargs):
-		
-		instance = self.get_queryset()
-		serializer = self.serializer_class(instance, data=request.data, partial=False)
-		serializer.is_valid(raise_exception=True)
-		serializer.create(**validated_data)
-		
-		return Response(200)
-		
-		#return Response(serializer.data)		
-	'''
