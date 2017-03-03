@@ -1,0 +1,33 @@
+<div class="input-field col s6 l6">
+    <select id="group-days-multiple-{{ day_seq }}" type="text" name="group-days-multiple-{{ day_seq }}" class="validate" data-rule-required="true" multiple>
+        <option value="seg" selected>Segunda-feira</option>
+        <option value="ter">Terça-feira</option>
+        <option value="qua">Quarta-feira</option>
+        <option value="qui">Quinta-feira</option>
+        <option value="sex">Sexta-feira</option>
+        <option value="sab">Sábado</option>
+        <option value="dom">Domingo</option>
+    </select>
+        <label for="group-days-multiple-{{ day_seq }}">Dia:</label>        
+</div>
+
+
+<div class="input-field col s6 l6">
+    <input id="group-hours-{{ day_seq }}" name="group-hours-{{ day_seq }}" type="time" class="timepicker validate" data-rule-required="true" data-rule-minlength="5" >
+    <label for="group-hours-{{ day_seq }}">Horario:</label>
+</div>
+
+<script>
+    $('select').material_select();
+
+    //Time Picker:
+    $('.timepicker').pickatime({
+        default: 'now',
+        twelvehour: false, // change to 12 hour AM/PM clock from 24 hour
+        donetext: 'OK',
+      autoclose: false,
+      vibrate: true // vibrate the device when dragging clock hand
+    });
+
+
+</script>

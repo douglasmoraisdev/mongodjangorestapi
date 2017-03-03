@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class CellsConfig(AppConfig):
+class GroupsConfig(AppConfig):
     name = 'cell'

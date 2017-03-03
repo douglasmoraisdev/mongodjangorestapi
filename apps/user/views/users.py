@@ -10,7 +10,7 @@ import time
 import os
 import binascii
 
-from bethel_core.models import *
+from core.models import *
 
 
 def user(request, user_id):
@@ -22,8 +22,8 @@ def user(request, user_id):
 	user = Users()
 	user = user.get_user_by_id(user_id)
 
-	groups = Groups()
-	groups = groups.get_user_groups(user_id)
+	cells = Groups()
+	cells = cells.get_user_cells(user_id)
 
 	events = Events()
 	events = events.get_user_events(user_id)
@@ -36,7 +36,7 @@ def user(request, user_id):
 
 	content = {
 		'User':user,
-		'Groups':groups,
+		'Groups':cells,
 		'Events':events,
 		'Courses':courses,
 		'member_maps' : [user]
@@ -257,9 +257,9 @@ def add_member_list_save(request):
 
 	# Save on database
 
-	if (doc_type == 'group'):
+	if (doc_type == 'cell'):
 		user_add = Groups()
-		user_add.add_user_group(user_role, doc_id)
+		user_add.add_user_cell(user_role, doc_id)
 	elif (doc_type == 'event'):
 		user_add = Events()
 		user_add.add_user_event(user_role, doc_id)
@@ -274,7 +274,7 @@ def add_member_list_save(request):
 		'roles_ids': roles_ids,
 	}	
 
-	if (doc_type == 'group'):
+	if (doc_type == 'cell'):
 		template = loader.get_template('user_modals/member_item_list_add_save.html')
 
 	elif (doc_type == 'event'):
@@ -302,9 +302,9 @@ def remove_member_list_save(request):
 
 	# Remove from database
 
-	if (doc_type == 'group'):
+	if (doc_type == 'cell'):
 		user_add = Groups()
-		user_add.remove_user_group(user_role, doc_id)
+		user_add.remove_user_cell(user_role, doc_id)
 	if (doc_type == 'event'):
 		user_add = Events()
 		user_add.remove_user_event(user_role, doc_id)		
@@ -315,12 +315,12 @@ def remove_member_list_save(request):
 
 
 #ajax
-def day_group_hmtl_frag(request):
+def day_cell_hmtl_frag(request):
 
 	content = {
 		'day_seq' : binascii.hexlify(os.urandom(4))
 	}	
 
-	template = loader.get_template('default/add_group_day_frag.html')
+	template = loader.get_template('default/add_cell_day_frag.html')
 
 	return HttpResponse(template.render(content,request))		

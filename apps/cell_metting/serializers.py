@@ -1,6 +1,6 @@
 from .models import Cell_mettings
 
-from bethel_core.models import Events, Users, User_roles
+from core.models import Events, Users, User_roles
 from user.serializers import UserroleSerializer
 
 from rest_framework_mongoengine.serializers import *

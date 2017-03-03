@@ -236,7 +236,7 @@ window.onload = function(){
 
 function updateGroupChart(){
 
-    if ($('#group-chart').prop('checked')){
+    if ($('#cell-chart').prop('checked')){
         window.trendingLineChart.destroy();
         var trendingLineChart = document.getElementById("trending-line-chart").getContext("2d");        
         window.trendingLineChart = new Chart(trendingLineChart).Line(window.dataLine2, window.optionsLine);

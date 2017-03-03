@@ -52,7 +52,7 @@
         <!-- end header nav-->
 
 
-<form id="form_logout" action="/bethel_core/logout" method="POST">
+<form id="form_logout" action="/core/logout" method="POST">
     {% csrf_token %}
     <input type="hidden" name='action' value="logout" />
 </form>

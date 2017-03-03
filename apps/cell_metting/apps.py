@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class CellmettingsConfig(AppConfig):
+class GroupmettingsConfig(AppConfig):
     name = 'cell_metting'

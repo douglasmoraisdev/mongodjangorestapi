@@ -2,7 +2,7 @@ from .models import *
 
 from rest_framework_mongoengine.serializers import DocumentSerializer, EmbeddedDocumentSerializer
 
-from bethel_core.serializers import RoleSerializer
+from core.serializers import RoleSerializer
 
 class UsersSerializer(DocumentSerializer):
 

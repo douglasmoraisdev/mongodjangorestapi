@@ -86,33 +86,33 @@
                                                         </li>
 
                                                         <li class="collection-item">
-                                                            <div>CPF: {{ group_data.addr_zip }}
+                                                            <div>CPF: {{ cell_data.addr_zip }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
-                                                            <div>Data de Nascimento: {{ group_data.addr_state }}
+                                                            <div>Data de Nascimento: {{ cell_data.addr_state }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
-                                                            <div>Sexo: {{ group_data.addr_city }}
+                                                            <div>Sexo: {{ cell_data.addr_city }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
-                                                            <div>Telefone: {{ group_data.addr_neigh }}
+                                                            <div>Telefone: {{ cell_data.addr_neigh }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
-                                                            <div>Email: {{ group_data.addr_street }}
+                                                            <div>Email: {{ cell_data.addr_street }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
@@ -127,39 +127,39 @@
                                                         </li>
 
                                                         <li class="collection-item">
-                                                            <div>CEP: {{ group_data.addr_zip }}
+                                                            <div>CEP: {{ cell_data.addr_zip }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
-                                                            <div>Estado: {{ group_data.addr_state }}
+                                                            <div>Estado: {{ cell_data.addr_state }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
 
                                                         <li class="collection-item">
-                                                            <div>Cidade: {{ group_data.addr_city }}
+                                                            <div>Cidade: {{ cell_data.addr_city }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
-                                                            <div>Bairro: {{ group_data.addr_neigh }}
+                                                            <div>Bairro: {{ cell_data.addr_neigh }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
-                                                            <div>Logradouro: {{ group_data.addr_street }}
+                                                            <div>Logradouro: {{ cell_data.addr_street }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
 
                                                         <li class="collection-item">
-                                                            <div>Nro/Complemento: {{ group_data.addr_street_number }}
+                                                            <div>Nro/Complemento: {{ cell_data.addr_street_number }}
                                                                 <a href="{{ base_url }}/usuario/get/{{ list.user.id }}" class="secondary-content"></a>
                                                             </div>
                                                         </li>
@@ -171,7 +171,7 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="/bethel_core/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
+                                                    <a href="/core/celula/editar/{{ cell_id }}/"  class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons">edit</i></a>
                                                     <a class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">delete</i></a>
 
                                                 </div>
@@ -205,7 +205,7 @@
 
                                     <div class="row">
                                         <div class="col s12 m12 l12">
-                                            <div id="groups" class="card scrollspy">
+                                            <div id="cells" class="card scrollspy">
                                                 <div class="card-content">
 
                                                     <span class="card-title">Grupos</span>
@@ -225,7 +225,7 @@
 
                                                 <div class="card-action">
 
-                                                    <a href="{{ base_url }}/reuniaocelula/novo/{{ group_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
+                                                    <a href="{{ base_url }}/reuniaocelula/novo/{{ cell_id }}/" class="btn-floating btn-move-up waves-effect orange darken-5 right"><i class="material-icons activator">add</i></a>
 
                                                 </div>
 
@@ -278,7 +278,7 @@
                               <ul class="section table-of-contents">
                                 <li><a class="white-text" href="#user">Usuario</a></li>
                                 <li><a class="white-text" href="#geo-member">Geolocalizaçao</a></li>
-                                <li><a class="white-text" href="#groups">Grupos</a></li>
+                                <li><a class="white-text" href="#cells">Grupos</a></li>
                                 <li><a class="white-text" href="#mettings">Reuniões</a></li>
                               </ul>
                             </div>

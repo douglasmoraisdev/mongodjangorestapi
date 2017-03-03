@@ -1,9 +1,9 @@
 from django.db import models
 from mongoengine import *
-from bethel_core.models.roles import *
-from bethel_core.models.tasks import *
-from bethel_core.models.users import *
-from bethel_core.models.roles import *
+from core.models.roles import *
+from core.models.tasks import *
+from core.models.users import *
+from core.models.roles import *
 
 
 
@@ -102,7 +102,7 @@ class Mig(models.Model):
 		return {'result_msg': result_msg, 'result_count' : result_count}
 
 
-	def mig_groups(self):
+	def mig_cells(self):
 
 		result_msg = ''
 		result_count = 0
@@ -110,9 +110,9 @@ class Mig(models.Model):
 
 		csv_data = []
 
-		cvs_path_groups = 'mig/static/upload/grupos.csv'
+		cvs_path_cells = 'mig/static/upload/grupos.csv'
 
-		with open(cvs_path_groups) as f:
+		with open(cvs_path_cells) as f:
 			reader = csv.reader(f, delimiter=';')
 
 			for row in reader:
@@ -120,8 +120,8 @@ class Mig(models.Model):
 				if row[0] not in ids_added:
 
 					csv_data.append([{
-						'id_group' : row[0],
-						'group_name' : row[1].strip(),
+						'id_cell' : row[0],
+						'cell_name' : row[1].strip(),
 
 						'zipcode' : row[16],
 						'street' : row[17],	
@@ -144,12 +144,12 @@ class Mig(models.Model):
 
 				try:
 					Cells().add_cell(
-						mig_id = item[0]['id_group'],
-						name = item[0]['group_name'],
+						mig_id = item[0]['id_cell'],
+						name = item[0]['cell_name'],
 
-						group_origin = None,
-						groups_over = [],
-						groups_under = [],
+						cell_origin = None,
+						cells_over = [],
+						cells_under = [],
 						user_roles = [],
 
 						zipcode = item[0]['zipcode'],
@@ -174,22 +174,22 @@ class Mig(models.Model):
 		return {'result_msg': result_msg, 'result_count' : result_count}
 
 
-	def mig_groups_roles(self):
+	def mig_cells_roles(self):
 
 		result_msg = ''
 		result_count = 0
 
 		csv_data = []
 
-		cvs_path_groups = 'mig/static/upload/grupos_x_participantes.csv'
+		cvs_path_cells = 'mig/static/upload/grupos_x_participantes.csv'
 
-		with open(cvs_path_groups) as f:
+		with open(cvs_path_cells) as f:
 			reader = csv.reader(f, delimiter=';')
 
 			for row in reader:
 
 				csv_data.append([{
-					'id_group' : row[0],
+					'id_cell' : row[0],
 					'id_user' : row[2],
 					'role' : row[4]
 				}])
@@ -202,7 +202,7 @@ class Mig(models.Model):
 				user_rls = []
 
 				id_user = item[0]['id_user']
-				id_group = item[0]['id_group']
+				id_cell = item[0]['id_cell']
 				role = item[0]['role']
 
 				user_obj = Users.objects.get(mig_id=id_user)
@@ -218,7 +218,7 @@ class Mig(models.Model):
 
 				try:
 
-					Cells.objects.filter(mig_id = id_group).update(
+					Cells.objects.filter(mig_id = id_cell).update(
 						add_to_set__user_roles = user_rls
 					)
 
@@ -242,9 +242,9 @@ class Mig(models.Model):
 
 		csv_data = []
 
-		cvs_path_groups = 'mig/static/upload/grupos_x_encontro_precenca_participantes.csv'
+		cvs_path_cells = 'mig/static/upload/grupos_x_encontro_precenca_participantes.csv'
 
-		with open(cvs_path_groups) as f:
+		with open(cvs_path_cells) as f:
 			reader = csv.reader(f, delimiter=',')
 
 			for row in reader:
@@ -252,7 +252,7 @@ class Mig(models.Model):
 				if row[2] not in ids_added:
 
 					csv_data.append([{
-						'id_group' : row[0],
+						'id_cell' : row[0],
 						'id_metting' : row[2],
 						'name' : row[3],
 						'data' : row[4],
@@ -272,7 +272,7 @@ class Mig(models.Model):
 
 				extra = dict()
 
-				id_group = item[0]['id_group']
+				id_cell = item[0]['id_cell']
 				id_metting = item[0]['id_metting']
 				name = item[0]['name']
 				data = item[0]['data']
@@ -280,7 +280,7 @@ class Mig(models.Model):
 				role = item[0]['role']
 				presence = item[0]['presence']
 
-				group_obj = Cells.objects.get(mig_id=id_group)
+				cell_obj = Cells.objects.get(mig_id=id_cell)
 
 				try:
 					Cell_mettings().add_event(
@@ -289,8 +289,8 @@ class Mig(models.Model):
 						parent_event = None,
 						start_date = data,
 						end_date = '',
-						groups_in = [],
-						host = group_obj,
+						cells_in = [],
+						host = cell_obj,
 						recorrent = '',
 						user_roles = [],
 						extra_data = extra,
@@ -315,15 +315,15 @@ class Mig(models.Model):
 
 		csv_data = []
 
-		cvs_path_groups = 'mig/static/upload/grupos_x_encontro_precenca_participantes.csv'
+		cvs_path_cells = 'mig/static/upload/grupos_x_encontro_precenca_participantes.csv'
 
-		with open(cvs_path_groups) as f:
+		with open(cvs_path_cells) as f:
 			reader = csv.reader(f, delimiter=',')
 
 			for row in reader:
 
 				csv_data.append([{
-					'id_group' : row[0],
+					'id_cell' : row[0],
 					'id_metting' : row[2],
 					'id_user' : row[5],
 					'role' : row[7],
@@ -340,7 +340,7 @@ class Mig(models.Model):
 
 				extra = dict()
 
-				id_group = item[0]['id_group']
+				id_cell = item[0]['id_cell']
 				id_metting = item[0]['id_metting']
 				id_user = item[0]['id_user']
 				role = item[0]['role']

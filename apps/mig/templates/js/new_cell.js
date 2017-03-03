@@ -70,9 +70,9 @@ $(document).ready(function () {
 });
 
 
-function add_day_group(){
+function add_day_cell(){
 
-    $.get( "day_group_hmtl_frag", function( data ) {
+    $.get( "day_cell_hmtl_frag", function( data ) {
       $( "#days_list" ).append( data );
 
     });          

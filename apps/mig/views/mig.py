@@ -3,7 +3,7 @@ from django.template import loader
 from django.http import HttpResponseForbidden
 from bson.objectid import ObjectId
 from django.urls import reverse
-from bethel_core import utils
+from core import utils
 
 from django.utils.translation import *
 
@@ -14,7 +14,7 @@ import uuid
 import googlemaps
 
 
-from bethel_core.decorators import *
+from core.decorators import *
 
 import logging
 
@@ -31,14 +31,14 @@ def prover(request,  user_apps=''):
 	result_count_user = res_mig_user['result_count']
 	
 	#Celulas
-	res_mig_cell = Mig().mig_groups()
+	res_mig_cell = Mig().mig_cells()
 
 	result_msg_cells = res_mig_cell['result_msg']
 	result_count_cells = res_mig_cell['result_count']
 
 	
 	#Celulas x Funcoes
-	res_mig_roles = Mig().mig_groups_roles()
+	res_mig_roles = Mig().mig_cells_roles()
 
 	result_msg_roles = res_mig_roles['result_msg']
 	result_count_roles = res_mig_roles['result_count']

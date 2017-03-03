@@ -1,8 +1,8 @@
 from django.db import models
 from mongoengine import *
-from bethel_core.models.roles import *
-from bethel_core.models.tasks import *
-from bethel_core.models.users import *
+from core.models.roles import *
+from core.models.tasks import *
+from core.models.users import *
 
 
 import logging

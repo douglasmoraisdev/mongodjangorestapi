@@ -35,13 +35,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'bethel_core.apps.BethelcoreConfig',
-    'cell.apps.CellsConfig',
-    'cell_metting.apps.CellmettingsConfig',    
+    'core.apps.CoreConfig',
+    'cell.apps.GroupsConfig',
+    'cell_metting.apps.GroupmettingsConfig',   
     'user.apps.UsersConfig',
-    'overview.apps.OverviewConfig',
     'mig.apps.MigConfig',
-    'apigateway.apps.ApiGatewayConfig',
 
     'rest_framework_mongoengine',
     'rest_framework',
@@ -87,7 +85,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'bethel_core.context_processors.my_context',
+                'core.context_processors.my_context',
             ],
         },
     },
@@ -142,7 +140,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': 'bethel_core/log/debug.log',
+            'filename': 'core/log/debug.log',
         },
     },
     'loggers': {
@@ -216,10 +214,10 @@ SESSION_COOKIE_NAME = 'abracadabra'
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-ALLOWED_HOSTS = ['bethel-api-dmsantos.c9users.io']
+ALLOWED_HOSTS = ['mongodjango-api-dmsantos.c9users.io']
 
 
-# Bethelgroups Settings
+# Bethelcells Settings
 #Base url WITHOUT end slash "/""
 BASE_URL = 'http://localhost:333'
 
@@ -237,7 +235,7 @@ AUTHENTICATION_BACKENDS = (
 
 OAUTH2_PROVIDER = {
     # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'cells': 'Access to your groups'}
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'cells': 'Access to your cells'}
 }
 
 REST_FRAMEWORK = {

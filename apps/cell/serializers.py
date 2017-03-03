@@ -47,7 +47,7 @@ class CellSerializer(DocumentSerializer):
 
 	def update(self, instance, validated_data):
 	    #instance.email = validated_data.get('email', instance.email)
-	    instance.name = validated_data.get('name', instance.name)+'balblabal'
+	    instance.name = validated_data.get('name', instance.name)
 	    print(validated_data)
 	    return instance
 
@@ -61,8 +61,8 @@ class CellSerializer(DocumentSerializer):
 		member_maps = []
 		maps_dict	= dict()		
 
-		grouped_coordinates = []
-		grouped_dict = dict()
+		celled_coordinates = []
+		celled_dict = dict()
 
 		user_info_dict = dict()
 
@@ -81,7 +81,7 @@ class CellSerializer(DocumentSerializer):
 		gen_coordinates_ids = list(set(gen_coordinates_ids))
 		
 		for item in gen_coordinates_ids:
-			grouped_dict = {item : []}
+			celled_dict = {item : []}
 
 			for value in member_maps:
 				if list(value)[0] == item:
@@ -92,12 +92,12 @@ class CellSerializer(DocumentSerializer):
 						'last_name' : value[item][0].user.last_name,
 					}
 
-					grouped_dict[item].append(user_info_dict)
+					celled_dict[item].append(user_info_dict)
 		
-			grouped_coordinates.append(grouped_dict)
+			celled_coordinates.append(celled_dict)
 
 
-		return grouped_coordinates
+		return celled_coordinates
 
 
 	def get_mettings(self, obj):

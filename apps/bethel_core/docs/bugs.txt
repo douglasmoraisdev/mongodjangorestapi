@@ -1,3 +1,0 @@
-bugs.txt
-
-- Tendo mais de 2 usuarios em um mesmo endereço (geolocalização) os markers e lista de usuarios no endereço não são exibidos corretament

@@ -16,8 +16,8 @@ $('#member-modal-trigger').leanModal({
 
         user_selected = $('#member_searched_selected').val();
         roles_selectec = $('#member_role_selected').val();
-        group = 'group'
-        group_id = '{{ group_id }}'
+        cell = 'cell'
+        cell_id = '{{ cell_id }}'
 
         $('#loader-member-cell-added').show();
 
@@ -25,7 +25,7 @@ $('#member-modal-trigger').leanModal({
             method: "GET",
             dataType: "html",
             url: "{{ base_url }}/add_member_list_save",
-            data: { userid: user_selected, rolesid: roles_selectec, origin: group, origin_id: group_id}
+            data: { userid: user_selected, rolesid: roles_selectec, origin: cell, origin_id: cell_id}
             })
             .fail(function( ){
                 $('#loader-member-cell-added').hide();
@@ -43,9 +43,9 @@ $('#member-modal-trigger').leanModal({
 
 
 
-function add_day_group(){
+function add_day_cell(){
 
-    $.get( "day_group_hmtl_frag", function( data ) {
+    $.get( "day_cell_hmtl_frag", function( data ) {
       $( "#days_list" ).append( data );
 
     });          
@@ -61,8 +61,8 @@ function remove_user(list_id){
 function remove_user_save(user_id){
 
     user_selected = user_id;
-    group = 'group'
-    group_id = '{{ group_id }}'
+    cell = 'cell'
+    cell_id = '{{ cell_id }}'
 
     $('#loader-member-cell-added').show();                    
 
@@ -70,7 +70,7 @@ function remove_user_save(user_id){
         method: "GET",
         dataType: "html",
         url: "{{ base_url }}/remove_member_list_save",
-        data: { userid: user_selected, origin: group, origin_id: group_id}
+        data: { userid: user_selected, origin: cell, origin_id: cell_id}
         })
         .fail(function( ){
             $('#loader-member-cell-added').hide();

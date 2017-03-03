@@ -70,7 +70,7 @@
 
 
                                                         <div class="input-field col s12 l6">
-                                                            <select id="group-origin" name="group-origin">
+                                                            <select id="cell-origin" name="cell-origin">
                                                                 <option value="" disabled selected>Selecione</option>
                                                                 {% for item in Groups %}   
                                                                 <option value="{{ item.id }}">{{ item.name }}</option>
@@ -81,7 +81,7 @@
 
 
                                                         <div class="input-field col s12 l12">
-                                                        <select multiple id="groups-up-multiple" name="groups-up-multiple">
+                                                        <select multiple id="cells-up-multiple" name="cells-up-multiple">
                                                           <option value="" disabled selected>Selecione</option>
                                                               {% for item in Groups %}   
                                                                 <option value="{{ item.id }}">{{ item.name }}</option>
@@ -92,7 +92,7 @@
 
 
                                                         <div class="input-field col s12 l12">
-                                                        <select multiple id="groups-down-multiple" name="groups-down-multiple">
+                                                        <select multiple id="cells-down-multiple" name="cells-down-multiple">
                                                           <option value="" disabled selected>Selecione</option>
                                                               {% for item in Groups %}   
                                                                 <option value="{{ item.id }}">{{ item.name }}</option>
@@ -204,7 +204,7 @@
                                                     <div id="row">
                                                         <div class="col s12 m12">
 
-                                                            <a onclick="add_day_group()" class="waves-effect waves-light btn right">+ Horário</a>
+                                                            <a onclick="add_day_cell()" class="waves-effect waves-light btn right">+ Horário</a>
 
                                                         </div>
                                                     </div>                                                    

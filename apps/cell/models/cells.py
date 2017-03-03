@@ -3,9 +3,9 @@ from mongoengine import *
 from collections import Counter
 
 
-from bethel_core.models.groups import *
-from bethel_core.models.users import *
-from bethel_core.models.roles import *
+from core.models.groups import *
+from core.models.users import *
+from core.models.roles import *
 from cell_metting.models import *
 
 import logging
@@ -15,20 +15,20 @@ logger = logging.getLogger(__name__)
 
 class Cells(Groups):
 
-	def add_group(self, name, group_origin, groups_over, groups_under, user_roles, extra_data=None):
+	def add_cell(self, name, cell_origin, cells_over, cells_under, user_roles, extra_data=None):
 
 		Cells.objects.create(
 			name=name,
-			origin=group_origin,
-			groups_over=groups_over,
-			groups_under=groups_under,
+			origin=cell_origin,
+			cells_over=cells_over,
+			cells_under=cells_under,
 			user_roles = user_roles,
 			extra_data=extra_data
 		)
 
 
 
-	def add_cell(self, mig_id, name, group_origin, groups_over, groups_under, 
+	def add_cell(self, mig_id, name, cell_origin, cells_over, cells_under, 
 		user_roles, zipcode,  street,  street_number,  addr_obs,  neigh,  city,  state, 
 	 	extra_data=None):
 
@@ -37,10 +37,10 @@ class Cells(Groups):
 		Cells.objects.create(
 			mig_id = mig_id,
 			name=name,
-			#group_type=cell_type_id,
-			origin=group_origin,
-			groups_over=groups_over,
-			groups_under=groups_under,
+			#cell_type=cell_type_id,
+			origin=cell_origin,
+			cells_over=cells_over,
+			cells_under=cells_under,
 			user_roles = user_roles,
 			
 			zipcode = zipcode,
@@ -58,49 +58,49 @@ class Cells(Groups):
 	'''
 		REMOVE DATA METHODS
 	'''
-	def remove_user_group(self, user, group_id):
+	def remove_user_cell(self, user, cell_id):
 
-		Groups.objects.filter(id=group_id).update(pull__user_roles__user=user[0].user)
+		Groups.objects.filter(id=cell_id).update(pull__user_roles__user=user[0].user)
 
 	'''
 		EDIT DATA METHODS		
 	'''
 
-	def edit_cell(self, cell_id, name, group_origin, groups_over, groups_under, user_roles=None, extra_data=None):
+	def edit_cell(self, cell_id, name, cell_origin, cells_over, cells_under, user_roles=None, extra_data=None):
 
 
 		Groups.objects.filter(id=cell_id).update(
 			name=name,
-			origin=group_origin,
-			groups_over=groups_over,
-			groups_under=groups_under,
+			origin=cell_origin,
+			cells_over=cells_over,
+			cells_under=cells_under,
 			user_roles = user_roles,
 			extra_data=extra_data
 		)
 
 
 
-	def get_groups_over_by_id(self, group_id):
+	def get_cells_over_by_id(self, cell_id):
 
-		return Groups.objects.get(id=group_id)
-
-
-	def get_groups_under_by_id(self, group_id):
-
-		return Groups.objects.get(id=group_id)			
+		return Groups.objects.get(id=cell_id)
 
 
-	def get_group_users(self, group_id, role=None):
+	def get_cells_under_by_id(self, cell_id):
+
+		return Groups.objects.get(id=cell_id)			
+
+
+	def get_cell_users(self, cell_id, role=None):
 		'''
-		returns the user_roles of the groups by id
+		returns the user_roles of the cells by id
 		params:
 		role(optional): get by user role, eg: 'leaders or hosts'
 		'''
 		user_list = []
-		group = Groups.objects.get(id=group_id)
+		cell = Groups.objects.get(id=cell_id)
 
 		if (role != None):
-			for us in group.user_roles:
+			for us in cell.user_roles:
 				for rl in us.role:
 					if rl.code in role:
 						user_list.append(us)
@@ -108,70 +108,70 @@ class Cells(Groups):
 			return user_list
 
 
-		return group.user_roles
+		return cell.user_roles
 
 
-	def get_user_groups(self, user_id):
+	def get_user_cells(self, user_id):
 
-		group = Groups.objects(user_roles__user=user_id)
+		cell = Groups.objects(user_roles__user=user_id)
 
-		return group
+		return cell
 
-	def get_user_groups_by_type(self, user_id='', get_childs=False):
+	def get_user_cells_by_type(self, user_id='', get_childs=False):
 		'''
-			return a list of groups-type separated
+			return a list of cells-type separated
 		'''
 
-		groups_under = []
+		cells_under = []
 
-		# Get user groups
-		groups = Groups.objects(user_roles__user=user_id)
+		# Get user cells
+		cells = Groups.objects(user_roles__user=user_id)
 
-		user_groups = dict()
+		user_cells = dict()
 
-		for key, gtype in enumerate(groups):
+		for key, gtype in enumerate(cells):
 
-			if gtype.group_type.code in user_groups:
-				user_groups[gtype.group_type.code].append(groups[key])
+			if gtype.cell_type.code in user_cells:
+				user_cells[gtype.cell_type.code].append(cells[key])
 			else:
-				user_groups[gtype.group_type.code] = [groups[key]]
+				user_cells[gtype.cell_type.code] = [cells[key]]
 
 
-		# Get groups under (all groups that this group is over) IF get_childs == True
+		# Get cells under (all cells that this cell is over) IF get_childs == True
 		if get_childs:
-			groups_under = Groups.objects(groups_over__in=groups)
+			cells_under = Groups.objects(cells_over__in=cells)
 
-			for key, gtype in enumerate(groups_under):
+			for key, gtype in enumerate(cells_under):
 
-				if gtype.group_type.code in user_groups:
-					user_groups[gtype.group_type.code].append(groups_under[key])
+				if gtype.cell_type.code in user_cells:
+					user_cells[gtype.cell_type.code].append(cells_under[key])
 				else:
-					user_groups[gtype.group_type.code] = [groups_under[key]]				
+					user_cells[gtype.cell_type.code] = [cells_under[key]]				
 
-		return user_groups
+		return user_cells
 
-	def get_user_groups_by_role(self, user_id, role_code):
+	def get_user_cells_by_role(self, user_id, role_code):
 
-		group = Groups.objects(user_roles__user=user_id)
+		cell = Groups.objects(user_roles__user=user_id)
 
-		user_groups = dict()
+		user_cells = dict()
 
-		for key, gtype in enumerate(group):
+		for key, gtype in enumerate(cell):
 
-			if gtype.group_type.code in user_groups:
-				user_groups[gtype.group_type.code].append(group[key])
+			if gtype.cell_type.code in user_cells:
+				user_cells[gtype.cell_type.code].append(cell[key])
 			else:
-				user_groups[gtype.group_type.code] = [group[key]]
+				user_cells[gtype.cell_type.code] = [cell[key]]
 
 
 
-		return user_groups		
+		return user_cells		
 
-	def get_groups_generetad(self, group_id):
+	def get_cells_generetad(self, cell_id):
 
-		groups = Groups.objects(origin=group_id)
+		cells = Groups.objects(origin=cell_id)
 
-		return groups
+		return cells
 
 
 
@@ -179,7 +179,7 @@ class Cells(Groups):
 		REPORT LEVEL DATA
 	'''
 
-	def get_cell_presence_graph(self, group_id):
+	def get_cell_presence_graph(self, cell_id):
 
 		presence_evolution = []
 		key_presence = []
@@ -190,7 +190,7 @@ class Cells(Groups):
 
 		report = dict()
 
-		metting = Cell_mettings.objects(host=group_id).order_by('start_date')
+		metting = Cell_mettings.objects(host=cell_id).order_by('start_date')
 
 		#presence labels by day	
 		for item in metting:
@@ -242,9 +242,9 @@ class Cells(Groups):
 
 		return report
 
-	def get_total_roles(self, group_id):
+	def get_total_roles(self, cell_id):
 
-		cell = Cells.objects.get(id=group_id)
+		cell = Cells.objects.get(id=cell_id)
 
 		report = dict()
 		

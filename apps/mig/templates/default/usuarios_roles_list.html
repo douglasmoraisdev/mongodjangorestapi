@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="input-field col s6">
-        <select id="user-group{{ fields_seq }}" name="user-group{{ fields_seq }}">
+        <select id="user-cell{{ fields_seq }}" name="user-cell{{ fields_seq }}">
               <option value="" disabled selected>Selecione</option>
               {% for item in Users %}                    
                 <option value="{{ item.id }}">{{ item.first_name }}</option>
@@ -12,7 +12,7 @@
     </div>
 
     <div class="input-field col s6">
-        <select multiple id="group-role{{ fields_seq }}-multiple" name="group-role{{ fields_seq }}-multiple">
+        <select multiple id="cell-role{{ fields_seq }}-multiple" name="cell-role{{ fields_seq }}-multiple">
           <option value="" disabled selected>Selecione</option>
 
               {% for item in Roles %}                    

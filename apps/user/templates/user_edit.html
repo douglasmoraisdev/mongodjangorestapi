@@ -73,7 +73,7 @@
 
 
                                                     <div class="input-field col s12 l6">
-                                                        <select id="group-origin" name="group-origin">
+                                                        <select id="cell-origin" name="cell-origin">
                                                             <option value="" disabled selected>Selecione</option>
                                                             {% for item in Groups %}   
                                                             <option value="{{ item.id }}">{{ item.name }}</option>
@@ -84,7 +84,7 @@
 
 
                                                     <div class="input-field col s12 l12">
-                                                    <select multiple id="groups-up-multiple" name="groups-up-multiple">
+                                                    <select multiple id="cells-up-multiple" name="cells-up-multiple">
                                                       <option value="" disabled selected>Selecione</option>
                                                           {% for item in Groups %}   
                                                             <option value="{{ item.id }}">{{ item.name }}</option>
@@ -95,7 +95,7 @@
 
 
                                                     <div class="input-field col s12 l12">
-                                                    <select multiple id="groups-down-multiple" name="groups-down-multiple">
+                                                    <select multiple id="cells-down-multiple" name="cells-down-multiple">
                                                       <option value="" disabled selected>Selecione</option>
                                                           {% for item in Groups %}   
                                                             <option value="{{ item.id }}">{{ item.name }}</option>
@@ -177,7 +177,7 @@
                                                     <div id="row">
                                                         <div class="col s12 m12">
 
-                                                            <a onclick="add_day_group()" class="waves-effect waves-light btn right">+ Horário</a>
+                                                            <a onclick="add_day_cell()" class="waves-effect waves-light btn right">+ Horário</a>
 
                                                         </div>
                                                     </div>                                                    
@@ -237,7 +237,7 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="servant-modal-trigger" class="waves-effect waves-light btn right" data-target="servant-modal">+ Servo</a>
-                                                        {% include "app/group/cells/modals/add_servant_search_modal.html" %}
+                                                        {% include "app/cell/cells/modals/add_servant_search_modal.html" %}
 
 
                                                     </div>
@@ -298,7 +298,7 @@
                                                     <div class="col s12 m12">
 
                                                         <a id="member-modal-trigger" class="waves-effect waves-light btn right modal-trigger" data-target="member-modal">+ Membro</a>
-                                                        {% include "app/group/cells/modals/add_member_search_modal.html" %}
+                                                        {% include "app/cell/cells/modals/add_member_search_modal.html" %}
 
 
                                                     </div>
@@ -341,7 +341,7 @@
     </div>
 
     <script>
-        {% include "app/group/cells/js/new_cell.js" %}
+        {% include "app/cell/cells/js/new_cell.js" %}
     </script>
 
     <script src="{% static "js/datepicker_defaults.js"%}"></script>
